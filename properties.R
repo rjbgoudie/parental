@@ -334,6 +334,14 @@ routes <- function(x){
   routes
 }
 
+routesAddEdge <- function(x, i, j){
+  x + x[, i] %*% .Internal(t.default((x[j, ])))
+}
+
+routesRemoveEdge <- function(x, i, j){
+  x - x[, i] %*% .Internal(t.default((x[j, ])))
+}
+
 neighbourhoodSize <- function(x){
   # this algorithm is pretty rubbish
   stopifnot("bn" %in% class(x))
