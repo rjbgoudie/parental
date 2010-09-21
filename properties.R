@@ -81,7 +81,7 @@ checkAcyclic <- function(parental){
   # true if is acyclic
   # ie TRUE == no cycle
   # FALSE = cycle exists
-  if (N == nNodes(parental) + 1) TRUE else FALSE
+  if (N == nNodes(parental) + 1) T else F
 }
 
 
@@ -142,8 +142,8 @@ setdiff2 <- function(x, y){
 }
 
 numberOfMovesBetweenIgnoringCycles <- function(x, y, 
-                                               components = FALSE,
-                                               allowFlips = FALSE){
+                                               components = F,
+                                               allowFlips = F){
   # Compute the number of edge additions, removals (and single-edge flips if 
   # allowFlips = T) that would be required to morph from network x to network 
   # y, both of which are objects of class 'parental'. The measure is 
@@ -186,7 +186,7 @@ numberOfMovesBetweenIgnoringCycles <- function(x, y,
     stop("components and allFlips cannot both be true")
   }
   
-  diffs <- mapply(setdiff2, x, y, SIMPLIFY = FALSE, USE.NAMES = FALSE)
+  diffs <- mapply(setdiff2, x, y, SIMPLIFY = F, USE.NAMES = F)
   if (allowFlips){
     # loop over each node
     for (currentchild in seq_along(x)){
@@ -222,7 +222,7 @@ route <- function(x, y){
     "parental" %in% class(y)
   )
   
-  diffs <- mapply(setdiff2, x, y, SIMPLIFY = FALSE, USE.NAMES = FALSE)
+  diffs <- mapply(setdiff2, x, y, SIMPLIFY = F, USE.NAMES = F)
   browser()
 }
 
@@ -235,7 +235,7 @@ psetdiff <- function(parental1, parental2, count = F){
     class(count) == "logical"
   )
   res <- mapply(setdiff, parental1, parental2,
-                SIMPLIFY = FALSE, USE.NAMES = FALSE)
+                SIMPLIFY = F, USE.NAMES = F)
   if (count){
     length(unlist(res))
   }

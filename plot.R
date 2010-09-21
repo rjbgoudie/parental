@@ -26,9 +26,9 @@ distance <- function(x, y){
 }
 
 coordinatesBetweenRectangles <- function(x1, y1, x2, y2, w1, h1, w2, h2){
-  switchBack <- FALSE
+  switchBack <- F
   if (x1 > x2){
-    switchBack <- TRUE
+    switchBack <- T
     s1 <- x1
     t1 <- y1
     u1 <- w1
@@ -108,12 +108,12 @@ latticeGrob <- function(p, ...){
    grob(p = p, ..., cl = "lattice")
 }
 
-drawDetails.lattice <- function(x, recording = FALSE){
-   lattice:::plot.trellis(x$p, newpage = FALSE)
+drawDetails.lattice <- function(x, recording = F){
+   lattice:::plot.trellis(x$p, newpage = F)
 }
 
 prepanel.parental <- function(x, y, parents, rawdata = NULL, grobNodeSize, offset, 
-                              islist = FALSE, widthMultiplier = 2, heightMultipler = 1){
+                              islist = F, widthMultiplier = 2, heightMultipler = 1){
   if (!islist){
     parents <- list(parents)
   }
@@ -282,7 +282,7 @@ grobNodeLevelPlot <- function(node, parents, rawdata){
 
 panel.parental <- function(x, y, parents, layout, col, alpha, 
                            edgecol, 
-                           edgealpha, islist = FALSE, rawdata = NULL,
+                           edgealpha, islist = F, rawdata = NULL,
                            grobNode,
                            grobNodeSize,
                            offset,
@@ -290,7 +290,7 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
                            heightMultipler = 1,
                            ...){
   if (missing(edgecol)){
-    edgecol <- standard.theme(color=TRUE)$col[[1]]
+    edgecol <- standard.theme(color = T)$col[[1]]
   }
   numberOfNodes <- length(parents)
   if (length(edgecol) == 1){
@@ -458,7 +458,7 @@ grplot.parental <- function(parents,
   ccall$parents <- parents
   
   adj <- as.adjacency(parents)
-  hideIsolates <- FALSE
+  hideIsolates <- F
   numberOfNodes <- length(parents)
   
   isolates <- which(rowSums(adj) == 0 & colSums(adj) == 0)
@@ -488,7 +488,7 @@ grplot.parental <- function(parents,
   
   inputs <- layout
   form <- ycoord ~ xcoord
-  ccall$islist <- FALSE
+  ccall$islist <- F
   
   ccall$col <- col
   ccall$alpha <- alpha
@@ -503,7 +503,7 @@ grplot.parental <- function(parents,
                        axs = "i" # no padding on the axis
                        )
   ccall$aspect <- "fill"
-  ccall$as.table <- TRUE
+  ccall$as.table <- T
   ccall$xlab <- list(NULL)
   ccall$ylab <- list(NULL)
   ccall$x <- form
@@ -561,7 +561,7 @@ grplot.parental.list <- function(parentallist,
   levels(graphIndicator) <- names(parentallist)
   inputs <- cbind(layouts, whichgraph = graphIndicator)
   form <- xcoord ~ ycoord | whichgraph
-  ccall$islist <- TRUE
+  ccall$islist <- T
   
   if (missing(edgecol)){
     edgecol <- matrix(1, ncol = numberOfNodes, nrow = numberOfNodes)
@@ -573,8 +573,8 @@ grplot.parental.list <- function(parentallist,
   ccall$alpha <- alpha
   ccall$edgecol <- edgecol
   ccall$edgealpha <- edgealpha
-  ccall$scales <- list(draw = FALSE)
-  ccall$as.table <- TRUE
+  ccall$scales <- list(draw = F)
+  ccall$as.table <- T
   ccall$xlab <- list(NULL)
   ccall$ylab <- list(NULL)
   ccall$grobNodeSize <- grobNodeSize

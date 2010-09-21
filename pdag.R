@@ -180,7 +180,7 @@ pdag2alldags <- function(x, ...){
   UseMethod("pdag2alldags")
 }
 
-pdag2alldags.parental <- function(pdag, verbose = FALSE){
+pdag2alldags.parental <- function(pdag, verbose = F){
   pdag <- as.adjacency(pdag)
   out <- pdag2alldags(pdag, verbose = verbose)
   out <- lapply(out, function(adj){
@@ -192,7 +192,7 @@ pdag2alldags.parental <- function(pdag, verbose = FALSE){
 }
 
 
-pdag2alldags.matrix <- function(pdag, verbose = FALSE){
+pdag2alldags.matrix <- function(pdag, verbose = F){
   stopifnot("matrix"        %in% class(pdag),
             dim(pdag)[1]    == dim(pdag)[2],
             class(verbose)  == "logical",
@@ -274,7 +274,7 @@ pdag2alldags.matrix <- function(pdag, verbose = FALSE){
   }
 }
 
-recurse_unoriented_edge <- function(cpdag, verbose = FALSE){
+recurse_unoriented_edge <- function(cpdag, verbose = F){
   stopifnot(class(cpdag)    == "matrix",
             dim(cpdag)[1]   == dim(cpdag)[2],
             class(verbose)  == "logical",
@@ -287,7 +287,7 @@ recurse_unoriented_edge <- function(cpdag, verbose = FALSE){
 #    implements Step 2 of the pdag2alldags algorithm.        #
 ##################################################################
 
-recurse_unoriented_edge <- function(cpdag, dag_list, verbose = FALSE){
+recurse_unoriented_edge <- function(cpdag, dag_list, verbose = F){
   
   # input must be a COMPLETE pdag
   # find all undirected edges

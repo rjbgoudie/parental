@@ -97,7 +97,7 @@ as.parental.character <- function(x, pretty = F){
   out
 }
 
-as.bn.character <- function(x, checkAcyclic = TRUE, ...){
+as.bn.character <- function(x, checkAcyclic = T, ...){
   out <- as.parental(x, ...)
   if ("parental.list" %in% class(out)){
     if (!isTRUE(checkAcyclic)){
@@ -166,7 +166,7 @@ as.parental.matrix <- function(x, type = "adjacency", n){
   }
   else if (type == "edgelist"){
     stopifnot(class(x) == "matrix",
-              isTRUE(missing(n)) == FALSE)
+              isTRUE(missing(n)) == F)
     if (class(x) != "matrix"){
       stop("need a matrix for now")
     }
