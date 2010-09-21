@@ -308,6 +308,18 @@ lpunion <- function(pl){
 }
 
 routes <- function(x){
+  # Returns a matrix encoding the number of routes between the nodes of the 
+  # bn x.
+  # 
+  # Element (i, j) contains the number of routes from node i to node j
+  # for i != j
+  # Element (i, i) contains 1 for all i.
+  # 
+  # Args:
+  #   x: An object of class 'bn'.
+  #
+  # Returns:
+  #   A matrix of dimension nNodes(x) x nNodes(x)
   stopifnot("bn" %in% class(x))
   nNodes <- nNodes(x)
   nodesSeq <- seq.int(nNodes)
