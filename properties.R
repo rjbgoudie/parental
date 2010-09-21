@@ -307,6 +307,20 @@ lpunion <- function(pl){
   out
 }
 
+routes <- function(x){
+  stopifnot("bn" %in% class(x))
+  nNodes <- nNodes(x)
+  nodesSeq <- seq.int(nNodes)
+  routes <- matrix(0, nNodes, nNodes)
+  diag(routes) <- 1
+  
+  for (head in nodesSeq){
+    for (tail in x[[head]]){
+      routes <- routes + outer(routes[, tail], routes[head, ])
+    }
+  }
+  routes
+}
 
 neighbourhoodSize <- function(x){
   # this algorithm is pretty rubbish
