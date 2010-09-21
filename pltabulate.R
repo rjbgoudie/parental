@@ -1,4 +1,4 @@
-pltabulate <- function(pl, pretty = FALSE, levels = NULL, sort = FALSE){
+pltabulate <- function(pl, pretty = F, levels = NULL, sort = F){
   stopifnot(
     "parental.list" %in% class(pl)
   )

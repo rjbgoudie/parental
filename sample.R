@@ -111,7 +111,7 @@ simulate.bn <- function(bn, ptables, N, expectation = F){
         
         # get conditional probability table for this configuraion
         L <- as.list(c(0, config))
-        L[1] <- TRUE
+        L[1] <- T
         probs <- do.call("[", c(list(ptable), L))
         
         # for the rows that are in this configuration, sample
@@ -128,7 +128,7 @@ simulate.bn <- function(bn, ptables, N, expectation = F){
       #for (j in 1:N){
       #  config <- local[j, ]
       #  L <- as.list(c(0, config))
-      #  L[1] <- TRUE
+      #  L[1] <- T
       #  probs <- do.call("[", c(list(ptable), L))
       #  dat[j, i] <- sample.int(numberOfLevels,
       #                          size    = 1,
@@ -190,7 +190,7 @@ marginal.probs <- function(bn, ptables){
         
         # get conditional probability table for this configuraion
         L <- as.list(c(0, config))
-        L[1] <- TRUE
+        L[1] <- T
         probs <- do.call("[", c(list(ptable), L))
         
         # for the rows that are in this configuration, sample

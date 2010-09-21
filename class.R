@@ -348,11 +348,11 @@ is.valid.bvsresponse <- function(x){
   stopifnot("bvsresponse" %in% class(x))
   
   if (any(is.null(x$parents), is.null(x$response), is.null(x$nNodes))){
-    FALSE
+    F
   }
   else {
     if (!all(length(x$nNodes) == 1, length(x$response) == 1)){
-      FALSE
+      F
     }
     else {
       sorted <- !is.unsorted(x$parents) # check all components sorted
@@ -367,10 +367,10 @@ is.valid.bvsresponse <- function(x){
       isvalid <- all(c(sorted, ints, maxNotTooHigh, minNotTooLow,
                        responseWhole, nNodesWhole, responseNotInParents))
       if (isvalid){
-        TRUE
+        T
       }
       else {
-        FALSE
+        F
       }
     }
   }

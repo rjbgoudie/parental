@@ -1,6 +1,6 @@
 # returns a list of every DAG with n nodes
 
-enumerateBNSpace <- function(n, allowCyclic = FALSE, multicore = F){
+enumerateBNSpace <- function(n, allowCyclic = F, multicore = F){
   myapply <- function(...) lapply(...)
   if (multicore){
     require(multicore)
@@ -56,7 +56,7 @@ enumerateBNSpace <- function(n, allowCyclic = FALSE, multicore = F){
 
 filterCyclic <- function(bnlist){
   isAcyclic <- lapply(bnlist, checkAcyclic)
-  out <- bnlist[which(isAcyclic == TRUE)]
+  out <- bnlist[which(isAcyclic == T)]
   class(out) <- c("bn.list", "parental.list")
   out
 }
