@@ -135,16 +135,18 @@ is.valid.parental <- function(x){
   # Returns:
   #   A logical of length 1 indicating whether x is a valid 'parental' object
   stopifnot("parental" %in% class(x))
-  
-  sorted <- all(!sapply(x, is.unsorted)) # check all components sorted
-  ints <- all(sapply(x, storage.mode) == "integer") # all ints
-  
-  if (all(c(sorted, ints))){
-    TRUE
-  }
-  else {
-    FALSE
-  }
+  tryCatch({
+    sorted <- all(!sapply(x, is.unsorted)) # check all components sorted
+    ints <- all(sapply(x, storage.mode) == "integer") # all ints
+
+    if (all(c(sorted, ints))){
+      T
+    }
+    else {
+      F
+    }
+    },
+    error = function(e) F)
 }
 
 is.valid.bvs <- function(x){
@@ -159,18 +161,20 @@ is.valid.bvs <- function(x){
   # Returns:
   #   A logical of length 1 indicating whether x is a valid 'bvs' object
   stopifnot("bvs" %in% class(x))
+  tryCatch({
+    sorted <- all(!sapply(x, is.unsorted)) # check all components sorted
+    ints <- all(sapply(x, storage.mode) == "integer") # all ints
+    # check only one response, or could be the empty graph
+    resp <- sum(sapply(x, length) > 0) %in% c(0, 1)
   
-  sorted <- all(!sapply(x, is.unsorted)) # check all components sorted
-  ints <- all(sapply(x, storage.mode) == "integer") # all ints
-  # check only one response, or could be the empty graph
-  resp <- sum(sapply(x, length) > 0) %in% c(0, 1)
-  
-  if (all(c(sorted, ints, resp))){
-    TRUE
-  }
-  else {
-    FALSE
-  }
+    if (all(c(sorted, ints, resp))){
+      T
+    }
+    else {
+      F
+    }
+    },
+    error = function(e) F)
 }
 
 is.valid.bn <- function(x){
@@ -185,17 +189,19 @@ is.valid.bn <- function(x){
   # Returns:
   #   A logical of length 1 indicating whether x is a valid 'bn' object
   stopifnot("bn" %in% class(x))
+  tryCatch({
+    sorted <- all(!sapply(x, is.unsorted)) # check all components sorted
+    ints <- all(sapply(x, storage.mode) == "integer") # all ints
+    acyclic <- checkAcyclic(x)
   
-  sorted <- all(!sapply(x, is.unsorted)) # check all components sorted
-  ints <- all(sapply(x, storage.mode) == "integer") # all ints
-  acyclic <- checkAcyclic(x)
-  
-  if (all(c(sorted, ints, acyclic))){
-    TRUE
-  }
-  else {
-    FALSE
-  }
+    if (all(c(sorted, ints, acyclic))){
+      T
+    }
+    else {
+      F
+    }
+    },
+    error = function(e) F)
 }
 
 c.parental.list <- function(...){
