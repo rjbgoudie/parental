@@ -160,7 +160,8 @@ is.valid.bvs <- function(x){
   #
   # Returns:
   #   A logical of length 1 indicating whether x is a valid 'bvs' object
-  stopifnot("bvs" %in% class(x))
+  stopifnot("bvs" %in% class(x),
+            "parental" %in% class(x))
   tryCatch({
     sorted <- all(!sapply(x, is.unsorted)) # check all components sorted
     ints <- all(sapply(x, storage.mode) == "integer") # all ints
@@ -188,7 +189,8 @@ is.valid.bn <- function(x){
   #
   # Returns:
   #   A logical of length 1 indicating whether x is a valid 'bn' object
-  stopifnot("bn" %in% class(x))
+  stopifnot("bn" %in% class(x),
+            "parental" %in% class(x))
   tryCatch({
     sorted <- all(!sapply(x, is.unsorted)) # check all components sorted
     ints <- all(sapply(x, storage.mode) == "integer") # all ints
