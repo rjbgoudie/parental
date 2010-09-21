@@ -193,14 +193,16 @@ numberOfMovesBetweenIgnoringCycles <- function(x, y,
       
       # for each difference
       toremove <- integer(0)
-      for (wh in seq_along(diffs[[currentchild]][[1]])){
+      sq <- seq_along(diffs[[currentchild]][[1]])
+      for (wh in sq){
         currentparent <- diffs[[currentchild]][[1]][wh]
         
         if (currentchild %in% y[[currentparent]]){
           toremove <- c(toremove, wh)
         }
       }
-      diffs[[currentchild]][[1]] <- diffs[[currentchild]][[1]][-toremove]
+      new <- setdiff(sq, toremove)
+      diffs[[currentchild]][[1]] <- diffs[[currentchild]][[1]][new]
     }
   }
   
