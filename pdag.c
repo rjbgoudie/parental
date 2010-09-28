@@ -7,6 +7,14 @@
  *
  */
 
+
+// Not currently correct or at least the same as R version
+//structure(list(4L, integer(0), 9L, integer(0), integer(0), c(11L, 
+//															 26L), integer(0), integer(0), 5L, 11L, c(22L, 28L), 9L, 5L, integer(0), 
+//			   integer(0), 24L, integer(0), c(26L, 29L), c(11L, 28L), integer(0), 
+//			   11L, 25L, integer(0), 30L, integer(0), c(22L, 28L), 21L, 
+//			   integer(0), c(22L, 28L), 6L), class = c("bn", "parental"))
+
 //include "pdag.h"
 
 #include <R.h>

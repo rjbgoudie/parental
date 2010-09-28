@@ -15,6 +15,13 @@ maximallyOrientEdges.parental <- function(pdag, verbose = F){
   as.parental(out)
 }
 
+# the C versions do not give the same answer as the R versions
+# eg for 
+# structure(list(4L, integer(0), 9L, integer(0), integer(0), c(11L, 
+# 26L), integer(0), integer(0), 5L, 11L, c(22L, 28L), 9L, 5L, integer(0), 
+#     integer(0), 24L, integer(0), c(26L, 29L), c(11L, 28L), integer(0), 
+#     11L, 25L, integer(0), 30L, integer(0), c(22L, 28L), 21L, 
+#     integer(0), c(22L, 28L), 6L), class = c("bn", "parental"))
 
 if (R.Version()$system == "x86_64, darwin9.8.0"){
   dyn.load("pdag-mac.so")
@@ -29,6 +36,7 @@ maximallyOrientEdges.matrix <- function(pdag, verbose = F){
             length(verbose) == 1)
   .Call("maximallyOrientEdges", pdag, verbose)
 }
+
 maximallyOrientEdges.matrix <- function(pdag, verbose = F){
   #if (class("pdag") != "pdag"){
   #  stop("Not a pdag")
