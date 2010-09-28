@@ -74,62 +74,38 @@ as.cpdag2 <- function(x, ...){
 
 whichVStructure <- function(net){
   nodeSeq <- seq_along(net)
-  lapply(nodeSeq, function(i){
-    if (i == 28) browser()
-    parents <- net[[i]]
+  lapply(nodeSeq, function(node){
+    parents <- net[[node]]
     if (length(parents) >= 2){
       parentsSeq <- seq_along(parents)
       grandparents <- lapply(parentsSeq, function(j){
         net[[parents[j]]]
       })
-      allgrandparents <- unlist(grandparents)
-      notInVStructure <- intersect(parents, allgrandparents)
-      moreNotInVStructure <- unlist(lapply(parentsSeq, function(j){
-        if (length(intersect(grandparents[[j]], notInVStructure)) > 0){
-          parents[j]
-        }
-        else {
+      
+      # an edge j -> node participates in a v-structure if and only if
+      # there exists a k in parent(node)\{j} s.t 
+      # 1. there is no edge j -> k
+      # 2. there is no edge k -> j
+      
+      parents[unlist(lapply(parentsSeq, function(j){
+        # check whether all possible k are linked to j
+        
+        # is there an edge j -> k
+        condition1 <- parents[-j] %in% grandparents[[j]]
+        # is there an edge k -> j
+        condition2 <- sapply(grandparents[-j], function(k) parents[j] %in% k)
+        
+        # do all k have links to or from j?
+        if (all(condition1 | condition2)){
+          # if so, j is not in a v-structure
           integer(0)
         }
-      }))
-      out <- setdiff(parents, c(notInVStructure, moreNotInVStructure))
-      if (is.null(out) || length(out) < 2){
-        integer(0)
-      } else {
-        out
-      }
-    }
-    else {
-      integer(0)
-    }
-  })
-}
+        else {
+          # otherwise it is
+          j
+        }
+      }))]
 
-whichVStructure <- function(net){
-  nodeSeq <- seq_along(net)
-  lapply(nodeSeq, function(i){
-    parents <- net[[i]]
-    if (length(parents) >= 2){
-      parentsSeq <- seq_along(parents)
-      grandparents <- lapply(parentsSeq, function(j){
-        net[[parents[j]]]
-      })
-      allgrandparents <- unlist(grandparents)
-      notInVStructure <- intersect(parents, allgrandparents)
-      moreNotInVStructure <- unlist(lapply(parentsSeq, function(j){
-        if (length(intersect(grandparents[[j]], notInVStructure)) > 0){
-          parents[j]
-        }
-        else {
-          integer(0)
-        }
-      }))
-      out <- setdiff(parents, c(notInVStructure, moreNotInVStructure))
-      if (is.null(out) || length(out) < 1){
-        integer(0)
-      } else {
-        parents
-      }
     }
     else {
       integer(0)
@@ -138,7 +114,7 @@ whichVStructure <- function(net){
 }
 
 whichVStructurePlot <- function(net){
-  vs <- whichVStructure(x)
+  vs <- whichVStructure(net)
   vs <- lapply(vs, function(parents){
     parents <- sort.int(parents)
     storage.mode(parents) <- "integer"
@@ -170,6 +146,7 @@ as.cpdag2.bn <- function(bn){
   bn <- makeNonVStructuresUndirected(bn)
   pdag <- as.adjacency(bn)
   out <- maximallyOrientEdges(pdag)
+  
   out <- abs(out)
   as.parental(out)
 }

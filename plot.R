@@ -210,7 +210,8 @@ grobNodeLevelPlotSize <- function(node, parents, rawdata){
   }
 }
 
-grobNodeLevelPlot <- function(node, parents, rawdata){
+grobNodeLevelPlot <- function(node, parents, rawdata, strip.lines = 20, 
+                              strip.left.lines = 15){
   # Return a grob for node "node" when a levelplot is plotted on each node
   # 
   # Args:
@@ -272,7 +273,9 @@ grobNodeLevelPlot <- function(node, parents, rawdata){
       par.settings = theme.noPadding
     )
     
-    p1 <- useOuterStrips2(p1, strip.lines = 20, strip.left.lines = 15)
+    p1 <- useOuterStrips2(p1,
+                          strip.lines      = strip.lines,
+                          strip.left.lines = strip.left.lines)
     latticeGrob(p1)
   }
   else {
@@ -610,4 +613,16 @@ grplot.bvsresponse <- function(x, col = "default", ...){
     col[response] <- 2 # 2 = red
   }
   grplot(bvs, col = col, ...)
+}
+
+nodeLevelplot <- function(parents, rawdata){
+  for (node in seq_along(parents)){
+    grid.newpage()
+    grob <- grobNodeLevelPlot(node, parents, rawdata, strip.lines = 1,
+                              strip.left.lines = 1)
+    vp <- viewport(name = "A", width = unit(1, "npc"), height = unit(1, "npc"))
+    pushViewport(vp)
+    grid.draw(grob)
+    popViewport()
+  }
 }

@@ -19,10 +19,14 @@ sampleBN <- function(n, maxNumberParents = NULL){
       numberOfParents <- numberOfParents - 1
       
       if (numberOfPotentialParents > 1){
-        sample(potentialParents, size = numberOfParents, replace = F)
+        out <- sort.int(sample(potentialParents, size = numberOfParents, replace = F))
+        storage.mode(out) <- "integer"
+        out
       }
       else if (numberOfPotentialParents == 1){
-        potentialParents[sample(c(T, F), size = numberOfParents)]
+        out <- sort.int(potentialParents[sample(c(T, F), size = numberOfParents)])
+        storage.mode(out) <- "integer"
+        out
       }
       else {
         stop("Unexpected")
