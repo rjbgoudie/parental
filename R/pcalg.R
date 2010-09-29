@@ -21,7 +21,7 @@ as.parental.pcAlgo <- function(x){
   as.parental(x@graph)
 }
 
-as.cpdag <- function(x, ...){
+as.cpdag <- function(...){
   UseMethod("as.cpdag")
 }
 
@@ -34,7 +34,6 @@ as.cpdag.bn <- function(x){
   #
   # Returns:
   #   The CPDAG as a parental. (Which will in general not be a BN)
-  require(pcalg)
   stopifnot(
     "bn" %in% class(x)
   )
@@ -68,7 +67,7 @@ as.cpdag.bn <- function(x){
   }
 }
 
-as.cpdag2 <- function(x, ...){
+as.cpdag2 <- function(...){
   UseMethod("as.cpdag2")
 }
 
@@ -140,11 +139,11 @@ makeNonVStructuresUndirected <- function(bn){
   bn2
 }
 
-as.cpdag2.bn <- function(bn){
+as.cpdag2.bn <- function(x){
   #### incorrect.
   #### need to make edges not in v-strcutures undirected
-  bn <- makeNonVStructuresUndirected(bn)
-  pdag <- as.adjacency(bn)
+  x <- makeNonVStructuresUndirected(x)
+  pdag <- as.adjacency(x)
   out <- maximallyOrientEdges(pdag)
   
   out <- abs(out)
@@ -162,7 +161,6 @@ as.cpdag.bn.list <- function(x){
   #
   # Returns:
   #   A parental.list containing a list of CPDAGs of class CPDAG.
-  require(pcalg)
   stopifnot(class(x) == "bn.list")
   
   res <- lapply(x, as.cpdag)
@@ -181,7 +179,6 @@ as.cpdag.bnpostmcmc.list <- function(x){
   #
   # Returns:
   #   A list containing a list of CPDAGs of class CPDAG.
-  require(pcalg)
   stopifnot(
     class(x)        ==   "bnpostmcmc.list",
     "parental.list" %in% class(x[[1]]$samples),

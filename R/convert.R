@@ -1,12 +1,12 @@
-as.adjacency <- function (x, ...) {
+as.adjacency <- function(...) {
   UseMethod("as.adjacency")
 }
 
-as.bn <- function (x, ...) {
+as.bn <- function(...) {
   UseMethod("as.bn")
 }
 
-as.graph <- function(x, ...){
+as.graph <- function(...){
   UseMethod("as.graph")
 }
 
@@ -56,7 +56,7 @@ as.adjacency.parental <- function(x, ...){
   m
 }
 
-as.parental <- function(x, ...){
+as.parental <- function(...){
   UseMethod("as.parental")
 }
 
@@ -372,7 +372,7 @@ as.bn.graphNEL <- function(x){
   res
 }
 
-as.bvsresponse <- function(x, ...){
+as.bvsresponse <- function(...){
   UseMethod("as.bvsresponse")
 }
 
@@ -484,7 +484,7 @@ as.character.bvsresponse.list <- function(x){
   sapply(x, as.character)
 }
 
-as.bvs <- function(x, ...){
+as.bvs <- function(...){
   UseMethod("as.bvs")
 }
 

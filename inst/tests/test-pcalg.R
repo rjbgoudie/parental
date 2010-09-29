@@ -4,7 +4,7 @@ test_that("toAdjacencyMatrix", {
   sink(tempfile())
   require(pcalg)
   sink()
-  load("../../test-data/pc-boot-1.RData")
+  load("../extdata/pc-boot-1.RData")
   expect_that(
     as.parental(pc.fit), 
     is_identical_to(

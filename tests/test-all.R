@@ -1,13 +1,5 @@
-# to import this using a full path use:
-# source("/Users/rjbg/Documents/Work/Ph.D./library/parental-dag/tests/main.R", chdir = T)
-
 library(testthat)
-
-if (as.numeric(R.version$minor) < 11){
-  vapply <- function(X, FUN, FUN.VALUE, ..., USE.NAMES = TRUE){
-  sapply(X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE)
-  }
-}
+library(parental)
 
 auto_test <- function (code_path, test_path, reporter = "summary") 
 {
@@ -85,7 +77,22 @@ throws_warning <- function (regexp = NULL)
   }
 }
 
-source("expectations.R")
-codepath <- "../"
-testpath <- "../tests"
-auto_test(codepath, testpath)
+if (as.numeric(R.version$minor) < 11){
+  vapply <- function(X, FUN, FUN.VALUE, ..., USE.NAMES = TRUE){
+  sapply(X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE)
+  }
+}
+
+is_within <- function(expected, tolerance){
+  name <- deparse(substitute(expected))
+  function(actual) {
+      testthat:::expectation(
+        identical(all.equal.numeric(expected, actual, tolerance = tolerance, scale = 1), TRUE),
+        paste("was out by ", abs(expected - actual), " when max is ", tolerance, sep = "")
+      )
+    }
+}
+
+
+
+test_package("parental")
