@@ -1,13 +1,3 @@
-plotwithstatnet <- function(net, ...){
-  library(network)
-  plot.network(network(as.adjacency(net)), displaylabels = T, ...)
-}
-
-library(network)
-library(lattice)
-library(grid)
-library(sna)
-
 toPolar <- function(x, y){
   r <- sqrt(x^2 + y^2)
   theta <- rep(NULL, times = length(r))
@@ -435,7 +425,7 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
   }
 }
 
-grplot <- function(x, ...){
+grplot <- function(...){
   UseMethod("grplot")
 }
 
@@ -470,7 +460,7 @@ grplot.parental <- function(parents,
   }
   
   if (missing(layout)){
-    layout <- network.layout.fruchtermanreingold(adj, layout.par)
+    layout <- network:::network.layout.fruchtermanreingold(adj, layout.par)
     layout <- as.data.frame(layout)
     colnames(layout) <- c("xcoord", "ycoord")
   }

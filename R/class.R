@@ -265,7 +265,7 @@ print.bn <- function(x){
 }
 
 
-renameNodes <- function(x, ...){
+renameNodes <- function(...){
   UseMethod("renameNodes")
 }
 

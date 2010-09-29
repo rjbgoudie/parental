@@ -1,5 +1,5 @@
 
-maximallyOrientEdges <- function(x, ...){
+maximallyOrientEdges <- function(...){
   UseMethod("maximallyOrientEdges")
 }
 
@@ -22,12 +22,6 @@ maximallyOrientEdges.parental <- function(pdag, verbose = F){
 #     integer(0), 24L, integer(0), c(26L, 29L), c(11L, 28L), integer(0), 
 #     11L, 25L, integer(0), 30L, integer(0), c(22L, 28L), 21L, 
 #     integer(0), c(22L, 28L), 6L), class = c("bn", "parental"))
-
-if (R.Version()$system == "x86_64, darwin9.8.0"){
-  dyn.load("pdag-mac.so")
-} else if (R.Version()$system == "x86_64, linux-gnu"){
-  dyn.load("pdag-linux.so")
-}
 
 maximallyOrientEdges.matrix <- function(pdag, verbose = F){
   stopifnot(class(pdag)     == "matrix",
@@ -184,7 +178,7 @@ maximallyOrientEdges.matrix <- function(pdag, verbose = F){
   pdag
 }
 
-pdag2alldags <- function(x, ...){
+pdag2alldags <- function(...){
   UseMethod("pdag2alldags")
 }
 
