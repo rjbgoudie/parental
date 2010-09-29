@@ -16,3 +16,7 @@ is.wholenumber <- function(x, tol = .Machine$double.eps^0.5){
             isTRUE(is.numeric(tol)))
   abs(x - round(x)) < tol
 }
+
+notdiag <- function(mx){
+  mx[which(upper.tri(mx) + lower.tri(mx) == 1)]
+}
