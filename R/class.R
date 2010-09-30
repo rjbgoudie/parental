@@ -295,6 +295,18 @@ renameNodes.parental.list <- function(x, newnames){
   res
 }
 
+complete <- function(n){
+  stopifnot(class(n) %in% c("numeric", "integer"),
+            n >= 1,
+            length(class) == 1)
+  nodeSeq <- seq_len(n)
+  res <- do.call(list, lapply(seq_len(n), function(i){
+    as.integer(sort.int(setdiff(nodeSeq, i)))
+  }))
+  class(res) <- "parental"
+  res
+}
+
 empty <- function(n, class = "parental", response){
   # Returns an empty graph with n nodes, of the given class
   # 
