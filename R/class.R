@@ -1,25 +1,28 @@
+#' Constructor function for a \code{parental} object.
+#'
+#' Objects of class \code{parental} are lists with the ith component specifying
+#' the parents of node i. The parents must be specified as a vector of 
+#' integers -- the storage.mode() of these integers MUST be integer. 
+#' If the node has no parents, use integer(0).
+#'
+#' Note, in particular, that \code{list(2, 1)} would not be a valid \code{parental} 
+#' object, because storage.mode(2) and \code{storage.mode(1) == "double"}
+#' Instead one would use \code{list(2L, 1L)}, as documented in the R FAQ (see [1])
+#'
+#' Parents of each node MUST be sorted in increasing order.
+#' Conformance with object requirements can be tested by \code{is.valid()}
+#'
+#' [1] http://cran.r-project.org/doc/manuals/R-lang.html#Constants
+#'
+#' @param ... A series of vectors specifying the parents of each node. These 
+#'   vectors must be of \code{storage.mode} "integer".
+#' @return An object of class \code{parental}.
+#' @keywords constructor
+#' @export
+#' @examples
+#' parental(c(), 1, 2)
+#' parental(c(), c(1, 3), c())
 parental <- function(...){
-  # Constructor function for a 'parental' object.
-  # Objects of class 'parental' are lists with the ith component specifying 
-  # the parents of node i. The parents must be specified as a vector of 
-  # integers -- the storage.mode() of these integers MUST be integer. 
-  # If the node has no parents, use integer(0).
-  #
-  # Note, in particular, that list(2, 1) would not be a valid 'parental' 
-  # object, because storage.mode(2) and storage.mode(1) == "double"
-  # Instead one would use list(2L, 1L), as documented in the R FAQ (see [1])
-  #
-  # Parents of each node MUST be sorted in increasing order.
-  # Conformance with object requirements can be tested by is.valid()
-  # 
-  # [1] http://cran.r-project.org/doc/manuals/R-lang.html#Constants
-  # 
-  # Args:
-  #   ...:  A series of vectors specifying the parents of each node. These 
-  #         vectors must be of storage.mode "integer".
-  #
-  # Returns:
-  #   An object of class 'parental'.
   parents <- list(...)
   parents <- lapply(parents, as.integer)
   parents <- lapply(parents, sort.int)
@@ -27,17 +30,15 @@ parental <- function(...){
   parents
 }
 
+#' Constructor function for a 'bn' object.
+#'
+#' \code{bn} is a subclass of \code{parental}. See \code{\link{parental}} for detailed 
+#' documentation.
+#' 
+#' @param ...  A series of vectors specifying the parents of each node. These 
+#'   vectors must be of storage.mode "integer".
+#' @return An object of class 'bn'.
 bn <- function(...){
-  # Constructor function for a 'bn' object.
-  # 'bn' is a subclass of 'parental'. See parental() for detailed 
-  # documentation.
-  # 
-  # Args:
-  #   ...:  A series of vectors specifying the parents of each node. These 
-  #         vectors must be of storage.mode "integer".
-  #
-  # Returns:
-  #   An object of class 'bn'.
   parents <- list(...)
   parents <- lapply(parents, as.integer)
   parents <- lapply(parents, sort.int)
@@ -45,17 +46,14 @@ bn <- function(...){
   parents
 }
 
+#' Constructor function for a 'bvs' object.
+#' 'bvs' is a subclass of \code{parental}. See \code{\link{parental}} for detailed 
+#' documentation.
+#' 
+#' @param ... A series of vectors specifying the parents of each node. These 
+#'   vectors must be of storage.mode "integer".
+#' @return An object of class 'bvs'.
 bvs <- function(...){
-  # Constructor function for a 'bvs' object.
-  # 'bvs' is a subclass of 'parental'. See parental() for detailed 
-  # documentation.
-  # 
-  # Args:
-  #   ...:  A series of vectors specifying the parents of each node. These 
-  #         vectors must be of storage.mode "integer".
-  #
-  # Returns:
-  #   An object of class 'bvs'.
   parents <- list(...)
   parents <- lapply(parents, as.integer)
   parents <- lapply(parents, sort.int)
@@ -63,14 +61,11 @@ bvs <- function(...){
   parents
 }
 
+#' Constructor function for a 'parental.list' object
+#' 
+#' @param ...  A series of objects of class \code{parental}.
+#' @return An object of class 'parental.list'
 parental.list <- function(...){
-  # Constructor function for a 'parental.list' object
-  # 
-  # Args:
-  #   ...:  A series of objects of class 'parental'.
-  #
-  # Returns:
-  #   An object of class 'parental.list'
   parentallist <- list(...)
   class(parentallist) <- c("parental.list")
   parentallist
@@ -82,14 +77,11 @@ parental.list <- function(...){
   x
 }
 
+#' Constructor function for a 'bn.list' object
+#' 
+#' @param ... A series of objects of class 'bn'.
+#' @return An object of class 'bn.list'
 bn.list <- function(...){
-  # Constructor function for a 'bn.list' object
-  # 
-  # Args:
-  #   ...:  A series of objects of class 'bn'.
-  #
-  # Returns:
-  #   An object of class 'bn.list'
   bnlist <- list(...)
   class(bnlist) <- c("bn.list", "parental.list")
   bnlist
@@ -101,14 +93,11 @@ bn.list <- function(...){
   x
 }
 
+#' Constructor function for a 'bvsresponse.list' object
+#' 
+#' @param ... A series of objects of class 'bvsresponse'.
+#' @return An object of class 'bvsresponse.list'
 bvsresponse.list <- function(...){
-  # Constructor function for a 'bvsresponse.list' object
-  # 
-  # Args:
-  #   ...:  A series of objects of class 'bvsresponse'.
-  #
-  # Returns:
-  #   An object of class 'bvsresponse.list'
   bvsrlist <- list(...)
   class(bvsrlist) <- "bvsresponse.list"
   bvsrlist
@@ -124,16 +113,15 @@ is.valid <- function(x){
   UseMethod("is.valid")
 }
 
+#' Checks whether the supplied \code{parental} is valid.
+#' Tests that the parents are sorted correctly, are of 
+#' storage.mode() == "integer"
+#' 
+#' @param x A object of class \code{parental}
+#'
+#' Returns:
+#'   A logical of length 1 indicating whether x is a valid \code{parental} object
 is.valid.parental <- function(x){
-  # Checks whether the supplied 'parental' is valid.
-  # Tests that the parents are sorted correctly, are of 
-  # storage.mode() == "integer"
-  # 
-  # Args:
-  #   x: A object of class 'parental'
-  #
-  # Returns:
-  #   A logical of length 1 indicating whether x is a valid 'parental' object
   stopifnot("parental" %in% class(x))
   tryCatch({
     sorted <- all(!sapply(x, is.unsorted)) # check all components sorted
@@ -149,17 +137,14 @@ is.valid.parental <- function(x){
     error = function(e) F)
 }
 
+#' Checks whether the supplied 'bvs' is valid.
+#' Tests that the parents are sorted correctly, are of 
+#' storage.mode() == "integer".
+#' Additionally tests that there is a unique response.
+#' 
+#' @param x A object of class 'bvs'
+#' @return A logical of length 1 indicating whether x is a valid 'bvs' object
 is.valid.bvs <- function(x){
-  # Checks whether the supplied 'bvs' is valid.
-  # Tests that the parents are sorted correctly, are of 
-  # storage.mode() == "integer".
-  # Additionally tests that there is a unique response.
-  # 
-  # Args:
-  #   x: A object of class 'bvs'
-  #
-  # Returns:
-  #   A logical of length 1 indicating whether x is a valid 'bvs' object
   stopifnot("bvs" %in% class(x))
   tryCatch({
     sorted <- all(!sapply(x, is.unsorted)) # check all components sorted
@@ -177,17 +162,14 @@ is.valid.bvs <- function(x){
     error = function(e) F)
 }
 
+#' Checks whether the supplied 'bn is valid.
+#' Tests that the parents are sorted correctly, are of 
+#' storage.mode() == "integer".
+#' Additionally checks that the supplied bn is acyclic.
+#' 
+#' @param x A object of class 'bn'
+#' @return A logical of length 1 indicating whether x is a valid 'bn' object
 is.valid.bn <- function(x){
-  # Checks whether the supplied 'bn is valid.
-  # Tests that the parents are sorted correctly, are of 
-  # storage.mode() == "integer".
-  # Additionally checks that the supplied bn is acyclic.
-  # 
-  # Args:
-  #   x: A object of class 'bn'
-  #
-  # Returns:
-  #   A logical of length 1 indicating whether x is a valid 'bn' object
   stopifnot("bn" %in% class(x),
             "parental" %in% class(x))
   tryCatch({
@@ -205,62 +187,49 @@ is.valid.bn <- function(x){
     error = function(e) F)
 }
 
+#' Concatenates a 'parental.list' object to the console.
+#' 
+#' @param ... Any number of 'parental.list' objects
+#' @return An new 'parental.list' object, including all the supplied parental.lists
 c.parental.list <- function(...){
-  # Concatenates a 'parental.list' object to the console.
-  # 
-  # Args:
-  #   ...:        Any number of 'parental.list' objects
-  # 
-  # Returns:
-  #   An new 'parental.list' object, including all the supplied parental.lists
   out <- NextMethod("c")
   class(out) <- "parental.list"
   out
 }
 
+#' Concatenates a 'bn.list' object to the console.
+#' 
+#' @param ... Any number of 'bn.list' objects
+#' @return An new 'bn.list' object, including all the supplied bn.lists
 c.bn.list <- function(...){
-  # Concatenates a 'bn.list' object to the console.
-  # 
-  # Args:
-  #   ...:        Any number of 'bn.list' objects
-  # 
-  # Returns:
-  #   An new 'bn.list' object, including all the supplied bn.lists
+
   out <- NextMethod("c")
   class(out) <- c("bn.list", "parental.list")
   out
 }
 
+#' Prints a 'parental.list' object to the console.
+#' 
+#' @param x A 'parental.list' object
+#' @return Prints the 'parental.list' object to the console.
 print.parental.list <- function(x){
-  # Prints a 'parental.list' object to the console.
-  # 
-  # Args:
-  #   x:        A 'parental.list' object
-  # 
-  # Returns:
-  #   Prints the 'parental.list' object to the console.
+
   print(unlist(lapply(x, as.character, pretty = T)))
 }
 
+#' Prints a \code{parental} object to the console.
+#' 
+#' @param x A \code{parental} object
+#' @return Prints the \code{parental} object to the console.
 print.parental <- function(x){
-  # Prints a 'parental' object to the console.
-  # 
-  # Args:
-  #   x:        A 'parental' object
-  # 
-  # Returns:
-  #   Prints the 'parental' object to the console.
   print(as.character(x, pretty = T))
 }
 
+#' Prints a 'bn' object to the console.
+#' 
+#' @param x A 'bn' object
+#' @return Prints the 'bn' object to the console.
 print.bn <- function(x){
-  # Prints a 'bn' object to the console.
-  # 
-  # Args:
-  #   x:        A 'bn' object
-  # 
-  # Returns:
-  #   Prints the 'bn' object to the console.
   print(as.character(x, pretty = T))
 }
 
@@ -269,16 +238,14 @@ renameNodes <- function(...){
   UseMethod("renameNodes")
 }
 
+#' Return the parental list, with nodes in each parental
+#' in the parental.list renamed to the newnames.
+#' 
+#' @param x A parental.list
+#' @param newnames A character vector specifying the new names for the nodes
+#'
+#' @return The parental.list with renamed nodes
 renameNodes.parental.list <- function(x, newnames){
-  # Return the parental list, with nodes in each parental
-  # in the parental.list renamed to the newnames.
-  # 
-  # Args:
-  #   x:        A parental.list
-  #   newnames: A character vector specifying the new names for the nodes
-  #
-  # Returns:
-  #   The parental.list with renamed nodes
   stopifnot(
     "parental.list" %in% class(x),
     class(newnames) == "character",
@@ -307,16 +274,12 @@ complete <- function(n){
   res
 }
 
+#' Returns an empty graph with n nodes, of the given class
+#' 
+#' @param n A integer of length 1, specifying the number of nodes
+#' @param class The class of the returned graph. Can be any of "parental", "bn" or "bvs".
+#' @return An empty graph of the specified class.
 empty <- function(n, class = "parental", response){
-  # Returns an empty graph with n nodes, of the given class
-  # 
-  # Args:
-  #   n:     A integer of length 1, specifying the number of nodes
-  #   class: The class of the returned graph. Can be any of "parental",
-  #          "bn" or "bvs".
-  #
-  # Returns:
-  #   An empty graph of the specified class.
   stopifnot(class(n) %in% c("numeric", "integer"),
             n >= 1,
             length(class) == 1,
@@ -346,18 +309,14 @@ empty <- function(n, class = "parental", response){
   res
 }
 
+#' Checks whether the supplied 'bvsresponse' is valid.
+#' Tests that the parents are sorted correctly, are of 
+#' storage.mode() == "integer".
+#' Additionally tests the parents all exist.
+#' 
+#' @param x: A object of class 'bvsresponse'
+#' @return A logical of length 1 indicating whether x is a valid 'bvsresponse' object
 is.valid.bvsresponse <- function(x){
-  # Checks whether the supplied 'bvsresponse' is valid.
-  # Tests that the parents are sorted correctly, are of 
-  # storage.mode() == "integer".
-  # Additionally tests the parents all exist.
-  # 
-  # Args:
-  #   x: A object of class 'bvsresponse'
-  #
-  # Returns:
-  #   A logical of length 1 indicating whether x is a valid 'bvsresponse' 
-  #   object
   stopifnot("bvsresponse" %in% class(x))
   
   if (any(is.null(x$parents), is.null(x$response), is.null(x$nNodes))){
@@ -389,32 +348,28 @@ is.valid.bvsresponse <- function(x){
   }
 }
 
+# Constructor function for a 'bvsresponse' object.
+# Objects of class 'bvsresponse' are lists, with the following components:
+# 
+# $parents: A vectors of integers, specifying the parents of the response. 
+# The parents must be specified as a vector of integers -- the 
+# storage.mode() of these integers MUST be integer. If the node has no 
+# parents, use integer(0).
+#
+# Note, in particular, that c(2, 1) would not be a valid specification 
+# of 'parents', because storage.mode(2) and storage.mode(1) == "double"
+# Instead one would use c(2L, 1L), as documented in the R FAQ (see [1])
+#
+# Parents of each node MUST be sorted in increasing order.
+# Conformance with object requirements can be tested by is.valid()
+# 
+# [1] http://cran.r-project.org/doc/manuals/R-lang.html#Constants
+# 
+# @param x A vector of integers specifying the parents of the response.
+# @param response A integer of length 1 specifying which node (column) is the response.
+# @param nNodes The number of nodes (columns) in the variable selection.
+# @return An object of class 'bvsresponse'.
 bvsresponse <- function(x, response, nNodes){
-  # Constructor function for a 'bvsresponse' object.
-  # Objects of class 'bvsresponse' are lists, with the following components:
-  # 
-  # $parents: A vectors of integers, specifying the parents of the response. 
-  # The parents must be specified as a vector of integers -- the 
-  # storage.mode() of these integers MUST be integer. If the node has no 
-  # parents, use integer(0).
-  #
-  # Note, in particular, that c(2, 1) would not be a valid specification 
-  # of 'parents', because storage.mode(2) and storage.mode(1) == "double"
-  # Instead one would use c(2L, 1L), as documented in the R FAQ (see [1])
-  #
-  # Parents of each node MUST be sorted in increasing order.
-  # Conformance with object requirements can be tested by is.valid()
-  # 
-  # [1] http://cran.r-project.org/doc/manuals/R-lang.html#Constants
-  # 
-  # Args:
-  #   x:        A vector of integers specifying the parents of the response.
-  #   response: A integer of length 1 specifying which node (column) is the 
-  #             response.
-  #   nNodes:   The number of nodes (columns) in the variable selection.
-  # 
-  # Returns:
-  #   An object of class 'bvsresponse'.
   stopifnot(class(x) == "integer",
             is.numeric(x),
             length(response) == 1,
@@ -431,14 +386,11 @@ bvsresponse <- function(x, response, nNodes){
   res
 }
 
+#' Prints a 'bvsresponse' object to the console.
+#' 
+#' @param x:        A 'bvsresponse' object
+#' @return Prints the 'bvsresponse' object to the console.
 print.bvsresponse <- function(x){
-  # Prints a 'bvsresponse' object to the console.
-  # 
-  # Args:
-  #   x:        A 'bvsresponse' object
-  # 
-  # Returns:
-  #   Prints the 'bvsresponse' object to the console.
   cat("bvsresponse. Col ", x$response, " is response. ", sep = "")
   cat(x$nNodes, " variables. ", sep = "")
     if (length(x$parents) > 0){

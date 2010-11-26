@@ -135,20 +135,17 @@ convertToEnlargedCoordinates <- function(width, height, x, y){
 }
 
 
+#' Return the size of node "node" when the name of the node is plotted
+#' 
+#' @param node An integer of length 1, indicating which node the dimensions
+#'   should be computed for.
+#' @param parents An object of class "parental" containing the graph that is to 
+#'   be plotted
+#' @param rawdata The rawdata
+#' @return A list of length 2 containing two items:
+#'     width: A object of class "unit"
+#'     height: A object of class "unit"
 grobNodeNameSize <- function(node, parents, rawdata = NULL){
-  # Return the size of node "node" when the name of the node is plotted
-  # 
-  # Args:
-  #   node:    An integer of length 1, indicating which node the dimensions
-  #            should be computed for.
-  #   parents: An object of class "parental" containing the graph that is to 
-  #            be plotted
-  #   rawdata: The rawdata
-  #            
-  # Returns:
-  #   A list of length 2 containing two items:
-  #     width: A object of class "unit"
-  #     height: A object of class "unit"
   #tg <- textGrob(label = names(parents)[node])
   #list(width  = grobWidth(tg),
   #     height = grobHeight(tg))
@@ -156,38 +153,33 @@ grobNodeNameSize <- function(node, parents, rawdata = NULL){
        height = length(gregexpr("\n", names(parents)[node], fixed = T)[[1]]))
 }
 
+#' Return a grob for node "node" when the name of the node is plotted
+#' 
+#' @param node An integer of length 1, indicating which node the dimensions
+#'   should be computed for.
+#' @param parents An object of class "parental" containing the graph that is to 
+#'   be plotted
+#' @param rawdata The rawdata
+#' @return A "grob"
 grobNodeName <- function(node, parents, rawdata = NULL){
-  # Return a grob for node "node" when the name of the node is plotted
-  # 
-  # Args:
-  #   node:    An integer of length 1, indicating which node the dimensions
-  #            should be computed for.
-  #   parents: An object of class "parental" containing the graph that is to 
-  #            be plotted
-  #   rawdata: The rawdata
-  #            
-  # Returns:
-  #   A "grob"
   textGrob(label = names(parents)[node])
 }
 
+#' Return the size of levelplot for node "node". If the node has no 
+#' parents, the size of a grobNodeName is returned instead.
+#' 
+#' @param node An integer of length 1, indicating which node the dimensions
+#'   should be computed for.
+#' @param parents An object of class "parental" containing the graph that is to 
+#'   be plottedb
+#' @param rawdata The rawdata
+#' @param width A scaling factor for the width of the nodes
+#' @param height A scaling factor for the height of the nodes
+#'            
+#' @return A list of length 2 containing two items:
+#'     width: A object of class "unit"
+#'     height: A object of class "unit"
 grobNodeLevelPlotSize <- function(node, parents, rawdata){
-  # Return the size of levelplot for node "node". If the node has no 
-  # parents, the size of a grobNodeName is returned instead.
-  # 
-  # Args:
-  #   node:    An integer of length 1, indicating which node the dimensions
-  #            should be computed for.
-  #   parents: An object of class "parental" containing the graph that is to 
-  #            be plottedb
-  #   rawdata: The rawdata
-  #   width:   A scaling factor for the width of the nodes
-  #   height:  A scaling factor for the height of the nodes
-  #            
-  # Returns:
-  #   A list of length 2 containing two items:
-  #     width: A object of class "unit"
-  #     height: A object of class "unit"
   nParents <- length(parents[[node]])
   if (nParents > 0){
     nLevels <- nlevels(rawdata[, node])
@@ -200,19 +192,38 @@ grobNodeLevelPlotSize <- function(node, parents, rawdata){
   }
 }
 
-grobNodeLevelPlot <- function(node, parents, rawdata, strip.lines = 20, 
-                              strip.left.lines = 15){
-  # Return a grob for node "node" when a levelplot is plotted on each node
-  # 
-  # Args:
-  #   node:    An integer of length 1, indicating which node the dimensions
-  #            should be computed for.
-  #   parents: An object of class "parental" containing the graph that is to 
-  #            be plotted
-  #   rawdata: The rawdata
-  #            
-  # Returns:
-  #   A "grob"
+grobNodeLevelPlotDefaultTheme <- function(){
+  list(layout.heights = list(top.padding       = 0,
+                             main.key.padding  = 0.5,
+                             key.axis.padding  = 0,
+                             axis.xlab.padding = 0,
+                             xlab.key.padding  = 0,
+                             key.sub.padding   = 0,
+                             bottom.padding    = 0),
+       layout.widths = list(left.padding      = 0,
+                            key.ylab.padding  = 0,
+                            ylab.axis.padding = 0,
+                            axis.key.padding  = 0,
+                            right.padding     = 0),
+        par.main.text = list(cex = 0.5))
+}
+
+#' Return a grob for node "node" when a levelplot is plotted on each node
+#' 
+#' @param node  An integer of length 1, indicating which node the dimensions
+#'   should be computed for.
+#' @param parents An object of class "parental" containing the graph that is to 
+#'            be plotted
+#' @param rawdata The rawdata
+#' @return A "grob"
+grobNodeLevelPlot <- function(node,
+                              parents,
+                              rawdata,
+                              strip.lines = 20, 
+                              strip.left.lines = 15,
+                              theme = grobNodeLevelPlotDefaultTheme(),
+                              horizontal = F,
+                              ...){
   if (length(parents[[node]]) > 0){
     rd <- rawdata[, c(node, parents[[node]])]
     df <- data.frame(.dummy1 = factor(0), .dummy2 = factor(0), rd)
@@ -220,7 +231,7 @@ grobNodeLevelPlot <- function(node, parents, rawdata, strip.lines = 20,
     dft <- as.data.frame(prop.table(table(df), propSeq))
     roundedFreq <- round(dft[, "Freq"], 2)
     countTable <- as.data.frame(table(df))[, "Freq"]
-    dft[, "Freq"] <- paste(roundedFreq, countTable, sep = "\n")
+    dft[, "Freq"] <- paste(roundedFreq, " (", countTable, ")")
     
     conds <- paste("`", names(rd), "`", collapse = "+", sep = "")
     form <- eval(as.formula(
@@ -228,31 +239,17 @@ grobNodeLevelPlot <- function(node, parents, rawdata, strip.lines = 20,
       dft
     )
     
-    theme.noPadding <- 
-      list(layout.heights = list(top.padding       = 0,
-                                 main.key.padding  = 0.5,
-                                 key.axis.padding  = 0,
-                                 axis.xlab.padding = 0,
-                                 xlab.key.padding  = 0,
-                                 key.sub.padding   = 0,
-                                 bottom.padding    = 0),
-           layout.widths = list(left.padding      = 0,
-                                key.ylab.padding  = 0,
-                                ylab.axis.padding = 0,
-                                axis.key.padding  = 0,
-                                right.padding     = 0),
-            par.main.text = list(cex = 0.5))
-    
     col.l <- colorRampPalette(c('white', 'blue'))(30)
     p1 <- levelplot(
       form,
       data = dft,
       xlab = NULL,
       ylab = NULL,
-      main = names(parents)[node],
+      main = list(label = paste(names(parents)[node], "\nParents: ", paste(strwrap(paste(rev(names(parents)[parents[[node]]]), collapse = ", "), width = 60), collapse = ""), "."), fontsize = 7),
       colorkey = NULL,
       panel = function(x, y, z, subscripts, ...){
-        z2 <- as.numeric(unlist(strsplit(z, "\n"))[seq(1, 2*length(z), by = 2)])
+
+        z2 <- as.numeric(unlist(strsplit(z, " (", fixed = T))[seq(1, 2*length(z), by = 2)])
         panel.levelplot(x, y, z2, subscripts, ...)
         ltext(x[1], y[1], z[subscripts], col = "black", cex = 0.3)
       },
@@ -260,12 +257,13 @@ grobNodeLevelPlot <- function(node, parents, rawdata, strip.lines = 20,
       col.regions = col.l,
       scales = list(draw = F),
       par.strip.text = list(cex = 0.5),
-      par.settings = theme.noPadding
+      par.settings = theme
     )
     
     p1 <- useOuterStrips2(p1,
                           strip.lines      = strip.lines,
-                          strip.left.lines = strip.left.lines)
+                          strip.left.lines = strip.left.lines,
+                          horizontal = horizontal)
     latticeGrob(p1)
   }
   else {
@@ -460,7 +458,7 @@ grplot.parental <- function(parents,
   }
   
   if (missing(layout)){
-    layout <- network:::network.layout.fruchtermanreingold(adj, layout.par)
+    layout <- network.layout.fruchtermanreingold(adj, layout.par)
     layout <- as.data.frame(layout)
     colnames(layout) <- c("xcoord", "ycoord")
   }
@@ -582,17 +580,14 @@ grplot.parental.list <- function(parentallist,
 }
 
 
+#' Plot a 'bvsresponse' graph. 
+#' 
+#' @param x A 'bvsresponse' object
+#' @param col A vector with each component indicating the colour of the 
+#'   corresponding node. The default character vector vector "default"
+#'   makes the response node red and the other nodes black.
+#' @return A lattice plot of the graph
 grplot.bvsresponse <- function(x, col = "default", ...){
-  # Plot a 'bvsresponse' graph. 
-  # 
-  # Args:
-  #   x:   A 'bvsresponse' object
-  #   col: A vector with each component indicating the colour of the 
-  #        corresponding node. The default character vector vector "default"
-  #        makes the response node red and the other nodes black.
-  # 
-  # Returns:
-  #   A lattice plot of the graph
   stopifnot(class(x) == "bvsresponse")
   bvs <- as.bvs(x)
   response <- x$response
@@ -608,11 +603,9 @@ grplot.bvsresponse <- function(x, col = "default", ...){
 nodeLevelplot <- function(parents, rawdata){
   for (node in seq_along(parents)){
     grid.newpage()
-    grob <- grobNodeLevelPlot(node, parents, rawdata, strip.lines = 1,
-                              strip.left.lines = 1)
-    vp <- viewport(name = "A", width = unit(1, "npc"), height = unit(1, "npc"))
-    pushViewport(vp)
+    grob <- grobNodeLevelPlot(node, parents, rawdata, strip.lines = 2,
+                              strip.left.lines = 2, 
+                              theme = standard.theme())
     grid.draw(grob)
-    popViewport()
   }
 }

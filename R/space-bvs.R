@@ -1,19 +1,16 @@
 # returns a list of every Bayesian Variable Selection network, 
 # with a particular response
 
+#' Enumerate (ie make a list of, not just count) the entire space of 
+#' Bayesian Variable Selection models, on a given number of nodes, for a 
+#' particular response. Optionally, restrcit the maximum number of parents
+#'
+#' @param numberOfNodes An integer of length 1. The number of noes
+#' @param response An integer of length 1. Which node is the response
+#' @param maxNumberParents The maximum number of parents of node response.
+#' @return An object of class "bvs.list", a list of objects of class "bvs"
 enumerateBVSSpace <- function(numberOfNodes, response, 
                               maxNumberParents = numberOfNodes - 1){
-  # Enumerate (ie make a list of, not just count) the entire space of 
-  # Bayesian Variable Selection models, on a given number of nodes, for a 
-  # particular response. Optionally, restrcit the maximum number of parents
-  #
-  # Args:
-  #   numberOfNodes:    An integer of length 1. The number of noes
-  #   response:         An integer of length 1. Which node is the response
-  #   maxNumberParents: The maximum number of parents of node response.
-  #
-  # Returns:
-  #   An object of class "bvs.list", a list of objects of class "bvs"
   if (length(numberOfNodes) != 1 | length(response) != 1){
     stop("numberOfNodes and response must be of length 1")
   }
@@ -59,37 +56,35 @@ enumerateBVSSpace <- function(numberOfNodes, response,
   out
 }
 
+#' Enumerate all the combinations of possible parents, given a SET of 
+#' possible parents. Optionally, restrcit the maximum number of parents. 
+#' Optionally, require that a particular parent is always present.
+#'
+#' @param potentialParents A numeric vector of possible parents.
+#'                     Note: at the moment, this should EXCLUDE any 
+#'                     required parents.
+#' @param maxNumberParents The maximum number of parents of node response.
+#' @param required A numeric vector of required parents
+#' @return A list of possible parents sets, each of which will be a sorted 
+#'   numeric vector, stored as integers.
 enumerateParents <- function(potentialParents,
                              maxNumberParents = length(potentialParents),
                              required = integer(0)){
-  # Enumerate all the combinations of possible parents, given a SET of 
-  # possible parents. Optionally, restrcit the maximum number of parents. 
-  # Optionally, require that a particular parent is always present.
-  #
-  # Args:
-  #   potentialParents: A numeric vector of possible parents.
-  #                     Note: at the moment, this should EXCLUDE any 
-  #                     required parents.
-  #   maxNumberParents: The maximum number of parents of node response.
-  #   required:         A numeric vector of required parents
-  #
-  # Returns:
-  #   A list of possible parents sets, each of which will be a sorted 
-  #   numeric vector, stored as integers.
   stopifnot(class(potentialParents) %in% c("numeric", "integer"),
             length(potentialParents) >= 0,
             sum(duplicated(potentialParents)) == 0,
-            maxNumberParents <= length(potentialParents),
+            #maxNumberParents <= length(potentialParents),
             !any(required %in% potentialParents))
   if (length(potentialParents) == 0){
     possibleParents <- list()
   }
   else {
-    allowedNumberOfParents <- seq_len(maxNumberParents)
+    allowedNumberOfParents <- min(maxNumberParents, length(potentialParents))
+    allowedNumberOfParentsSeq <- seq_len(allowedNumberOfParents)
   
     # all combinations of all lengths
     # unlisting is unelegant, but does the job
-    possibleParents <- unlist(lapply(allowedNumberOfParents, 
+    possibleParents <- unlist(lapply(allowedNumberOfParentsSeq, 
       function(numberOfParents){
         # combn treats single integers as implying 1:x
         # use a list to force it not to

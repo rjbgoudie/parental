@@ -40,6 +40,31 @@ sampleBN <- function(n, maxNumberParents = NULL){
   out
 }
 
+sampleBN2 <- function(n, k){
+  # hypercube
+  # the higher k the sparser the partial order
+  
+  x <- vapply(seq_len(n), function(x) runif(k), numeric(k))
+  out <- empty(n, class = "bn")
+  for (i in seq_len(n)){
+    for (j in setdiff(seq_len(n), i)){
+      # an arrow i -> j  if for all k, i < j
+      
+      if (k == 1){
+        if (all(x[i] < x[j])){
+          out[[j]] <- sort.int(c(out[[j]], i))
+        }
+      } else {
+        if (all(x[, i] < x[, j])){
+          out[[j]] <- sort.int(c(out[[j]], i))
+        }
+      }
+    }
+  }
+  out
+}
+
+
 expected.sample <- function(n, size, replace, prob){
   exp <- prob * size
   out <- rep(seq.int(n), exp)
