@@ -10,14 +10,11 @@ as.graph <- function(...){
   UseMethod("as.graph")
 }
 
+#' Convert a matrix to a 'bn'. See for 'as.parental.matrix' for details
+#' 
+#' @param A matrix, as described in as.parental.matrix()
+#' @return An object of class 'bn'
 as.bn.matrix <- function(x, ...){
-  # Convert a matrix to a 'bn'. See for 'as.parental.matrix' for details
-  # 
-  # Args:
-  #   x: A matrix, as described in as.parental.matrix()
-  # 
-  # Returns:
-  #   An object of class 'bn'
   class(x) <- "matrix"
   out <- as.parental(x, ...)
   if (checkAcyclic(out)){
@@ -29,16 +26,13 @@ as.bn.matrix <- function(x, ...){
   }
 }
 
+#' Convert a object of class 'parental' to an adjacency matrix. An 
+#' adjacency matrix is a matrix A of dimension n x n, with A[i, j] = 1 if 
+#' an edge exist between nodes i and j, where n is the number of nodes.
+#' 
+#' @param x A object of class 'parental'.
+#' @return An adjacency matrix.
 as.adjacency.parental <- function(x, ...){
-  # Convert a object of class 'parental' to an adjacency matrix. An 
-  # adjacency matrix is a matrix A of dimension n x n, with A[i, j] = 1 if 
-  # an edge exist between nodes i and j, where n is the number of nodes.
-  # 
-  # Args:
-  #   x: A object of class 'parental'.
-  # 
-  # Returns:
-  #   An adjacency matrix.
   stopifnot("parental" %in% class(x))
   n <- nNodes(x)
   m <- matrix(NA, n, n)
@@ -129,25 +123,22 @@ as.bn.character <- function(x, checkAcyclic = T, ...){
   }
 }
 
+#' Convert a variety of matrix objects to 'parental' objects.
+#' 
+#' The supplied matrix x should either be an adjacency 
+#' matrix (type = "adjacency"), or an edgelist (type = "edgelist").
+#' Adjacency matrices should be an n x n matrix A with A[i, j] = 1 if an 
+#' edge exists between node i and j. Edgelists are of the form returned 
+#' by which(x == condition, arr.ind = TRUE) for matrices x in 
+#' adjacency matrix form.
+#' 
+#' For type = "edgelist", the number of nodes n must be specified.
+#' 
+#' @param x An object of class 'matrix'
+#' @param type Either "adjacency" or "edgelist"
+#' @param n The number of nodes n. Only required for type = "edgelist"
+#' @return An object of class 'parental'.
 as.parental.matrix <- function(x, type = "adjacency", n){
-  # Convert a variety of matrix objects to 'parental' objects.
-  # 
-  # The supplied matrix x should either be an adjacency 
-  # matrix (type = "adjacency"), or an edgelist (type = "edgelist").
-  # Adjacency matrices should be an n x n matrix A with A[i, j] = 1 if an 
-  # edge exists between node i and j. Edgelists are of the form returned 
-  # by which(x == condition, arr.ind = TRUE) for matrices x in 
-  # adjacency matrix form.
-  # 
-  # For type = "edgelist", the number of nodes n must be specified.
-  # 
-  # Args:
-  #   x:    An object of class 'matrix'
-  #   type: Either "adjacency" or "edgelist"
-  #   n:    The number of nodes n. Only required for type = "edgelist"
-  # 
-  # Returns:
-  #   An object of class 'parental'.
   if (type == "adjacency"){
     if (class(x) != "matrix"){
       stop("Adjacency must be a matrix")
@@ -192,14 +183,11 @@ as.parental.matrix <- function(x, type = "adjacency", n){
   out
 }
 
+#' Convert a 'bn' to a 'parental'
+#' 
+#' @param x An object of class 'bn'
+#' @return The object 'x', but of class 'parental'
 as.parental.bn <- function(x){
-  # Convert a 'bn' to a 'parental'
-  # 
-  # Args:
-  #   x: An object of class 'bn'
-  # 
-  # Returns:
-  #   The object 'x', but of class 'parental'
   class(x) <- "parental"
   x
 }
@@ -248,16 +236,13 @@ as.character.parental <- function (x, pretty = F) {
   }
 }
 
+#' Convert a 'parental.list' to a character vector.
+#' 
+#' @param x A object of class 'parental'.
+#' @param pretty A logical of length 1 indicating if the character vectors are 
+#'   pretty-printed.
+#' @return A character vector.
 as.character.parental.list <- function (x, pretty = F) {
-  # Convert a 'parental.list' to a character vector.
-  # 
-  # Args:
-  #   x:      A object of class 'parental'.
-  #   pretty: A logical of length 1 indicating if the character vectors are 
-  #           pretty-printed.
-  # 
-  # Returns:
-  #   A character vector.
   sapply(x, as.character, pretty)
   #if (pretty == F){
   #  #res <- as.character(unclass(x))
@@ -283,16 +268,14 @@ as.character.parental.list <- function (x, pretty = F) {
   #}
 }
 
+#' A heuristic test for whether it appears that x is 'pretty-printed'. ie 
+#' whether it is of the form [2][][3] (printed-printed) or 
+#' "c(2L), integer(0), c(3L)" (not pretty-printed)
+#' 
+#' @param x A character vector defining a 'parental' object
+#' @return A logical of length 1. Returns true if it appears x is 
+#'   pretty-printed.
 seemsPretty <- function(x){
-  # A heuristic test for whether it appears that x is 'pretty-printed'. ie 
-  # whether it is of the form [2][][3] (printed-printed) or 
-  # "c(2L), integer(0), c(3L)" (not pretty-printed)
-  # 
-  # Args:
-  #   x:        A character vector defining a 'parental' object
-  # 
-  # Returns:
-  #   A logical of length 1. Returns true if it appears x is pretty-printed.
   isTRUE(substring(x, 1, 1) == "[")
 }
 
@@ -311,17 +294,14 @@ seemsPretty <- function(x){
 #}
 #
 
+#' Convert a 'parental' object to a 'graphNEL' object. graphNEL objects are 
+#' from bioconductor package 'graph'
+#'
+#' Note that graphNEL's edge list are *children* lists.
+#' 
+#' @param x An object of class 'parental'
+#' @return An object of class 'graphNEL'.
 as.graph.parental <- function(x){
-  # Convert a 'parental' object to a 'graphNEL' object. graphNEL objects are 
-  # from bioconductor package 'graph'
-  #
-  # Note that graphNEL's edge list are *children* lists.
-  # 
-  # Args:
-  #   x:  An object of class 'parental'
-  #
-  # Returns:
-  #   An object of class 'graphNEL'.
   require(graph)
   x <- getChildren(x) # convert to children list
   nodeNames <- as.character(seq_along(x))
@@ -331,17 +311,14 @@ as.graph.parental <- function(x){
   new("graphNEL", nodes = nodeNames, edgeL = edL, edgemode = "directed")
 }
 
+#' Convert a graphNEL object to a 'parental' object. graphNEL objects are 
+#' from bioconductor package 'graph'
+#'
+#' Note that graphNEL's edge list are *children* lists.
+#' 
+#' @param x An object of class 'graphNEL'
+#' @return An object of class 'parental'.
 as.parental.graphNEL <- function(x){
-  # Convert a graphNEL object to a 'parental' object. graphNEL objects are 
-  # from bioconductor package 'graph'
-  #
-  # Note that graphNEL's edge list are *children* lists.
-  # 
-  # Args:
-  #   x:  An object of class 'graphNEL'
-  #
-  # Returns:
-  #   An object of class 'parental'.
   edL <- edges(x)
   edL <- lapply(edL, factor, levels = names(edL))
   edL <- unname(edL)
@@ -353,17 +330,14 @@ as.parental.graphNEL <- function(x){
   edL
 }
 
+#' Convert a graphNEL object to a 'bn' object. graphNEL objects are 
+#' from bioconductor package 'graph'
+#'
+#' Note that graphNEL's edge list are *children* lists.
+#' 
+#' @param x An object of class 'graphNEL'
+#' @return An object of class 'bn'.
 as.bn.graphNEL <- function(x){
-  # Convert a graphNEL object to a 'bn' object. graphNEL objects are 
-  # from bioconductor package 'graph'
-  #
-  # Note that graphNEL's edge list are *children* lists.
-  # 
-  # Args:
-  #   x:  An object of class 'graphNEL'
-  #
-  # Returns:
-  #   An object of class 'bn'.
   res <- as.parental(x)
   if (!checkAcyclic(res)){
     stop("Not acyclic")
@@ -376,19 +350,16 @@ as.bvsresponse <- function(...){
   UseMethod("as.bvsresponse")
 }
 
+#' Convert a 'bvs' object to a 'bvsresponse' object.
+#' 
+#' A 'bvs' object is a full 'parental' object, whereas a 'bvsresponse' 
+#' object is smaller object designed specifically for fast MCMC iterations.
+#' 
+#' @param x An object of class 'bvsresponse'
+#' @param response An integer of length 1 specifying which node is 
+#'   the response. This is not required, except for the empty graph.
+#' @return An object of class 'bvsresponse'.
 as.bvsresponse.bvs <- function(x, response){
-  # Convert a 'bvs' object to a 'bvsresponse' object.
-  # 
-  # A 'bvs' object is a full 'parental' object, whereas a 'bvsresponse' 
-  # object is smaller object designed specifically for fast MCMC iterations.
-  # 
-  # Args:
-  #   x:        An object of class 'bvsresponse'
-  #   response: An integer of length 1 specifying which node is the response.
-  #             This is not required, except for the empty graph.
-  # 
-  # Returns:
-  #   An object of class 'bvsresponse'.
   stopifnot("bvs" %in% class(x),
             is.valid(x))
   
@@ -405,27 +376,26 @@ as.bvsresponse.bvs <- function(x, response){
               nNodes = length(x))
 }
 
+#' Convert a character vector (a comma-separated string) specifying the 
+#' parents of a response to a 'bvsresponse' object.
+#' 
+#' For example, as.bvsresponse("1,2,3", 4, 5) returns a 'bvsresponse' object 
+#' with 5 nodes, with node 4 as response, and nodes 1, 2 and 3 as its 
+#' parents.
+#' 
+#' @param x A character string (possibly vector), a comma-separated list of 
+#'   the parents of the response.
+#' @param response An integer of length 1 specifying which node 
+#'   is the response.
+#' @param nNodes An integer of length 1 specifying the number of nodes in the 
+#'   variable selection.
+#'
+#' @return If length(x) == 1:
+#'     An object of class 'bvsresponse'.
+#'   If length(x) > 1:
+#'     A list of class "bvsresponse.list" containing a number of 
+#'     'bvsresponse' objects
 as.bvsresponse.character <- function(x, response, nNodes){
-  # Convert a character vector (a comma-separated string) specifying the 
-  # parents of a response to a 'bvsresponse' object.
-  # 
-  # For example, as.bvsresponse("1,2,3", 4, 5) returns a 'bvsresponse' object 
-  # with 5 nodes, with node 4 as response, and nodes 1, 2 and 3 as its 
-  # parents.
-  # 
-  # Args:
-  #   x:        A character string (possibly vector), a comma-separated list 
-  #             of the parents of the response.
-  #   response: An integer of length 1 specifying which node is the response.
-  #   nNodes:   An integer of length 1 specifying the number of nodes in the 
-  #             variable selection.
-  #
-  # Returns:
-  #   If length(x) == 1:
-  #     An object of class 'bvsresponse'.
-  #   If length(x) > 1:
-  #     A list of class "bvsresponse.list" containing a number of 
-  #     'bvsresponse' objects
   stopifnot("character" %in% class(x),
             is.numeric(response),
             length(response) == 1,
@@ -449,37 +419,31 @@ as.bvsresponse.character <- function(x, response, nNodes){
   res
 }
 
+#' Convert a 'bvsresponse' object to a character string. Note that the 
+#' number of nodes, and which node the response is not contained in the 
+#' resulting character string.
+#' 
+#' For example, as.character() on a bvsresponse with 10 nodes, response 
+#' node 5, which has parents 2, 3, 6, and 10 returns "2,3,6,10".
+#' 
+#' @param x An object of class 'bvsresponse'
+#' @return An object of class 'parental'.
 as.character.bvsresponse <- function(x){
-  # Convert a 'bvsresponse' object to a character string. Note that the 
-  # number of nodes, and which node the response is not contained in the 
-  # resulting character string.
-  # 
-  # For example, as.character() on a bvsresponse with 10 nodes, response 
-  # node 5, which has parents 2, 3, 6, and 10 returns "2,3,6,10".
-  # 
-  # Args:
-  #   x:  An object of class 'bvsresponse'
-  #
-  # Returns:
-  #   An object of class 'parental'.
   stopifnot("bvsresponse" %in% class(x))
   
   paste(x$parents, sep = "", collapse = ",")
 }
 
+#' Convert a 'bvsresponse.list' object to a character string. Note that the 
+#' number of nodes, and which node the response is not contained in the 
+#' resulting character string. 
+#'
+#' This function passes the list to as.character.bvsresponse()
+#' 
+#' @param x An object of class 'bvsresponse.list'
+#' @return A character vector, each component of which is a character 
+#'   representation of the parents of each 'bvsresponse' included in x.
 as.character.bvsresponse.list <- function(x){
-  # Convert a 'bvsresponse.list' object to a character string. Note that the 
-  # number of nodes, and which node the response is not contained in the 
-  # resulting character string. 
-  #
-  # This function passes the list to as.character.bvsresponse()
-  # 
-  # Args:
-  #   x:  An object of class 'bvsresponse.list'
-  #
-  # Returns:
-  #   A character vector, each component of which is a character 
-  #   representation of the parents of each 'bvsresponse' included in x.
   stopifnot(class(x) == "bvsresponse.list")
   sapply(x, as.character)
 }
@@ -488,16 +452,13 @@ as.bvs <- function(...){
   UseMethod("as.bvs")
 }
 
+#' Convert a 'bvsresponse' object to a 'bvs' object. A 'bvs' object is a 
+#' full 'parental' object, whereas a 'bvsresponse' object is smaller 
+#' object designed specifically for fast MCMC iterations.
+#' 
+#' @param x An object of class 'bvsresponse'
+#' @return An object of class 'bvs'.
 as.bvs.bvsresponse <- function(x){
-  # Convert a 'bvsresponse' object to a 'bvs' object. A 'bvs' object is a 
-  # full 'parental' object, whereas a 'bvsresponse' object is smaller 
-  # object designed specifically for fast MCMC iterations.
-  # 
-  # Args:
-  #   x:  An object of class 'bvsresponse'
-  #
-  # Returns:
-  #   An object of class 'bvs'.
   stopifnot(class(x) == "bvsresponse")
   
   res <- empty(x$nNodes, class = "bvs")

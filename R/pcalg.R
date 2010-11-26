@@ -25,15 +25,12 @@ as.cpdag <- function(...){
   UseMethod("as.cpdag")
 }
 
+#' Convert a parental BN to a 
+#' Completed Partially Directed Acyclic Graph (CPDAG).
+#'
+#' @param x The parental BN to be converted.
+#' @return The CPDAG as a parental. (Which will in general not be a BN)
 as.cpdag.bn <- function(x){
-  # Convert a parental BN to a 
-  # Completed Partially Directed Acyclic Graph (CPDAG).
-  #
-  # Args:
-  #   x: The parental BN to be converted.
-  #
-  # Returns:
-  #   The CPDAG as a parental. (Which will in general not be a BN)
   stopifnot(
     "bn" %in% class(x)
   )
@@ -152,15 +149,12 @@ as.cpdag2.bn <- function(x){
 
 #as.cpdag.bn <- as.cpdag2.bn
 
+#' Convert a bn.list to list of parental.list of
+#' Completed Partially Directed Acyclic Graph (CPDAG).
+#'
+#' @param x An object of class bn.list
+#' @return A parental.list containing a list of CPDAGs of class CPDAG.
 as.cpdag.bn.list <- function(x){
-  # Convert a bn.list to list of parental.list of
-  # Completed Partially Directed Acyclic Graph (CPDAG).
-  #
-  # Args:
-  #   x: An object of class bn.list
-  #
-  # Returns:
-  #   A parental.list containing a list of CPDAGs of class CPDAG.
   stopifnot(class(x) == "bn.list")
   
   res <- lapply(x, as.cpdag)
@@ -168,17 +162,13 @@ as.cpdag.bn.list <- function(x){
   res
 }
 
+#' Convert a full set of MCMC posterior samples to 
+#' Completed Partially Directed Acyclic Graph (CPDAG).
+#' All MCMC runs are converted.
+#'
+#' @param x An object of class bnpostmcmc.list
+#' @return A list containing a list of CPDAGs of class CPDAG.
 as.cpdag.bnpostmcmc.list <- function(x){
-  
-  # Convert a full set of MCMC posterior samples to 
-  # Completed Partially Directed Acyclic Graph (CPDAG).
-  # All MCMC runs are converted.
-  #
-  # Args:
-  #   x: An object of class bnpostmcmc.list
-  #
-  # Returns:
-  #   A list containing a list of CPDAGs of class CPDAG.
   stopifnot(
     class(x)        ==   "bnpostmcmc.list",
     "parental.list" %in% class(x[[1]]$samples),

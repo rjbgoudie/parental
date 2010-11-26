@@ -1,5 +1,9 @@
 # get the number of nodes in the network
-nNodes <- function(parental){
+nNodes <- function(x, ...){
+  UseMethod("nNodes")
+}
+
+nNodes.parental <- function(parental){
   stopifnot(
     "parental" %in% class(parental)
   )
@@ -119,60 +123,54 @@ topologicallyOrder <- function(parental){
   order
 }
 
+#' A dual-direction, fast (and dangerous!) version of setdiff.
+#'
+#' setdiff() is not symmetric. This function returns a list with component 1 
+#' equivalent to setdiff(x, y) and component 2 equivalent to setdiff(y, x).
+#'
+#' Note that unlike setdiff() THE OUTPUT MAY CONTAIN DUPLICATES. 
+#' eg     setdiff2(c(1,1,2), c(2, 3))[[1]] == c(1, 1)
+#'    BUT setdiff(c(1, 1, 2), c(2, 3)) == 1
+#' 
+#' Additionally the inputs are NOT coerced to vectors, again, unlike setdiff
+#' 
+#' @param x A numeric vector
+#' @param y A numeric vector
+#' @return A list of length 2, with setdiff(x, y) in component 1 and 
+#'   setdiff(y, x) in component 2 (apart from the differences described above).
 setdiff2 <- function(x, y){
-  # A dual-direction, fast (and dangerous!) version of setdiff.
-  #
-  # setdiff() is not symmetric. This function returns a list with component 1 
-  # equivalent to setdiff(x, y) and component 2 equivalent to setdiff(y, x).
-  #
-  # Note that unlike setdiff() THE OUTPUT MAY CONTAIN DUPLICATES. 
-  # eg     setdiff2(c(1,1,2), c(2, 3))[[1]] == c(1, 1)
-  #    BUT setdiff(c(1, 1, 2), c(2, 3)) == 1
-  # 
-  # Additionally the inputs are NOT coerced to vectors, again, unlike setdiff
-  # 
-  # Args:
-  #   x: A numeric vector
-  #   y: A numeric vector
-  #
-  # Returns:
-  #   A list of length 2, with setdiff(x, y) in component 1 and setdiff(y, x) 
-  #   in component 2 (apart from the differences described above).
   list(x[match(x, y, 0L) == 0L], y[match(y, x, 0L) == 0L])
 }
 
+#' Compute the number of edge additions, removals (and single-edge flips if 
+#' allowFlips = T) that would be required to morph from network x to network 
+#' y, both of which are objects of class 'parental'. The measure is 
+#' symmetric.
+#'
+#' The parental objects x and y must have the same number of 
+#' nodes. No attempt is made to account for whether intermediate graphs are 
+#' cyclic (but perhaps there is always one ordering of the moves that is 
+#' OK?).
+#' 
+#' 
+#' @param x An object of class "parental"
+#' @param y An object of class "parental"
+#' @param components: A logical of length 1, indicating whether the 
+#'   total number of moves required to morph x to y should be returned 
+#'   (components = F) or if the number of changes required for 
+#'   each node should be returned (components = T). 
+#' @param allowFlips: Allow single-edge flip moves. This is not compatible with 
+#'   components = T, because it is not clear for which node to 
+#'   account flip moves.
+#' @return if components == FALSE:
+#'     A numeric of length 1 indicating the number of moves required.
+#'   if components == TRUE:
+#'     A number number of length (nNodes(x) == nNodes(y)).
+#'     The figure in position i of the vector relates to the number changes 
+#'     that need to be made to change the inward bound edges toward node i.
 numberOfMovesBetweenIgnoringCycles <- function(x, y, 
                                                components = F,
                                                allowFlips = F){
-  # Compute the number of edge additions, removals (and single-edge flips if 
-  # allowFlips = T) that would be required to morph from network x to network 
-  # y, both of which are objects of class 'parental'. The measure is 
-  # symmetric.
-  #
-  # The parental objects x and y must have the same number of 
-  # nodes. No attempt is made to account for whether intermediate graphs are 
-  # cyclic (but perhaps there is always one ordering of the moves that is 
-  # OK?).
-  # 
-  # 
-  # Args:
-  #   x:          An object of class "parental"
-  #   y:          An object of class "parental"
-  #   components: A logical of length 1, indicating whether the total number 
-  #               of moves required to morph x to y should be returned 
-  #               (components = F) or if the number of changes required for 
-  #               each node should be returned (components = T). 
-  #   allowFlips: Allow single-edge flip moves. This is not compatible with 
-  #               components = T, because it is not clear for which node to 
-  #               account flip moves.
-  # 
-  # Returns:
-  #   if components == FALSE:
-  #     A numeric of length 1 indicating the number of moves required.
-  #   if components == TRUE:
-  #     A number number of length (nNodes(x) == nNodes(y)).
-  #     The figure in position i of the vector relates to the number changes 
-  #     that need to be made to change the inward bound edges toward node i.
   stopifnot(
     length(x) == length(y),
     "parental" %in% class(x),
@@ -307,19 +305,16 @@ lpunion <- function(pl){
   out
 }
 
+#' Returns a matrix encoding the number of routes between the nodes of the 
+#' bn x.
+#' 
+#' Element (i, j) contains the number of routes from node i to node j
+#' for i != j
+#' Element (i, i) contains 1 for all i.
+#' 
+#' @param x An object of class 'bn'.
+#' @return A matrix of dimension nNodes(x) x nNodes(x)
 routes <- function(x){
-  # Returns a matrix encoding the number of routes between the nodes of the 
-  # bn x.
-  # 
-  # Element (i, j) contains the number of routes from node i to node j
-  # for i != j
-  # Element (i, i) contains 1 for all i.
-  # 
-  # Args:
-  #   x: An object of class 'bn'.
-  #
-  # Returns:
-  #   A matrix of dimension nNodes(x) x nNodes(x)
   stopifnot("bn" %in% class(x))
   nNodes <- nNodes(x)
   nodesSeq <- seq.int(nNodes)
