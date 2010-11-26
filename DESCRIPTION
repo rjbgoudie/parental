@@ -4,10 +4,14 @@ Title: Light-weight graph package
 Version: 0.9
 Author: R.J.B Goudie <rjbgoudie@gmail.com>
 Maintainer: R.J.B Goudie <rjbgoudie@gmail.com>
-Description: Data structures and tools for handling and manipulating graphs, Bayesian Networks, and Bayesian Variable Selection graphs.
+Description: Data structures and tools for handling and manipulating
+    graphs, Bayesian Networks, and Bayesian Variable Selection graphs.
 URL: localhost
-Depends: R (>= 2.9)
-Imports: network, lattice, grid, sna
+Imports: base
+Depends: network, lattice, grid, sna, R (>= 2.9)
 Suggests: pcalg, graph, bnlearn, multicore
 License: GPL
 LazyData: true
+Collate: 'bnlearn.R' 'class.R' 'convert.R' 'is.element2.R' 'pcalg.R'
+    'pdag.R' 'plot.R' 'pltabulate.R' 'properties.R' 'sample.R'
+    'space-bn.R' 'space-bvs.R' 'space-conf.R' 'utils.R'
