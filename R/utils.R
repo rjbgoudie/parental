@@ -7,6 +7,7 @@
 #' 
 #' @return A logical vector of length 1, taking the value TRUE is x is a whole 
 #'   number and false otherwise
+#' @export
 is.wholenumber <- function(x, tol = .Machine$double.eps^0.5){
   stopifnot(length(x) == 1,
             isTRUE(is.numeric(x)),
@@ -15,6 +16,7 @@ is.wholenumber <- function(x, tol = .Machine$double.eps^0.5){
   abs(x - round(x)) < tol
 }
 
+#' @export
 notdiag <- function(mx){
   mx[which(upper.tri(mx) + lower.tri(mx) == 1)]
 }

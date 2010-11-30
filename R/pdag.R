@@ -1,8 +1,15 @@
 
+#' ...
+#' 
+#' ....
+#' @param x ...
+#' 
+#' @export
 maximallyOrientEdges <- function(...){
   UseMethod("maximallyOrientEdges")
 }
 
+#' @export
 maximallyOrientEdges.parental <- function(pdag, verbose = F){
   # convert to adjacency matrix
   pdag <- as.adjacency(pdag)
@@ -23,6 +30,7 @@ maximallyOrientEdges.parental <- function(pdag, verbose = F){
 #     11L, 25L, integer(0), 30L, integer(0), c(22L, 28L), 21L, 
 #     integer(0), c(22L, 28L), 6L), class = c("bn", "parental"))
 
+#' @export
 maximallyOrientEdges.matrix <- function(pdag, verbose = F){
   stopifnot(class(pdag)     == "matrix",
             dim(pdag)[1]    == dim(pdag)[2],
@@ -31,6 +39,7 @@ maximallyOrientEdges.matrix <- function(pdag, verbose = F){
   .Call("maximallyOrientEdges", pdag, verbose)
 }
 
+#' @export
 maximallyOrientEdges.matrix <- function(pdag, verbose = F){
   #if (class("pdag") != "pdag"){
   #  stop("Not a pdag")
@@ -178,10 +187,25 @@ maximallyOrientEdges.matrix <- function(pdag, verbose = F){
   pdag
 }
 
+#' ...
+#' 
+#' ....
+#' @param x ...
+#' 
+#' @export
 pdag2alldags <- function(...){
   UseMethod("pdag2alldags")
 }
 
+#' xxxx
+#' 
+#' ....
+#'
+#' @param x ....
+#' @param pretty ...
+#' @return ....
+#' @S3method pdag2alldags parental
+#' @export
 pdag2alldags.parental <- function(pdag, verbose = F){
   pdag <- as.adjacency(pdag)
   out <- pdag2alldags(pdag, verbose = verbose)
@@ -193,7 +217,15 @@ pdag2alldags.parental <- function(pdag, verbose = F){
   out
 }
 
-
+#' xxxx
+#' 
+#' ....
+#'
+#' @param x ....
+#' @param pretty ...
+#' @return ....
+#' @S3method pdag2alldags matrix
+#' @export
 pdag2alldags.matrix <- function(pdag, verbose = F){
   stopifnot("matrix"        %in% class(pdag),
             dim(pdag)[1]    == dim(pdag)[2],
@@ -276,6 +308,7 @@ pdag2alldags.matrix <- function(pdag, verbose = F){
   }
 }
 
+#' @export
 recurse_unoriented_edge <- function(cpdag, verbose = F){
   stopifnot(class(cpdag)    == "matrix",
             dim(cpdag)[1]   == dim(cpdag)[2],
@@ -289,6 +322,7 @@ recurse_unoriented_edge <- function(cpdag, verbose = F){
 #    implements Step 2 of the pdag2alldags algorithm.        #
 ##################################################################
 
+#' @export
 recurse_unoriented_edge <- function(cpdag, dag_list, verbose = F){
   
   # input must be a COMPLETE pdag

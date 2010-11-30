@@ -22,6 +22,7 @@
 #' @examples
 #' parental(c(), 1, 2)
 #' parental(c(), c(1, 3), c())
+#' @export
 parental <- function(...){
   parents <- list(...)
   parents <- lapply(parents, as.integer)
@@ -38,6 +39,7 @@ parental <- function(...){
 #' @param ...  A series of vectors specifying the parents of each node. These 
 #'   vectors must be of storage.mode "integer".
 #' @return An object of class 'bn'.
+#' @export
 bn <- function(...){
   parents <- list(...)
   parents <- lapply(parents, as.integer)
@@ -53,6 +55,7 @@ bn <- function(...){
 #' @param ... A series of vectors specifying the parents of each node. These 
 #'   vectors must be of storage.mode "integer".
 #' @return An object of class 'bvs'.
+#' @export
 bvs <- function(...){
   parents <- list(...)
   parents <- lapply(parents, as.integer)
@@ -65,12 +68,19 @@ bvs <- function(...){
 #' 
 #' @param ...  A series of objects of class \code{parental}.
 #' @return An object of class 'parental.list'
+#' @export
 parental.list <- function(...){
   parentallist <- list(...)
   class(parentallist) <- c("parental.list")
   parentallist
 }
 
+#' ....
+#' 
+#' @param ... ...
+#' @return ...
+#' @S3method "[" parental.list
+#' @name getpl
 "[.parental.list" <- function(x, i){
   x <- unclass(x)[i]
   class(x) <- "parental.list"
@@ -81,12 +91,19 @@ parental.list <- function(...){
 #' 
 #' @param ... A series of objects of class 'bn'.
 #' @return An object of class 'bn.list'
+#' @export
 bn.list <- function(...){
   bnlist <- list(...)
   class(bnlist) <- c("bn.list", "parental.list")
   bnlist
 }
 
+#' ....
+#' 
+#' @param ... ...
+#' @return ...
+#' @name getbnl
+#' @S3method "[" bn.list
 "[.bn.list" <- function(x, i){
   x <- unclass(x)[i]
   class(x) <- c("bn.list", "parental.list")
@@ -97,18 +114,31 @@ bn.list <- function(...){
 #' 
 #' @param ... A series of objects of class 'bvsresponse'.
 #' @return An object of class 'bvsresponse.list'
+#' @export
 bvsresponse.list <- function(...){
   bvsrlist <- list(...)
   class(bvsrlist) <- "bvsresponse.list"
   bvsrlist
 }
 
+#' ....
+#' 
+#' @param ... ...
+#' @return ...
+#' @name getbvsrl
+#' @S3method "[" bvsresponse.list
 "[.bvsresponse.list" <- function(x, i){
   x <- unclass(x)[i]
   class(x) <- "bvsresponse.list"
   x
 }
 
+#' ...
+#' 
+#' ....
+#' @param x ...
+#' 
+#' @export
 is.valid <- function(x){
   UseMethod("is.valid")
 }
@@ -121,6 +151,8 @@ is.valid <- function(x){
 #'
 #' Returns:
 #'   A logical of length 1 indicating whether x is a valid \code{parental} object
+#' @S3method is.valid parental
+#' @export
 is.valid.parental <- function(x){
   stopifnot("parental" %in% class(x))
   tryCatch({
@@ -144,6 +176,8 @@ is.valid.parental <- function(x){
 #' 
 #' @param x A object of class 'bvs'
 #' @return A logical of length 1 indicating whether x is a valid 'bvs' object
+#' @S3method is.valid bvs
+#' @export
 is.valid.bvs <- function(x){
   stopifnot("bvs" %in% class(x))
   tryCatch({
@@ -169,6 +203,8 @@ is.valid.bvs <- function(x){
 #' 
 #' @param x A object of class 'bn'
 #' @return A logical of length 1 indicating whether x is a valid 'bn' object
+#' @S3method is.valid bn
+#' @export
 is.valid.bn <- function(x){
   stopifnot("bn" %in% class(x),
             "parental" %in% class(x))
@@ -191,6 +227,8 @@ is.valid.bn <- function(x){
 #' 
 #' @param ... Any number of 'parental.list' objects
 #' @return An new 'parental.list' object, including all the supplied parental.lists
+#' @S3method c parental.list
+#' @export
 c.parental.list <- function(...){
   out <- NextMethod("c")
   class(out) <- "parental.list"
@@ -201,6 +239,8 @@ c.parental.list <- function(...){
 #' 
 #' @param ... Any number of 'bn.list' objects
 #' @return An new 'bn.list' object, including all the supplied bn.lists
+#' @S3method c bn.list
+#' @export
 c.bn.list <- function(...){
 
   out <- NextMethod("c")
@@ -212,6 +252,8 @@ c.bn.list <- function(...){
 #' 
 #' @param x A 'parental.list' object
 #' @return Prints the 'parental.list' object to the console.
+#' @S3method print parental.list
+#' @export
 print.parental.list <- function(x){
 
   print(unlist(lapply(x, as.character, pretty = T)))
@@ -221,6 +263,8 @@ print.parental.list <- function(x){
 #' 
 #' @param x A \code{parental} object
 #' @return Prints the \code{parental} object to the console.
+#' @S3method print parental
+#' @export
 print.parental <- function(x){
   print(as.character(x, pretty = T))
 }
@@ -229,11 +273,18 @@ print.parental <- function(x){
 #' 
 #' @param x A 'bn' object
 #' @return Prints the 'bn' object to the console.
+#' @S3method print bn
+#' @export
 print.bn <- function(x){
   print(as.character(x, pretty = T))
 }
 
-
+#' ...
+#' 
+#' ....
+#' @param x ...
+#' 
+#' @export
 renameNodes <- function(...){
   UseMethod("renameNodes")
 }
@@ -245,6 +296,8 @@ renameNodes <- function(...){
 #' @param newnames A character vector specifying the new names for the nodes
 #'
 #' @return The parental.list with renamed nodes
+#' @S3method renameNodes parental.list
+#' @export
 renameNodes.parental.list <- function(x, newnames){
   stopifnot(
     "parental.list" %in% class(x),
@@ -262,6 +315,12 @@ renameNodes.parental.list <- function(x, newnames){
   res
 }
 
+
+#' ....
+#'
+#' @param n ...
+#' @return ...
+#' @export
 complete <- function(n){
   stopifnot(class(n) %in% c("numeric", "integer"),
             n >= 1,
@@ -279,6 +338,7 @@ complete <- function(n){
 #' @param n A integer of length 1, specifying the number of nodes
 #' @param class The class of the returned graph. Can be any of "parental", "bn" or "bvs".
 #' @return An empty graph of the specified class.
+#' @export
 empty <- function(n, class = "parental", response){
   stopifnot(class(n) %in% c("numeric", "integer"),
             n >= 1,
@@ -316,6 +376,8 @@ empty <- function(n, class = "parental", response){
 #' 
 #' @param x: A object of class 'bvsresponse'
 #' @return A logical of length 1 indicating whether x is a valid 'bvsresponse' object
+#' @S3method is.valid bvsresponse
+#' @export
 is.valid.bvsresponse <- function(x){
   stopifnot("bvsresponse" %in% class(x))
   
@@ -348,27 +410,28 @@ is.valid.bvsresponse <- function(x){
   }
 }
 
-# Constructor function for a 'bvsresponse' object.
-# Objects of class 'bvsresponse' are lists, with the following components:
-# 
-# $parents: A vectors of integers, specifying the parents of the response. 
-# The parents must be specified as a vector of integers -- the 
-# storage.mode() of these integers MUST be integer. If the node has no 
-# parents, use integer(0).
-#
-# Note, in particular, that c(2, 1) would not be a valid specification 
-# of 'parents', because storage.mode(2) and storage.mode(1) == "double"
-# Instead one would use c(2L, 1L), as documented in the R FAQ (see [1])
-#
-# Parents of each node MUST be sorted in increasing order.
-# Conformance with object requirements can be tested by is.valid()
-# 
-# [1] http://cran.r-project.org/doc/manuals/R-lang.html#Constants
-# 
-# @param x A vector of integers specifying the parents of the response.
-# @param response A integer of length 1 specifying which node (column) is the response.
-# @param nNodes The number of nodes (columns) in the variable selection.
-# @return An object of class 'bvsresponse'.
+#' Constructor function for a 'bvsresponse' object.
+#' Objects of class 'bvsresponse' are lists, with the following components:
+#' 
+#' $parents: A vectors of integers, specifying the parents of the response. 
+#' The parents must be specified as a vector of integers -- the 
+#' storage.mode() of these integers MUST be integer. If the node has no 
+#' parents, use integer(0).
+#'
+#' Note, in particular, that c(2, 1) would not be a valid specification 
+#' of 'parents', because storage.mode(2) and storage.mode(1) == "double"
+#' Instead one would use c(2L, 1L), as documented in the R FAQ (see [1])
+#'
+#' Parents of each node MUST be sorted in increasing order.
+#' Conformance with object requirements can be tested by is.valid()
+#' 
+#' [1] http://cran.r-project.org/doc/manuals/R-lang.html#Constants
+#' 
+#' @param x A vector of integers specifying the parents of the response.
+#' @param response A integer of length 1 specifying which node (column) is the response.
+#' @param nNodes The number of nodes (columns) in the variable selection.
+#' @return An object of class 'bvsresponse'.
+#' @export
 bvsresponse <- function(x, response, nNodes){
   stopifnot(class(x) == "integer",
             is.numeric(x),
@@ -390,6 +453,8 @@ bvsresponse <- function(x, response, nNodes){
 #' 
 #' @param x:        A 'bvsresponse' object
 #' @return Prints the 'bvsresponse' object to the console.
+#' @S3method print bvsresponse
+#' @export
 print.bvsresponse <- function(x){
   cat("bvsresponse. Col ", x$response, " is response. ", sep = "")
   cat(x$nNodes, " variables. ", sep = "")
@@ -401,6 +466,12 @@ print.bvsresponse <- function(x){
   }
 }
 
+#' ....
+#'
+#' @param x ...
+#' @param i ...
+#' @return ...
+#' @export
 parents <- function(x, i){
   x[[i]]
 }

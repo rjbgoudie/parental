@@ -1,4 +1,7 @@
 \name{renameNodes}
 \alias{renameNodes}
-\title{renameNodes}
+\title{.}
 \usage{renameNodes(...)}
+\description{...}
+\details{....}
+\arguments{\item{x}{...}}

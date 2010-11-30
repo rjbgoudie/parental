@@ -1,4 +1,7 @@
 \name{as.parental}
 \alias{as.parental}
-\title{as.parental}
+\title{.}
 \usage{as.parental(...)}
+\description{...}
+\details{....}
+\arguments{\item{x}{...}}

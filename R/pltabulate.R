@@ -1,3 +1,4 @@
+#' @export
 pltabulate <- function(pl, pretty = F, levels = NULL, sort = F){
   stopifnot(
     "parental.list" %in% class(pl)

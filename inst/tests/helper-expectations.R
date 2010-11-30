@@ -1,5 +1,3 @@
-library(testthat)
-library(parental)
 
 if (as.numeric(R.version$minor) < 11){
   vapply <- function(X, FUN, FUN.VALUE, ..., USE.NAMES = TRUE){
@@ -16,5 +14,3 @@ is_within <- function(expected, tolerance){
       )
     }
 }
-
-test_package("parental")

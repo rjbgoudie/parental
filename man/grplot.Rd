@@ -1,4 +1,7 @@
 \name{grplot}
 \alias{grplot}
-\title{grplot}
+\title{.}
 \usage{grplot(...)}
+\description{...}
+\details{....}
+\arguments{\item{x}{...}}

@@ -1,3 +1,4 @@
+#' @export
 sampleBN <- function(n, maxNumberParents = NULL){
   nodeSeq <- seq_len(n)
   
@@ -40,6 +41,7 @@ sampleBN <- function(n, maxNumberParents = NULL){
   out
 }
 
+#' @export
 sampleBN2 <- function(n, k){
   # hypercube
   # the higher k the sparser the partial order
@@ -64,7 +66,7 @@ sampleBN2 <- function(n, k){
   out
 }
 
-
+#' @export
 expected.sample <- function(n, size, replace, prob){
   exp <- prob * size
   out <- rep(seq.int(n), exp)
@@ -79,7 +81,7 @@ expected.sample <- function(n, size, replace, prob){
 }
 
 ##### sensitivity to the order in which parents are specified
-
+#' @export
 simulate.bn <- function(bn, ptables, N, expectation = F){
   stopifnot(
     "bn" %in% class(bn),
@@ -170,6 +172,7 @@ simulate.bn <- function(bn, ptables, N, expectation = F){
   data.frame(lapply(dat, as.factor))
 }
 
+#' @export
 marginal.probs <- function(bn, ptables){
   stopifnot(
     "bn" %in% class(bn),

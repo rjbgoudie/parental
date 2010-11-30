@@ -1,4 +1,9 @@
 \name{pdag2alldags.matrix}
 \alias{pdag2alldags.matrix}
-\title{pdag2alldags.matrix}
+\title{xxxx...}
 \usage{pdag2alldags.matrix(pdag, verbose=F)}
+\description{xxxx}
+\details{....}
+\value{....}
+\arguments{\item{x}{....}
+\item{pretty}{...}}

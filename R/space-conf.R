@@ -1,5 +1,5 @@
 # returns a list of every Sach's confounder network
-
+#' @export
 enumerateConfSpace <- function(numberOfConfounders, response, effect,
                                maxNumberParents = numberOfConfounders - 2){
   nodesSeq <- seq_len(numberOfConfounders)

@@ -9,6 +9,7 @@
 #' @param response An integer of length 1. Which node is the response
 #' @param maxNumberParents The maximum number of parents of node response.
 #' @return An object of class "bvs.list", a list of objects of class "bvs"
+#' @export
 enumerateBVSSpace <- function(numberOfNodes, response, 
                               maxNumberParents = numberOfNodes - 1){
   if (length(numberOfNodes) != 1 | length(response) != 1){
@@ -36,21 +37,26 @@ enumerateBVSSpace <- function(numberOfNodes, response,
   
   nodesSeq <- seq_len(numberOfNodes)
   choices <- setdiff(nodesSeq, response)
-  possibleParents <- enumerateParents(choices, maxNumberParents)
+  possibleParents <- enumerateParents(potentialParents = choices, maxNumberParents)
   
   # empty graph to which parents are added
   empty <- lapply(nodesSeq, function(node) integer(0))
   
-  out <- lapply(possibleParents, function(parents) {
-    
-    # empty[[x]] <- NULL removes that element
-    # so avoid this problem
-    if (!is.null(parents)){
-      empty[[response]] <- parents
-    }
+  if (maxNumberParents > 0){
+    out <- lapply(possibleParents, function(parents) {
+  
+      # empty[[x]] <- NULL removes that element
+      # so avoid this problem
+      if (!is.null(parents)){
+        empty[[response]] <- parents
+      }
+      class(empty) <- c("bvs", "bn", "parental")
+      empty
+    })
+  } else {
     class(empty) <- c("bvs", "bn", "parental")
-    empty
-  })
+    out <- list(empty)
+  }
   
   class(out) <- c("bvs.list", "bn.list", "parental.list")
   out
@@ -67,6 +73,7 @@ enumerateBVSSpace <- function(numberOfNodes, response,
 #' @param required A numeric vector of required parents
 #' @return A list of possible parents sets, each of which will be a sorted 
 #'   numeric vector, stored as integers.
+#' @export
 enumerateParents <- function(potentialParents,
                              maxNumberParents = length(potentialParents),
                              required = integer(0)){
@@ -100,6 +107,7 @@ enumerateParents <- function(potentialParents,
       ), 
     recursive = F)
   }
+  
   # add a NULL to make the empty graph
   length(possibleParents) <- length(possibleParents) + 1
 
@@ -115,7 +123,7 @@ enumerateParents <- function(potentialParents,
   })
 
   # handle edge case of maxNumberParents == 0
-  if (length(possibleParents) == 0) possibleParents <- list(possibleParents)
+  if (length(possibleParents) == 0) possibleParents <- list()
 
   possibleParents
 }
