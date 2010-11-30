@@ -1,4 +1,7 @@
 \name{complete}
 \alias{complete}
-\title{complete}
+\title{.}
 \usage{complete(n)}
+\description{....}
+\value{...}
+\arguments{\item{n}{...}}

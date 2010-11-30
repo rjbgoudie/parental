@@ -1,8 +1,16 @@
 # get the number of nodes in the network
+#' ...
+#' 
+#' ....
+#' @param x ...
+#' 
+#' @export
 nNodes <- function(x, ...){
   UseMethod("nNodes")
 }
 
+#' @export
+#' @S3method nNodes parental
 nNodes.parental <- function(parental){
   stopifnot(
     "parental" %in% class(parental)
@@ -11,12 +19,14 @@ nNodes.parental <- function(parental){
 }
 
 # get the number of edges in the network
+#' @export
 nEdges <- function(parental){
   stopifnot("parental" %in% class(parental))
   length(unlist(parental))
 }
 
 # convert list of parents to list of children
+#' @export
 getChildren <- function(parental){
   stopifnot("parental" %in% class(parental))
   
@@ -59,6 +69,7 @@ getChildren <- function(parental){
 }
 
 # check if the network is a DAG
+#' @export
 checkAcyclic <- function(parental){
   stopifnot("parental" %in% class(parental))
   # Graphs, Networks and Algorithms By Dieter Jungnickel
@@ -88,7 +99,7 @@ checkAcyclic <- function(parental){
   if (N == nNodes(parental) + 1) T else F
 }
 
-
+#' @export
 topologicallyOrder <- function(parental){
   stopifnot("parental" %in% class(parental))
   # slow but worth it for error checking for now
@@ -138,6 +149,7 @@ topologicallyOrder <- function(parental){
 #' @param y A numeric vector
 #' @return A list of length 2, with setdiff(x, y) in component 1 and 
 #'   setdiff(y, x) in component 2 (apart from the differences described above).
+#' @export
 setdiff2 <- function(x, y){
   list(x[match(x, y, 0L) == 0L], y[match(y, x, 0L) == 0L])
 }
@@ -168,6 +180,7 @@ setdiff2 <- function(x, y){
 #'     A number number of length (nNodes(x) == nNodes(y)).
 #'     The figure in position i of the vector relates to the number changes 
 #'     that need to be made to change the inward bound edges toward node i.
+#' @export
 numberOfMovesBetweenIgnoringCycles <- function(x, y, 
                                                components = F,
                                                allowFlips = F){
@@ -215,6 +228,7 @@ numberOfMovesBetweenIgnoringCycles <- function(x, y,
   }
 }
 
+#' @export
 route <- function(x, y){
   stopifnot(
     length(x) == length(y),
@@ -226,7 +240,7 @@ route <- function(x, y){
   browser()
 }
 
-
+#' @export
 psetdiff <- function(parental1, parental2, count = F){
   stopifnot(
     length(parental1) == length(parental2),
@@ -245,7 +259,7 @@ psetdiff <- function(parental1, parental2, count = F){
   }
 }
 
-
+#' @export
 pintersect <- function(parental1, parental2, count = F){
   stopifnot(
     length(parental1) == length(parental2),
@@ -264,6 +278,7 @@ pintersect <- function(parental1, parental2, count = F){
   }
 }
 
+#' @export
 punion <- function(parental1, parental2){
   stopifnot(
     length(parental1) == length(parental2),
@@ -279,6 +294,7 @@ punion <- function(parental1, parental2){
   res
 }
 
+#' @export
 lpunion <- function(pl){
   stopifnot(
     "parental.list" %in% class(pl)
@@ -314,6 +330,7 @@ lpunion <- function(pl){
 #' 
 #' @param x An object of class 'bn'.
 #' @return A matrix of dimension nNodes(x) x nNodes(x)
+#' @export
 routes <- function(x){
   stopifnot("bn" %in% class(x))
   nNodes <- nNodes(x)
@@ -329,14 +346,17 @@ routes <- function(x){
   routes
 }
 
+#' @export
 routesAddEdge <- function(x, i, j){
   x + x[, i] %*% .Internal(t.default((x[j, ])))
 }
 
+#' @export
 routesRemoveEdge <- function(x, i, j){
   x - x[, i] %*% .Internal(t.default((x[j, ])))
 }
 
+#' @export
 neighbourhoodSize <- function(x){
   # this algorithm is pretty rubbish
   stopifnot("bn" %in% class(x))

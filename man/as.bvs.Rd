@@ -1,4 +1,7 @@
 \name{as.bvs}
 \alias{as.bvs}
-\title{as.bvs}
+\title{.}
 \usage{as.bvs(...)}
+\description{...}
+\details{....}
+\arguments{\item{x}{...}}

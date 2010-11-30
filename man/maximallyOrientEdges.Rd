@@ -1,4 +1,7 @@
 \name{maximallyOrientEdges}
 \alias{maximallyOrientEdges}
-\title{maximallyOrientEdges}
+\title{.}
 \usage{maximallyOrientEdges(...)}
+\description{...}
+\details{....}
+\arguments{\item{x}{...}}

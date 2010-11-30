@@ -98,10 +98,25 @@ latticeGrob <- function(p, ...){
    grob(p = p, ..., cl = "lattice")
 }
 
+#' xxxx
+#' 
+#' ....
+#'
+#' @param x ....
+#' @param pretty ...
+#' @return ....
 drawDetails.lattice <- function(x, recording = F){
    lattice:::plot.trellis(x$p, newpage = F)
 }
 
+#' xxxx
+#' 
+#' ....
+#'
+#' @param x ....
+#' @param pretty ...
+#' @return ....
+#' @export
 prepanel.parental <- function(x, y, parents, rawdata = NULL, grobNodeSize, offset, 
                               islist = F, widthMultiplier = 2, heightMultipler = 1){
   if (!islist){
@@ -145,6 +160,7 @@ convertToEnlargedCoordinates <- function(width, height, x, y){
 #' @return A list of length 2 containing two items:
 #'     width: A object of class "unit"
 #'     height: A object of class "unit"
+#' @export
 grobNodeNameSize <- function(node, parents, rawdata = NULL){
   #tg <- textGrob(label = names(parents)[node])
   #list(width  = grobWidth(tg),
@@ -161,6 +177,7 @@ grobNodeNameSize <- function(node, parents, rawdata = NULL){
 #'   be plotted
 #' @param rawdata The rawdata
 #' @return A "grob"
+#' @export
 grobNodeName <- function(node, parents, rawdata = NULL){
   textGrob(label = names(parents)[node])
 }
@@ -179,6 +196,7 @@ grobNodeName <- function(node, parents, rawdata = NULL){
 #' @return A list of length 2 containing two items:
 #'     width: A object of class "unit"
 #'     height: A object of class "unit"
+#' @export
 grobNodeLevelPlotSize <- function(node, parents, rawdata){
   nParents <- length(parents[[node]])
   if (nParents > 0){
@@ -192,6 +210,7 @@ grobNodeLevelPlotSize <- function(node, parents, rawdata){
   }
 }
 
+#' @export
 grobNodeLevelPlotDefaultTheme <- function(){
   list(layout.heights = list(top.padding       = 0,
                              main.key.padding  = 0.5,
@@ -216,6 +235,7 @@ grobNodeLevelPlotDefaultTheme <- function(){
 #'            be plotted
 #' @param rawdata The rawdata
 #' @return A "grob"
+#' @export
 grobNodeLevelPlot <- function(node,
                               parents,
                               rawdata,
@@ -271,6 +291,14 @@ grobNodeLevelPlot <- function(node,
   }
 }
 
+#' xxxx
+#' 
+#' ....
+#'
+#' @param x ....
+#' @param pretty ...
+#' @return ....
+#' @export
 panel.parental <- function(x, y, parents, layout, col, alpha, 
                            edgecol, 
                            edgealpha, islist = F, rawdata = NULL,
@@ -423,10 +451,25 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
   }
 }
 
+#' ...
+#' 
+#' ....
+#' @param x ...
+#' 
+#' @export
 grplot <- function(...){
   UseMethod("grplot")
 }
 
+#' xxxx
+#' 
+#' ....
+#'
+#' @param x ....
+#' @param pretty ...
+#' @return ....
+#' @S3method grplot parental
+#' @export
 grplot.parental <- function(parents,
                             col          = 1,
                             alpha        = 1,
@@ -508,6 +551,15 @@ grplot.parental <- function(parents,
   ans
 }
 
+#' xxxx
+#' 
+#' ....
+#'
+#' @param x ....
+#' @param pretty ...
+#' @return ....
+#' @S3method grplot parental.list
+#' @export
 grplot.parental.list <- function(parentallist,
                                  col          = 1, 
                                  alpha        = 1,
@@ -587,6 +639,8 @@ grplot.parental.list <- function(parentallist,
 #'   corresponding node. The default character vector vector "default"
 #'   makes the response node red and the other nodes black.
 #' @return A lattice plot of the graph
+#' @S3method grplot bvsresponse
+#' @export
 grplot.bvsresponse <- function(x, col = "default", ...){
   stopifnot(class(x) == "bvsresponse")
   bvs <- as.bvs(x)
@@ -600,6 +654,7 @@ grplot.bvsresponse <- function(x, col = "default", ...){
   grplot(bvs, col = col, ...)
 }
 
+#' @export
 nodeLevelplot <- function(parents, rawdata){
   for (node in seq_along(parents)){
     grid.newpage()

@@ -1,10 +1,16 @@
+#' Coerce pcAlgo object to a bn
+#'
+#' ....
+#' 
+#' @param x An object of class \code{pcAlgo}
+#' @S3method as.bn pcAlgo
+#' @export
 as.bn.pcAlgo <- function(x){
-  require(pcalg)
   stopifnot(
     "pcAlgo" %in% class(x)
   )
   warning("this selects a particular bn from the equivalence class")
-  pdag <- pdag2dag(x@graph)
+  pdag <- pcalg::pdag2dag(x@graph)
   if (isTRUE(pdag$success)){
     as.bn(pdag$graph)
   }
@@ -13,14 +19,26 @@ as.bn.pcAlgo <- function(x){
   }
 }
 
+#' Coerce pcAlgo object to a bn
+#'
+#' ....
+#' 
+#' @param x An object of class \code{pcAlgo}
+#' @S3method as.bn pcAlgo
+#' @export
 as.parental.pcAlgo <- function(x){
-  require(pcalg)
   stopifnot(
     "pcAlgo" %in% class(x)
   )
   as.parental(x@graph)
 }
 
+#' ...
+#' 
+#' ....
+#' @param x ...
+#' 
+#' @export
 as.cpdag <- function(...){
   UseMethod("as.cpdag")
 }
@@ -30,6 +48,8 @@ as.cpdag <- function(...){
 #'
 #' @param x The parental BN to be converted.
 #' @return The CPDAG as a parental. (Which will in general not be a BN)
+#' @S3method as.cpdag bn
+#' @export
 as.cpdag.bn <- function(x){
   stopifnot(
     "bn" %in% class(x)
@@ -50,7 +70,7 @@ as.cpdag.bn <- function(x){
     dag[dag != 0] <- 1
 
     ## dag is adjacency matrix
-    e.df <- labelEdges(dag)
+    e.df <- pcalg::labelEdges(dag)
     cpdag <- matrix(rep(0, p * p), nrow = p, ncol = p)
     for (i in seq_len(dim(e.df)[1])) {
       if (e.df$label[i]) {
@@ -64,10 +84,17 @@ as.cpdag.bn <- function(x){
   }
 }
 
+#' ...
+#' 
+#' ....
+#' @param x ...
+#' 
+#' @export
 as.cpdag2 <- function(...){
   UseMethod("as.cpdag2")
 }
 
+#' @export
 whichVStructure <- function(net){
   nodeSeq <- seq_along(net)
   lapply(nodeSeq, function(node){
@@ -109,6 +136,7 @@ whichVStructure <- function(net){
   })
 }
 
+#' @export
 whichVStructurePlot <- function(net){
   vs <- whichVStructure(net)
   vs <- lapply(vs, function(parents){
@@ -121,6 +149,7 @@ whichVStructurePlot <- function(net){
   grplot(net, edgecol = adjvs + 1)
 }
 
+#' @export
 makeNonVStructuresUndirected <- function(bn){
   parentsSeq <- seq_along(bn)
   ivs <- whichVStructure(bn)
@@ -136,6 +165,7 @@ makeNonVStructuresUndirected <- function(bn){
   bn2
 }
 
+#' @export
 as.cpdag2.bn <- function(x){
   #### incorrect.
   #### need to make edges not in v-strcutures undirected
@@ -154,6 +184,8 @@ as.cpdag2.bn <- function(x){
 #'
 #' @param x An object of class bn.list
 #' @return A parental.list containing a list of CPDAGs of class CPDAG.
+#' @S3method as.cpdag bn.list
+#' @export
 as.cpdag.bn.list <- function(x){
   stopifnot(class(x) == "bn.list")
   
@@ -168,6 +200,8 @@ as.cpdag.bn.list <- function(x){
 #'
 #' @param x An object of class bnpostmcmc.list
 #' @return A list containing a list of CPDAGs of class CPDAG.
+#' @S3method as.cpdag bnpostmcmc.list
+#' @export
 as.cpdag.bnpostmcmc.list <- function(x){
   stopifnot(
     class(x)        ==   "bnpostmcmc.list",

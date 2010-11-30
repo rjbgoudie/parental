@@ -2,7 +2,8 @@
 \alias{enumerateParents}
 \title{Enumerate all the combinations of possible parents, given a SET of...}
 \usage{enumerateParents(potentialParents,
-    maxNumberParents=length(potentialParents), required=integer(0))}
+    maxNumberParents=length(potentialParents),
+    required=integer(0))}
 \description{Enumerate all the combinations of possible parents, given a SET of 
 possible parents. Optionally, restrcit the maximum number of parents. 
 Optionally, require that a particular parent is always present.}

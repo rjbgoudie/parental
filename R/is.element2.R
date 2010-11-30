@@ -1,3 +1,7 @@
+#' ...
+#'
+#' ...
+#' @export
 is.element2 <- function (el, set) {
   stopifnot("parental" %in% class(el),
             "parental.list" %in% class(set))
@@ -6,6 +10,10 @@ is.element2 <- function (el, set) {
   }))
 }
 
+#' ...
+#'
+#' ...
+#' @export
 which2 <- function (el, set) {
   stopifnot("parental" %in% class(el),
             "parental.list" %in% class(set))
