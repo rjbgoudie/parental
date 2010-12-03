@@ -3,22 +3,23 @@
 # test_that("bnlearn2parental - marks", {
 # 
 #   local({
-#     require("bnlearn")
-#     data(marks)
-#     x <- mmpc(marks)
+#     if (require("bnlearn")){
+#       data(marks)
+#       x <- mmpc(marks)
 #   
-#     expect_that(
-#       bnlearn2parental(x), 
-#       is_identical_to(
-#         structure(list(mechanics = 2:3,
-#                        vectors = c(1L, 3L),
-#                        algebra = c(1L, 2L, 4L, 5L),
-#                        analysis = c(3L, 5L),
-#                        statistics = 3:4),
-#                    class = "parental",
-#                    .Names = c("mechanics", "vectors", "algebra",
-#                               "analysis", "statistics"))
-#         ))
+#       expect_that(
+#         bnlearn2parental(x), 
+#         is_identical_to(
+#           structure(list(mechanics = 2:3,
+#                          vectors = c(1L, 3L),
+#                          algebra = c(1L, 2L, 4L, 5L),
+#                          analysis = c(3L, 5L),
+#                          statistics = 3:4),
+#                      class = "parental",
+#                      .Names = c("mechanics", "vectors", "algebra",
+#                                 "analysis", "statistics"))
+#           ))
+#       }
 #     })
 # })
 # 
