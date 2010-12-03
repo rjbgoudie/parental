@@ -4,7 +4,17 @@ test_that("toAdjacencyMatrix", {
   sink(tempfile())
   require(pcalg)
   sink()
-  load("../extdata/pc-boot-1.RData")
+  
+  if (R.version$os == "darwin9.8.0"){
+    testfile <- file.path("", "Volumes", "Buster", "library",
+                           "parental", "inst", "test-data", 
+                           "pc-boot-1.RData")
+  } else {
+    testfile <- file.path("~", "library",
+                             "parental", "inst", "test-data", 
+                             "pc-boot-1.RData")
+  }
+  load(testfile)
   expect_that(
     as.parental(pc.fit), 
     is_identical_to(
