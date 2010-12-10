@@ -1,5 +1,17 @@
 # returns a list of every DAG with n nodes
 
+#' Enumerate the space of BNs
+#' 
+#' Enumerate (ie make a list of, not just count) the entire space of 
+#' Bayesian Networks models, on a given number of nodes.
+#' 
+#' @param n The number of nodes
+#' @param allowCyclic A logical indicating whether cyclic directed graphs
+#'   should be filtered out.
+#' @param multicore A logical specifying whether to use 
+#'   \link[multicore]{mclapply}.
+#' @return A \code{parental.list} including ALL the directed acyclic 
+#'   graphs with \code{n} nodes.
 #' @export
 enumerateBNSpace <- function(n, allowCyclic = F, multicore = F){
   myapply <- function(...) lapply(...)
@@ -55,6 +67,13 @@ enumerateBNSpace <- function(n, allowCyclic = F, multicore = F){
   family
 }
 
+#' Filter cyclic graphs
+#' 
+#' Removes the cyclic graphs from a list of graphs
+#' 
+#' @param bnlist A \code{parental.list} of graphs
+#' @return An object of class \code{bn.list}, containing all the acyclic graphs 
+#'   in \code{bnlist}
 #' @export
 filterCyclic <- function(bnlist){
   isAcyclic <- lapply(bnlist, checkAcyclic)
@@ -63,6 +82,12 @@ filterCyclic <- function(bnlist){
   out
 }
 
+#' Create a bn.list
+#' 
+#' Creates a list of objects of \code{bn} class.
+#' 
+#' @param ... A number of objects of class \code{bn}
+#' @return An object of class \code{bn.list}, containing all supplied BNs.
 #' @export
 bn.list <- function(...){
   out <- list(...)

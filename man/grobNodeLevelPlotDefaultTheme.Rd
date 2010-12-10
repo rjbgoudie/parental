@@ -1,3 +1,7 @@
 \name{grobNodeLevelPlotDefaultTheme}
 \alias{grobNodeLevelPlotDefaultTheme}
-\title{grobNodeLevelPlotDefaultTheme}
+\title{.}
+\description{...}
+\details{...}
+\value{...}
+

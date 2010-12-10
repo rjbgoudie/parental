@@ -1,4 +1,10 @@
 \name{nEdges}
 \alias{nEdges}
-\title{nEdges}
-\usage{nEdges(parental)}
+\title{.}
+\usage{nEdges(parental)
+}
+\description{...}
+\details{....}
+\arguments{\item{parental}{...}
+}
+

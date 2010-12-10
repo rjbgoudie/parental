@@ -1,3 +1,8 @@
+#' ...
+#' 
+#' ....
+#' @param n ...
+#' @param maxNumberParents ...
 #' @export
 sampleBN <- function(n, maxNumberParents = NULL){
   nodeSeq <- seq_len(n)
@@ -41,6 +46,11 @@ sampleBN <- function(n, maxNumberParents = NULL){
   out
 }
 
+#' ...
+#' 
+#' ....
+#' @param n ...
+#' @param k ...
 #' @export
 sampleBN2 <- function(n, k){
   # hypercube
@@ -66,6 +76,14 @@ sampleBN2 <- function(n, k){
   out
 }
 
+#' ...
+#' 
+#' ....
+#' @param n ...
+#' @param size ...
+#' @param replace ...
+#' @param prob ...
+#' @export
 #' @export
 expected.sample <- function(n, size, replace, prob){
   exp <- prob * size
@@ -81,6 +99,13 @@ expected.sample <- function(n, size, replace, prob){
 }
 
 ##### sensitivity to the order in which parents are specified
+#' ...
+#' 
+#' ....
+#' @param bn ...
+#' @param ptables ...
+#' @param N ...
+#' @param expectation ...
 #' @export
 simulate.bn <- function(bn, ptables, N, expectation = F){
   stopifnot(
@@ -172,8 +197,15 @@ simulate.bn <- function(bn, ptables, N, expectation = F){
   data.frame(lapply(dat, as.factor))
 }
 
+#' ...
+#' 
+#' I don't think this works. In particular check that sample.int is sensible.
+#' And that N is properly implemented
+#' @param bn ...
+#' @param ptables ...
+#' @param N ...
 #' @export
-marginal.probs <- function(bn, ptables){
+marginal.probs <- function(bn, ptables, N){
   stopifnot(
     "bn" %in% class(bn),
     class(ptables) == "list",
@@ -198,7 +230,7 @@ marginal.probs <- function(bn, ptables){
     numberOfLevels <- numberOfLevelsAll[[i]]
     
     if (numberOfParents[i] == 0){
-      dat[, i] <- creator(numberOfLevels,
+      dat[, i] <- sample.int(numberOfLevels,
                              size    = N,
                              replace = T,
                              prob    = ptable)
@@ -228,7 +260,7 @@ marginal.probs <- function(bn, ptables){
         # for the rows that are in this configuration, sample
         whichRows <- apply(local, 1, function(x) all(x == config))
         
-        dat[whichRows, i] <- creator(numberOfLevels,
+        dat[whichRows, i] <- sample.int(numberOfLevels,
                                         size    = sum(whichRows),
                                         replace = T,
                                         prob    = probs)
@@ -237,6 +269,12 @@ marginal.probs <- function(bn, ptables){
   }
 }
 
+#' ...
+#' 
+#' ....
+#' @param i ...
+#' @param j ...
+#' @export
 cptBinary <- function(i,j){
   as.table(array(c(i, j), 2))
 }

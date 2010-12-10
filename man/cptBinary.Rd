@@ -1,4 +1,11 @@
 \name{cptBinary}
 \alias{cptBinary}
-\title{cptBinary}
-\usage{cptBinary(i, j)}
+\title{.}
+\usage{cptBinary(i, j)
+}
+\description{...}
+\details{....}
+\arguments{\item{i}{...}
+\item{j}{...}
+}
+

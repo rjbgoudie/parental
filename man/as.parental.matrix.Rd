@@ -1,7 +1,8 @@
 \name{as.parental.matrix}
 \alias{as.parental.matrix}
 \title{Convert a variety of matrix objects to 'parental' objects.}
-\usage{as.parental.matrix(x, type="adjacency", n)}
+\usage{as.parental.matrix(x, type="adjacency", n)
+}
 \description{Convert a variety of matrix objects to 'parental' objects.}
 \details{The supplied matrix x should either be an adjacency 
 matrix (type = "adjacency"), or an edgelist (type = "edgelist").
@@ -14,4 +15,6 @@ For type = "edgelist", the number of nodes n must be specified.}
 \value{An object of class 'parental'.}
 \arguments{\item{x}{An object of class 'matrix'}
 \item{type}{Either "adjacency" or "edgelist"}
-\item{n}{The number of nodes n. Only required for type = "edgelist"}}
+\item{n}{The number of nodes n. Only required for type = "edgelist"}
+}
+

@@ -1,4 +1,11 @@
 \name{sampleBN2}
 \alias{sampleBN2}
-\title{sampleBN2}
-\usage{sampleBN2(n, k)}
+\title{.}
+\usage{sampleBN2(n, k)
+}
+\description{...}
+\details{....}
+\arguments{\item{n}{...}
+\item{k}{...}
+}
+

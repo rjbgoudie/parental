@@ -1,4 +1,10 @@
 \name{nodeLevelplot}
 \alias{nodeLevelplot}
-\title{nodeLevelplot}
-\usage{nodeLevelplot(parents, rawdata)}
+\title{.}
+\usage{nodeLevelplot(parents, rawdata)
+}
+\description{...}
+\arguments{\item{parents}{...}
+\item{rawdata}{...}
+}
+

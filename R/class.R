@@ -1,3 +1,13 @@
+#' The parental package.
+#' 
+#' Parental
+#' 
+#' @import lattice grid utils.rjbg
+#' @docType package
+#' @name package-parental
+#' @aliases package-parental
+NULL
+
 #' Constructor function for a \code{parental} object.
 #'
 #' Objects of class \code{parental} are lists with the ith component specifying
@@ -5,9 +15,10 @@
 #' integers -- the storage.mode() of these integers MUST be integer. 
 #' If the node has no parents, use integer(0).
 #'
-#' Note, in particular, that \code{list(2, 1)} would not be a valid \code{parental} 
-#' object, because storage.mode(2) and \code{storage.mode(1) == "double"}
-#' Instead one would use \code{list(2L, 1L)}, as documented in the R FAQ (see [1])
+#' Note, in particular, that \code{list(2, 1)} would not be a valid 
+#' \code{parental}  object, because storage.mode(2) and 
+#' \code{storage.mode(1) == "double"}. Instead one would use 
+#' \code{list(2L, 1L)}, as documented in the R FAQ (see [1])
 #'
 #' Parents of each node MUST be sorted in increasing order.
 #' Conformance with object requirements can be tested by \code{is.valid()}
@@ -21,6 +32,7 @@
 #' @export
 #' @examples
 #' parental(c(), 1, 2)
+#' 
 #' parental(c(), c(1, 3), c())
 #' @export
 parental <- function(...){
@@ -49,8 +61,9 @@ bn <- function(...){
 }
 
 #' Constructor function for a 'bvs' object.
-#' 'bvs' is a subclass of \code{parental}. See \code{\link{parental}} for detailed 
-#' documentation.
+#' 
+#' 'bvs' is a subclass of \code{parental}. See \code{\link{parental}} 
+#' for detailed documentation.
 #' 
 #' @param ... A series of vectors specifying the parents of each node. These 
 #'   vectors must be of storage.mode "integer".
@@ -75,10 +88,15 @@ parental.list <- function(...){
   parentallist
 }
 
-#' ....
+#' Extract parts of a parental.list
 #' 
-#' @param ... ...
-#' @return ...
+#' Operator that acts on objects of class \code{parental.list} to extract 
+#' parts of the list
+#' 
+#' @param x Object from which to extract element(s)
+#' @param i Indicies specifying elements to extract
+#' @return An object of class \code{parental.list}, consisting the parts of 
+#'   \code{x} indicated by \code{i}
 #' @S3method "[" parental.list
 #' @name getpl
 "[.parental.list" <- function(x, i){
@@ -98,10 +116,15 @@ bn.list <- function(...){
   bnlist
 }
 
-#' ....
+#' Extract parts of a bn.list
 #' 
-#' @param ... ...
-#' @return ...
+#' Operator that acts on objects of class \code{bn.list} to extract 
+#' parts of the list
+#' 
+#' @param x Object from which to extract element(s)
+#' @param i Indicies specifying elements to extract
+#' @return An object of class \code{bn.list}, consisting the parts of 
+#'   \code{x} indicated by \code{i}
 #' @name getbnl
 #' @S3method "[" bn.list
 "[.bn.list" <- function(x, i){
@@ -121,10 +144,15 @@ bvsresponse.list <- function(...){
   bvsrlist
 }
 
-#' ....
+#' Extract parts of a bvsresponse.list
 #' 
-#' @param ... ...
-#' @return ...
+#' Operator that acts on objects of class \code{bvsresponse.list} to extract 
+#' parts of the list
+#' 
+#' @param x Object from which to extract element(s)
+#' @param i Indicies specifying elements to extract
+#' @return An object of class \code{bvsresponse.list}, consisting the parts of 
+#'   \code{x} indicated by \code{i}
 #' @name getbvsrl
 #' @S3method "[" bvsresponse.list
 "[.bvsresponse.list" <- function(x, i){
@@ -133,11 +161,11 @@ bvsresponse.list <- function(...){
   x
 }
 
-#' ...
+#' Check validity of x
 #' 
-#' ....
-#' @param x ...
 #' 
+#' @param x Object to check for validity
+#' @return A logical indicating validity.
 #' @export
 is.valid <- function(x){
   UseMethod("is.valid")
@@ -148,9 +176,8 @@ is.valid <- function(x){
 #' storage.mode() == "integer"
 #' 
 #' @param x A object of class \code{parental}
-#'
-#' Returns:
-#'   A logical of length 1 indicating whether x is a valid \code{parental} object
+#' @return A logical of length 1 indicating whether x is a valid 
+#'   \code{parental} object
 #' @S3method is.valid parental
 #' @export
 is.valid.parental <- function(x){
@@ -279,13 +306,15 @@ print.bn <- function(x){
   print(as.character(x, pretty = T))
 }
 
-#' ...
+#' Rename nodes
 #' 
-#' ....
-#' @param x ...
+#' A generic
+#' 
+#' @param x object to rename
+#' @param ... unused
 #' 
 #' @export
-renameNodes <- function(...){
+renameNodes <- function(x, ...){
   UseMethod("renameNodes")
 }
 
@@ -294,11 +323,12 @@ renameNodes <- function(...){
 #' 
 #' @param x A parental.list
 #' @param newnames A character vector specifying the new names for the nodes
+#' @param ... unused
 #'
 #' @return The parental.list with renamed nodes
 #' @S3method renameNodes parental.list
 #' @export
-renameNodes.parental.list <- function(x, newnames){
+renameNodes.parental.list <- function(x, newnames, ...){
   stopifnot(
     "parental.list" %in% class(x),
     class(newnames) == "character",
@@ -316,10 +346,10 @@ renameNodes.parental.list <- function(x, newnames){
 }
 
 
-#' ....
+#' Return a complete graph
 #'
-#' @param n ...
-#' @return ...
+#' @param n the number of nodes
+#' @return a complete parental graph
 #' @export
 complete <- function(n){
   stopifnot(class(n) %in% c("numeric", "integer"),
@@ -336,7 +366,9 @@ complete <- function(n){
 #' Returns an empty graph with n nodes, of the given class
 #' 
 #' @param n A integer of length 1, specifying the number of nodes
-#' @param class The class of the returned graph. Can be any of "parental", "bn" or "bvs".
+#' @param class The class of the returned graph. Can be any of "parental", 
+#'   "bn", "bvs", or "bvsresponse".
+#' @param response For "bvsresponse", which node is the response
 #' @return An empty graph of the specified class.
 #' @export
 empty <- function(n, class = "parental", response){
@@ -374,7 +406,7 @@ empty <- function(n, class = "parental", response){
 #' storage.mode() == "integer".
 #' Additionally tests the parents all exist.
 #' 
-#' @param x: A object of class 'bvsresponse'
+#' @param x A object of class 'bvsresponse'
 #' @return A logical of length 1 indicating whether x is a valid 'bvsresponse' object
 #' @S3method is.valid bvsresponse
 #' @export
@@ -451,11 +483,12 @@ bvsresponse <- function(x, response, nNodes){
 
 #' Prints a 'bvsresponse' object to the console.
 #' 
-#' @param x:        A 'bvsresponse' object
+#' @param x A 'bvsresponse' object
+#' @param ... unused
 #' @return Prints the 'bvsresponse' object to the console.
 #' @S3method print bvsresponse
 #' @export
-print.bvsresponse <- function(x){
+print.bvsresponse <- function(x, ...){
   cat("bvsresponse. Col ", x$response, " is response. ", sep = "")
   cat(x$nNodes, " variables. ", sep = "")
     if (length(x$parents) > 0){
@@ -466,11 +499,11 @@ print.bvsresponse <- function(x){
   }
 }
 
-#' ....
+#' Parents
 #'
-#' @param x ...
-#' @param i ...
-#' @return ...
+#' @param x The object for which to get the parents
+#' @param i Which node
+#' @return The parents
 #' @export
 parents <- function(x, i){
   x[[i]]

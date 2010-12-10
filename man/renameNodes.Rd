@@ -1,7 +1,11 @@
 \name{renameNodes}
 \alias{renameNodes}
-\title{.}
-\usage{renameNodes(...)}
-\description{...}
-\details{....}
-\arguments{\item{x}{...}}
+\title{Rename nodes...}
+\usage{renameNodes(x, ...)
+}
+\description{Rename nodes}
+\details{A generic}
+\arguments{\item{x}{object to rename}
+\item{...}{unused}
+}
+

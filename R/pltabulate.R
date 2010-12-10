@@ -1,3 +1,14 @@
+#' Tabulate a parental list
+#'
+#' Tabulate a parental list.
+#'
+#' @param pl A \code{parental.list} to tabulate.
+#' @param pretty A logical indicating how to convert the objects of
+#'   class \code{parental} inside \code{pl} to strings. See 
+#'   \code{\link{as.character.parental.list}} for details.
+#' @param levels What levels to make the table using. By default 
+#'   \code{as.character(pl)}.
+#' @param sort A logical indicating whether to sort the table.
 #' @export
 pltabulate <- function(pl, pretty = F, levels = NULL, sort = F){
   stopifnot(

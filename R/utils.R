@@ -16,6 +16,12 @@ is.wholenumber <- function(x, tol = .Machine$double.eps^0.5){
   abs(x - round(x)) < tol
 }
 
+#' Retrieve off-diagonal elements
+#'
+#' Retrieve off-diagonal elements
+#'
+#' @param mx A matrix
+#' @return A vector of off-diagonals
 #' @export
 notdiag <- function(mx){
   mx[which(upper.tri(mx) + lower.tri(mx) == 1)]

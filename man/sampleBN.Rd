@@ -1,4 +1,11 @@
 \name{sampleBN}
 \alias{sampleBN}
-\title{sampleBN}
-\usage{sampleBN(n, maxNumberParents)}
+\title{.}
+\usage{sampleBN(n, maxNumberParents)
+}
+\description{...}
+\details{....}
+\arguments{\item{n}{...}
+\item{maxNumberParents}{...}
+}
+

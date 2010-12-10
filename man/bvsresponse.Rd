@@ -1,7 +1,8 @@
 \name{bvsresponse}
 \alias{bvsresponse}
 \title{Constructor function for a 'bvsresponse' object.}
-\usage{bvsresponse(x, response, nNodes)}
+\usage{bvsresponse(x, response, nNodes)
+}
 \description{Constructor function for a 'bvsresponse' object.
 Objects of class 'bvsresponse' are lists, with the following components:}
 \details{$parents: A vectors of integers, specifying the parents of the response. 
@@ -20,4 +21,6 @@ Conformance with object requirements can be tested by is.valid()
 \value{An object of class 'bvsresponse'.}
 \arguments{\item{x}{A vector of integers specifying the parents of the response.}
 \item{response}{A integer of length 1 specifying which node (column) is the response.}
-\item{nNodes}{The number of nodes (columns) in the variable selection.}}
+\item{nNodes}{The number of nodes (columns) in the variable selection.}
+}
+

@@ -1,4 +1,10 @@
 \name{nNodes.parental}
 \alias{nNodes.parental}
-\title{nNodes.parental}
-\usage{nNodes.parental(parental)}
+\title{.}
+\usage{nNodes.parental(parental)
+}
+\description{...}
+\details{....}
+\arguments{\item{parental}{...}
+}
+

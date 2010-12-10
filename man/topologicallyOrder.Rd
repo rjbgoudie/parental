@@ -1,4 +1,10 @@
 \name{topologicallyOrder}
 \alias{topologicallyOrder}
-\title{topologicallyOrder}
-\usage{topologicallyOrder(parental)}
+\title{.}
+\usage{topologicallyOrder(parental)
+}
+\description{...}
+\details{....}
+\arguments{\item{parental}{...}
+}
+
