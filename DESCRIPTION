@@ -10,7 +10,7 @@ Description: Data structures and tools for handling and
 URL: localhost
 Imports: base, network, lattice, grid, sna
 Depends: R (>= 2.9)
-Suggests: pcalg, graph, bnlearn, multicore
+Suggests: pcalg, graph, bnlearn, multicore, graphicsQC
 License: GPL
 LazyData: true
 Collate: 'bnlearn.R' 'class.R' 'convert.R' 'is.element2.R'

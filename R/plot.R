@@ -1,3 +1,5 @@
+
+
 toPolar <- function(x, y){
   r <- sqrt(x^2 + y^2)
   theta <- rep(NULL, times = length(r))
@@ -106,7 +108,7 @@ latticeGrob <- function(p, ...){
 #' @param pretty ...
 #' @return ....
 drawDetails.lattice <- function(x, recording = F){
-   lattice:::plot.trellis(x$p, newpage = F)
+   plot.trellis(x$p, newpage = F)
 }
 
 #' xxxx
