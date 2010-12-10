@@ -1,4 +1,11 @@
 \name{route}
 \alias{route}
-\title{route}
-\usage{route(x, y)}
+\title{.}
+\usage{route(x, y)
+}
+\description{...}
+\details{....}
+\arguments{\item{x}{...}
+\item{y}{...}
+}
+

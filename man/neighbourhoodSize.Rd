@@ -1,4 +1,10 @@
 \name{neighbourhoodSize}
 \alias{neighbourhoodSize}
-\title{neighbourhoodSize}
-\usage{neighbourhoodSize(x)}
+\title{.}
+\usage{neighbourhoodSize(x)
+}
+\description{...}
+\details{....}
+\arguments{\item{x}{...}
+}
+

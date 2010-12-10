@@ -1,4 +1,11 @@
 \name{makeNonVStructuresUndirected}
 \alias{makeNonVStructuresUndirected}
-\title{makeNonVStructuresUndirected}
-\usage{makeNonVStructuresUndirected(bn)}
+\title{.}
+\usage{makeNonVStructuresUndirected(bn)
+}
+\description{...}
+\details{...}
+\value{...}
+\arguments{\item{bn}{...}
+}
+

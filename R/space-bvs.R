@@ -1,6 +1,8 @@
 # returns a list of every Bayesian Variable Selection network, 
 # with a particular response
 
+#' Enumerate the space of BVSs
+#' 
 #' Enumerate (ie make a list of, not just count) the entire space of 
 #' Bayesian Variable Selection models, on a given number of nodes, for a 
 #' particular response. Optionally, restrcit the maximum number of parents

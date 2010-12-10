@@ -2,9 +2,10 @@
 #' 
 #' ....
 #' @param x ...
+#' @param ... ...
 #' 
 #' @export
-as.adjacency <- function(...) {
+as.adjacency <- function(x, ...) {
   UseMethod("as.adjacency")
 }
 
@@ -12,9 +13,10 @@ as.adjacency <- function(...) {
 #' 
 #' ....
 #' @param x ...
+#' @param ... ...
 #' 
 #' @export
-as.bn <- function(...) {
+as.bn <- function(x, ...) {
   UseMethod("as.bn")
 }
 
@@ -22,15 +24,17 @@ as.bn <- function(...) {
 #' 
 #' ....
 #' @param x ...
+#' @param ... ...
 #' 
 #' @export
-as.graph <- function(...){
+as.graph <- function(x, ...){
   UseMethod("as.graph")
 }
 
 #' Convert a matrix to a 'bn'. See for 'as.parental.matrix' for details
 #' 
-#' @param A matrix, as described in as.parental.matrix()
+#' @param x A matrix, as described in as.parental.matrix()
+#' @param ... unused
 #' @return An object of class 'bn'
 #' @S3method as.bn matrix
 #' @export
@@ -51,6 +55,7 @@ as.bn.matrix <- function(x, ...){
 #' an edge exist between nodes i and j, where n is the number of nodes.
 #' 
 #' @param x A object of class 'parental'.
+#' @param ... unused
 #' @return An adjacency matrix.
 #' @S3method as.adjacency parental
 #' @export
@@ -75,7 +80,7 @@ as.adjacency.parental <- function(x, ...){
 #' ...
 #' 
 #' ....
-#' @param x ...
+#' @param ... ...
 #' 
 #' @export
 as.parental <- function(...){
@@ -133,7 +138,8 @@ as.parental.character <- function(x, pretty = F){
 #' ....
 #'
 #' @param x ....
-#' @param pretty ...
+#' @param checkAcyclic ...
+#' @param ... ... 
 #' @return ....
 #' @S3method as.bn character
 #' @export
@@ -362,10 +368,11 @@ seemsPretty <- function(x){
 #' Note that graphNEL's edge list are *children* lists.
 #' 
 #' @param x An object of class 'parental'
+#' @param ... unused
 #' @return An object of class 'graphNEL'.
 #' @S3method as.graph parental
 #' @export
-as.graph.parental <- function(x){
+as.graph.parental <- function(x, ...){
   require(graph)
   x <- getChildren(x) # convert to children list
   nodeNames <- as.character(seq_along(x))
@@ -402,10 +409,11 @@ as.parental.graphNEL <- function(x){
 #' Note that graphNEL's edge list are *children* lists.
 #' 
 #' @param x An object of class 'graphNEL'
+#' @param ... unused
 #' @return An object of class 'bn'.
 #' @S3method as.bn graphNEL
 #' @export
-as.bn.graphNEL <- function(x){
+as.bn.graphNEL <- function(x, ...){
   res <- as.parental(x)
   if (!checkAcyclic(res)){
     stop("Not acyclic")
@@ -417,7 +425,7 @@ as.bn.graphNEL <- function(x){
 #' ...
 #' 
 #' ....
-#' @param x ...
+#' @param ... ...
 #' 
 #' @export
 as.bvsresponse <- function(...){
@@ -533,7 +541,7 @@ as.character.bvsresponse.list <- function(x){
 #' ...
 #' 
 #' ....
-#' @param x ...
+#' @param ... ...
 #' 
 #' @export
 as.bvs <- function(...){

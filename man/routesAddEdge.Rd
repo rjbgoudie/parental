@@ -1,4 +1,12 @@
 \name{routesAddEdge}
 \alias{routesAddEdge}
-\title{routesAddEdge}
-\usage{routesAddEdge(x, i, j)}
+\title{.}
+\usage{routesAddEdge(x, i, j)
+}
+\description{...}
+\details{....}
+\arguments{\item{x}{...}
+\item{i}{...}
+\item{j}{...}
+}
+

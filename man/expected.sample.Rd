@@ -1,4 +1,13 @@
 \name{expected.sample}
 \alias{expected.sample}
-\title{expected.sample}
-\usage{expected.sample(n, size, replace, prob)}
+\title{.}
+\usage{expected.sample(n, size, replace, prob)
+}
+\description{...}
+\details{....}
+\arguments{\item{n}{...}
+\item{size}{...}
+\item{replace}{...}
+\item{prob}{...}
+}
+

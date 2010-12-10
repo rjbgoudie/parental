@@ -1,4 +1,10 @@
 \name{checkAcyclic}
 \alias{checkAcyclic}
-\title{checkAcyclic}
-\usage{checkAcyclic(parental)}
+\title{.}
+\usage{checkAcyclic(parental)
+}
+\description{...}
+\details{....}
+\arguments{\item{parental}{...}
+}
+

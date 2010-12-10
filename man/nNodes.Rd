@@ -1,7 +1,12 @@
 \name{nNodes}
 \alias{nNodes}
-\title{.}
-\usage{nNodes(x, ...)}
-\description{...}
+\title{get the number of nodes in the network...}
+\usage{nNodes(x, ...)
+}
+\description{get the number of nodes in the network
+...}
 \details{....}
-\arguments{\item{x}{...}}
+\arguments{\item{x}{...}
+\item{...}{...}
+}
+

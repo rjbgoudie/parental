@@ -1,4 +1,10 @@
 \name{getChildren}
 \alias{getChildren}
-\title{getChildren}
-\usage{getChildren(parental)}
+\title{.}
+\usage{getChildren(parental)
+}
+\description{...}
+\details{....}
+\arguments{\item{parental}{...}
+}
+

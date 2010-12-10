@@ -3,9 +3,10 @@
 #' ....
 #' 
 #' @param x An object of class \code{pcAlgo}
+#' @param ... unused
 #' @S3method as.bn pcAlgo
 #' @export
-as.bn.pcAlgo <- function(x){
+as.bn.pcAlgo <- function(x, ...){
   stopifnot(
     "pcAlgo" %in% class(x)
   )
@@ -36,7 +37,7 @@ as.parental.pcAlgo <- function(x){
 #' ...
 #' 
 #' ....
-#' @param x ...
+#' @param ... ...
 #' 
 #' @export
 as.cpdag <- function(...){
@@ -87,13 +88,16 @@ as.cpdag.bn <- function(x){
 #' ...
 #' 
 #' ....
-#' @param x ...
+#' @param ... ...
 #' 
 #' @export
 as.cpdag2 <- function(...){
   UseMethod("as.cpdag2")
 }
 
+#' Find V Structure
+#' 
+#' @param net ...
 #' @export
 whichVStructure <- function(net){
   nodeSeq <- seq_along(net)
@@ -136,6 +140,12 @@ whichVStructure <- function(net){
   })
 }
 
+#' ...
+#'
+#' ...
+#'
+#' @param net ...
+#' @return ...
 #' @export
 whichVStructurePlot <- function(net){
   vs <- whichVStructure(net)
@@ -149,6 +159,12 @@ whichVStructurePlot <- function(net){
   grplot(net, edgecol = adjvs + 1)
 }
 
+#' ...
+#'
+#' ...
+#'
+#' @param bn ...
+#' @return ...
 #' @export
 makeNonVStructuresUndirected <- function(bn){
   parentsSeq <- seq_along(bn)
@@ -165,6 +181,12 @@ makeNonVStructuresUndirected <- function(bn){
   bn2
 }
 
+#' ...
+#'
+#' ...
+#'
+#' @param x ...
+#' @return ...
 #' @export
 as.cpdag2.bn <- function(x){
   #### incorrect.

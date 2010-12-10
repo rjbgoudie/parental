@@ -1,3 +1,8 @@
+#' ...
+#' 
+#' ....
+#' @param x ...
+#' @export
 bnlearn2parental <- function(x){
   require(bnlearn)
   stopifnot("bn" %in% class(x),
@@ -23,6 +28,11 @@ bnlearn2parental <- function(x){
   out
 }
 
+#' ...
+#' 
+#' ....
+#' @param x ...
+#' @export
 parental2bnlearn <- function(x){
   require(bnlearn)
   stopifnot("parental" %in% class(x))
@@ -60,21 +70,33 @@ parental2bnlearn <- function(x){
 # somewhat unbelievably, adding undirected edges does not seem to be 
 # exposed in bnlearn
 
+#' ...
+#' 
+#' ....
+#' @param x ...
+#' @param from ...
+#' @param to ...
+#' @param check.cycles ...
+#' @param update ...
+#' @param debug ...
+#' @export
 add.undirected.edge <- function(x, from, to, check.cycles,
                                 update = T, debug = F) {
+  stop("'op' required")
+  op <- 1
   # check x's class.
-  bnlearn:::check.bn(x)
+  bnlearn::check.bn(x)
   # a valid node is needed.
-  bnlearn:::check.nodes(nodes = from, graph = x, max.nodes = 1)
+  bnlearn::check.nodes(nodes = from, graph = x, max.nodes = 1)
   # another valid node is needed.
-  bnlearn:::check.nodes(nodes = to, graph = x, max.nodes = 1)
+  bnlearn::check.nodes(nodes = to, graph = x, max.nodes = 1)
   # 'from' must be different from 'to'.
   if (identical(from, to))
     stop("'from' and 'to' must be different from each other.")
   # check logical flags (debug, check.cycles, update).
-  bnlearn:::check.logical(debug)
-  bnlearn:::check.logical(check.cycles)
-  bnlearn:::check.logical(update)
+  bnlearn::check.logical(debug)
+  bnlearn::check.logical(check.cycles)
+  bnlearn::check.logical(update)
   
   # add undirected edge
   if (debug) cat("* setting arc", from, "->", to, ".\n")
@@ -83,38 +105,45 @@ add.undirected.edge <- function(x, from, to, check.cycles,
 
   # check whether the graph is still acyclic; not needed if an arc is dropped.
   if (check.cycles && (op != "drop"))
-    if (!is.acyclic(x$arcs, names(x$nodes)))
+    if (!bnlearn::is.acyclic(x$arcs, names(x$nodes)))
       stop("the resulting graph contains cycles.")
 
   # update the network structure.
   if (update) {
     # build the adjacency matrix only once.
-    amat = bnlearn:::arcs2amat(x$arcs, names(x$nodes))
+    amat = bnlearn::arcs2amat(x$arcs, names(x$nodes))
     # check which nodes have to be updated.
     updated.nodes = unique(c(from, to, x$nodes[[from]]$mb, x$nodes[[to]]$mb))
     # update the chosen nodes.
     for (node in updated.nodes)
-      x$nodes[[node]] = bnlearn:::cache.partial.structure(names(x$nodes),
+      x$nodes[[node]] = bnlearn::cache.partial.structure(names(x$nodes),
         target = node, amat = amat, debug = debug)
   }#THEN
   invisible(x)
 }#ARC.OPERATIONS
 
+#' Add.undirected.backend
+#' 
+#' sfsdf
+#' @param from ...
+#' @param to ...
+#' @param arcs ...
+#' @param debug ...
 add.undirected.backend = function(from, to, arcs, debug = F) {
   # the arc is there, undirected
-  if (bnlearn:::is.listed(arcs, c(to, from), both = T)){
+  if (bnlearn::is.listed(arcs, c(to, from), both = T)){
     # nothing to do
     arcs
   }
   # the arc is there, but reversed.
-  else if (bnlearn:::is.listed(arcs, c(to, from))) {
+  else if (bnlearn::is.listed(arcs, c(to, from))) {
     if (debug){
       cat("  > the arc", to, "->", from, "is present, reversing.\n")
     }
     rbind(arcs, c(from, to))
   }#THEN
   # the arc is already there.
-  else if (bnlearn:::is.listed(arcs, c(from, to))) {
+  else if (bnlearn::is.listed(arcs, c(from, to))) {
     if (debug){
       cat("  > the arc", from, "->", to, "is present, reversing.\n")
     }

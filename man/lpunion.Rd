@@ -1,4 +1,10 @@
 \name{lpunion}
 \alias{lpunion}
-\title{lpunion}
-\usage{lpunion(pl)}
+\title{.}
+\usage{lpunion(pl)
+}
+\description{...}
+\details{....}
+\arguments{\item{pl}{...}
+}
+

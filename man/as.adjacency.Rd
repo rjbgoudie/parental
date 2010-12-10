@@ -1,7 +1,11 @@
 \name{as.adjacency}
 \alias{as.adjacency}
 \title{.}
-\usage{as.adjacency(...)}
+\usage{as.adjacency(x, ...)
+}
 \description{...}
 \details{....}
-\arguments{\item{x}{...}}
+\arguments{\item{x}{...}
+\item{...}{...}
+}
+

@@ -1,7 +1,11 @@
 \name{as.bn}
 \alias{as.bn}
 \title{.}
-\usage{as.bn(...)}
+\usage{as.bn(x, ...)
+}
 \description{...}
 \details{....}
-\arguments{\item{x}{...}}
+\arguments{\item{x}{...}
+\item{...}{...}
+}
+

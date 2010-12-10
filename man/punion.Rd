@@ -1,4 +1,11 @@
 \name{punion}
 \alias{punion}
-\title{punion}
-\usage{punion(parental1, parental2)}
+\title{.}
+\usage{punion(parental1, parental2)
+}
+\description{...}
+\details{....}
+\arguments{\item{parental1}{...}
+\item{parental2}{...}
+}
+

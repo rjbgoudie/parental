@@ -1,4 +1,12 @@
 \name{distance}
 \alias{distance}
-\title{distance}
-\usage{distance(x, y)}
+\title{.}
+\usage{distance(x, y)
+}
+\description{...}
+\details{...}
+\value{...}
+\arguments{\item{x}{...}
+\item{y}{...}
+}
+

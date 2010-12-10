@@ -1,4 +1,12 @@
 \name{routesRemoveEdge}
 \alias{routesRemoveEdge}
-\title{routesRemoveEdge}
-\usage{routesRemoveEdge(x, i, j)}
+\title{.}
+\usage{routesRemoveEdge(x, i, j)
+}
+\description{...}
+\details{....}
+\arguments{\item{x}{...}
+\item{i}{...}
+\item{j}{...}
+}
+

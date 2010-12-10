@@ -1,7 +1,10 @@
 \name{as.cpdag}
 \alias{as.cpdag}
 \title{.}
-\usage{as.cpdag(...)}
+\usage{as.cpdag(...)
+}
 \description{...}
 \details{....}
-\arguments{\item{x}{...}}
+\arguments{\item{...}{...}
+}
+

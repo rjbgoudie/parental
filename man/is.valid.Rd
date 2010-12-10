@@ -1,7 +1,10 @@
 \name{is.valid}
 \alias{is.valid}
-\title{.}
-\usage{is.valid(x)}
-\description{...}
-\details{....}
-\arguments{\item{x}{...}}
+\title{Check validity of x...}
+\usage{is.valid(x)
+}
+\description{Check validity of x}
+\value{A logical indicating validity.}
+\arguments{\item{x}{Object to check for validity}
+}
+

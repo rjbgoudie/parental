@@ -1,4 +1,15 @@
-# returns a list of every Sach's confounder network
+#' Enumerate the space of Confounder Graphs
+#'
+#' Enumerate (ie make a list of, not just count) the entire space of 
+#' Confounder models, on a given number of nodes, for a 
+#' particular response.
+#' 
+#' @param numberOfConfounders An integer of length 1. The number of confounders
+#' @param response An integer of length 1. Which node is the response.
+#' @param effect ?
+#' @param maxNumberParents The maximum number of parents of node response.
+#' @return An object of class "parental.list", a list of objects of class 
+#'   "parental"
 #' @export
 enumerateConfSpace <- function(numberOfConfounders, response, effect,
                                maxNumberParents = numberOfConfounders - 2){
