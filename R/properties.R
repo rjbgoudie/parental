@@ -1,19 +1,21 @@
-#' get the number of nodes in the network
-#' ...
+#' Number of nodes
 #' 
-#' ....
+#' A generic to get the number of nodes.
+#' 
 #' @param x ...
 #' @param ... ...
-#' 
+#' @return The number of nodes in \code{parental}, an integer.
 #' @export
 nNodes <- function(x, ...){
   UseMethod("nNodes")
 }
 
-#' ...
+#' Number of nodes/vertices
 #' 
-#' ....
-#' @param parental ...
+#' Get the number of nodes in a \code{parental} object
+#' 
+#' @param parental An object of class \code{parental}
+#' @return The number of nodes in \code{parental}, an integer.
 #' @export
 #' @S3method nNodes parental
 nNodes.parental <- function(parental){
@@ -23,22 +25,26 @@ nNodes.parental <- function(parental){
   length(parental)
 }
 
-# get the number of edges in the network
-#' ...
+#' Number of edges
 #' 
-#' ....
-#' @param parental ...
+#' Get the number of edges in a \code{parental} object
+#' 
+#' @param parental An object of class \code{parental}
+#' @return The number of edges in \code{parental}, an integer.
 #' @export
 nEdges <- function(parental){
   stopifnot("parental" %in% class(parental))
   length(unlist(parental))
 }
 
-# convert list of parents to list of children
-#' ...
+#' Children lists
 #' 
-#' ....
-#' @param parental ...
+#' Create a list, with each component listing the direct children of the 
+#' corresponding node in the supplied parental.
+#' 
+#' @param parental An object of class \code{parental}
+#' @return A list, the ith component of which is a numeric vector listing the 
+#'   nodes that are children of node i.
 #' @export
 getChildren <- function(parental){
   stopifnot("parental" %in% class(parental))
@@ -81,11 +87,13 @@ getChildren <- function(parental){
   #out
 }
 
-# check if the network is a DAG
-#' ...
+#' Acyclicity testing
 #' 
-#' ....
-#' @param parental ...
+#' Check for cycles in a directed graph.
+#' 
+#' @param parental An object of class \code{parental}
+#' @return A logical. TRUE if \code{parental} is acyclic. FALSE if 
+#'   \code{parental} contains a cycle.
 #' @export
 checkAcyclic <- function(parental){
   stopifnot("parental" %in% class(parental))
@@ -116,10 +124,13 @@ checkAcyclic <- function(parental){
   if (N == nNodes(parental) + 1) T else F
 }
 
-#' ...
+#' Topological ordering
 #' 
-#' ....
-#' @param parental ...
+#' Finds a permutation of the nodes 1, ..., p such that each all ancestors of 
+#' each node have a lower place in the order.
+#' 
+#' @param parental An object of class \code{parental}
+#' @return A numeric vector. The order.
 #' @export
 topologicallyOrder <- function(parental){
   stopifnot("parental" %in% class(parental))
@@ -249,11 +260,10 @@ numberOfMovesBetweenIgnoringCycles <- function(x, y,
   }
 }
 
-#' ...
+#' Unknown
 #' 
-#' ....
-#' @param x ...
-#' @param y ...
+#' @param x An object of class \code{parental}
+#' @param y An object of class \code{parental}
 #' @export
 route <- function(x, y){
   stopifnot(
@@ -393,32 +403,44 @@ routes <- function(x){
   routes
 }
 
-#' ...
+#' Update a routes matrix (edge addition)
 #' 
-#' ....
-#' @param x ...
-#' @param i ...
-#' @param j ...
+#' A routes matrix is a matrix A, such that each element (i, j) is the number 
+#' of routes from i to j in some directed graph.
+#'
+#' This function updates the routes matrix to account for the addition of an 
+#' edge from i to j in the directed graph
+#' 
+#' @param x A routes matrix
+#' @param i The node from which the added edge emanates
+#' @param j The node that the added edge goes to
 #' @export
 routesAddEdge <- function(x, i, j){
   x + x[, i] %*% .Internal(t.default((x[j, ])))
 }
 
-#' ...
+#' Update a routes matrix (edge removal)
 #' 
-#' ....
-#' @param x ...
-#' @param i ...
-#' @param j ...
+#' A routes matrix is a matrix A, such that each element (i, j) is the number 
+#' of routes from i to j in some directed graph.
+#'
+#' This function updates the routes matrix to account for the deletion of an 
+#' edge from i to j in the directed graph
+#' 
+#' @param x A routes matrix
+#' @param i The node from which the removed edge emanates
+#' @param j The node that the removed edge goes to
 #' @export
 routesRemoveEdge <- function(x, i, j){
   x - x[, i] %*% .Internal(t.default((x[j, ])))
 }
 
-#' ...
+#' Neighbourhood size
 #' 
-#' ....
-#' @param x ...
+#' Computes the number of 
+#' 
+#' @param x An object of class \code{parental}
+#' @return The size of the neighbourhood (an integer)
 #' @export
 neighbourhoodSize <- function(x){
   # this algorithm is pretty rubbish
