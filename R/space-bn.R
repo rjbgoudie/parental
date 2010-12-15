@@ -72,8 +72,8 @@ enumerateBNSpace <- function(n, allowCyclic = F, multicore = F){
 #' Removes the cyclic graphs from a list of graphs
 #' 
 #' @param bnlist A \code{parental.list} of graphs
-#' @return An object of class \code{bn.list}, containing all the acyclic graphs 
-#'   in \code{bnlist}
+#' @return An object of class \code{bn.list}, containing all the acyclic 
+#'   graphs in \code{bnlist}
 #' @export
 filterCyclic <- function(bnlist){
   isAcyclic <- lapply(bnlist, checkAcyclic)

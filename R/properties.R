@@ -43,8 +43,8 @@ nEdges <- function(parental){
 #' corresponding node in the supplied parental.
 #' 
 #' @param parental An object of class \code{parental}
-#' @return A list, the ith component of which is a numeric vector listing the 
-#'   nodes that are children of node i.
+#' @return A list, the ith component of which is a numeric vector listing 
+#'   the nodes that are children of node i.
 #' @export
 getChildren <- function(parental){
   stopifnot("parental" %in% class(parental))
@@ -126,8 +126,8 @@ checkAcyclic <- function(parental){
 
 #' Topological ordering
 #' 
-#' Finds a permutation of the nodes 1, ..., p such that each all ancestors of 
-#' each node have a lower place in the order.
+#' Finds a permutation of the nodes 1, ..., p such that each all ancestors 
+#' of each node have a lower place in the order.
 #' 
 #' @param parental An object of class \code{parental}
 #' @return A numeric vector. The order.
@@ -168,8 +168,9 @@ topologicallyOrder <- function(parental){
 
 #' A dual-direction, fast (and dangerous!) version of setdiff.
 #'
-#' setdiff() is not symmetric. This function returns a list with component 1 
-#' equivalent to setdiff(x, y) and component 2 equivalent to setdiff(y, x).
+#' setdiff() is not symmetric. This function returns a list with component 
+#' 1 equivalent to setdiff(x, y) and component 2 equivalent to 
+#' setdiff(y, x).
 #'
 #' Note that unlike setdiff() THE OUTPUT MAY CONTAIN DUPLICATES. 
 #' eg     setdiff2(c(1,1,2), c(2, 3))[[1]] == c(1, 1)
@@ -180,7 +181,8 @@ topologicallyOrder <- function(parental){
 #' @param x A numeric vector
 #' @param y A numeric vector
 #' @return A list of length 2, with setdiff(x, y) in component 1 and 
-#'   setdiff(y, x) in component 2 (apart from the differences described above).
+#'   setdiff(y, x) in component 2 (apart from the differences described 
+#'   above).
 #' @export
 setdiff2 <- function(x, y){
   list(x[match(x, y, 0L) == 0L], y[match(y, x, 0L) == 0L])
@@ -203,8 +205,8 @@ setdiff2 <- function(x, y){
 #'   total number of moves required to morph x to y should be returned 
 #'   (components = F) or if the number of changes required for 
 #'   each node should be returned (components = T). 
-#' @param allowFlips Allow single-edge flip moves. This is not compatible with 
-#'   components = T, because it is not clear for which node to 
+#' @param allowFlips Allow single-edge flip moves. This is not compatible 
+#'   with components = T, because it is not clear for which node to 
 #'   account flip moves.
 #' @return if components == FALSE:
 #'     A numeric of length 1 indicating the number of moves required.
@@ -253,7 +255,8 @@ numberOfMovesBetweenIgnoringCycles <- function(x, y,
     getComponentLength <- function(x, i){
       length(x[[i]])
     }
-    sapply(diffs, getComponentLength, 1) + sapply(diffs, getComponentLength, 2)
+    sapply(diffs, getComponentLength, 1) + 
+      sapply(diffs, getComponentLength, 2)
   }
   else {
     length(unlist(diffs, use.names = F))
@@ -405,11 +408,11 @@ routes <- function(x){
 
 #' Update a routes matrix (edge addition)
 #' 
-#' A routes matrix is a matrix A, such that each element (i, j) is the number 
-#' of routes from i to j in some directed graph.
+#' A routes matrix is a matrix A, such that each element (i, j) is the 
+#' number of routes from i to j in some directed graph.
 #'
-#' This function updates the routes matrix to account for the addition of an 
-#' edge from i to j in the directed graph
+#' This function updates the routes matrix to account for the addition of 
+#' an edge from i to j in the directed graph
 #' 
 #' @param x A routes matrix
 #' @param i The node from which the added edge emanates
@@ -421,11 +424,11 @@ routesAddEdge <- function(x, i, j){
 
 #' Update a routes matrix (edge removal)
 #' 
-#' A routes matrix is a matrix A, such that each element (i, j) is the number 
-#' of routes from i to j in some directed graph.
+#' A routes matrix is a matrix A, such that each element (i, j) is the 
+#' number of routes from i to j in some directed graph.
 #'
-#' This function updates the routes matrix to account for the deletion of an 
-#' edge from i to j in the directed graph
+#' This function updates the routes matrix to account for the deletion of 
+#' an edge from i to j in the directed graph
 #' 
 #' @param x A routes matrix
 #' @param i The node from which the removed edge emanates

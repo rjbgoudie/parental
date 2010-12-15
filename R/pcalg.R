@@ -120,7 +120,9 @@ whichVStructure <- function(net){
         # is there an edge j -> k
         condition1 <- parents[-j] %in% grandparents[[j]]
         # is there an edge k -> j
-        condition2 <- sapply(grandparents[-j], function(k) parents[j] %in% k)
+        condition2 <- sapply(grandparents[-j], function(k){
+          parents[j] %in% k
+        })
         
         # do all k have links to or from j?
         if (all(condition1 | condition2)){
