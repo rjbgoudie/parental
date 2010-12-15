@@ -103,7 +103,8 @@ add.undirected.edge <- function(x, from, to, check.cycles,
   x$arcs = add.undirected.backend(from, to, x$arcs, debug = debug)
 
 
-  # check whether the graph is still acyclic; not needed if an arc is dropped.
+  # check whether the graph is still acyclic; 
+  # not needed if an arc is dropped.
   if (check.cycles && (op != "drop"))
     if (!bnlearn::is.acyclic(x$arcs, names(x$nodes)))
       stop("the resulting graph contains cycles.")

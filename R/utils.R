@@ -5,8 +5,8 @@
 #'   whole
 #' @param tol A numeric vector of length 1 specifying the tolerance allowed
 #' 
-#' @return A logical vector of length 1, taking the value TRUE is x is a whole 
-#'   number and false otherwise
+#' @return A logical vector of length 1, taking the value TRUE is x is a 
+#'   whole number and false otherwise
 #' @export
 is.wholenumber <- function(x, tol = .Machine$double.eps^0.5){
   stopifnot(length(x) == 1,

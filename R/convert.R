@@ -304,8 +304,8 @@ as.character.parental <- function (x, pretty = F) {
 #' Convert a 'parental.list' to a character vector.
 #' 
 #' @param x A object of class 'parental'.
-#' @param pretty A logical of length 1 indicating if the character vectors are 
-#'   pretty-printed.
+#' @param pretty A logical of length 1 indicating if the character vectors 
+#'   are pretty-printed.
 #' @return A character vector.
 #' @S3method as.character parental.list
 #' @export
@@ -471,8 +471,8 @@ as.bvsresponse.bvs <- function(x, response){
 #'   the parents of the response.
 #' @param response An integer of length 1 specifying which node 
 #'   is the response.
-#' @param nNodes An integer of length 1 specifying the number of nodes in the 
-#'   variable selection.
+#' @param nNodes An integer of length 1 specifying the number of nodes in 
+#'   the variable selection.
 #'
 #' @return If length(x) == 1:
 #'     An object of class 'bvsresponse'.

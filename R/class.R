@@ -10,10 +10,10 @@ NULL
 
 #' Constructor function for a \code{parental} object.
 #'
-#' Objects of class \code{parental} are lists with the ith component specifying
-#' the parents of node i. The parents must be specified as a vector of 
-#' integers -- the storage.mode() of these integers MUST be integer. 
-#' If the node has no parents, use integer(0).
+#' Objects of class \code{parental} are lists with the ith component 
+#' specifyingthe parents of node i. The parents must be specified as a 
+#' vector of integers -- the storage.mode() of these integers MUST be 
+#' integer. If the node has no parents, use integer(0).
 #'
 #' Note, in particular, that \code{list(2, 1)} would not be a valid 
 #' \code{parental}  object, because storage.mode(2) and 
@@ -45,11 +45,11 @@ parental <- function(...){
 
 #' Constructor function for a 'bn' object.
 #'
-#' \code{bn} is a subclass of \code{parental}. See \code{\link{parental}} for detailed 
-#' documentation.
+#' \code{bn} is a subclass of \code{parental}. See \code{\link{parental}} 
+#' for detailed documentation.
 #' 
-#' @param ...  A series of vectors specifying the parents of each node. These 
-#'   vectors must be of storage.mode "integer".
+#' @param ...  A series of vectors specifying the parents of each node. 
+#'   These vectors must be of storage.mode "integer".
 #' @return An object of class 'bn'.
 #' @export
 bn <- function(...){
@@ -65,8 +65,8 @@ bn <- function(...){
 #' 'bvs' is a subclass of \code{parental}. See \code{\link{parental}} 
 #' for detailed documentation.
 #' 
-#' @param ... A series of vectors specifying the parents of each node. These 
-#'   vectors must be of storage.mode "integer".
+#' @param ... A series of vectors specifying the parents of each node. 
+#'   These vectors must be of storage.mode "integer".
 #' @return An object of class 'bvs'.
 #' @export
 bvs <- function(...){
@@ -151,8 +151,8 @@ bvsresponse.list <- function(...){
 #' 
 #' @param x Object from which to extract element(s)
 #' @param i Indicies specifying elements to extract
-#' @return An object of class \code{bvsresponse.list}, consisting the parts of 
-#'   \code{x} indicated by \code{i}
+#' @return An object of class \code{bvsresponse.list}, consisting the parts 
+#'   of \code{x} indicated by \code{i}
 #' @name getbvsrl
 #' @S3method "[" bvsresponse.list
 "[.bvsresponse.list" <- function(x, i){
@@ -202,7 +202,8 @@ is.valid.parental <- function(x){
 #' Additionally tests that there is a unique response.
 #' 
 #' @param x A object of class 'bvs'
-#' @return A logical of length 1 indicating whether x is a valid 'bvs' object
+#' @return A logical of length 1 indicating whether x is a valid 'bvs' 
+#'   object.
 #' @S3method is.valid bvs
 #' @export
 is.valid.bvs <- function(x){
@@ -253,7 +254,8 @@ is.valid.bn <- function(x){
 #' Concatenates a 'parental.list' object to the console.
 #' 
 #' @param ... Any number of 'parental.list' objects
-#' @return An new 'parental.list' object, including all the supplied parental.lists
+#' @return An new 'parental.list' object, including all the supplied 
+#'   parental.lists
 #' @S3method c parental.list
 #' @export
 c.parental.list <- function(...){
@@ -322,7 +324,8 @@ renameNodes <- function(x, ...){
 #' in the parental.list renamed to the newnames.
 #' 
 #' @param x A parental.list
-#' @param newnames A character vector specifying the new names for the nodes
+#' @param newnames A character vector specifying the new names for the 
+#'   nodes
 #' @param ... unused
 #'
 #' @return The parental.list with renamed nodes
@@ -407,7 +410,8 @@ empty <- function(n, class = "parental", response){
 #' Additionally tests the parents all exist.
 #' 
 #' @param x A object of class 'bvsresponse'
-#' @return A logical of length 1 indicating whether x is a valid 'bvsresponse' object
+#' @return A logical of length 1 indicating whether x is a valid 
+#'   'bvsresponse' object
 #' @S3method is.valid bvsresponse
 #' @export
 is.valid.bvsresponse <- function(x){
@@ -460,7 +464,8 @@ is.valid.bvsresponse <- function(x){
 #' [1] http://cran.r-project.org/doc/manuals/R-lang.html#Constants
 #' 
 #' @param x A vector of integers specifying the parents of the response.
-#' @param response A integer of length 1 specifying which node (column) is the response.
+#' @param response A integer of length 1 specifying which node (column) 
+#'   is the response.
 #' @param nNodes The number of nodes (columns) in the variable selection.
 #' @return An object of class 'bvsresponse'.
 #' @export

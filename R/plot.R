@@ -167,8 +167,9 @@ drawDetails.lattice <- function(x, recording = F){
 #' @param heightMultipler ...
 #' @return ....
 #' @export
-prepanel.parental <- function(x, y, parents, rawdata = NULL, grobNodeSize, offset, 
-                              islist = F, widthMultiplier = 2, heightMultipler = 1){
+prepanel.parental <- function(x, y, parents, rawdata = NULL, 
+                              grobNodeSize, offset, islist = F,
+                              widthMultiplier = 2, heightMultipler = 1){
   if (!islist){
     parents <- list(parents)
   }
@@ -182,8 +183,10 @@ prepanel.parental <- function(x, y, parents, rawdata = NULL, grobNodeSize, offse
            height = out[[2]] + offset)
     })
     totals <- rowSums(nodeSize)
-    widths <- nodeSize["width", ] / totals["width"] * max(diff(range(x)), diff(range(y))) * widthMultiplier
-    heights <- nodeSize["height", ] / totals["height"] * max(diff(range(x)), diff(range(y))) * heightMultipler
+    widths <- nodeSize["width", ] / totals["width"] * 
+                max(diff(range(x)), diff(range(y))) * widthMultiplier
+    heights <- nodeSize["height", ] / totals["height"] * 
+                 max(diff(range(x)), diff(range(y))) * heightMultipler
     c(range(c(x - widths/2, x + widths/2)),
       range(c(y - heights/2, y + heights/2)))
   })
@@ -213,8 +216,8 @@ convertToEnlargedCoordinates <- function(width, height, x, y){
 #' 
 #' @param node An integer of length 1, indicating which node the dimensions
 #'   should be computed for.
-#' @param parents An object of class "parental" containing the graph that is to 
-#'   be plotted
+#' @param parents An object of class "parental" containing the graph that 
+#'   is to be plotted
 #' @param rawdata The rawdata
 #' @return A list of length 2 containing two items:
 #'     width: A object of class "unit"
@@ -232,8 +235,8 @@ grobNodeNameSize <- function(node, parents, rawdata = NULL){
 #' 
 #' @param node An integer of length 1, indicating which node the dimensions
 #'   should be computed for.
-#' @param parents An object of class "parental" containing the graph that is to 
-#'   be plotted
+#' @param parents An object of class "parental" containing the graph that 
+#'   is to be plotted
 #' @param rawdata The rawdata
 #' @return A "grob"
 #' @export
@@ -246,8 +249,8 @@ grobNodeName <- function(node, parents, rawdata = NULL){
 #' 
 #' @param node An integer of length 1, indicating which node the dimensions
 #'   should be computed for.
-#' @param parents An object of class "parental" containing the graph that is to 
-#'   be plottedb
+#' @param parents An object of class "parental" containing the graph that 
+#'   is to be plotted.
 #' @param rawdata The rawdata
 #'            
 #' @return A list of length 2 containing two items:
@@ -258,7 +261,9 @@ grobNodeLevelPlotSize <- function(node, parents, rawdata){
   nParents <- length(parents[[node]])
   if (nParents > 0){
     nLevels <- nlevels(rawdata[, node])
-    nLevelsParents <- sapply(parents[[node]], function(j) nlevels(rawdata[, j]))
+    nLevelsParents <- sapply(parents[[node]], function(j){
+      nlevels(rawdata[, j])
+    })
     list(width = (nParents + nLevels),
          height = (prod(nLevelsParents) + 3))
   }
@@ -293,8 +298,8 @@ grobNodeLevelPlotDefaultTheme <- function(){
 #' 
 #' @param node  An integer of length 1, indicating which node the dimensions
 #'   should be computed for.
-#' @param parents An object of class "parental" containing the graph that is to 
-#'            be plotted
+#' @param parents An object of class "parental" containing the graph that 
+#'   is to be plotted
 #' @param rawdata The rawdata
 #' @param strip.lines ...
 #' @param strip.left.lines ...
@@ -332,11 +337,16 @@ grobNodeLevelPlot <- function(node,
       data = dft,
       xlab = NULL,
       ylab = NULL,
-      main = list(label = paste(names(parents)[node], "\nParents: ", paste(strwrap(paste(rev(names(parents)[parents[[node]]]), collapse = ", "), width = 60), collapse = ""), "."), fontsize = 7),
+      main = list(label = paste(names(parents)[node], "\nParents: ", 
+                          paste(strwrap(paste(
+                            rev(names(parents)[parents[[node]]]), 
+                            collapse = ", "), width = 60), collapse = ""), 
+                            "."), fontsize = 7),
       colorkey = NULL,
       panel = function(x, y, z, subscripts, ...){
 
-        z2 <- as.numeric(unlist(strsplit(z, " (", fixed = T))[seq(1, 2*length(z), by = 2)])
+        thisseq <- seq(1, 2*length(z), by = 2)
+        z2 <- as.numeric(unlist(strsplit(z, " (", fixed = T))[thisseq])
         panel.levelplot(x, y, z2, subscripts, ...)
         ltext(x[1], y[1], z[subscripts], col = "black", cex = 0.3)
       },
@@ -400,7 +410,8 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
     edgealpha <- matrix(1, ncol = numberOfNodes, nrow = numberOfNodes)
   }
   if (length(edgealpha) == 1){
-    edgealpha <- matrix(edgealpha, ncol = numberOfNodes, nrow = numberOfNodes)
+    edgealpha <- matrix(edgealpha,
+                        ncol = numberOfNodes, nrow = numberOfNodes)
   }
   if (islist){
     parents <- parents[[panel.number()]]
@@ -425,8 +436,10 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
   })
   
   totals <- rowSums(nodeSize)
-  widths <- nodeSize["width", ] / totals["width"] * max(diff(range(x)), diff(range(y))) * widthMultiplier
-  heights <- nodeSize["height", ] / totals["height"] * max(diff(range(x)), diff(range(y))) * heightMultipler
+  widths <- nodeSize["width", ] / totals["width"] * 
+              max(diff(range(x)), diff(range(y))) * widthMultiplier
+  heights <- nodeSize["height", ] / totals["height"] * 
+               max(diff(range(x)), diff(range(y))) * heightMultipler
   nodeSize <- lapply(seq_along(parents), function(i){
     c(width  = widths[i], 
       height = heights[i])
@@ -451,8 +464,10 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
          height = out[[2]])
   })
   totals <- rowSums(nodeSizeNoOffset)
-  widths <- nodeSizeNoOffset["width", ] / totals["width"] * max(diff(range(x)), diff(range(y))) * widthMultiplier
-  heights <- nodeSizeNoOffset["height", ] / totals["height"] * max(diff(range(x)), diff(range(y))) * heightMultipler
+  widths <- nodeSizeNoOffset["width", ] / totals["width"] * 
+              max(diff(range(x)), diff(range(y))) * widthMultiplier
+  heights <- nodeSizeNoOffset["height", ] / totals["height"] * 
+               max(diff(range(x)), diff(range(y))) * heightMultipler
   nodeSizeNoOffset <- lapply(seq_along(parents), function(i){
     c(width  = widths[i], 
       height = heights[i])
@@ -491,8 +506,10 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
                                                      w2 = nodeSize[[j]][1],
                                                      h2 = nodeSize[[j]][2])
 
-        d1 <- distance(c(x[i], y[i]), c(boundingRectPoints[1], boundingRectPoints[2]))
-        d2 <- distance(c(x[i], y[i]), c(boundingRectPoints[3], boundingRectPoints[4]))
+        d1 <- distance(c(x[i], y[i]), c(boundingRectPoints[1],
+                                        boundingRectPoints[2]))
+        d2 <- distance(c(x[i], y[i]), c(boundingRectPoints[3],
+                                        boundingRectPoints[4]))
         if (d2 < d1){
           a <- boundingRectPoints[1]
           b <- boundingRectPoints[2]

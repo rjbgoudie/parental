@@ -39,7 +39,8 @@ enumerateBVSSpace <- function(numberOfNodes, response,
   
   nodesSeq <- seq_len(numberOfNodes)
   choices <- setdiff(nodesSeq, response)
-  possibleParents <- enumerateParents(potentialParents = choices, maxNumberParents)
+  possibleParents <- enumerateParents(potentialParents = choices, 
+                                      maxNumberParents)
   
   # empty graph to which parents are added
   empty <- lapply(nodesSeq, function(node) integer(0))

@@ -25,12 +25,15 @@ sampleBN <- function(n, maxNumberParents = NULL){
       numberOfParents <- numberOfParents - 1
       
       if (numberOfPotentialParents > 1){
-        out <- sort.int(sample(potentialParents, size = numberOfParents, replace = F))
+        out <- sort.int(sample(potentialParents,
+                               size = numberOfParents,
+                               replace = F))
         storage.mode(out) <- "integer"
         out
       }
       else if (numberOfPotentialParents == 1){
-        out <- sort.int(potentialParents[sample(c(T, F), size = numberOfParents)])
+        out <- sort.int(potentialParents[sample(c(T, F),
+                                                size = numberOfParents)])
         storage.mode(out) <- "integer"
         out
       }
@@ -199,8 +202,8 @@ simulate.bn <- function(bn, ptables, N, expectation = F){
 
 #' ...
 #' 
-#' I don't think this works. In particular check that sample.int is sensible.
-#' And that N is properly implemented
+#' I don't think this works. In particular check that sample.int is 
+#' sensible. And that N is properly implemented
 #' @param bn ...
 #' @param ptables ...
 #' @param N ...

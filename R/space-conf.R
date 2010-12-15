@@ -4,7 +4,8 @@
 #' Confounder models, on a given number of nodes, for a 
 #' particular response.
 #' 
-#' @param numberOfConfounders An integer of length 1. The number of confounders
+#' @param numberOfConfounders An integer of length 1. The number of 
+#'   confounders
 #' @param response An integer of length 1. Which node is the response.
 #' @param effect ?
 #' @param maxNumberParents The maximum number of parents of node response.
