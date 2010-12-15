@@ -1,11 +1,8 @@
 \name{as.bn.matrix}
 \alias{as.bn.matrix}
 \title{Convert a matrix to a 'bn'.}
-\usage{as.bn.matrix(x, ...)
-}
+\usage{as.bn.matrix(x, ...)}
 \description{Convert a matrix to a 'bn'. See for 'as.parental.matrix' for details}
 \value{An object of class 'bn'}
 \arguments{\item{x}{A matrix, as described in as.parental.matrix()}
-\item{...}{unused}
-}
-
+\item{...}{unused}}

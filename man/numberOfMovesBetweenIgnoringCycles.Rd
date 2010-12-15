@@ -1,8 +1,7 @@
 \name{numberOfMovesBetweenIgnoringCycles}
 \alias{numberOfMovesBetweenIgnoringCycles}
 \title{Compute the number of edge additions, removals (and single-edge flips if...}
-\usage{numberOfMovesBetweenIgnoringCycles(x, y, components=F, allowFlips=F)
-}
+\usage{numberOfMovesBetweenIgnoringCycles(x, y, components=F, allowFlips=F)}
 \description{Compute the number of edge additions, removals (and single-edge flips if 
 allowFlips = T) that would be required to morph from network x to network 
 y, both of which are objects of class 'parental'. The measure is 
@@ -25,6 +24,4 @@ total number of moves required to morph x to y should be returned
 each node should be returned (components = T).}
 \item{allowFlips}{Allow single-edge flip moves. This is not compatible with 
 components = T, because it is not clear for which node to 
-account flip moves.}
-}
-
+account flip moves.}}

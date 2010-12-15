@@ -2,7 +2,7 @@
 #' 
 #' Parental
 #' 
-#' @import lattice grid utils.rjbg
+#' @import lattice grid utils.rjbg network
 #' @docType package
 #' @name package-parental
 #' @aliases package-parental

@@ -1,9 +1,8 @@
 \name{prepanel.parental}
 \alias{prepanel.parental}
 \title{xxxx...}
-\usage{prepanel.parental(x, y, parents, rawdata, grobNodeSize, offset, islist=F,
-    widthMultiplier=2, heightMultipler=1)
-}
+\usage{prepanel.parental(x, y, parents, rawdata, grobNodeSize, offset,
+    islist=F, widthMultiplier=2, heightMultipler=1)}
 \description{xxxx}
 \details{....}
 \value{....}
@@ -15,6 +14,4 @@
 \item{offset}{...}
 \item{islist}{...}
 \item{widthMultiplier}{...}
-\item{heightMultipler}{...}
-}
-
+\item{heightMultipler}{...}}

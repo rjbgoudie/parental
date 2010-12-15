@@ -1,8 +1,7 @@
 \name{enumerateBNSpace}
 \alias{enumerateBNSpace}
 \title{Enumerate the space of BNs...}
-\usage{enumerateBNSpace(n, allowCyclic=F, multicore=F)
-}
+\usage{enumerateBNSpace(n, allowCyclic=F, multicore=F)}
 \description{Enumerate the space of BNs}
 \details{Enumerate (ie make a list of, not just count) the entire space of 
 Bayesian Networks models, on a given number of nodes.}
@@ -12,6 +11,4 @@ graphs with \code{n} nodes.}
 \item{allowCyclic}{A logical indicating whether cyclic directed graphs
 should be filtered out.}
 \item{multicore}{A logical specifying whether to use 
-\link[multicore]{mclapply}.}
-}
-
+\link[multicore]{mclapply}.}}
