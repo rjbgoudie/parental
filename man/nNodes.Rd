@@ -1,12 +1,9 @@
 \name{nNodes}
 \alias{nNodes}
-\title{get the number of nodes in the network...}
-\usage{nNodes(x, ...)
-}
-\description{get the number of nodes in the network
-...}
-\details{....}
+\title{Number of nodes...}
+\usage{nNodes(x, ...)}
+\description{Number of nodes}
+\details{A generic to get the number of nodes.}
+\value{The number of nodes in \code{parental}, an integer.}
 \arguments{\item{x}{...}
-\item{...}{...}
-}
-
+\item{...}{...}}

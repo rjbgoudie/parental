@@ -1,8 +1,7 @@
 \name{parental}
 \alias{parental}
 \title{Constructor function for a parental object.}
-\usage{parental(...)
-}
+\usage{parental(...)}
 \description{Constructor function for a \code{parental} object.}
 \details{Objects of class \code{parental} are lists with the ith component specifying
 the parents of node i. The parents must be specified as a vector of 
@@ -21,9 +20,7 @@ Conformance with object requirements can be tested by \code{is.valid()}
 \value{An object of class \code{parental}.}
 \keyword{constructor}
 \arguments{\item{...}{A series of vectors specifying the parents of each node. These 
-vectors must be of \code{storage.mode} "integer".}
-}
+vectors must be of \code{storage.mode} "integer".}}
 \examples{parental(c(), 1, 2)
 
 parental(c(), c(1, 3), c())}
-

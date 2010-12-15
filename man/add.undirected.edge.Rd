@@ -1,8 +1,7 @@
 \name{add.undirected.edge}
 \alias{add.undirected.edge}
 \title{.}
-\usage{add.undirected.edge(x, from, to, check.cycles, update=T, debug=F)
-}
+\usage{add.undirected.edge(x, from, to, check.cycles, update=T, debug=F)}
 \description{...}
 \details{....}
 \arguments{\item{x}{...}
@@ -10,6 +9,4 @@
 \item{to}{...}
 \item{check.cycles}{...}
 \item{update}{...}
-\item{debug}{...}
-}
-
+\item{debug}{...}}

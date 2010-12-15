@@ -591,7 +591,8 @@ grplot.parental <- function(parents,
   }
   
   if (missing(layout)){
-    layout <- network.layout.fruchtermanreingold(adj, layout.par)
+    net <- network(adj)
+    layout <- network.layout.fruchtermanreingold(net, layout.par)
     layout <- as.data.frame(layout)
     colnames(layout) <- c("xcoord", "ycoord")
   }
@@ -687,7 +688,9 @@ grplot.parental.list <- function(parentallist,
   numberOfNodes <- length(parentallist[[1]])
   
   adj <- as.adjacency(lpunion(parentallist))
-  layout <- as.data.frame(network.layout.fruchtermanreingold(adj, layout.par))
+  net <- network(adj)
+  layout <- network.layout.fruchtermanreingold(net, layout.par)
+  layout <- as.data.frame(layout)
   colnames(layout) <- c("xcoord", "ycoord")
   
   torbind <- lapply(seq_len(numberOfGraphs), function(i) layout)

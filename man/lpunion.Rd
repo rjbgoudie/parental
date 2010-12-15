@@ -1,10 +1,7 @@
 \name{lpunion}
 \alias{lpunion}
 \title{.}
-\usage{lpunion(pl)
-}
+\usage{lpunion(pl)}
 \description{...}
 \details{....}
-\arguments{\item{pl}{...}
-}
-
+\arguments{\item{pl}{...}}
