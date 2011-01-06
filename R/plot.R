@@ -621,7 +621,7 @@ grplot.parental <- function(parents,
                             offset       = 0.25,
                             layout,
                             ...){
-  stopifnot("parental" %in% class(parent))
+  stopifnot("parental" %in% class(parents))
   ocall <- sys.call(sys.parent())
   ccall <- match.call()
   
