@@ -603,6 +603,8 @@ grplot <- function(...){
 #' @param grobNode A grob function that will be used to draw the nodes
 #' @param grobNodeSize A function that can compute the sizes of the nodes
 #' @param offset A offset
+#' @param hideIsolates A logical of length 1. If true, isolates nodes 
+#'   (those not connected to any other node) are removed.
 #' @param layout Optionally provide the coordinates at which each node will 
 #'   be drawn. This should be supplied as a data.frame with columns 
 #'   \code{xcoord} and \code{ycoord}. 
@@ -619,6 +621,7 @@ grplot.parental <- function(parents,
                             grobNode     = grobNodeName, 
                             grobNodeSize = grobNodeNameSize,
                             offset       = 0.25,
+                            hideIsolates = F,
                             layout,
                             ...){
   stopifnot("parental" %in% class(parents))
@@ -633,7 +636,6 @@ grplot.parental <- function(parents,
   ccall$parents <- parents
   
   adj <- as.adjacency(parents)
-  hideIsolates <- F
   numberOfNodes <- length(parents)
   
   isolates <- which(rowSums(adj) == 0 & colSums(adj) == 0)
