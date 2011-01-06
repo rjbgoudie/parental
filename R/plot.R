@@ -237,7 +237,12 @@ convertToEnlargedCoordinates <- function(width, height, x, y){
 }
 
 
-#' Return the size of node "node" when the name of the node is plotted
+#' Return the size of node when the name of the node is plotted
+#' 
+#' This returns size of the label. Specifically, the return width is number 
+#' of characters in the label.
+#' 
+#' The height is the number of newlines.
 #' 
 #' @param node An integer of length 1, indicating which node the dimensions
 #'   should be computed for.
@@ -245,14 +250,13 @@ convertToEnlargedCoordinates <- function(width, height, x, y){
 #'   is to be plotted
 #' @param rawdata The rawdata
 #' @return A list of length 2 containing two items:
-#'     width: A object of class "unit"
-#'     height: A object of class "unit"
+#'     width: An integer vector of length 1. The width in characters.
+#'     height: An integer vector of length 1. The height in lines.
 #' @export
 grobNodeNameSize <- function(node, parents, rawdata = NULL){
-  #tg <- textGrob(label = names(parents)[node])
-  #list(width  = grobWidth(tg),
-  #     height = grobHeight(tg))
-  list(width  = nchar(names(parents)[node]),
+  # grobWidth etc can not be used here because  this function is used in 
+  # prepanel.parental, when the dimensions of the device are not known
+  list(width  = max(nchar(strsplit(names(parents)[node])[[1]])),
        height = length(gregexpr("\n", names(parents)[node], fixed = T)[[1]]))
 }
 
@@ -283,6 +287,8 @@ grobNodeName <- function(node, parents, rawdata = NULL){
 #'     height: A object of class "unit"
 #' @export
 grobNodeLevelPlotSize <- function(node, parents, rawdata){
+  # grobWidth etc can not be used here because  this function is used in 
+  # prepanel.parental, when the dimensions of the device are not known
   nParents <- length(parents[[node]])
   if (nParents > 0){
     nLevels <- nlevels(rawdata[, node])
