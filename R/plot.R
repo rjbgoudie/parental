@@ -1,12 +1,13 @@
 
 
-#' ...
+#' Convert cartesian coordinates to polars
 #'
-#' ...
+#' Currently unused. Not sure if this is vectorised
 #'
-#' @param x ...
-#' @param y ...
-#' @return ...
+#' @param x Cartesian x-coordinates
+#' @param y Cartesian y-coordinates
+#' @return A list with two components, named \code{r} and \code{theta}, 
+#'   containing the radius and angle to the supplied point.
 toPolar <- function(x, y){
   r <- sqrt(x^2 + y^2)
   theta <- rep(NULL, times = length(r))
@@ -16,41 +17,60 @@ toPolar <- function(x, y){
   list(r = r, theta = theta)
 }
 
-#' ...
+#' Convert polar coordinates to Cartesian
 #'
-#' ...
+#' Currently unused. Not sure if this is vectorised
 #'
-#' @param r ...
-#' @param theta ...
-#' @return ...
+#' @param r Polar coordinates
+#' @param theta Polar coordinates
+#' @return A list with two components, named \code{x} and \code{y}, 
+#'   containing the coordinates of the supplied point.
 toCartesian <- function(r, theta){
   list(x = r * cos(theta), y = r * sin(theta))
 }
 
-#' ...
+#' Calculate distance between two points
 #'
-#' ...
+#' A vectorised function for calculating the distance between two 
+#' points in Cartesian space. Computes the distance between \code{(x[1], 
+#' y[1])} and \code{(x[2], y[2])}.
 #'
-#' @param x ...
-#' @param y ...
-#' @return ...
+#' @param x A numeric vector of length 2, containing the x-coordinates of 
+#'   the two points
+#' @param y A numeric vector of length 2, containing the y-coordinates of 
+#'   the two points
+#' @return A numeric vector of length 1. The distance.
 distance <- function(x, y){
   sqrt((y[1] - x[1])^2 + (y[2] - x[2])^2)
 }
 
-#' ...
+#' Calculate coordinates of line between bounding boxes
 #'
-#' ...
-#'
-#' @param x1 ...
-#' @param y1 ...
-#' @param x2 ...
-#' @param y2 ...
-#' @param w1 ...
-#' @param h1 ...
-#' @param w2 ...
-#' @param h2 ...
-#' @return ...
+#' We have points \code{(x1, y1)} and \code{(x2, y2)} in Cartesian space. 
+#' We wish to draw a line between these two points.
+#' 
+#' However, these two points have rectangles centred around them.
+#' The first point has a rectangle width \code{w1} and height \code{h1} drawn 
+#' around it; the second has a rectangle with \code{w2} and height \code{h2}
+#' drawn around it. Note that the vertices of the first rectangle are 
+#' \code{(x1-w1/2, x1+h1/2)}, \code{(x1+w1/2, x1+h1/2)},
+#' \code{(x1+w1/2, x1-h1/2)} \code{(x1-w1/2, x1-h1/2)}.
+#' 
+#' This function returns the coordinates of the points on which the 
+#' line drawn between the two points intersects with each bounding box.
+#' 
+#' @param x1 The x-coordinate of the first point
+#' @param y1 The y-coordinate of the first point
+#' @param x2 The x-coordinate of the second point
+#' @param y2 The y-coordinate of the second point
+#' @param w1 The width of the bounding box around \code{(x1, y1)}
+#' @param h1 The height of the bounding box around \code{(x1, y1)}
+#' @param w2 The width of the bounding box around \code{(x2, y2)}
+#' @param h2 The height of the bounding box around \code{(x1, y1)}
+#' @return A numeric vector of length 4. The first two are the x- and 
+#'   y-coordinates on the bounding box of \code{(x1, y1)}. The 
+#'   third and fourth are the x- and y-coordinates on the bounding box of 
+#'   \code{(x2, y2)}
 coordinatesBetweenRectangles <- function(x1, y1, x2, y2, w1, h1, w2, h2){
   switchBack <- F
   if (x1 > x2){
@@ -129,21 +149,24 @@ coordinatesBetweenRectangles <- function(x1, y1, x2, y2, w1, h1, w2, h2){
   c(ox1, oy1, ox2, oy2)
 }
 
-#' ...
+#' Convert a lattice object to a grob
 #'
-#' ...
+#' See Paul Murrell's message to r-help - Mar 21, 2010 8:21:39 pm.
+#' "Re: [R] lattice grob"
+#' http://markmail.org/message/tg6kdxsr74fynncy
 #'
-#' @param p ...
-#' @param ... ...
-#' @return ...
+#' @param p A lattice object
+#' @param ... further arguments
+#' @return A grob
 latticeGrob <- function(p, ...){
-   
    grob(p = p, ..., cl = "lattice")
 }
 
-#' xxxx
+#' drawDetails for lattice plots
 #' 
-#' ....
+#' See Paul Murrell's message to r-help - Mar 21, 2010 8:21:39 pm.
+#' "Re: [R] lattice grob"
+#' http://markmail.org/message/tg6kdxsr74fynncy
 #'
 #' @param x ....
 #' @param recording ...
@@ -152,20 +175,22 @@ drawDetails.lattice <- function(x, recording = F){
    lattice::plot.trellis(x$p, newpage = F)
 }
 
-#' xxxx
+#' Pre-panel function for plotting parental objects
 #' 
-#' ....
+#' Computes the bounds of the final plot.
 #'
-#' @param x ....
-#' @param y ...
-#' @param parents ...
-#' @param rawdata ...
-#' @param grobNodeSize ...
-#' @param offset ...
-#' @param islist ...
-#' @param widthMultiplier ...
-#' @param heightMultipler ...
-#' @return ....
+#' @param x The x-coordinates of the nodes
+#' @param y The y-coordinates of the nodes
+#' @param parents An object of class 'parental'
+#' @param rawdata A data frame containing the raw data
+#' @param grobNodeSize A function that returns the size of a node grob
+#' @param offset An offset
+#' @param islist A logical
+#' @param widthMultiplier A width multiplier
+#' @param heightMultipler A height multiplier
+#' @return A list of length two. This contains two components: \code{xlim} 
+#'   and \code{ylim}, each of which contain the max and min values in 
+#'   that dimension.
 #' @export
 prepanel.parental <- function(x, y, parents, rawdata = NULL, 
                               grobNodeSize, offset, islist = F,
@@ -195,15 +220,15 @@ prepanel.parental <- function(x, y, parents, rawdata = NULL,
        ylim = c(min(unlist(out[3, ])), max(unlist(out[4, ]))))
 }
 
-#' ...
+#' Expand coordinates
 #'
-#' ...
+#' Expand the coordinates. Not currently used
 #'
-#' @param width ...
-#' @param height ...
-#' @param x ...
-#' @param y ...
-#' @return ...
+#' @param width A vector of widths?
+#' @param height A vector of heights?
+#' @param x x-coordinates
+#' @param y y-coordinates
+#' @return A list with two components: \code{width} and \code{height}.
 convertToEnlargedCoordinates <- function(width, height, x, y){
   curr.xlim <- current.panel.limits()$xlim
   curr.ylim <- current.panel.limits()$ylim
@@ -272,11 +297,11 @@ grobNodeLevelPlotSize <- function(node, parents, rawdata){
   }
 }
 
-#' ...
+#' Return the default theme
 #'
-#' ...
+#' Returns the default theme
 #'
-#' @return ...
+#' @return Returns the default theme
 #' @export
 grobNodeLevelPlotDefaultTheme <- function(){
   list(layout.heights = list(top.padding       = 0,
@@ -368,27 +393,28 @@ grobNodeLevelPlot <- function(node,
   }
 }
 
-#' xxxx
+#' Panel function for ploting a parental graph
 #' 
-#' ....
+#' Panel function for grplot.
 #'
-#' @param x ....
-#' @param y ...
-#' @param parents ...
-#' @param layout ...
-#' @param col ...
-#' @param alpha ...
-#' @param edgecol ...
-#' @param edgealpha ...
-#' @param islist ...
-#' @param rawdata ...
-#' @param grobNode ...
-#' @param grobNodeSize ...
-#' @param offset ...
-#' @param widthMultiplier ...
-#' @param heightMultipler ...
-#' @param ... ...
-#' @return ....
+#' @param x The x-coordinates of the nodes
+#' @param y The y-coordinates of the nodes
+#' @param parents An object of class parental
+#' @param layout The layout (not currently used??)
+#' @param col A vector of colours for the nodes (not currently used??)
+#' @param alpha A vector of alpha values for the nodes (not currently used??)
+#' @param edgecol A matrix of edge colours
+#' @param edgealpha A matrix of edge alpha values
+#' @param islist A logical of length 1
+#' @param rawdata A data frame of raw data.
+#' @param grobNode A function that returns the grob for a given node
+#' @param grobNodeSize A function that returns the size of a grob for a 
+#'   given node
+#' @param offset An offset
+#' @param widthMultiplier A width multiplier
+#' @param heightMultipler A height multiplier
+#' @param ... Further arguments
+#' @return A panel
 #' @export
 panel.parental <- function(x, y, parents, layout, col, alpha, 
                            edgecol, 
@@ -539,7 +565,7 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
                        x1     = boundingRectPoints[1],
                        y1     = boundingRectPoints[2],
                        length = unit(0.05, "native"),
-                       col    = edgecol[i, j],
+                       col    = edgealpha[i, j],
                        alpha  = edgealpha[i, j],
                        ends   = "both",
                        ...)
@@ -549,32 +575,39 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
   }
 }
 
-#' ...
+#' Plot a graph
 #' 
-#' ....
-#' @param ... ...
+#' A generic
+#' 
+#' @param ... Passed to method
 #' 
 #' @export
 grplot <- function(...){
   UseMethod("grplot")
 }
 
-#' xxxx
+#' Plot a parental graph
 #' 
-#' ....
-#'
-#' @param parents ....
-#' @param col ...
-#' @param alpha ...
-#' @param edgecol ...
-#' @param edgealpha ...
-#' @param layout.par ...
-#' @param grobNode ...
-#' @param grobNodeSize ...
-#' @param offset ...
-#' @param layout ...
-#' @param ... ...
-#' @return ....
+#' Plots a parental graph, by default using the layout routines of the 
+#' package 'network'.
+#' 
+#' @param parents An object of class 'parental'
+#' @param col A vector of colours for the nodes (FIXME - does not currently 
+#'   work.)
+#' @param alpha A vector of alpha values for the nodes (FIXME - does not 
+#'   currently work.)
+#' @param edgecol A matrix of edge colours.
+#' @param edgealpha A matrix of edge alpha values
+#' @param layout.par Passed to 
+#'   \code{\link[network]{network.layout.fruchtermanreingold}}
+#' @param grobNode A grob function that will be used to draw the nodes
+#' @param grobNodeSize A function that can compute the sizes of the nodes
+#' @param offset A offset
+#' @param layout Optionally provide the coordinates at which each node will 
+#'   be drawn. This should be supplied as a data.frame with columns 
+#'   \code{xcoord} and \code{ycoord}. 
+#' @param ... Further arguments (not currently passed on?)
+#' @return A lattice plot
 #' @S3method grplot parental
 #' @export
 grplot.parental <- function(parents,
@@ -588,6 +621,7 @@ grplot.parental <- function(parents,
                             offset       = 0.25,
                             layout,
                             ...){
+  stopifnot("parental" %in% class(parent))
   ocall <- sys.call(sys.parent())
   ccall <- match.call()
   
@@ -659,21 +693,25 @@ grplot.parental <- function(parents,
   ans
 }
 
-#' xxxx
+#' Plot a parental.list
 #' 
-#' ....
+#' Plots a parental graph, by default using the layout routines of the 
+#' package 'network'.
 #'
-#' @param parentallist ....
-#' @param col ...
-#' @param alpha ...
-#' @param edgecol ...
-#' @param edgealpha ...
-#' @param layout.par ...
-#' @param grobNode ...
-#' @param grobNodeSize ...
-#' @param offset ...
-#' @param ... ...
-#' @return ....
+#' @param parentallist An object of class 'parental.list'
+#' @param col A vector of colours for the nodes (FIXME - does not currently 
+#'   work.)
+#' @param alpha A vector of alpha values for the nodes (FIXME - does not 
+#'   currently work.)
+#' @param edgecol A matrix of edge colours.
+#' @param edgealpha A matrix of edge alpha values
+#' @param layout.par Passed to 
+#'   \code{\link[network]{network.layout.fruchtermanreingold}}
+#' @param grobNode A grob function that will be used to draw the nodes
+#' @param grobNodeSize A function that can compute the sizes of the nodes
+#' @param offset A offset
+#' @param ... Further arguments (not currently passed on?)
+#' @return A lattice plot
 #' @S3method grplot parental.list
 #' @export
 grplot.parental.list <- function(parentallist,
@@ -773,10 +811,13 @@ grplot.bvsresponse <- function(x, col = "default", ...){
   grplot(bvs, col = col, ...)
 }
 
-#' ...
+#' Multi-page plot of nodeLevelPlots
 #' 
-#' @param parents ...
-#' @param rawdata ...
+#' Creates a plot with a level plot for each variable, each of which is 
+#' presented on a separate page.
+#' 
+#' @param parents An object of class 'parental'
+#' @param rawdata A data frame.
 #' @export
 nodeLevelplot <- function(parents, rawdata){
   for (node in seq_along(parents)){
