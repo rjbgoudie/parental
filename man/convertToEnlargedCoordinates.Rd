@@ -1,11 +1,11 @@
 \name{convertToEnlargedCoordinates}
 \alias{convertToEnlargedCoordinates}
-\title{.}
+\title{Expand coordinates...}
 \usage{convertToEnlargedCoordinates(width, height, x, y)}
-\description{...}
-\details{...}
-\value{...}
-\arguments{\item{width}{...}
-\item{height}{...}
-\item{x}{...}
-\item{y}{...}}
+\description{Expand coordinates}
+\details{Expand the coordinates. Not currently used}
+\value{A list with two components: \code{width} and \code{height}.}
+\arguments{\item{width}{A vector of widths?}
+\item{height}{A vector of heights?}
+\item{x}{x-coordinates}
+\item{y}{y-coordinates}}

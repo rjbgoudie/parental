@@ -172,7 +172,7 @@ latticeGrob <- function(p, ...){
 #' @param recording ...
 #' @return ....
 drawDetails.lattice <- function(x, recording = F){
-   lattice::plot.trellis(x$p, newpage = F)
+   lattice:::plot.trellis(x$p, newpage = F)
 }
 
 #' Pre-panel function for plotting parental objects

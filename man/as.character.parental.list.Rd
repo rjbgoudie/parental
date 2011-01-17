@@ -5,5 +5,5 @@
 \description{Convert a 'parental.list' to a character vector.}
 \value{A character vector.}
 \arguments{\item{x}{A object of class 'parental'.}
-\item{pretty}{A logical of length 1 indicating if the character vectors are 
-pretty-printed.}}
+\item{pretty}{A logical of length 1 indicating if the character vectors 
+are pretty-printed.}}

@@ -1,7 +1,7 @@
 \name{grplot}
 \alias{grplot}
-\title{.}
+\title{Plot a graph...}
 \usage{grplot(...)}
-\description{...}
-\details{....}
-\arguments{\item{...}{...}}
+\description{Plot a graph}
+\details{A generic}
+\arguments{\item{...}{Passed to method}}

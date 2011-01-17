@@ -22,6 +22,6 @@ that need to be made to change the inward bound edges toward node i.}
 total number of moves required to morph x to y should be returned 
 (components = F) or if the number of changes required for 
 each node should be returned (components = T).}
-\item{allowFlips}{Allow single-edge flip moves. This is not compatible with 
-components = T, because it is not clear for which node to 
+\item{allowFlips}{Allow single-edge flip moves. This is not compatible 
+with components = T, because it is not clear for which node to 
 account flip moves.}}

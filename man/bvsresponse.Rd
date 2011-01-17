@@ -19,5 +19,6 @@ Conformance with object requirements can be tested by is.valid()
 [1] http://cran.r-project.org/doc/manuals/R-lang.html#Constants}
 \value{An object of class 'bvsresponse'.}
 \arguments{\item{x}{A vector of integers specifying the parents of the response.}
-\item{response}{A integer of length 1 specifying which node (column) is the response.}
+\item{response}{A integer of length 1 specifying which node (column) 
+is the response.}
 \item{nNodes}{The number of nodes (columns) in the variable selection.}}
