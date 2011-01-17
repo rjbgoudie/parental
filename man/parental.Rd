@@ -3,10 +3,10 @@
 \title{Constructor function for a parental object.}
 \usage{parental(...)}
 \description{Constructor function for a \code{parental} object.}
-\details{Objects of class \code{parental} are lists with the ith component specifying
-the parents of node i. The parents must be specified as a vector of 
-integers -- the storage.mode() of these integers MUST be integer. 
-If the node has no parents, use integer(0).
+\details{Objects of class \code{parental} are lists with the ith component 
+specifyingthe parents of node i. The parents must be specified as a 
+vector of integers -- the storage.mode() of these integers MUST be 
+integer. If the node has no parents, use integer(0).
 
 Note, in particular, that \code{list(2, 1)} would not be a valid 
 \code{parental}  object, because storage.mode(2) and 

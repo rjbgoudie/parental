@@ -81,16 +81,3 @@ filterCyclic <- function(bnlist){
   class(out) <- c("bn.list", "parental.list")
   out
 }
-
-#' Create a bn.list
-#' 
-#' Creates a list of objects of \code{bn} class.
-#' 
-#' @param ... A number of objects of class \code{bn}
-#' @return An object of class \code{bn.list}, containing all supplied BNs.
-#' @export
-bn.list <- function(...){
-  out <- list(...)
-  class(out) <- c("bn.list", "parental.list")
-  out
-}

@@ -107,6 +107,8 @@ parental.list <- function(...){
 
 #' Constructor function for a 'bn.list' object
 #' 
+#' Constructs bn.list objects
+#' 
 #' @param ... A series of objects of class 'bn'.
 #' @return An object of class 'bn.list'
 #' @export

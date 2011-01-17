@@ -37,29 +37,29 @@ maximallyOrientEdges.parental <- function(pdag, verbose = F){
 #     11L, 25L, integer(0), 30L, integer(0), c(22L, 28L), 21L, 
 #     integer(0), c(22L, 28L), 6L), class = c("bn", "parental"))
 
-#' ...
-#'
-#' ...
-#'
-#' @param pdag ...
-#' @param verbose ...
-#' @return ...
-#' @export
-maximallyOrientEdges.matrix <- function(pdag, verbose = F){
-  stopifnot(class(pdag)     == "matrix",
-            dim(pdag)[1]    == dim(pdag)[2],
-            class(verbose)  == "logical",
-            length(verbose) == 1)
-  .Call("maximallyOrientEdges", pdag, verbose)
-}
+# # ...
+# #
+# # ...
+# #
+# # @param pdag ...
+# # @param verbose ...
+# # @return ...
+# # @export
+# maximallyOrientEdges.matrix <- function(pdag, verbose = F){
+#   stopifnot(class(pdag)     == "matrix",
+#             dim(pdag)[1]    == dim(pdag)[2],
+#             class(verbose)  == "logical",
+#             length(verbose) == 1)
+#   .Call("maximallyOrientEdges", pdag, verbose)
+# }
 
-#' ...
+#' Maximally orient edges
 #'
-#' ...
+#' This is the R implementation
 #'
-#' @param pdag ...
-#' @param verbose ...
-#' @return ...
+#' @param pdag A pdag
+#' @param verbose A logical of length 1.
+#' @return Something?
 #' @export
 maximallyOrientEdges.matrix <- function(pdag, verbose = F){
   #if (class("pdag") != "pdag"){
@@ -328,31 +328,31 @@ pdag2alldags.matrix <- function(pdag, verbose = F){
     dag_list
   }
 }
-
-#' ...
-#'
-#' ...
-#'
-#' @param cpdag ...
-#' @param verbose ...
-#' @return ...
-#' @export
-recurse_unoriented_edge <- function(cpdag, verbose = F){
-  stopifnot(class(cpdag)    == "matrix",
-            dim(cpdag)[1]   == dim(cpdag)[2],
-            class(verbose)  == "logical",
-            length(verbose) == 1)
-  .Call("recurse_unoriented_edge", cpdag, verbose)
-}
+# 
+# # ...
+# #
+# # ...
+# #
+# # @param cpdag ...
+# # @param verbose ...
+# # @return ...
+# # @export
+# recurse_unoriented_edge <- function(cpdag, verbose = F){
+#   stopifnot(class(cpdag)    == "matrix",
+#             dim(cpdag)[1]   == dim(cpdag)[2],
+#             class(verbose)  == "logical",
+#             length(verbose) == 1)
+#   .Call("recurse_unoriented_edge", cpdag, verbose)
+# }
 
 ##################################################################
 # RECURSE_UNORIENTED_EDGE                                        #
 #    implements Step 2 of the pdag2alldags algorithm.        #
 ##################################################################
 
-#' ...
+#' Recurse unoriented edge
 #'
-#' ...
+#' This is the R implementation
 #'
 #' @param cpdag ...
 #' @param dag_list ...

@@ -16,5 +16,5 @@ A list of class "bvsresponse.list" containing a number of
 the parents of the response.}
 \item{response}{An integer of length 1 specifying which node 
 is the response.}
-\item{nNodes}{An integer of length 1 specifying the number of nodes in the 
-variable selection.}}
+\item{nNodes}{An integer of length 1 specifying the number of nodes in 
+the variable selection.}}

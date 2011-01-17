@@ -126,11 +126,12 @@ add.undirected.edge <- function(x, from, to, check.cycles,
 #' Add.undirected.backend
 #' 
 #' sfsdf
+#' 
 #' @param from ...
 #' @param to ...
 #' @param arcs ...
 #' @param debug ...
-add.undirected.backend = function(from, to, arcs, debug = F) {
+add.undirected.backend <- function(from, to, arcs, debug = F) {
   # the arc is there, undirected
   if (bnlearn::is.listed(arcs, c(to, from), both = T)){
     # nothing to do

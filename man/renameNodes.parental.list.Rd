@@ -6,5 +6,6 @@
 in the parental.list renamed to the newnames.}
 \value{The parental.list with renamed nodes}
 \arguments{\item{x}{A parental.list}
-\item{newnames}{A character vector specifying the new names for the nodes}
+\item{newnames}{A character vector specifying the new names for the 
+nodes}
 \item{...}{unused}}
