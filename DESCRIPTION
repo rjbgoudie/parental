@@ -12,6 +12,6 @@ Depends: R (>= 2.9)
 Suggests: pcalg, graph, bnlearn, multicore, graphicsQC
 License: GPL
 LazyData: true
-Collate: 'bnlearn.R' 'class.R' 'convert.R' 'is.element2.R' 'pcalg.R'
-    'pdag.R' 'plot.R' 'pltabulate.R' 'properties.R' 'sample.R'
+Collate: 'bnlearn.R' 'class.R' 'convert.R' 'grplot.R' 'is.element2.R'
+    'pcalg.R' 'pdag.R' 'pltabulate.R' 'properties.R' 'sample.R'
     'space-bn.R' 'space-bvs.R' 'space-conf.R' 'utils.R'
