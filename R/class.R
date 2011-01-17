@@ -98,6 +98,8 @@ parental.list <- function(...){
 #' @return An object of class \code{parental.list}, consisting the parts of 
 #'   \code{x} indicated by \code{i}
 #' @S3method "[" parental.list
+#' @aliases [.parental.list
+#' @usage \method{[}{parental.list}(x, i)
 #' @name getpl
 "[.parental.list" <- function(x, i){
   x <- unclass(x)[i]
@@ -128,6 +130,8 @@ bn.list <- function(...){
 #' @return An object of class \code{bn.list}, consisting the parts of 
 #'   \code{x} indicated by \code{i}
 #' @name getbnl
+#' @aliases [.bn.list
+#' @usage \method{[}{bn.list}(x, i)
 #' @S3method "[" bn.list
 "[.bn.list" <- function(x, i){
   x <- unclass(x)[i]
@@ -156,6 +160,8 @@ bvsresponse.list <- function(...){
 #' @return An object of class \code{bvsresponse.list}, consisting the parts 
 #'   of \code{x} indicated by \code{i}
 #' @name getbvsrl
+#' @aliases [.bvsresponse.list
+#' @usage \method{[}{bvsresponse.list}(x, i)
 #' @S3method "[" bvsresponse.list
 "[.bvsresponse.list" <- function(x, i){
   x <- unclass(x)[i]
@@ -282,10 +288,11 @@ c.bn.list <- function(...){
 #' Prints a 'parental.list' object to the console.
 #' 
 #' @param x A 'parental.list' object
+#' @param ... Further arguments (unused)
 #' @return Prints the 'parental.list' object to the console.
 #' @S3method print parental.list
 #' @export
-print.parental.list <- function(x){
+print.parental.list <- function(x, ...){
 
   print(unlist(lapply(x, as.character, pretty = T)))
 }
@@ -293,20 +300,22 @@ print.parental.list <- function(x){
 #' Prints a \code{parental} object to the console.
 #' 
 #' @param x A \code{parental} object
+#' @param ... Further arguments (unused)
 #' @return Prints the \code{parental} object to the console.
 #' @S3method print parental
 #' @export
-print.parental <- function(x){
+print.parental <- function(x, ...){
   print(as.character(x, pretty = T))
 }
 
 #' Prints a 'bn' object to the console.
 #' 
 #' @param x A 'bn' object
+#' @param ... Further arguments (unused)
 #' @return Prints the 'bn' object to the console.
 #' @S3method print bn
 #' @export
-print.bn <- function(x){
+print.bn <- function(x, ...){
   print(as.character(x, pretty = T))
 }
 

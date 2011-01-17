@@ -14,15 +14,16 @@ nNodes <- function(x, ...){
 #' 
 #' Get the number of nodes in a \code{parental} object
 #' 
-#' @param parental An object of class \code{parental}
+#' @param x An object of class \code{parental}
+#' @param ... Further arguments (unused)
 #' @return The number of nodes in \code{parental}, an integer.
 #' @export
 #' @S3method nNodes parental
-nNodes.parental <- function(parental){
+nNodes.parental <- function(x, ...){
   stopifnot(
-    "parental" %in% class(parental)
+    "parental" %in% class(x)
   )
-  length(parental)
+  length(x)
 }
 
 #' Number of edges

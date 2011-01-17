@@ -34,7 +34,7 @@ test_that("simulate2", {
       0.4, 0.6  # 2 = 2
     ), c(2, 2)))
   )
-  sim <- simulate.bn(net, cpt, 1000)
+  sim <- simulate(object = net, nsim = 1000, ptables = cpt)
   
   tcol <- function(i) as.vector(table(sim[, i]))
   

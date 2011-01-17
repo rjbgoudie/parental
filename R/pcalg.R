@@ -25,22 +25,25 @@ as.bn.pcAlgo <- function(x, ...){
 #' ....
 #' 
 #' @param x An object of class \code{pcAlgo}
+#' @param ... Further arguments (unused)
 #' @S3method as.bn pcAlgo
 #' @export
-as.parental.pcAlgo <- function(x){
+as.parental.pcAlgo <- function(x, ...){
   stopifnot(
     "pcAlgo" %in% class(x)
   )
   as.parental(x@graph)
 }
 
-#' ...
+#' Convert an object to a CPDAG
 #' 
-#' ....
-#' @param ... ...
+#' A generic function
+#' 
+#' @param x An object
+#' @param ... Further arguments passed to methods
 #' 
 #' @export
-as.cpdag <- function(...){
+as.cpdag <- function(x, ...){
   UseMethod("as.cpdag")
 }
 
@@ -48,10 +51,11 @@ as.cpdag <- function(...){
 #' Completed Partially Directed Acyclic Graph (CPDAG).
 #'
 #' @param x The parental BN to be converted.
+#' @param ... Further arguments (unused)
 #' @return The CPDAG as a parental. (Which will in general not be a BN)
 #' @S3method as.cpdag bn
 #' @export
-as.cpdag.bn <- function(x){
+as.cpdag.bn <- function(x, ...){
   stopifnot(
     "bn" %in% class(x)
   )
@@ -85,13 +89,15 @@ as.cpdag.bn <- function(x){
   }
 }
 
-#' ...
+#' Convert an object to a CPDAG2 (?)
 #' 
-#' ....
-#' @param ... ...
+#' A generic
+#' 
+#' @param x An object
+#' @param ... Further arguments passed to method
 #' 
 #' @export
-as.cpdag2 <- function(...){
+as.cpdag2 <- function(x, ...){
   UseMethod("as.cpdag2")
 }
 
@@ -183,14 +189,15 @@ makeNonVStructuresUndirected <- function(bn){
   bn2
 }
 
-#' ...
+#' Convert a bn to a CPDAG2 (?)
 #'
-#' ...
+#' Not sure this is correct
 #'
-#' @param x ...
+#' @param x An object
+#' @param ... Further arguments (unused)
 #' @return ...
 #' @export
-as.cpdag2.bn <- function(x){
+as.cpdag2.bn <- function(x, ...){
   #### incorrect.
   #### need to make edges not in v-strcutures undirected
   x <- makeNonVStructuresUndirected(x)
@@ -207,10 +214,11 @@ as.cpdag2.bn <- function(x){
 #' Completed Partially Directed Acyclic Graph (CPDAG).
 #'
 #' @param x An object of class bn.list
+#' @param ... Further arguments (unused)
 #' @return A parental.list containing a list of CPDAGs of class CPDAG.
 #' @S3method as.cpdag bn.list
 #' @export
-as.cpdag.bn.list <- function(x){
+as.cpdag.bn.list <- function(x, ...){
   stopifnot(class(x) == "bn.list")
   
   res <- lapply(x, as.cpdag)
@@ -223,10 +231,11 @@ as.cpdag.bn.list <- function(x){
 #' All MCMC runs are converted.
 #'
 #' @param x An object of class bnpostmcmc.list
+#' @param ... Further arguments (unused)
 #' @return A list containing a list of CPDAGs of class CPDAG.
 #' @S3method as.cpdag bnpostmcmc.list
 #' @export
-as.cpdag.bnpostmcmc.list <- function(x){
+as.cpdag.bnpostmcmc.list <- function(x, ...){
   stopifnot(
     class(x)        ==   "bnpostmcmc.list",
     "parental.list" %in% class(x[[1]]$samples),

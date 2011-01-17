@@ -77,26 +77,29 @@ as.adjacency.parental <- function(x, ...){
   m
 }
 
-#' ...
+#' Convert an object to a parental object
 #' 
-#' ....
-#' @param ... ...
+#' A generic
+#' 
+#' @param x An object
+#' @param ... Further arguments passed to method
 #' 
 #' @export
-as.parental <- function(...){
+as.parental <- function(x, ...){
   UseMethod("as.parental")
 }
 
-#' xxxx
+#' Convert a character string to a parental
 #' 
-#' ....
+#' Format required is one of two. Either standard or pretty.
 #'
-#' @param x ....
-#' @param pretty ...
+#' @param x An object
+#' @param pretty A logical indicating whether the supplied object is pretty
+#' @param ... Further arguments (unused)
 #' @return ....
 #' @S3method as.parental character
 #' @export
-as.parental.character <- function(x, pretty = F){
+as.parental.character <- function(x, pretty = F, ...){
   if (pretty){
     # handle nodes with no parents
     x <- gsub("\\[\\]", "\\[integer(0)\\]", x)
@@ -189,10 +192,11 @@ as.bn.character <- function(x, checkAcyclic = T, ...){
 #' @param x An object of class 'matrix'
 #' @param type Either "adjacency" or "edgelist"
 #' @param n The number of nodes n. Only required for type = "edgelist"
+#' @param ... Further arguments (unused)
 #' @return An object of class 'parental'.
 #' @S3method as.parental matrix
 #' @export
-as.parental.matrix <- function(x, type = "adjacency", n){
+as.parental.matrix <- function(x, type = "adjacency", n, ...){
   if (type == "adjacency"){
     if (class(x) != "matrix"){
       stop("Adjacency must be a matrix")
@@ -240,10 +244,11 @@ as.parental.matrix <- function(x, type = "adjacency", n){
 #' Convert a 'bn' to a 'parental'
 #' 
 #' @param x An object of class 'bn'
+#' @param ... Further arguments (unused)
 #' @return The object 'x', but of class 'parental'
 #' @S3method as.parental bn
 #' @export
-as.parental.bn <- function(x){
+as.parental.bn <- function(x, ...){
   class(x) <- "parental"
   x
 }
@@ -258,10 +263,11 @@ as.parental.bn <- function(x){
 #'
 #' @param x ....
 #' @param pretty ...
+#' @param ... Further arguments (unused)
 #' @return ....
 #' @S3method as.character parental
 #' @export
-as.character.parental <- function (x, pretty = F) {
+as.character.parental <- function (x, pretty = F, ...) {
   if (pretty){
     # Collapse to comma separated, and paste together
     # then unlist
@@ -306,10 +312,11 @@ as.character.parental <- function (x, pretty = F) {
 #' @param x A object of class 'parental'.
 #' @param pretty A logical of length 1 indicating if the character vectors 
 #'   are pretty-printed.
+#' @param ... Further arguments (unused)
 #' @return A character vector.
 #' @S3method as.character parental.list
 #' @export
-as.character.parental.list <- function (x, pretty = F) {
+as.character.parental.list <- function (x, pretty = F, ...) {
   sapply(x, as.character, pretty)
   #if (pretty == F){
   #  #res <- as.character(unclass(x))
@@ -388,10 +395,11 @@ as.graph.parental <- function(x, ...){
 #' Note that graphNEL's edge list are *children* lists.
 #' 
 #' @param x An object of class 'graphNEL'
+#' @param ... Further arguments (unused)
 #' @return An object of class 'parental'.
 #' @S3method as.parental graphNEL
 #' @export
-as.parental.graphNEL <- function(x){
+as.parental.graphNEL <- function(x, ...){
   edL <- graph::edges(x)
   edL <- lapply(edL, factor, levels = names(edL))
   edL <- unname(edL)
@@ -422,13 +430,15 @@ as.bn.graphNEL <- function(x, ...){
   res
 }
 
-#' ...
+#' Convert an object a 'bvsresponse' object.
 #' 
-#' ....
-#' @param ... ...
+#' A generic
+#' 
+#' @param x An object
+#' @param ... further arguments passed to method
 #' 
 #' @export
-as.bvsresponse <- function(...){
+as.bvsresponse <- function(x, ...){
   UseMethod("as.bvsresponse")
 }
 
@@ -440,10 +450,11 @@ as.bvsresponse <- function(...){
 #' @param x An object of class 'bvsresponse'
 #' @param response An integer of length 1 specifying which node is 
 #'   the response. This is not required, except for the empty graph.
+#' @param ... Further arguments (unused)
 #' @return An object of class 'bvsresponse'.
 #' @S3method as.bvsresponse bvs
 #' @export
-as.bvsresponse.bvs <- function(x, response){
+as.bvsresponse.bvs <- function(x, response, ...){
   stopifnot("bvs" %in% class(x),
             is.valid(x))
   
@@ -473,6 +484,7 @@ as.bvsresponse.bvs <- function(x, response){
 #'   is the response.
 #' @param nNodes An integer of length 1 specifying the number of nodes in 
 #'   the variable selection.
+#' @param ... Further arguments (unused)
 #'
 #' @return If length(x) == 1:
 #'     An object of class 'bvsresponse'.
@@ -481,7 +493,7 @@ as.bvsresponse.bvs <- function(x, response){
 #'     'bvsresponse' objects
 #' @S3method as.bvsresponse character
 #' @export
-as.bvsresponse.character <- function(x, response, nNodes){
+as.bvsresponse.character <- function(x, response, nNodes, ...){
   stopifnot("character" %in% class(x),
             is.numeric(response),
             length(response) == 1,
@@ -513,10 +525,11 @@ as.bvsresponse.character <- function(x, response, nNodes){
 #' node 5, which has parents 2, 3, 6, and 10 returns "2,3,6,10".
 #' 
 #' @param x An object of class 'bvsresponse'
+#' @param ... Further arguments (unused)
 #' @return An object of class 'parental'.
 #' @S3method as.character bvsresponse
 #' @export
-as.character.bvsresponse <- function(x){
+as.character.bvsresponse <- function(x, ...){
   stopifnot("bvsresponse" %in% class(x))
   
   paste(x$parents, sep = "", collapse = ",")
@@ -529,22 +542,25 @@ as.character.bvsresponse <- function(x){
 #' This function passes the list to as.character.bvsresponse()
 #' 
 #' @param x An object of class 'bvsresponse.list'
+#' @param ... Further arguments (unused)
 #' @return A character vector, each component of which is a character 
 #'   representation of the parents of each 'bvsresponse' included in x.
 #' @S3method as.character bvsresponse.list
 #' @export
-as.character.bvsresponse.list <- function(x){
+as.character.bvsresponse.list <- function(x, ...){
   stopifnot(class(x) == "bvsresponse.list")
   sapply(x, as.character)
 }
 
-#' ...
+#' Convert objects to a bvs
 #' 
-#' ....
-#' @param ... ...
+#' A generic function
+#' 
+#' @param x An object 
+#' @param ... further arguments passed to methods
 #' 
 #' @export
-as.bvs <- function(...){
+as.bvs <- function(x, ...){
   UseMethod("as.bvs")
 }
 
@@ -553,10 +569,11 @@ as.bvs <- function(...){
 #' object designed specifically for fast MCMC iterations.
 #' 
 #' @param x An object of class 'bvsresponse'
+#' @param ... further arguments (unused)
 #' @return An object of class 'bvs'.
 #' @S3method as.bvs bvsresponse
 #' @export
-as.bvs.bvsresponse <- function(x){
+as.bvs.bvsresponse <- function(x, ...){
   stopifnot(class(x) == "bvsresponse")
   
   res <- empty(x$nNodes, class = "bvs")
