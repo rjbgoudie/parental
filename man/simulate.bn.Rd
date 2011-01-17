@@ -1,10 +1,12 @@
 \name{simulate.bn}
 \alias{simulate.bn}
 \title{.}
-\usage{simulate.bn(bn, ptables, N, expectation=F)}
+\usage{simulate.bn(object, nsim, seed, ptables, expectation=F, ...)}
 \description{...}
 \details{....}
-\arguments{\item{bn}{...}
+\arguments{\item{object}{A bn}
+\item{nsim}{Number of simulations}
+\item{seed}{The starting seed (UNIMPLEMENTED)}
 \item{ptables}{...}
-\item{N}{...}
-\item{expectation}{...}}
+\item{expectation}{...}
+\item{...}{Further arguments (unused)}}

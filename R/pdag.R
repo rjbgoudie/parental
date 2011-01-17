@@ -1,11 +1,13 @@
 
 #' ...
 #' 
-#' ....
-#' @param ... ...
+#' A generic
+#' 
+#' @param pdag A pdag
+#' @param ... Further arguments passed to methods
 #' 
 #' @export
-maximallyOrientEdges <- function(...){
+maximallyOrientEdges <- function(pdag, ...){
   UseMethod("maximallyOrientEdges")
 }
 
@@ -15,9 +17,10 @@ maximallyOrientEdges <- function(...){
 #'
 #' @param pdag ...
 #' @param verbose A logical
+#' @param ... Further arguments (unused)
 #' @return ...
 #' @export
-maximallyOrientEdges.parental <- function(pdag, verbose = F){
+maximallyOrientEdges.parental <- function(pdag, verbose = F, ...){
   # convert to adjacency matrix
   pdag <- as.adjacency(pdag)
   # maximally orient
@@ -59,9 +62,10 @@ maximallyOrientEdges.parental <- function(pdag, verbose = F){
 #'
 #' @param pdag A pdag
 #' @param verbose A logical of length 1.
+#' @param ... Further arguments (unused)
 #' @return Something?
 #' @export
-maximallyOrientEdges.matrix <- function(pdag, verbose = F){
+maximallyOrientEdges.matrix <- function(pdag, verbose = F, ...){
   #if (class("pdag") != "pdag"){
   #  stop("Not a pdag")
   #}
@@ -210,11 +214,13 @@ maximallyOrientEdges.matrix <- function(pdag, verbose = F){
 
 #' ...
 #' 
-#' ....
-#' @param ... ...
+#' A generic
+#' 
+#' @param pdag A pdag
+#' @param ... Further arguments passed to method
 #' 
 #' @export
-pdag2alldags <- function(...){
+pdag2alldags <- function(pdag, ...){
   UseMethod("pdag2alldags")
 }
 
@@ -222,12 +228,13 @@ pdag2alldags <- function(...){
 #' 
 #' ....
 #'
-#' @param pdag ....
+#' @param pdag A pdag
 #' @param verbose ...
+#' @param ... Further arguments (unused)
 #' @return ....
 #' @S3method pdag2alldags parental
 #' @export
-pdag2alldags.parental <- function(pdag, verbose = F){
+pdag2alldags.parental <- function(pdag, verbose = F, ...){
   pdag <- as.adjacency(pdag)
   out <- pdag2alldags(pdag, verbose = verbose)
   out <- lapply(out, function(adj){
@@ -244,10 +251,11 @@ pdag2alldags.parental <- function(pdag, verbose = F){
 #'
 #' @param pdag ....
 #' @param verbose ...
+#' @param ... Further arguments (unused)
 #' @return ....
 #' @S3method pdag2alldags matrix
 #' @export
-pdag2alldags.matrix <- function(pdag, verbose = F){
+pdag2alldags.matrix <- function(pdag, verbose = F, ...){
   stopifnot("matrix"        %in% class(pdag),
             dim(pdag)[1]    == dim(pdag)[2],
             class(verbose)  == "logical",

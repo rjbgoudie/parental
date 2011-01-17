@@ -1,9 +1,10 @@
 \name{as.parental.character}
 \alias{as.parental.character}
-\title{xxxx...}
-\usage{as.parental.character(x, pretty=F)}
-\description{xxxx}
-\details{....}
+\title{Convert a character string to a parental...}
+\usage{as.parental.character(x, pretty=F, ...)}
+\description{Convert a character string to a parental}
+\details{Format required is one of two. Either standard or pretty.}
 \value{....}
-\arguments{\item{x}{....}
-\item{pretty}{...}}
+\arguments{\item{x}{An object}
+\item{pretty}{A logical indicating whether the supplied object is pretty}
+\item{...}{Further arguments (unused)}}

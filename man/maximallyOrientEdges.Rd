@@ -1,7 +1,8 @@
 \name{maximallyOrientEdges}
 \alias{maximallyOrientEdges}
 \title{.}
-\usage{maximallyOrientEdges(...)}
+\usage{maximallyOrientEdges(pdag, ...)}
 \description{...}
-\details{....}
-\arguments{\item{...}{...}}
+\details{A generic}
+\arguments{\item{pdag}{A pdag}
+\item{...}{Further arguments passed to methods}}

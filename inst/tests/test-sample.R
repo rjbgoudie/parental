@@ -6,9 +6,9 @@ test_that("simulate-sanity", {
   cptable2 <- as.table(array(c(0.5, 0.5)))
   cptable <- list(cptable1, cptable2)
   
-  expect_that(simulate.bn(bn      = bn(1, NULL),
-                          ptables = cptable,
-                          N       = 10),
+  expect_that(simulate(object  = bn(1, NULL),
+                       nsim    = 10,
+                       ptables = cptable),
               throws_error())
 })
 
@@ -19,7 +19,7 @@ test_that("simulate.bn (Two node)", {
     as.table(array(c(0.5, 0.5, 0.2, 0.8), c(2, 2)))
   )
   net <- bn(NULL, 1)
-  sim <- simulate.bn(net, cpt, 1000)
+  sim <- simulate(object = net, nsim = 1000, ptables = cpt)
   
   col1 <- as.vector(table(sim[, 1]))
   col2 <- as.vector(table(sim[, 2]))
@@ -43,7 +43,7 @@ test_that("simulate.bn (Three node)", {
     ), c(2, 2, 2)))
   )
   net <- bn(NULL, 1L, c(1L, 2L))
-  sim <- simulate.bn(net, cpt, 1000)
+  sim <- simulate(object = net, nsim = 1000, ptables = cpt)
   
   col1 <- as.vector(table(sim[, 1]))
   col2 <- as.vector(table(sim[, 2]))
@@ -74,7 +74,7 @@ test_that("simulate.bn (Three node)", {
     ), c(2, 2, 2)))
   )
   net <- bn(NULL, 1L, c(1L, 2L))
-  sim <- simulate.bn(net, cpt, 1000)
+  sim <- simulate(object = net, nsim = 1000, ptables = cpt)
   
   col1 <- as.vector(table(sim[, 1]))
   col2 <- as.vector(table(sim[, 2]))
@@ -121,7 +121,7 @@ test_that("simulate.bn (Four node)", {
 
   cpt <- list(node1, node2, node3, node4)
   N <- 10000
-  sim <- simulate.bn(net, cpt, N = N)
+  sim <- simulate(object = net, nsim = N, ptables = cpt)
   
   col1 <- as.vector(table(sim[, 1]))
   col2 <- as.vector(table(sim[, 2]))
@@ -186,5 +186,5 @@ test_that("simulate.bn (Errors)", {
   
   # cyclic input
   net <- bn(2, 1)
-  expect_that(simulate.bn(net, cpt, 1000), throws_error())
+  expect_that(simulate(object = net, nsim = 1000, ptables = cpt), throws_error())
 })

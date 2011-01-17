@@ -105,18 +105,20 @@ expected.sample <- function(n, size, replace, prob){
 #' ...
 #' 
 #' ....
-#' @param bn ...
+#' @param object A bn
+#' @param nsim Number of simulations
+#' @param seed The starting seed (UNIMPLEMENTED)
 #' @param ptables ...
-#' @param N ...
 #' @param expectation ...
+#' @param ... Further arguments (unused)
 #' @export
-simulate.bn <- function(bn, ptables, N, expectation = F){
+simulate.bn <- function(object, nsim, seed, ptables, expectation = F, ...){
   stopifnot(
-    "bn" %in% class(bn),
+    "bn" %in% class(object),
     class(expectation) == "logical",
     length(expectation) == 1,
-    length(N) == 1,
-    class(N) %in% c("integer", "numeric"),
+    length(nsim) == 1,
+    class(nsim) %in% c("integer", "numeric"),
     class(ptables) == "list",
     all(sapply(ptables, class) == "table")
   )
@@ -127,12 +129,12 @@ simulate.bn <- function(bn, ptables, N, expectation = F){
     creator <- sample.int
   }
   
-  nNodes <- length(bn)
-  numberOfParents <- sapply(bn, length)
-  dat <- as.data.frame(matrix(NA, ncol = nNodes, nrow = N))
+  nNodes <- length(object)
+  numberOfParents <- sapply(object, length)
+  dat <- as.data.frame(matrix(NA, ncol = nNodes, nrow = nsim))
   
   # topologically sort
-  nodeOrder <- topologicallyOrder(bn)
+  nodeOrder <- topologicallyOrder(object)
   
   numberOfLevelsAll <- lapply(seq_len(nNodes), function(i){
     dim(ptables[[i]])[1]
@@ -147,12 +149,12 @@ simulate.bn <- function(bn, ptables, N, expectation = F){
     
     if (numberOfParents[i] == 0){
       dat[, i] <- creator(numberOfLevels,
-                             size    = N,
+                             size    = nsim,
                              replace = T,
                              prob    = ptable)
     }
     else {
-      parents <- bn[[i]]
+      parents <- object[[i]]
       
       local <- dat[, parents, drop = F]
       local <- data.frame(lapply(seq_len(ncol(local)), function(i){
@@ -184,7 +186,7 @@ simulate.bn <- function(bn, ptables, N, expectation = F){
       
       # old slow version
       # would be better to loop over the distinct values, rather than rows
-      #for (j in 1:N){
+      #for (j in 1:nsim){
       #  config <- local[j, ]
       #  L <- as.list(c(0, config))
       #  L[1] <- T
