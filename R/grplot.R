@@ -256,7 +256,7 @@ convertToEnlargedCoordinates <- function(width, height, x, y){
 grobNodeNameSize <- function(node, parents, rawdata = NULL){
   # grobWidth etc can not be used here because  this function is used in 
   # prepanel.parental, when the dimensions of the device are not known
-  list(width  = max(nchar(strsplit(names(parents)[node])[[1]])),
+  list(width  = max(nchar(strsplit(names(parents)[node], "\n")[[1]])),
        height = length(gregexpr("\n", names(parents)[node], fixed = T)[[1]]))
 }
 
