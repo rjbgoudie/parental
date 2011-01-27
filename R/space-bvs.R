@@ -96,37 +96,67 @@ enumerateParents <- function(potentialParents,
     # unlisting is unelegant, but does the job
     possibleParents <- unlist(lapply(allowedNumberOfParentsSeq, 
       function(numberOfParents){
-        # combn treats single integers as implying 1:x
-        # use a list to force it not to
-        # but have to unlist twice in this case
-        ul <- function(l) unlist(l, recursive = F)
-        if (length(potentialParents) == 1){
-          potentialParents <- list(potentialParents)
-          ul <- function(l) unlist(unlist(l, recursive = F), recursive = F)
-        }
-      
-        ul(apply(combn(potentialParents, numberOfParents), 2, list))
+        combn2(potentialParents, numberOfParents, required)
       }
       ), 
     recursive = F)
+    possibleParents <- c(possibleParents, list(integer(0)))
   }
   
-  # add a NULL to make the empty graph
-  length(possibleParents) <- length(possibleParents) + 1
-
-  possibleParents <- lapply(possibleParents, function(out){
-    if (!is.null(out)){
-      out <- sort.int(c(out, required))
-    }
-    else {
-      out <- required
-    }
-    class(out) <- "integer"
-    out
-  })
-
-  # handle edge case of maxNumberParents == 0
-  if (length(possibleParents) == 0) possibleParents <- list()
-
   possibleParents
+}
+
+
+#' (Fast, simple) Generate All Combinations of n Elements, Taken m at a Time
+#' 
+#' A fast, simple version of \code{\link[utils]{combn}}.
+#' 
+#' ALSO NOTE. The output is SORTED!
+#' 
+#' @param x The set of elements from which to choose. Unlike \code{combn}, 
+#'   if this is a single integer, only this single integer is used; 
+#'   \code{combn} uses \code{1:x} in this case.
+#' @param m The size of the sets
+#' @param required A numeric vector that is appended to each set
+#' @export
+combn2 <- function (x, m, required) 
+{
+    stopifnot(length(m) == 1L)
+    x <- sort.int(x)
+    class(x) <- "integer"
+    if (m == 0) 
+        return(list())
+    n <- length(x)
+    if (n < m) 
+        stop("n < m")
+    m <- as.integer(m)
+    e <- 0
+    h <- m
+    a <- 1L:m
+    r <- x[a]
+    
+    count <- as.integer(round(choose(n, m)))
+    out <- vector("list", count)
+    out[[1L]] <- r
+    
+    i <- 2L
+    nmmp1 <- n - m + 1L
+    while (a[1L] != nmmp1) {
+        if (e < n - h) {
+            h <- 1L
+            e <- a[m]
+            j <- 1L
+        }
+        else {
+            e <- a[m - h]
+            h <- h + 1L
+            j <- 1L:h
+        }
+        a[m - h + j] <- e + j
+        r <- c(x[a], required)
+        class(r) <- "integer"
+        out[[i]] <- r
+        i <- i + 1L
+    }
+    out
 }
