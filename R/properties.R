@@ -26,6 +26,37 @@ nNodes.parental <- function(x, ...){
   length(x)
 }
 
+#' Indegrees
+#' 
+#' A generic to get the indegree of each node of the supplied graph
+#' 
+#' @param x An object of class \code{parental}
+#' @param ... ...
+#' @return A vector of length \code{nNodes(x)}, with the indegrees of each 
+#'   node of \code{x}
+#' @export
+indegrees <- function(x, ...){
+  UseMethod("indegrees")
+}
+
+#' Indegrees
+#' 
+#' Get the indegree of each node of the supplied graph
+#' 
+#' @param x An object of class \code{parental}
+#' @param ... Further arguments (unused)
+#' @return A vector of length \code{nNodes(x)}, with the indegrees of each 
+#'   node of \code{x}
+#' @export
+#' @S3method indegrees parental
+indegrees.parental <- function(x, ...){
+  stopifnot(
+    "parental" %in% class(x)
+  )
+  sapply(x, length)
+}
+
+
 #' Number of edges
 #' 
 #' Get the number of edges in a \code{parental} object
