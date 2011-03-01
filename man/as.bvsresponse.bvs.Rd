@@ -1,7 +1,7 @@
 \name{as.bvsresponse.bvs}
 \alias{as.bvsresponse.bvs}
 \title{Convert a 'bvs' object to a 'bvsresponse' object.}
-\usage{\method{as.bvsresponse}{bvs} (x, response, ...)}
+\usage{as.bvsresponse.bvs(x, response, ...)}
 \description{Convert a 'bvs' object to a 'bvsresponse' object.}
 \details{A 'bvs' object is a full 'parental' object, whereas a 'bvsresponse' 
 object is smaller object designed specifically for fast MCMC iterations.}

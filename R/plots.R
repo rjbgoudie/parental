@@ -10,8 +10,7 @@
 #'   \code{outdegree}
 #' @param ... Further arguments, passed onto \code{barchart()}
 #' @return A barchart
-#' @S3method barchart parental
-#' @method barchart parental
+#' @S3method "barchart" parental
 barchart.parental <- function(x,
                               data,
                               type = c("indegrees", "outdegrees"),

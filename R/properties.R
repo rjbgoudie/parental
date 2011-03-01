@@ -19,7 +19,6 @@ nNodes <- function(x, ...){
 #' @return The number of nodes in \code{parental}, an integer.
 #' @export
 #' @S3method nNodes parental
-#' @method nNodes parental
 nNodes.parental <- function(x, ...){
   stopifnot(
     "parental" %in% class(x)
@@ -50,7 +49,6 @@ indegrees <- function(x, ...){
 #'   node of \code{x}
 #' @export
 #' @S3method indegrees parental
-#' @method indegrees parental
 indegrees.parental <- function(x, ...){
   stopifnot(
     "parental" %in% class(x)

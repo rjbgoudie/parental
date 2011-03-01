@@ -1,7 +1,7 @@
 \name{as.parental.matrix}
 \alias{as.parental.matrix}
 \title{Convert a variety of matrix objects to 'parental' objects.}
-\usage{\method{as.parental}{matrix} (x, type="adjacency", n, ...)}
+\usage{as.parental.matrix(x, type="adjacency", n, ...)}
 \description{Convert a variety of matrix objects to 'parental' objects.}
 \details{The supplied matrix x should either be an adjacency 
 matrix (type = "adjacency"), or an edgelist (type = "edgelist").
