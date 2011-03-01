@@ -267,10 +267,11 @@ grobNodeNameSize <- function(node, parents, rawdata = NULL){
 #' @param parents An object of class "parental" containing the graph that 
 #'   is to be plotted
 #' @param rawdata The rawdata
+#' @param gp Graphical parameters, passed to \code{\link[grid]{textGrob}}.
 #' @return A "grob"
 #' @export
-grobNodeName <- function(node, parents, rawdata = NULL){
-  textGrob(label = names(parents)[node])
+grobNodeName <- function(node, parents, rawdata = NULL, gp){
+  textGrob(label = names(parents)[node], gp = gp)
 }
 
 #' Return the size of levelplot for node "node". If the node has no 
@@ -508,7 +509,7 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
   # plot the nodes
   # each node is plotted in its own viewport
   for (i in seq_along(parents)){
-    grob <- grobNode(node = i, parents, rawdata)
+    grob <- grobNode(node = i, parents, rawdata, gp = gpar(col = col[i]))
     vpWidth <- unit(nodeSizeNoOffset[[i]][[1]], "native")
     vpHeight <- unit(nodeSizeNoOffset[[i]][[2]], "native")
     vp <- viewport(x      = unit(x[i], "native"),
@@ -674,6 +675,10 @@ grplot.parental <- function(parents,
   form <- ycoord ~ xcoord
   ccall$islist <- F
   
+  if (length(col) < numberOfNodes){
+    col <- rep(col, length.out = numberOfNodes)
+  }
+  
   ccall$col <- col
   ccall$alpha <- alpha
   if (!missing(edgecol)){
@@ -776,6 +781,10 @@ grplot.parental.list <- function(parentallist,
   if (missing(edgealpha)){
     edgealpha <- matrix(1, ncol = numberOfNodes, nrow = numberOfNodes)
   }
+  if (length(col) < numberOfNodes){
+    col <- rep(col, length.out = numberOfNodes)
+  }
+  
   ccall$col <- col
   ccall$alpha <- alpha
   ccall$edgecol <- edgecol
