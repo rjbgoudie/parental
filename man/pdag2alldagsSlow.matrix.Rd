@@ -1,7 +1,7 @@
-\name{pdag2alldags.matrix}
-\alias{pdag2alldags.matrix}
+\name{pdag2alldagsSlow.matrix}
+\alias{pdag2alldagsSlow.matrix}
 \title{xxxx...}
-\usage{\method{pdag2alldags}{matrix} (pdag, verbose=F, ...)}
+\usage{\method{pdag2alldagsSlow}{matrix} (pdag, verbose=F, ...)}
 \description{xxxx}
 \details{....}
 \value{....}

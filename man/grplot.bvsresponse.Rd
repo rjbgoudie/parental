@@ -1,7 +1,7 @@
 \name{grplot.bvsresponse}
 \alias{grplot.bvsresponse}
 \title{Plot a 'bvsresponse' graph.}
-\usage{grplot.bvsresponse(x, col="default", ...)}
+\usage{\method{grplot}{bvsresponse} (x, col="default", ...)}
 \description{Plot a 'bvsresponse' graph.}
 \value{A lattice plot of the graph}
 \arguments{\item{x}{A 'bvsresponse' object}

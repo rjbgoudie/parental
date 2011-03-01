@@ -618,7 +618,7 @@ grplot <- function(...){
 #' @param ... Further arguments (not currently passed on?)
 #' @return A lattice plot
 #' @S3method grplot parental
-#' @export
+#' @method grplot parental
 grplot.parental <- function(parents,
                             col          = 1,
                             alpha        = 1,
@@ -726,7 +726,7 @@ grplot.parental <- function(parents,
 #' @param ... Further arguments (not currently passed on?)
 #' @return A lattice plot
 #' @S3method grplot parental.list
-#' @export
+#' @method grplot parental.list
 grplot.parental.list <- function(parentallist,
                                  col          = 1, 
                                  alpha        = 1,
@@ -814,7 +814,7 @@ grplot.parental.list <- function(parentallist,
 #' @param ... further arguments
 #' @return A lattice plot of the graph
 #' @S3method grplot bvsresponse
-#' @export
+#' @method grplot bvsresponse
 grplot.bvsresponse <- function(x, col = "default", ...){
   stopifnot(class(x) == "bvsresponse")
   bvs <- as.bvs(x)

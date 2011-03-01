@@ -86,7 +86,7 @@ enumerateParents <- function(potentialParents,
             #maxNumberParents <= length(potentialParents),
             !any(required %in% potentialParents))
   if (length(potentialParents) == 0){
-    possibleParents <- list()
+    possibleParents <- list(integer(0))
   }
   else {
     allowedNumberOfParents <- min(maxNumberParents, length(potentialParents))

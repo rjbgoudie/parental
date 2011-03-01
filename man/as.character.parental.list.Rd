@@ -1,7 +1,7 @@
 \name{as.character.parental.list}
 \alias{as.character.parental.list}
 \title{Convert a 'parental...}
-\usage{as.character.parental.list(x, pretty=F, ...)}
+\usage{\method{as.character}{parental.list} (x, pretty=F, ...)}
 \description{Convert a 'parental.list' to a character vector.}
 \value{A character vector.}
 \arguments{\item{x}{A object of class 'parental'.}
