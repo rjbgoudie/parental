@@ -5,7 +5,6 @@
 #' 
 #' @param pdag A pdag
 #' @param ... Further arguments passed to methods
-#' 
 #' @export
 maximallyOrientEdges <- function(pdag, ...){
   UseMethod("maximallyOrientEdges")
@@ -40,176 +39,22 @@ maximallyOrientEdges.parental <- function(pdag, verbose = F, ...){
 #     11L, 25L, integer(0), 30L, integer(0), c(22L, 28L), 21L, 
 #     integer(0), c(22L, 28L), 6L), class = c("bn", "parental"))
 
-# # ...
-# #
-# # ...
-# #
-# # @param pdag ...
-# # @param verbose ...
-# # @return ...
-# # @export
-# maximallyOrientEdges.matrix <- function(pdag, verbose = F){
-#   stopifnot(class(pdag)     == "matrix",
-#             dim(pdag)[1]    == dim(pdag)[2],
-#             class(verbose)  == "logical",
-#             length(verbose) == 1)
-#   .Call("maximallyOrientEdges", pdag, verbose)
-# }
-
-#' Maximally orient edges
+#' ...
 #'
-#' This is the R implementation
+#' ...
 #'
-#' @param pdag A pdag
-#' @param verbose A logical of length 1.
-#' @param ... Further arguments (unused)
-#' @return Something?
-#' @export
+#' @param pdag ...
+#' @param verbose ...
+#' @param ... further arguments (unused)
+#' @return ...
+#' @S3method maximallyOrientEdges matrix
+#' @method maximallyOrientEdges matrix
 maximallyOrientEdges.matrix <- function(pdag, verbose = F, ...){
-  #if (class("pdag") != "pdag"){
-  #  stop("Not a pdag")
-  #}
-  
-  # based on code by Imme Ebert-Uphoff (ebert@tree.com), 2007
-  
-  # uses Rules R1-R4 of Meek (1995) to complete
-  # orientations in a pdag as far as possible, 
-  # i.e. every compelled edge is oriented.
-  #
-  # (Rules R1-R4 are also summarized in Pearl (2000), p.51
-  #  and Neapolitan (2004), p. 546.)
-  #
-  # Since the PC algorithm also uses Rules R1-R3, their implementation was 
-  # copied (with some modifications) from function learn_struct_pdag_pc.
-  #
-  # Rule R4 is necessary here, since the orientations in the input 
-  # pdag do not just represent v-structures.
-  
-  # the code below uses -1 for directed edge
-  # and 1 for undirected edge
-  # so need to set this up
-  undirected_edges <- which(pdag == 1 & pdag != t(pdag), arr.ind = T)
-  for (rownum in seq_len(nrow(undirected_edges))){
-    i <- undirected_edges[rownum, 1]
-    j <- undirected_edges[rownum, 2]
-    pdag[i, j] <- -1
-  }
-  
-  n <- nrow(pdag)
-  old_pdag <- matrix(0, nrow = n, ncol = n)
-  
-  # recurse until we don't do anything
-  while (!identical(pdag, old_pdag)){
-
-    old_pdag <- pdag
-
-    # Rule R1
-    directed_edges <- NULL
-    directed_edges <- which(pdag == -1, arr.ind = T) # a -> b
-    for (rownum in seq_len(nrow(directed_edges))){
-      a <- directed_edges[rownum, 1]
-      b <- directed_edges[rownum, 2]
-      undirected <- abs(pdag) + t(abs(pdag))
-      # Adjacency test in undirected matrix:
-      #   a adjacent b  <=>  undirected(a,b) ==0
-      # That's easier to use than adjacency test in pdag:
-      #   a adjacent b  <=>  pdag(a,b)==0 and pdag(b,a)==0
-
-      # Find all nodes c such that  b-c  and c not adjacent a
-      C <- which(pdag[b, ] == 1 & undirected[a,] == 0) 
-      if (length(C) > 0){
-        pdag[b, C] <- -1
-        pdag[C, b] <- 0
-        if (verbose){
-          for (j in seq_along(C)){
-            cat('Rule 1:', b, 'to', C[j], "\n")
-          }
-        }
-      }
-    }
-    
-    # Rule R2
-    undirected_edges <- NULL
-    # get all undirected edges
-    undirected_edges <- which(pdag == 1, arr.ind = T)
-    # for each undirected edge
-    for (rownum in seq_len(nrow(undirected_edges))){
-      # get the end points
-      a <- undirected_edges[rownum, 1]
-      b <- undirected_edges[rownum, 2]
-      
-      # it seems that we do not check for a route between the nodes
-      # instead, it has to be a 2-stage path
-      if (any(pdag[a, ] == -1 & pdag[, b] == -1)){
-        pdag[a,b] <- -1
-        pdag[b,a] <- 0
-        
-        if (verbose){
-          cat('Rule 2:', a, 'to', b, "\n")
-        }
-      }
-    }
-    
-    # Rule R3
-    undirected_edges <- NULL
-    undirected_edges <- which(pdag == 1, arr.ind = T) # unoriented a-b edge
-    for (rownum in seq_len(nrow(undirected_edges))){
-      a <- undirected_edges[rownum, 1]
-      b <- undirected_edges[rownum, 2]
-      C <- which(pdag[a,] == 1 & pdag[,b] == -1)
-      # C contains nodes c s.t. a-c->b-a
-
-      # Extract lines and columns corresponding only to the set of nodes C
-      core <- pdag[C,C]
-
-      # Prepare adjacency test:
-      unoriented = abs(core) + t(abs(core)) 
-      # Now:  a non-adjacent b <==> unoriented(a,b) == 0
-
-      # Prepare to detect existence of non-adjacent pairs of nodes in C.
-      # Set diagonal to 1, to prevent finding pairs of IDENTICAL nodes:
-      diag(unoriented) <- 1
-
-      # C contains 2 different non-adjacent elements
-      if (any(unoriented == 0)){
-        pdag[a,b] <- -1
-        pdag[b,a] <- 0 
-        if (verbose){
-          cat('Rule 3:', a, 'to', b, "\n")
-        }
-      }
-    }
-    
-    # Rule 4
-    undirected_edges <- NULL
-    undirected_edges <- which(pdag == 1, arr.ind = T) # unoriented a-b edge
-    for (rownum in seq_len(nrow(undirected_edges))){
-      a <- undirected_edges[rownum, 1]
-      b <- undirected_edges[rownum, 2]
-
-      # Prepare adjacency test:
-      # unoriented(i,j) is 0 (non-adj) or 1 (directed) or 2 (undirected)
-      unoriented <- abs(pdag) + t(abs(pdag))
-
-      # Find c such that c -> b and a,c are adjacent (a-c or a->c or a<-c) 
-      C = which((pdag[,b] == -1) & (unoriented[a,]>=1), arr.ind = T)
-      for (j in seq_along(C)){
-        c <- C[j]
-        # Check whether there is any node d, such that
-        # d->c  AND  a-d  AND  b NOT adjacent to d
-        if (any(pdag[, c]== -1 & pdag[a, ] == 1 & unoriented[b, ] == 0)){
-          pdag[a,b] = -1 
-          pdag[b,a] = 0  
-          if (verbose){
-            cat('Rule 4:', a, 'to', b, "\n")
-          }
-        }
-      }
-    }
-  }
-
-  # Oriented all possible edges.  Return result.
-  pdag
+  stopifnot(class(pdag)     == "matrix",
+            dim(pdag)[1]    == dim(pdag)[2],
+            class(verbose)  == "logical",
+            length(verbose) == 1)
+  .Call("maximallyOrientEdges", pdag, verbose, PACKAGE = "parental")
 }
 
 #' ...
@@ -218,7 +63,6 @@ maximallyOrientEdges.matrix <- function(pdag, verbose = F, ...){
 #' 
 #' @param pdag A pdag
 #' @param ... Further arguments passed to method
-#' 
 #' @export
 pdag2alldags <- function(pdag, ...){
   UseMethod("pdag2alldags")
@@ -233,7 +77,7 @@ pdag2alldags <- function(pdag, ...){
 #' @param ... Further arguments (unused)
 #' @return ....
 #' @S3method pdag2alldags parental
-#' @export
+#' @method pdag2alldags parental
 pdag2alldags.parental <- function(pdag, verbose = F, ...){
   pdag <- as.adjacency(pdag)
   out <- pdag2alldags(pdag, verbose = verbose)
@@ -254,7 +98,7 @@ pdag2alldags.parental <- function(pdag, verbose = F, ...){
 #' @param ... Further arguments (unused)
 #' @return ....
 #' @S3method pdag2alldags matrix
-#' @export
+#' @method pdag2alldags matrix
 pdag2alldags.matrix <- function(pdag, verbose = F, ...){
   stopifnot("matrix"        %in% class(pdag),
             dim(pdag)[1]    == dim(pdag)[2],
@@ -336,81 +180,28 @@ pdag2alldags.matrix <- function(pdag, verbose = F, ...){
     dag_list
   }
 }
-# 
-# # ...
-# #
-# # ...
-# #
-# # @param cpdag ...
-# # @param verbose ...
-# # @return ...
-# # @export
-# recurse_unoriented_edge <- function(cpdag, verbose = F){
-#   stopifnot(class(cpdag)    == "matrix",
-#             dim(cpdag)[1]   == dim(cpdag)[2],
-#             class(verbose)  == "logical",
-#             length(verbose) == 1)
-#   .Call("recurse_unoriented_edge", cpdag, verbose)
-# }
 
 ##################################################################
 # RECURSE_UNORIENTED_EDGE                                        #
 #    implements Step 2 of the pdag2alldags algorithm.        #
 ##################################################################
 
+
 #' Recurse unoriented edge
+#' 
+#' ...
 #'
-#' This is the R implementation
-#'
-#' @param cpdag ...
+#' @param cpdag A cpdag
 #' @param dag_list ...
-#' @param verbose ...
-#' @return ...
+#' @param verbose A logical indicating whether verbose output should be 
+#'   given.
+#' @return Unknown
+#' @useDynLib parental
 #' @export
 recurse_unoriented_edge <- function(cpdag, dag_list, verbose = F){
-  
-  # input must be a COMPLETE pdag
-  # find all undirected edges
-  undirected_edges <- which(cpdag == 1, arr.ind = T)
-  
-  updated_list <- dag_list
-
-  if (nrow(undirected_edges) == 0){
-    # if no undirected edges left
-    # End of recursion reached.
-    # Convert all (-1) values to (1) to yield standard DAG, add DAG to list.
-    updated_list <- append(updated_list, list(abs(cpdag)))
-  }
-  else {
-    # choose first unoriented edge
-    # (any unoriented edge could be used here)
-    a <- undirected_edges[1, 1]
-    b <- undirected_edges[1, 2]
-    
-    # choose two different directions for edge and complete BOTH !      
-    # PDAG1: contains a -> b
-    pdag1 <- cpdag
-    pdag1[a,b] <- -1
-    pdag1[b,a] <- 0
-    if (verbose){
-      cat("PDAG1: ", a, " -> ", b, "\n")
-    }
-    # complete as far as possible using rules R1-R4:
-    cpdag1 = maximallyOrientEdges(pdag1, verbose = verbose)
-    # Continue recursion on another unoriented edge
-    updated_list <- recurse_unoriented_edge(cpdag1, updated_list, verbose)
-
-    # PDAG1: contains b -> a
-    if (verbose){
-      cat("PDAG2: ", b, " -> ", a, "\n")
-    }
-    pdag2 = cpdag
-    pdag2[a,b] <- 0
-    pdag2[b,a] <- -1
-    # complete as far as possible using rules R1-R4:
-    cpdag2 = maximallyOrientEdges(pdag2, verbose = verbose)
-    # Continue recursion on another unoriented edge
-    updated_list <- recurse_unoriented_edge(cpdag2, updated_list, verbose)
-  }
-  updated_list
+  stopifnot(class(cpdag)    == "matrix",
+            dim(cpdag)[1]   == dim(cpdag)[2],
+            class(verbose)  == "logical",
+            length(verbose) == 1)
+  .Call("recurse_unoriented_edge", cpdag, dag_list, verbose, PACKAGE = "parental")
 }

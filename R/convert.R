@@ -37,7 +37,7 @@ as.graph <- function(x, ...){
 #' @param ... unused
 #' @return An object of class 'bn'
 #' @S3method as.bn matrix
-#' @export
+#' @method as.bn matrix
 as.bn.matrix <- function(x, ...){
   class(x) <- "matrix"
   out <- as.parental(x, ...)
@@ -58,7 +58,7 @@ as.bn.matrix <- function(x, ...){
 #' @param ... unused
 #' @return An adjacency matrix.
 #' @S3method as.adjacency parental
-#' @export
+#' @method as.adjacency parental
 as.adjacency.parental <- function(x, ...){
   stopifnot("parental" %in% class(x))
   n <- nNodes(x)
@@ -98,7 +98,7 @@ as.parental <- function(x, ...){
 #' @param ... Further arguments (unused)
 #' @return ....
 #' @S3method as.parental character
-#' @export
+#' @method as.parental character
 as.parental.character <- function(x, pretty = F, ...){
   if (pretty){
     # handle nodes with no parents
@@ -145,7 +145,7 @@ as.parental.character <- function(x, pretty = F, ...){
 #' @param ... ... 
 #' @return ....
 #' @S3method as.bn character
-#' @export
+#' @method as.bn character
 as.bn.character <- function(x, checkAcyclic = T, ...){
   out <- as.parental(x, ...)
   if ("parental.list" %in% class(out)){
@@ -195,7 +195,7 @@ as.bn.character <- function(x, checkAcyclic = T, ...){
 #' @param ... Further arguments (unused)
 #' @return An object of class 'parental'.
 #' @S3method as.parental matrix
-#' @export
+#' @method as.parental matrix
 as.parental.matrix <- function(x, type = "adjacency", n, ...){
   if (type == "adjacency"){
     if (class(x) != "matrix"){
@@ -247,7 +247,7 @@ as.parental.matrix <- function(x, type = "adjacency", n, ...){
 #' @param ... Further arguments (unused)
 #' @return The object 'x', but of class 'parental'
 #' @S3method as.parental bn
-#' @export
+#' @method as.parental bn
 as.parental.bn <- function(x, ...){
   class(x) <- "parental"
   x
@@ -266,7 +266,7 @@ as.parental.bn <- function(x, ...){
 #' @param ... Further arguments (unused)
 #' @return ....
 #' @S3method as.character parental
-#' @export
+#' @method as.character parental
 as.character.parental <- function (x, pretty = F, ...) {
   if (pretty){
     # Collapse to comma separated, and paste together
@@ -315,7 +315,7 @@ as.character.parental <- function (x, pretty = F, ...) {
 #' @param ... Further arguments (unused)
 #' @return A character vector.
 #' @S3method as.character parental.list
-#' @export
+#' @method as.character parental.list
 as.character.parental.list <- function (x, pretty = F, ...) {
   sapply(x, as.character, pretty)
   #if (pretty == F){
@@ -378,7 +378,7 @@ seemsPretty <- function(x){
 #' @param ... unused
 #' @return An object of class 'graphNEL'.
 #' @S3method as.graph parental
-#' @export
+#' @method as.graph parental
 as.graph.parental <- function(x, ...){
   require(graph)
   x <- getChildren(x) # convert to children list
@@ -398,7 +398,7 @@ as.graph.parental <- function(x, ...){
 #' @param ... Further arguments (unused)
 #' @return An object of class 'parental'.
 #' @S3method as.parental graphNEL
-#' @export
+#' @method as.parental graphNEL
 as.parental.graphNEL <- function(x, ...){
   edL <- graph::edges(x)
   edL <- lapply(edL, factor, levels = names(edL))
@@ -420,7 +420,7 @@ as.parental.graphNEL <- function(x, ...){
 #' @param ... unused
 #' @return An object of class 'bn'.
 #' @S3method as.bn graphNEL
-#' @export
+#' @method as.bn graphNEL
 as.bn.graphNEL <- function(x, ...){
   res <- as.parental(x)
   if (!checkAcyclic(res)){
@@ -453,7 +453,7 @@ as.bvsresponse <- function(x, ...){
 #' @param ... Further arguments (unused)
 #' @return An object of class 'bvsresponse'.
 #' @S3method as.bvsresponse bvs
-#' @export
+#' @method as.bvsresponse bvs
 as.bvsresponse.bvs <- function(x, response, ...){
   stopifnot("bvs" %in% class(x),
             is.valid(x))
@@ -492,7 +492,7 @@ as.bvsresponse.bvs <- function(x, response, ...){
 #'     A list of class "bvsresponse.list" containing a number of 
 #'     'bvsresponse' objects
 #' @S3method as.bvsresponse character
-#' @export
+#' @method as.bvsresponse character
 as.bvsresponse.character <- function(x, response, nNodes, ...){
   stopifnot("character" %in% class(x),
             is.numeric(response),
@@ -528,7 +528,7 @@ as.bvsresponse.character <- function(x, response, nNodes, ...){
 #' @param ... Further arguments (unused)
 #' @return An object of class 'parental'.
 #' @S3method as.character bvsresponse
-#' @export
+#' @method as.character bvsresponse
 as.character.bvsresponse <- function(x, ...){
   stopifnot("bvsresponse" %in% class(x))
   
@@ -546,7 +546,7 @@ as.character.bvsresponse <- function(x, ...){
 #' @return A character vector, each component of which is a character 
 #'   representation of the parents of each 'bvsresponse' included in x.
 #' @S3method as.character bvsresponse.list
-#' @export
+#' @method as.character bvsresponse.list
 as.character.bvsresponse.list <- function(x, ...){
   stopifnot(class(x) == "bvsresponse.list")
   sapply(x, as.character)
@@ -572,7 +572,7 @@ as.bvs <- function(x, ...){
 #' @param ... further arguments (unused)
 #' @return An object of class 'bvs'.
 #' @S3method as.bvs bvsresponse
-#' @export
+#' @method as.bvs bvsresponse
 as.bvs.bvsresponse <- function(x, ...){
   stopifnot(class(x) == "bvsresponse")
   
