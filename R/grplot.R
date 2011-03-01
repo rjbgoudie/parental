@@ -267,11 +267,10 @@ grobNodeNameSize <- function(node, parents, rawdata = NULL){
 #' @param parents An object of class "parental" containing the graph that 
 #'   is to be plotted
 #' @param rawdata The rawdata
-#' @param gp Graphical parameters, passed to \code{\link[grid]{textGrob}}.
 #' @return A "grob"
 #' @export
-grobNodeName <- function(node, parents, rawdata = NULL, gp){
-  textGrob(label = names(parents)[node], gp = gp)
+grobNodeName <- function(node, parents, rawdata = NULL){
+  textGrob(label = names(parents)[node])
 }
 
 #' Return the size of levelplot for node "node". If the node has no 
@@ -509,7 +508,7 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
   # plot the nodes
   # each node is plotted in its own viewport
   for (i in seq_along(parents)){
-    grob <- grobNode(node = i, parents, rawdata, gp = gpar(col = col[i]))
+    grob <- grobNode(node = i, parents, rawdata)
     vpWidth <- unit(nodeSizeNoOffset[[i]][[1]], "native")
     vpHeight <- unit(nodeSizeNoOffset[[i]][[2]], "native")
     vp <- viewport(x      = unit(x[i], "native"),
@@ -618,7 +617,7 @@ grplot <- function(...){
 #' @param ... Further arguments (not currently passed on?)
 #' @return A lattice plot
 #' @S3method grplot parental
-#' @method grplot parental
+#' @export
 grplot.parental <- function(parents,
                             col          = 1,
                             alpha        = 1,
@@ -675,10 +674,6 @@ grplot.parental <- function(parents,
   form <- ycoord ~ xcoord
   ccall$islist <- F
   
-  if (length(col) < numberOfNodes){
-    col <- rep(col, length.out = numberOfNodes)
-  }
-  
   ccall$col <- col
   ccall$alpha <- alpha
   if (!missing(edgecol)){
@@ -726,7 +721,7 @@ grplot.parental <- function(parents,
 #' @param ... Further arguments (not currently passed on?)
 #' @return A lattice plot
 #' @S3method grplot parental.list
-#' @method grplot parental.list
+#' @export
 grplot.parental.list <- function(parentallist,
                                  col          = 1, 
                                  alpha        = 1,
@@ -781,10 +776,6 @@ grplot.parental.list <- function(parentallist,
   if (missing(edgealpha)){
     edgealpha <- matrix(1, ncol = numberOfNodes, nrow = numberOfNodes)
   }
-  if (length(col) < numberOfNodes){
-    col <- rep(col, length.out = numberOfNodes)
-  }
-  
   ccall$col <- col
   ccall$alpha <- alpha
   ccall$edgecol <- edgecol
@@ -814,7 +805,7 @@ grplot.parental.list <- function(parentallist,
 #' @param ... further arguments
 #' @return A lattice plot of the graph
 #' @S3method grplot bvsresponse
-#' @method grplot bvsresponse
+#' @export
 grplot.bvsresponse <- function(x, col = "default", ...){
   stopifnot(class(x) == "bvsresponse")
   bvs <- as.bvs(x)

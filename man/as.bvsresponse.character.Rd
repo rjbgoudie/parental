@@ -1,7 +1,7 @@
 \name{as.bvsresponse.character}
 \alias{as.bvsresponse.character}
 \title{Convert a character vector (a comma-separated string) specifying the...}
-\usage{\method{as.bvsresponse}{character} (x, response, nNodes, ...)}
+\usage{as.bvsresponse.character(x, response, nNodes, ...)}
 \description{Convert a character vector (a comma-separated string) specifying the 
 parents of a response to a 'bvsresponse' object.}
 \details{For example, as.bvsresponse("1,2,3", 4, 5) returns a 'bvsresponse' object 

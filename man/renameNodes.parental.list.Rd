@@ -1,7 +1,7 @@
 \name{renameNodes.parental.list}
 \alias{renameNodes.parental.list}
 \title{Return the parental list, with nodes in each parental...}
-\usage{\method{renameNodes}{parental.list} (x, newnames, ...)}
+\usage{renameNodes.parental.list(x, newnames, ...)}
 \description{Return the parental list, with nodes in each parental
 in the parental.list renamed to the newnames.}
 \value{The parental.list with renamed nodes}

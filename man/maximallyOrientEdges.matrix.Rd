@@ -1,10 +1,10 @@
 \name{maximallyOrientEdges.matrix}
 \alias{maximallyOrientEdges.matrix}
-\title{.}
-\usage{\method{maximallyOrientEdges}{matrix} (pdag, verbose=F, ...)}
-\description{...}
-\details{...}
-\value{...}
-\arguments{\item{pdag}{...}
-\item{verbose}{...}
-\item{...}{further arguments (unused)}}
+\title{Maximally orient edges...}
+\usage{maximallyOrientEdges.matrix(pdag, verbose=F, ...)}
+\description{Maximally orient edges}
+\details{This is the R implementation}
+\value{Something?}
+\arguments{\item{pdag}{A pdag}
+\item{verbose}{A logical of length 1.}
+\item{...}{Further arguments (unused)}}

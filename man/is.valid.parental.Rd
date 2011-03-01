@@ -1,7 +1,7 @@
 \name{is.valid.parental}
 \alias{is.valid.parental}
 \title{Checks whether the supplied parental is valid.}
-\usage{\method{is.valid}{parental} (x)}
+\usage{is.valid.parental(x)}
 \description{Checks whether the supplied \code{parental} is valid.
 Tests that the parents are sorted correctly, are of 
 storage.mode() == "integer"}

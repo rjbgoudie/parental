@@ -1,7 +1,7 @@
 \name{as.character.bvsresponse}
 \alias{as.character.bvsresponse}
 \title{Convert a 'bvsresponse' object to a character string.}
-\usage{\method{as.character}{bvsresponse} (x, ...)}
+\usage{as.character.bvsresponse(x, ...)}
 \description{Convert a 'bvsresponse' object to a character string. Note that the 
 number of nodes, and which node the response is not contained in the 
 resulting character string.}

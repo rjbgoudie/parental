@@ -1,7 +1,7 @@
 \name{indegrees.parental}
 \alias{indegrees.parental}
 \title{Indegrees...}
-\usage{\method{indegrees}{parental} (x, ...)}
+\usage{indegrees.parental(x, ...)}
 \description{Indegrees}
 \details{Get the indegree of each node of the supplied graph}
 \value{A vector of length \code{nNodes(x)}, with the indegrees of each 

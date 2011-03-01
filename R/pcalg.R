@@ -5,20 +5,18 @@
 #' @param x An object of class \code{pcAlgo}
 #' @param ... unused
 #' @S3method as.bn pcAlgo
-#' @method as.bn pcAlgo
+#' @export
 as.bn.pcAlgo <- function(x, ...){
-  if (require(pcalg)){
-    stopifnot(
-      "pcAlgo" %in% class(x)
-    )
-    warning("this selects a particular bn from the equivalence class")
-    pdag <- pdag2dag(x@graph)
-    if (isTRUE(pdag$success)){
-      as.bn(pdag$graph)
-    }
-    else {
-      stop("Extension via pdag2dag not possible")
-    }
+  stopifnot(
+    "pcAlgo" %in% class(x)
+  )
+  warning("this selects a particular bn from the equivalence class")
+  pdag <- pcalg::pdag2dag(x@graph)
+  if (isTRUE(pdag$success)){
+    as.bn(pdag$graph)
+  }
+  else {
+    stop("Extension via pdag2dag not possible")
   }
 }
 
@@ -28,15 +26,13 @@ as.bn.pcAlgo <- function(x, ...){
 #' 
 #' @param x An object of class \code{pcAlgo}
 #' @param ... Further arguments (unused)
-#' @S3method as.parental pcAlgo
-#' @method as.parental pcAlgo
+#' @S3method as.bn pcAlgo
+#' @export
 as.parental.pcAlgo <- function(x, ...){
-  if (require(pcalg)){
-    stopifnot(
-      "pcAlgo" %in% class(x)
-    )
-    as.parental(x@graph)
-  }
+  stopifnot(
+    "pcAlgo" %in% class(x)
+  )
+  as.parental(x@graph)
 }
 
 #' Convert an object to a CPDAG
@@ -58,40 +54,38 @@ as.cpdag <- function(x, ...){
 #' @param ... Further arguments (unused)
 #' @return The CPDAG as a parental. (Which will in general not be a BN)
 #' @S3method as.cpdag bn
-#' @method as.cpdag bn
+#' @export
 as.cpdag.bn <- function(x, ...){
-  if (require(pcalg)){
-    stopifnot(
-      "bn" %in% class(x)
-    )
+  stopifnot(
+    "bn" %in% class(x)
+  )
   
-    #gr <- as.graph(x)
-    # The heavy lifting is performed by dag2cpdag() in package pcalg
-    #cpdag <- dag2cpdag(gr)
-    p <- length(x)
-    if (nEdges(x) == 0){
-      class(x) <- "parental"
-      x
-    } else {
-      dag <- as.adjacency(x)
-      # The following code is extracted from dag2cpdag() in package pcalg
-      # to save needless type conversions
-      # by Markus Kalisch
-      dag[dag != 0] <- 1
+  #gr <- as.graph(x)
+  # The heavy lifting is performed by dag2cpdag() in package pcalg
+  #cpdag <- dag2cpdag(gr)
+  p <- length(x)
+  if (nEdges(x) == 0){
+    class(x) <- "parental"
+    x
+  } else {
+    dag <- as.adjacency(x)
+    # The following code is extracted from dag2cpdag() in package pcalg
+    # to save needless type conversions
+    # by Markus Kalisch
+    dag[dag != 0] <- 1
 
-      ## dag is adjacency matrix
-      e.df <- labelEdges(dag)
-      cpdag <- matrix(rep(0, p * p), nrow = p, ncol = p)
-      for (i in seq_len(dim(e.df)[1])) {
-        if (e.df$label[i]) {
-          cpdag[e.df$tail[i], e.df$head[i]] <- 1
-        } else {
-          cpdag[e.df$tail[i],e.df$head[i]] <- 1
-          cpdag[e.df$head[i],e.df$tail[i]] <- 1
-        }
+    ## dag is adjacency matrix
+    e.df <- pcalg::labelEdges(dag)
+    cpdag <- matrix(rep(0, p * p), nrow = p, ncol = p)
+    for (i in seq_len(dim(e.df)[1])) {
+      if (e.df$label[i]) {
+        cpdag[e.df$tail[i], e.df$head[i]] <- 1
+      } else {
+        cpdag[e.df$tail[i],e.df$head[i]] <- 1
+        cpdag[e.df$head[i],e.df$tail[i]] <- 1
       }
-      as.parental(cpdag)
     }
+    as.parental(cpdag)
   }
 }
 
@@ -223,7 +217,7 @@ as.cpdag2.bn <- function(x, ...){
 #' @param ... Further arguments (unused)
 #' @return A parental.list containing a list of CPDAGs of class CPDAG.
 #' @S3method as.cpdag bn.list
-#' @method as.cpdag bn.list
+#' @export
 as.cpdag.bn.list <- function(x, ...){
   stopifnot(class(x) == "bn.list")
   
@@ -240,7 +234,7 @@ as.cpdag.bn.list <- function(x, ...){
 #' @param ... Further arguments (unused)
 #' @return A list containing a list of CPDAGs of class CPDAG.
 #' @S3method as.cpdag bnpostmcmc.list
-#' @method as.cpdag bnpostmcmc.list
+#' @export
 as.cpdag.bnpostmcmc.list <- function(x, ...){
   stopifnot(
     class(x)        ==   "bnpostmcmc.list",
