@@ -1,7 +1,7 @@
 \name{is.valid.bvsresponse}
 \alias{is.valid.bvsresponse}
 \title{Checks whether the supplied 'bvsresponse' is valid.}
-\usage{is.valid.bvsresponse(x)}
+\usage{\method{is.valid}{bvsresponse} (x)}
 \description{Checks whether the supplied 'bvsresponse' is valid.
 Tests that the parents are sorted correctly, are of 
 storage.mode() == "integer".
