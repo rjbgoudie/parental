@@ -1,8 +1,8 @@
 \name{add.undirected.edge}
 \alias{add.undirected.edge}
-\title{.}
+\title{Add undirected edge...}
 \usage{add.undirected.edge(x, from, to, check.cycles, update=T, debug=F)}
-\description{...}
+\description{Add undirected edge}
 \details{....}
 \arguments{\item{x}{...}
 \item{from}{...}
