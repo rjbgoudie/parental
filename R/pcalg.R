@@ -41,70 +41,14 @@ as.parental.pcAlgo <- function(x, ...){
 
 #' Convert an object to a CPDAG
 #' 
-#' A generic function
-#' 
-#' @param x An object
-#' @param ... Further arguments passed to methods
-#' 
-#' @export
-as.cpdag <- function(x, ...){
-  UseMethod("as.cpdag")
-}
-
-#' Convert a parental BN to a 
-#' Completed Partially Directed Acyclic Graph (CPDAG).
-#'
-#' @param x The parental BN to be converted.
-#' @param ... Further arguments (unused)
-#' @return The CPDAG as a parental. (Which will in general not be a BN)
-#' @S3method as.cpdag bn
-#' @method as.cpdag bn
-as.cpdag.bn <- function(x, ...){
-  if (require(pcalg)){
-    stopifnot(
-      "bn" %in% class(x)
-    )
-  
-    #gr <- as.graph(x)
-    # The heavy lifting is performed by dag2cpdag() in package pcalg
-    #cpdag <- dag2cpdag(gr)
-    p <- length(x)
-    if (nEdges(x) == 0){
-      class(x) <- "parental"
-      x
-    } else {
-      dag <- as.adjacency(x)
-      # The following code is extracted from dag2cpdag() in package pcalg
-      # to save needless type conversions
-      # by Markus Kalisch
-      dag[dag != 0] <- 1
-
-      ## dag is adjacency matrix
-      e.df <- labelEdges(dag)
-      cpdag <- matrix(rep(0, p * p), nrow = p, ncol = p)
-      for (i in seq_len(dim(e.df)[1])) {
-        if (e.df$label[i]) {
-          cpdag[e.df$tail[i], e.df$head[i]] <- 1
-        } else {
-          cpdag[e.df$tail[i],e.df$head[i]] <- 1
-          cpdag[e.df$head[i],e.df$tail[i]] <- 1
-        }
-      }
-      as.parental(cpdag)
-    }
-  }
-}
-
-#' Convert an object to a CPDAG2 (?)
-#' 
 #' A generic
 #' 
 #' @param x An object
 #' @param ... Further arguments passed to method
 #' 
 #' @export
-as.cpdag2 <- function(x, ...){
-  UseMethod("as.cpdag2")
+as.cpdag <- function(x, ...){
+  UseMethod("as.cpdag")
 }
 
 #' Find V Structure
@@ -202,8 +146,9 @@ makeNonVStructuresUndirected <- function(bn){
 #' @param x An object
 #' @param ... Further arguments (unused)
 #' @return ...
-#' @export
-as.cpdag2.bn <- function(x, ...){
+#' @S3method as.cpdag bn
+#' @method as.cpdag bn
+as.cpdag.bn <- function(x, ...){
   #### incorrect.
   #### need to make edges not in v-strcutures undirected
   x <- makeNonVStructuresUndirected(x)
@@ -213,8 +158,6 @@ as.cpdag2.bn <- function(x, ...){
   out <- abs(out)
   as.parental(out)
 }
-
-#as.cpdag.bn <- as.cpdag2.bn
 
 #' Convert a bn.list to list of parental.list of
 #' Completed Partially Directed Acyclic Graph (CPDAG).
@@ -251,6 +194,102 @@ as.cpdag.bnpostmcmc.list <- function(x, ...){
   runSeq <- seq_along(x)
   lapply(runSeq, function(whichRun){
     res <- lapply(x[[whichRun]]$samples, as.cpdag)
+    class(res) <- "parental.list"
+    res
+  })
+}
+
+#' Convert an object to a CPDAG
+#' 
+#' A generic function
+#' 
+#' @param x An object
+#' @param ... Further arguments passed to methods
+#' 
+#' @export
+as.cpdag0 <- function(x, ...){
+  UseMethod("as.cpdag0")
+}
+
+#' Convert a parental BN to a 
+#' Completed Partially Directed Acyclic Graph (CPDAG).
+#'
+#' @param x The parental BN to be converted.
+#' @param ... Further arguments (unused)
+#' @return The CPDAG as a parental. (Which will in general not be a BN)
+#' @S3method as.cpdag0 bn
+#' @method as.cpdag0 bn
+as.cpdag0.bn <- function(x, ...){
+  if (require(pcalg)){
+    stopifnot(
+      "bn" %in% class(x)
+    )
+  
+    #gr <- as.graph(x)
+    # The heavy lifting is performed by dag2cpdag() in package pcalg
+    #cpdag <- dag2cpdag(gr)
+    p <- length(x)
+    if (nEdges(x) == 0){
+      class(x) <- "parental"
+      x
+    } else {
+      dag <- as.adjacency(x)
+      # The following code is extracted from dag2cpdag() in package pcalg
+      # to save needless type conversions
+      # by Markus Kalisch
+      dag[dag != 0] <- 1
+
+      ## dag is adjacency matrix
+      e.df <- labelEdges(dag)
+      cpdag <- matrix(rep(0, p * p), nrow = p, ncol = p)
+      for (i in seq_len(dim(e.df)[1])) {
+        if (e.df$label[i]) {
+          cpdag[e.df$tail[i], e.df$head[i]] <- 1
+        } else {
+          cpdag[e.df$tail[i],e.df$head[i]] <- 1
+          cpdag[e.df$head[i],e.df$tail[i]] <- 1
+        }
+      }
+      as.parental(cpdag)
+    }
+  }
+}
+
+#' Convert a bn.list to list of parental.list of
+#' Completed Partially Directed Acyclic Graph (CPDAG).
+#'
+#' @param x An object of class bn.list
+#' @param ... Further arguments (unused)
+#' @return A parental.list containing a list of CPDAGs of class CPDAG.
+#' @S3method as.cpdag0 bn.list
+#' @method as.cpdag0 bn.list
+as.cpdag0.bn.list <- function(x, ...){
+  stopifnot(class(x) == "bn.list")
+  
+  res <- lapply(x, as.cpdag0)
+  class(res) <- "parental.list"
+  res
+}
+
+#' Convert a full set of MCMC posterior samples to 
+#' Completed Partially Directed Acyclic Graph (CPDAG).
+#' All MCMC runs are converted.
+#'
+#' @param x An object of class bnpostmcmc.list
+#' @param ... Further arguments (unused)
+#' @return A list containing a list of CPDAGs of class CPDAG.
+#' @S3method as.cpdag0 bnpostmcmc.list
+#' @method as.cpdag0 bnpostmcmc.list
+as.cpdag0.bnpostmcmc.list <- function(x, ...){
+  stopifnot(
+    class(x)        ==   "bnpostmcmc.list",
+    "parental.list" %in% class(x[[1]]$samples),
+    "parental"      %in% class(x[[1]]$samples[[1]]),
+    length(x)       >=   1)
+  
+  runSeq <- seq_along(x)
+  lapply(runSeq, function(whichRun){
+    res <- lapply(x[[whichRun]]$samples, as.cpdag0)
     class(res) <- "parental.list"
     res
   })
