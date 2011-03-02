@@ -1,7 +1,7 @@
-\name{pdag2alldags.parental}
-\alias{pdag2alldags.parental}
+\name{pdag2alldagsSlow.parental}
+\alias{pdag2alldagsSlow.parental}
 \title{xxxx...}
-\usage{\method{pdag2alldags}{parental} (pdag, verbose=F, ...)}
+\usage{\method{pdag2alldagsSlow}{parental} (pdag, verbose=F, ...)}
 \description{xxxx}
 \details{....}
 \value{....}

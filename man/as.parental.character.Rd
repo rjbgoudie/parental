@@ -1,7 +1,7 @@
 \name{as.parental.character}
 \alias{as.parental.character}
 \title{Convert a character string to a parental...}
-\usage{as.parental.character(x, pretty=F, ...)}
+\usage{\method{as.parental}{character} (x, pretty=F, ...)}
 \description{Convert a character string to a parental}
 \details{Format required is one of two. Either standard or pretty.}
 \value{....}

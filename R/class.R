@@ -34,7 +34,6 @@ NULL
 #' parental(c(), 1, 2)
 #' 
 #' parental(c(), c(1, 3), c())
-#' @export
 parental <- function(...){
   parents <- list(...)
   parents <- lapply(parents, as.integer)
@@ -98,6 +97,7 @@ parental.list <- function(...){
 #' @return An object of class \code{parental.list}, consisting the parts of 
 #'   \code{x} indicated by \code{i}
 #' @S3method "[" parental.list
+#' @method "[" parental.list
 #' @aliases [.parental.list
 #' @usage \method{[}{parental.list}(x, i)
 #' @name getpl
@@ -133,6 +133,7 @@ bn.list <- function(...){
 #' @aliases [.bn.list
 #' @usage \method{[}{bn.list}(x, i)
 #' @S3method "[" bn.list
+#' @method "[" bn.list
 "[.bn.list" <- function(x, i){
   x <- unclass(x)[i]
   class(x) <- c("bn.list", "parental.list")
@@ -163,6 +164,7 @@ bvsresponse.list <- function(...){
 #' @aliases [.bvsresponse.list
 #' @usage \method{[}{bvsresponse.list}(x, i)
 #' @S3method "[" bvsresponse.list
+#' @method "[" bvsresponse.list
 "[.bvsresponse.list" <- function(x, i){
   x <- unclass(x)[i]
   class(x) <- "bvsresponse.list"
@@ -187,7 +189,7 @@ is.valid <- function(x){
 #' @return A logical of length 1 indicating whether x is a valid 
 #'   \code{parental} object
 #' @S3method is.valid parental
-#' @export
+#' @method is.valid parental
 is.valid.parental <- function(x){
   stopifnot("parental" %in% class(x))
   tryCatch({
@@ -213,7 +215,7 @@ is.valid.parental <- function(x){
 #' @return A logical of length 1 indicating whether x is a valid 'bvs' 
 #'   object.
 #' @S3method is.valid bvs
-#' @export
+#' @method is.valid bvs
 is.valid.bvs <- function(x){
   stopifnot("bvs" %in% class(x))
   tryCatch({
@@ -240,7 +242,7 @@ is.valid.bvs <- function(x){
 #' @param x A object of class 'bn'
 #' @return A logical of length 1 indicating whether x is a valid 'bn' object
 #' @S3method is.valid bn
-#' @export
+#' @method is.valid bn
 is.valid.bn <- function(x){
   stopifnot("bn" %in% class(x),
             "parental" %in% class(x))
@@ -265,7 +267,7 @@ is.valid.bn <- function(x){
 #' @return An new 'parental.list' object, including all the supplied 
 #'   parental.lists
 #' @S3method c parental.list
-#' @export
+#' @method c parental.list
 c.parental.list <- function(...){
   out <- NextMethod("c")
   class(out) <- "parental.list"
@@ -277,7 +279,7 @@ c.parental.list <- function(...){
 #' @param ... Any number of 'bn.list' objects
 #' @return An new 'bn.list' object, including all the supplied bn.lists
 #' @S3method c bn.list
-#' @export
+#' @method c bn.list
 c.bn.list <- function(...){
 
   out <- NextMethod("c")
@@ -291,7 +293,7 @@ c.bn.list <- function(...){
 #' @param ... Further arguments (unused)
 #' @return Prints the 'parental.list' object to the console.
 #' @S3method print parental.list
-#' @export
+#' @method print parental.list
 print.parental.list <- function(x, ...){
 
   print(unlist(lapply(x, as.character, pretty = T)))
@@ -303,7 +305,7 @@ print.parental.list <- function(x, ...){
 #' @param ... Further arguments (unused)
 #' @return Prints the \code{parental} object to the console.
 #' @S3method print parental
-#' @export
+#' @method print parental
 print.parental <- function(x, ...){
   print(as.character(x, pretty = T))
 }
@@ -314,7 +316,7 @@ print.parental <- function(x, ...){
 #' @param ... Further arguments (unused)
 #' @return Prints the 'bn' object to the console.
 #' @S3method print bn
-#' @export
+#' @method print bn
 print.bn <- function(x, ...){
   print(as.character(x, pretty = T))
 }
@@ -341,7 +343,7 @@ renameNodes <- function(x, ...){
 #'
 #' @return The parental.list with renamed nodes
 #' @S3method renameNodes parental.list
-#' @export
+#' @method renameNodes parental.list
 renameNodes.parental.list <- function(x, newnames, ...){
   stopifnot(
     "parental.list" %in% class(x),
@@ -424,7 +426,7 @@ empty <- function(n, class = "parental", response){
 #' @return A logical of length 1 indicating whether x is a valid 
 #'   'bvsresponse' object
 #' @S3method is.valid bvsresponse
-#' @export
+#' @method is.valid bvsresponse
 is.valid.bvsresponse <- function(x){
   stopifnot("bvsresponse" %in% class(x))
   
@@ -503,7 +505,7 @@ bvsresponse <- function(x, response, nNodes){
 #' @param ... unused
 #' @return Prints the 'bvsresponse' object to the console.
 #' @S3method print bvsresponse
-#' @export
+#' @method print bvsresponse
 print.bvsresponse <- function(x, ...){
   cat("bvsresponse. Col ", x$response, " is response. ", sep = "")
   cat(x$nNodes, " variables. ", sep = "")
