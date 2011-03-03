@@ -96,7 +96,7 @@ enumerateParents <- function(potentialParents,
     # unlisting is unelegant, but does the job
     possibleParents <- unlist(lapply(allowedNumberOfParentsSeq, 
       function(numberOfParents){
-        combn2(potentialParents, numberOfParents, required)
+        combn3(potentialParents, numberOfParents, required)
       }
       ), 
     recursive = F)
@@ -110,22 +110,32 @@ enumerateParents <- function(potentialParents,
 #' (Fast, simple) Generate All Combinations of n Elements, Taken m at a Time
 #' 
 #' A fast, simple version of \code{\link[utils]{combn}}.
-#' 
+#'
 #' ALSO NOTE. The output is SORTED!
-#' 
+#'
+#' If \code{x} is of length 0, then a blank list \code{list()} is returned,
+#' unless \code{required} is of length great than 0, in which case,
+#' list(required) is returned.
+#'
 #' @param x The set of elements from which to choose. Unlike \code{combn}, 
 #'   if this is a single integer, only this single integer is used; 
 #'   \code{combn} uses \code{1:x} in this case.
 #' @param m The size of the sets
 #' @param required A numeric vector that is appended to each set
+#' @return A list of the combinations
 #' @export
-combn2 <- function (x, m, required) 
+combn2 <- function (x, m, required = integer(0)) 
 {
     stopifnot(length(m) == 1L)
     x <- sort.int(x)
     class(x) <- "integer"
-    if (m == 0) 
+    if (m == 0){
+      if (length(required) > 0){
+        return(list(required))
+      } else {
         return(list())
+      }
+    }
     n <- length(x)
     if (n < m) 
         stop("n < m")
@@ -137,7 +147,7 @@ combn2 <- function (x, m, required)
     
     count <- as.integer(round(choose(n, m)))
     out <- vector("list", count)
-    out[[1L]] <- r
+    out[[1L]] <- sort.int(c(r, required))
     
     i <- 2L
     nmmp1 <- n - m + 1L
@@ -153,10 +163,60 @@ combn2 <- function (x, m, required)
             j <- 1L:h
         }
         a[m - h + j] <- e + j
-        r <- c(x[a], required)
+        r <- sort.int(c(x[a], required))
         class(r) <- "integer"
         out[[i]] <- r
         i <- i + 1L
     }
     out
+}
+
+#' (C version) Generate All Combinations of n Elements, Taken m at a Time
+#' 
+#' A fast, simple version of \code{\link[utils]{combn}}.
+#' 
+#' ALSO NOTE. The output is SORTED!
+#'
+#' If \code{x} is of length 0, then a blank list \code{list()} is returned,
+#' unless \code{required} is of length great than 0, in which case,
+#' list(required) is returned.
+#' 
+#' @param x The set of elements from which to choose. Unlike \code{combn}, 
+#'   if this is a single integer, only this single integer is used; 
+#'   \code{combn} uses \code{1:x} in this case. (This is also unlike the
+#'   version in \code{gRbase}.
+#' @param m The size of the sets
+#' @param required A numeric vector that is appended to each set.
+#'   The length of required must be positive!
+#' @return A list of the combinations
+#' @export
+combn3 <- function(x, m, required = integer(0)){
+  # From
+  # http://cran.r-project.org/web/packages/gRbase/
+  # Soren Hojsgaard and Claus Dethlefsen with contributions from Clive Bowsher
+  # GPL License
+  if (length(x) == 0){
+    if (length(required) > 0){
+      return(list(required))
+    } else {
+      return(list())
+    }
+  }
+  if (length(x) < m){
+    stop("Error in combnPrim: n < m\n")
+  }
+  x <- sort.int(x, method = "quick")
+  NCAND = as.integer(length(x))
+  NSEL = as.integer(m)
+  NSET <- as.integer(choose(NCAND, NSEL))
+  ANS <- as.integer(rep.int(0, NSET * NSEL))
+  res <- .C("combnC", NSEL, NCAND, NSET, ANS, DUP = FALSE, 
+      PACKAGE = "parental")[[4]]
+  res <- x[res]
+  dim(res) <- c(NSEL, NSET)
+  if (!missing(required) && length(required) > 0){
+    res <- rbind(res, rep(required, ncol(res)))
+    res <- apply(res, 2, sort.int, method = "quick")
+  }
+  as.list(as.data.frame(res, optional = T, row.names = NULL))
 }
