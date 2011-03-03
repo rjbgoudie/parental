@@ -62,18 +62,22 @@ as.bn.matrix <- function(x, ...){
 as.adjacency.parental <- function(x, ...){
   stopifnot("parental" %in% class(x))
   n <- nNodes(x)
-  m <- matrix(NA, n, n)
+  m <- matrix(0, n, n)
   
-  for (i in 1:n){
-    for (j in 1:n){
-      m[i, j] <- if(i %in% x[[j]]){
-        1
-      }
-      else {
-        0
-      }
-    }
+  # for (i in 1:n){
+  #     for (j in 1:n){
+  #       m[i, j] <- if(i %in% x[[j]]){
+  #         1
+  #       }
+  #       else {
+  #         0
+  #       }
+  #     }
+  #   }
+  for (j in seq.int(n)){
+    m[x[[j]], j] <- 1
   }
+
   m
 }
 
