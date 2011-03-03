@@ -89,7 +89,7 @@ whichVStructure <- function(net){
           # otherwise it is
           j
         }
-      }))]
+      }), use.names = F)]
 
     }
     else {
@@ -168,7 +168,7 @@ as.cpdag.bn <- function(x, ...){
 #' @S3method as.cpdag bn.list
 #' @method as.cpdag bn.list
 as.cpdag.bn.list <- function(x, ...){
-  stopifnot(class(x) == "bn.list")
+  stopifnot("bn.list" %in% class(x))
   
   res <- lapply(x, as.cpdag)
   class(res) <- "parental.list"
