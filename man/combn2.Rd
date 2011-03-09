@@ -5,7 +5,11 @@
 \description{(Fast, simple) Generate All Combinations of n Elements, Taken m at a Time}
 \details{A fast, simple version of \code{\link[utils]{combn}}.
 
-ALSO NOTE. The output is SORTED!}
+ALSO NOTE. The output is SORTED!
+
+If \code{x} is of length 0, then a blank list \code{list()} is returned,
+unless \code{required} is of length great than 0, in which case,
+list(required) is returned.}
 \value{A list of the combinations}
 \arguments{\item{x}{The set of elements from which to choose. Unlike \code{combn}, 
 if this is a single integer, only this single integer is used; 
