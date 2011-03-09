@@ -163,14 +163,29 @@ as.cpdag.bn <- function(x, ...){
 #' Completed Partially Directed Acyclic Graph (CPDAG).
 #'
 #' @param x An object of class bn.list
+#' @param verbose Should a progress bar be shown?
 #' @param ... Further arguments (unused)
 #' @return A parental.list containing a list of CPDAGs of class CPDAG.
 #' @S3method as.cpdag bn.list
 #' @method as.cpdag bn.list
-as.cpdag.bn.list <- function(x, ...){
+as.cpdag.bn.list <- function(x, verbose = T, ...){
   stopifnot("bn.list" %in% class(x))
   
-  res <- lapply(x, as.cpdag)
+  len <- length(x)
+  res <- vector("list", length = len)
+  if (verbose){
+    progress <- create_progress_bar("text")
+    progress$init(len)
+  }
+  i <- 1
+  while (i <= len){
+    if (verbose){
+      progress$step()
+    }
+    res[[i]] <- as.cpdag(x[[i]])
+    i <- i + 1
+  }
+  
   class(res) <- "parental.list"
   res
 }
