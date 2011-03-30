@@ -8,8 +8,12 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-context("Slow Spaces")
+context("Plots")
 
-test_that("enumerateBNSpace", {
-  expect_that(length(enumerateBNSpace(4)), is_identical_to(543L))
+test_that("Basic", {
+  
+  x <- bn(one = integer(0), two = 1, `abc\ndef` = 2, `lllllllll` = c(1,3))
+  barchart(x)
+  
+  
 })
