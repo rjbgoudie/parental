@@ -1,0 +1,19 @@
+citHeader("To cite the package 'parental' please use:")
+
+citEntry(entry="Manual",
+         title = "parental: Light-weight graph package",
+         author = personList(as.person("Robert J. B. Goudie")), 
+         year         = 2008,
+         note         = paste("Version 1.1. Project home page at http://github.com/rbtgde/parental"),
+         address      = "Warwick, UK",
+         url          = "http://github.com/rbtgde/parental",
+         
+         textVersion = 
+         paste("Robert J. B. Goudie (2008) ", 
+               "parental: A Package for structural inference of Bayesian networks. ",
+               "Version 1.1. Project home page at http://github.com/rbtgde/parental ",
+               "URL http://github.com/rbtgde/parental",
+               sep="")
+         )
+
+citFooter("Please cite 'parental' it in all papers where it is used.")
