@@ -11,9 +11,108 @@
 context("Spaces")
 
 test_that("enumerateBNSpace", {
-  expect_that(length(enumerateBNSpace(1)), is_identical_to(1L))
-  expect_that(length(enumerateBNSpace(2)), is_identical_to(3L))
-  expect_that(length(enumerateBNSpace(3)), is_identical_to(25L))
+  bn1 <- enumerateBNSpace(1)
+  bn2 <- enumerateBNSpace(2)
+  bn3 <- enumerateBNSpace(3)
+  
+  expect_that(length(bn1), is_identical_to(1L))
+  expect_that(length(bn2), is_identical_to(3L))
+  expect_that(length(bn3), is_identical_to(25L))
+  
+  bn1expect <- bn.list(bn(integer(0)))
+  expect_that(bn1, is_identical_to(bn1expect))
+  
+  bn2expect <- bn.list(bn(integer(0), 1),
+                       bn(2, integer(0)),
+                       bn(integer(0), integer(0)))
+  expect_that(bn2, is_identical_to(bn2expect))
+  
+  bn3expect <- bn.list(
+    bn(integer(0), integer(0), integer(0)),
+    bn(integer(0), integer(0),          1),
+    bn(integer(0), integer(0),          2), # 3
+    bn(integer(0),          1, integer(0)),
+    bn(integer(0),          3, integer(0)),
+    bn(         2, integer(0), integer(0)), # 6
+    bn(         3, integer(0), integer(0)),
+    bn(integer(0),          1,          1),
+    bn(integer(0),          1,          2), # 9
+    bn(integer(0),          3,          1),
+    bn(         2, integer(0),          2),
+    bn(         2, integer(0),          1), # 12
+    bn(         3, integer(0),          2),
+    bn(         3,          3, integer(0)),
+    bn(         3,          1, integer(0)), # 15
+    bn(         2,          3, integer(0)),
+    bn(integer(0),    c(1, 3), integer(0)),
+    bn(integer(0), integer(0),    c(1, 2)), # 18
+    bn(   c(2, 3), integer(0), integer(0)),
+    bn(         3,    c(1, 3), integer(0)),
+    bn(integer(0),    c(1, 3),          1), # 21
+    bn(         2, integer(0),    c(1, 2)),
+    bn(integer(0),          1,    c(1, 2)),
+    bn(   c(2, 3),          3, integer(0)), # 24
+    bn(   c(2, 3), integer(0),          2)
+    )
+    
+  is.ok <- all(sapply(bn3, function(net){
+    any(sapply(bn3expect, identical, net))
+  }))
+  
+  expect_true(is.ok)
+})
+
+test_that("enumerateBNSpace - banned", {
+  bn2 <- enumerateBNSpace(2, banned = list(integer(0), 1))
+  bn3 <- enumerateBNSpace(3, banned = list(integer(0), 1, 2))
+  
+  bn2expect <- bn.list(bn(2, integer(0)),
+                       bn(integer(0), integer(0)))
+  expect_that(bn2, is_identical_to(bn2expect))
+  
+  bn3expect <- bn.list(
+    bn(integer(0), integer(0), integer(0)),
+    bn(integer(0), integer(0),          1),
+    bn(integer(0),          3, integer(0)),
+    bn(         2, integer(0), integer(0)), # 6
+    bn(         3, integer(0), integer(0)),
+    bn(integer(0),          3,          1),
+    bn(         2, integer(0),          1), # 12
+    bn(         3,          3, integer(0)),
+    bn(         2,          3, integer(0)),
+    bn(   c(2, 3), integer(0), integer(0)),
+    bn(   c(2, 3),          3, integer(0))
+    )
+    
+  is.ok <- all(sapply(bn3, function(net){
+    any(sapply(bn3expect, identical, net))
+  }))
+  
+  expect_true(is.ok)
+})
+
+test_that("enumerateBNSpace - banned 2", {
+  bn3 <- enumerateBNSpace(3, banned = list(integer(0), integer(0), c(1, 2)))
+  
+  bn3expect <- bn.list(
+    bn(integer(0), integer(0), integer(0)),
+    bn(integer(0),          1, integer(0)),
+    bn(integer(0),          3, integer(0)),
+    bn(         2, integer(0), integer(0)), # 6
+    bn(         3, integer(0), integer(0)),
+    bn(         3,          3, integer(0)),
+    bn(         3,          1, integer(0)), # 15
+    bn(         2,          3, integer(0)),
+    bn(integer(0),    c(1, 3), integer(0)),
+    bn(   c(2, 3), integer(0), integer(0)),
+    bn(         3,    c(1, 3), integer(0)),
+    bn(   c(2, 3),          3, integer(0))
+    )
+    
+  is.ok <- all(sapply(bn3, function(net){
+    any(sapply(bn3expect, identical, net))
+  }))
+  expect_true(is.ok)
 })
 
 test_that("enumerateBVSSpace", {
