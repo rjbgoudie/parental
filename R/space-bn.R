@@ -18,32 +18,43 @@
 #' @param n The number of nodes
 #' @param allowCyclic A logical indicating whether cyclic directed graphs
 #'   should be filtered out.
+#' @param banned A list of length \code{n}. Each component indicates which 
+#'   nodes cannot be parents of the corresponding node.
 #' @param multicore A logical specifying whether to use 
 #'   \link[multicore]{mclapply}.
 #' @return A \code{parental.list} including ALL the directed acyclic 
 #'   graphs with \code{n} nodes.
 #' @export
-enumerateBNSpace <- function(n, allowCyclic = F, multicore = F){
+enumerateBNSpace <- function(n,
+                             allowCyclic = F,
+                             banned = vector("list", n),
+                             multicore = F){
   myapply <- function(...) lapply(...)
   if (multicore){
     require(multicore)
     myapply <- function(...) mclapply(..., mc.cores = 10)
   }
+  stopifnot(inherits(n, c("numeric", "integer")),
+            is.logical(allowCyclic),
+            length(allowCyclic) == 1,
+            length(banned)      == n,
+            is.logical(multicore),
+            length(multicore)   == 1)
   
-  combin <- function(element, n){
-    unlist(
-      lapply(seq_len(n-1), function(i){
-        combn(
-          setdiff(seq_len(n), element), # all elements except
-                                        # the current element
-          i, 
-          simplify = F
-        )
-      }),
-      recursive = F)
+  combin <- function(element, n, banned){
+    nBanned <- length(banned)
+    out <- lapply(seq_len(n - 1 - nBanned), function(i){
+      banned <- c(banned, element)
+      x <- setdiff(seq_len(n), banned) # all elements except banned/required
+                                        # elements and the current element
+      combn3(x, i)
+    })
+    unlist(out, recursive = F)
   }
   
-  options <- lapply(seq_len(n), function(i) combin(i, n))
+  options <- lapply(seq_len(n), function(i){
+    combin(i, n, banned[[i]])
+  })
   
   # plus 1 for no parents
   choices <- expand.grid(lapply(options, function(option){
