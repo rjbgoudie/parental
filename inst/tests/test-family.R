@@ -22,9 +22,9 @@ test_that("enumerateBNSpace", {
   bn1expect <- bn.list(bn(integer(0)))
   expect_that(bn1, is_identical_to(bn1expect))
   
-  bn2expect <- bn.list(bn(integer(0), 1),
+  bn2expect <- bn.list(bn(integer(0), integer(0)),
                        bn(2, integer(0)),
-                       bn(integer(0), integer(0)))
+                       bn(integer(0), 1))
   expect_that(bn2, is_identical_to(bn2expect))
   
   bn3expect <- bn.list(
@@ -55,19 +55,19 @@ test_that("enumerateBNSpace", {
     bn(   c(2, 3), integer(0),          2)
     )
     
+  len.ok <- length(bn3) == length(bn3expect)
   is.ok <- all(sapply(bn3, function(net){
     any(sapply(bn3expect, identical, net))
   }))
-  
-  expect_true(is.ok)
+  expect_true(is.ok & len.ok)
 })
 
 test_that("enumerateBNSpace - banned", {
   bn2 <- enumerateBNSpace(2, banned = list(integer(0), 1))
   bn3 <- enumerateBNSpace(3, banned = list(integer(0), 1, 2))
   
-  bn2expect <- bn.list(bn(2, integer(0)),
-                       bn(integer(0), integer(0)))
+  bn2expect <- bn.list(bn(integer(0), integer(0)),
+                       bn(2, integer(0)))
   expect_that(bn2, is_identical_to(bn2expect))
   
   bn3expect <- bn.list(
@@ -84,11 +84,11 @@ test_that("enumerateBNSpace - banned", {
     bn(   c(2, 3),          3, integer(0))
     )
     
+  len.ok <- length(bn3) == length(bn3expect)
   is.ok <- all(sapply(bn3, function(net){
     any(sapply(bn3expect, identical, net))
   }))
-  
-  expect_true(is.ok)
+  expect_true(is.ok & len.ok)
 })
 
 test_that("enumerateBNSpace - banned 2", {
@@ -109,11 +109,75 @@ test_that("enumerateBNSpace - banned 2", {
     bn(   c(2, 3),          3, integer(0))
     )
     
+  len.ok <- length(bn3) == length(bn3expect)
   is.ok <- all(sapply(bn3, function(net){
     any(sapply(bn3expect, identical, net))
   }))
-  expect_true(is.ok)
+  expect_true(is.ok & len.ok)
 })
+
+test_that("enumerateBNSpace - required 1", {
+  bn3 <- enumerateBNSpace(3, required = list(integer(0), integer(0), c(1, 2)))
+
+  bn3expect <- bn.list(
+    bn(integer(0), integer(0),    c(1, 2)),
+    bn(         2, integer(0),    c(1, 2)),
+    bn(integer(0),          1,    c(1, 2)))
+    
+    len.ok <- length(bn3) == length(bn3expect)
+    is.ok <- all(sapply(bn3, function(net){
+      any(sapply(bn3expect, identical, net))
+    }))
+    expect_true(is.ok & len.ok)
+})
+
+test_that("enumerateBNSpace - required 2", {
+  bn3 <- enumerateBNSpace(3, required = list(integer(0), 1, integer(0)))
+
+  bn3expect <- bn.list(
+    bn(integer(0),          1, integer(0)),
+    bn(integer(0),          1,          1),
+    bn(integer(0),          1,          2), # 9
+    bn(         3,          1, integer(0)), # 15
+    bn(integer(0),    c(1, 3), integer(0)),
+    bn(         3,    c(1, 3), integer(0)),
+    bn(integer(0),    c(1, 3),          1), # 21
+    bn(integer(0),          1,    c(1, 2))
+    )
+  
+  len.ok <- length(bn3) == length(bn3expect)
+  is.ok <- all(sapply(bn3, function(net){
+    any(sapply(bn3expect, identical, net))
+  }))
+  expect_true(is.ok & len.ok)
+})
+
+# test_that("enumerateBNSpace - required 2", {
+#   banned <- list(c(2,3,4), c(1,3,4), integer(0), 3)
+#   required <- list(integer(0), integer(0), 4, integer(0))
+#   bn3 <- enumerateBNSpace(4,
+#                       banned = banned,
+#                       required = required)
+# 
+#   bn3expect <- bn.list(
+#     bn(integer(0),          1, integer(0)),
+#     bn(integer(0),          1,          1),
+#     bn(integer(0),          1,          2), # 9
+#     bn(         3,          1, integer(0)), # 15
+#     bn(integer(0),    c(1, 3), integer(0)),
+#     bn(         3,    c(1, 3), integer(0)),
+#     bn(integer(0),    c(1, 3),          1), # 21
+#     bn(integer(0),          1,    c(1, 2))
+#     )
+#   
+#   len.ok <- length(bn3) == length(bn3expect)
+#   is.ok <- all(sapply(bn3, function(net){
+#     any(sapply(bn3expect, identical, net))
+#   }))
+#   expect_true(is.ok & len.ok)
+# })
+
+
 
 test_that("enumerateBVSSpace", {
   expect_equal(length(enumerateBVSSpace(2, response = 2)), 2)
