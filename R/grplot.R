@@ -438,7 +438,7 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
                            grobNodeSize,
                            offset,
                            widthMultiplier = 2,
-                           heightMultipler = 1,
+                           heightMultipler = 3,
                            ...){
   if (missing(edgecol)){
     edgecol <- standard.theme(color = T)$col[[1]]
