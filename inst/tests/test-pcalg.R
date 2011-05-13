@@ -20,7 +20,7 @@ test_that("toAdjacencyMatrix", {
                            "parental", "inst", "test-data", 
                            "pc-boot-1.RData")
   } else {
-    testfile <- file.path("~", "library",
+    testfile <- file.path("~", "public",
                              "parental", "inst", "test-data", 
                              "pc-boot-1.RData")
   }
