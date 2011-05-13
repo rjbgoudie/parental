@@ -7,7 +7,7 @@ Maintainer: R.J.B Goudie <rjbgoudie@gmail.com>
 Description: Data structures and tools for handling and manipulating
     graphs, Bayesian Networks, and Bayesian Variable Selection graphs.
 URL: localhost
-Imports: base, lattice, grid, utils.rjbg, network
+Imports: base, lattice, grid, network
 Depends: R (>= 2.9)
 Suggests: pcalg, graph, bnlearn, multicore, graphicsQC
 License: GPL-3
