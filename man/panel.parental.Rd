@@ -3,7 +3,7 @@
 \title{Panel function for ploting a parental graph...}
 \usage{panel.parental(x, y, parents, layout, col, alpha, edgecol, edgealpha,
     islist=F, rawdata, grobNode, grobNodeSize, offset,
-    widthMultiplier=2, heightMultipler=1, ...)}
+    widthMultiplier=2, heightMultipler=3, ...)}
 \description{Panel function for ploting a parental graph}
 \details{Panel function for grplot.}
 \value{A panel}
