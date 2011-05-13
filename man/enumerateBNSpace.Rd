@@ -2,7 +2,7 @@
 \alias{enumerateBNSpace}
 \title{Enumerate the space of BNs...}
 \usage{enumerateBNSpace(n, allowCyclic=F, banned=vector("list", n),
-    multicore=F)}
+    required=vector("list", n), multicore=F)}
 \description{Enumerate the space of BNs}
 \details{Enumerate (ie make a list of, not just count) the entire space of 
 Bayesian Networks models, on a given number of nodes.}
@@ -13,5 +13,7 @@ graphs with \code{n} nodes.}
 should be filtered out.}
 \item{banned}{A list of length \code{n}. Each component indicates which 
 nodes cannot be parents of the corresponding node.}
+\item{required}{A list of length \code{n}. Each component indicates
+which nodes must be includes as parents of the corresponding node.}
 \item{multicore}{A logical specifying whether to use 
 \link[multicore]{mclapply}.}}

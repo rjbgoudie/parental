@@ -225,7 +225,8 @@ combn3 <- function(x, m, required = integer(0)){
   res <- x[res]
   dim(res) <- c(NSEL, NSET)
   if (!missing(required) && length(required) > 0){
-    res <- rbind(res, rep(required, ncol(res)))
+    required <- matrix(required, nrow = length(required), ncol = ncol(res))
+    res <- rbind(res, required)
     res <- apply(res, 2, sort.int, method = "quick")
   }
   as.list(as.data.frame(res, optional = T, row.names = NULL))
