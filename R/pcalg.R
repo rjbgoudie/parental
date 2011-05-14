@@ -184,18 +184,18 @@ as.cpdag.bn.list <- function(x, verbose = T, ...){
   len <- length(x)
   res <- vector("list", length = len)
   if (verbose){
-    progress <- create_progress_bar("text")
-    progress$init(len)
+    progress <- txtProgressBar(max = len, style = 3)
+    setTxtProgressBar(progress, 0)
   }
   i <- 1
   while (i <= len){
     if (verbose){
-      progress$step()
+      setTxtProgressBar(progress, i)
     }
     res[[i]] <- as.cpdag(x[[i]])
     i <- i + 1
   }
-  
+  close(progress)
   class(res) <- "parental.list"
   res
 }
