@@ -15,15 +15,9 @@ test_that("toAdjacencyMatrix", {
   require(pcalg)
   sink()
   
-  if (R.version$os == "darwin9.8.0"){
-    testfile <- file.path("", "Volumes", "Buster", "library",
-                           "parental", "inst", "test-data", 
-                           "pc-boot-1.RData")
-  } else {
-    testfile <- file.path("~", "public",
-                             "parental", "inst", "test-data", 
-                             "pc-boot-1.RData")
-  }
+  testfile <- system.file("tests", "data", "pc-boot-1.RData",
+                          package = "parental")
+
   load(testfile)
   expect_that(
     as.parental(pc.fit), 
