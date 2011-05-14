@@ -15,4 +15,4 @@ LazyData: true
 Collate: 'bnlearn.R' 'class.R' 'convert.R' 'grplot.R' 'is.element2.R'
     'pcalg.R' 'pdag-slow.R' 'pdag.R' 'plots.R' 'pltabulate.R'
     'properties.R' 'sample.R' 'space-bn.R' 'space-bvs.R' 'space-conf.R'
-    'utils.R'
+    'useOuterStrips2.R' 'utils.R'
