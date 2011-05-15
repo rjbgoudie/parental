@@ -14,7 +14,7 @@
 #' modifying network/graph objects. The emphasis is on representing 
 #' Bayesian Networks, so the focus is on Directed Acyclic Graphs.
 #' 
-#' @import lattice grid network
+#' @import lattice grid
 #' @docType package
 #' @name package-parental
 #' @aliases package-parental
