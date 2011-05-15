@@ -1,7 +1,7 @@
 export(bnlearn2parental)
 export(parental2bnlearn)
 export(add.undirected.edge)
-import(lattice, grid, network)
+import(lattice, grid)
 export(parental)
 export(bn)
 export(bvs)

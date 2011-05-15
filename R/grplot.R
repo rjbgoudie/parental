@@ -654,79 +654,83 @@ grplot.parental <- function(parents,
                             hideIsolates = F,
                             layout,
                             ...){
-  stopifnot("parental" %in% class(parents))
-  ocall <- sys.call(sys.parent())
-  ccall <- match.call()
+  if (require(network)){
+    stopifnot("parental" %in% class(parents))
+    ocall <- sys.call(sys.parent())
+    ccall <- match.call()
   
-  ccall$panel <- panel.parental
-  ccall$prepanel <- prepanel.parental
-  if (is.null(names(parents))){
-    names(parents) <- as.character(seq_along(parents))
+    ccall$panel <- panel.parental
+    ccall$prepanel <- prepanel.parental
+    if (is.null(names(parents))){
+      names(parents) <- as.character(seq_along(parents))
+    }
+    ccall$parents <- parents
+  
+    adj <- as.adjacency(parents)
+    numberOfNodes <- length(parents)
+  
+    isolates <- which(rowSums(adj) == 0 & colSums(adj) == 0)
+    if (hideIsolates){
+      adj <- adj[-isolates, -isolates]
+    }
+  
+    if (missing(layout)){
+      net <- network(adj)
+      layout <- network.layout.fruchtermanreingold(net, layout.par)
+      layout <- as.data.frame(layout)
+      colnames(layout) <- c("xcoord", "ycoord")
+    }
+  
+    if (hideIsolates){
+      newlayout <- matrix(NA, nrow = numberOfNodes, ncol = 2)
+      temp <- setdiff(seq_len(numberOfNodes), isolates)
+      newlayout[temp, ] <- as.matrix(layout)
+      range <- range(layout$xcoord)
+      s <- seq(from = range[1], to = range[2], length = length(isolates))
+      x <- c(s, rep(min(layout$ycoord), length(isolates)))
+      newlayout[isolates, ] <- matrix(x,
+                                      byrow = T,
+                                      nrow  = length(isolates),
+                                      ncol  = 2)
+      layout <- newlayout
+    }
+  
+    inputs <- layout
+    form <- ycoord ~ xcoord
+    ccall$islist <- F
+  
+    if (length(col) < numberOfNodes){
+      col <- rep(col, length.out = numberOfNodes)
+    }
+  
+    ccall$col <- col
+    ccall$alpha <- alpha
+    if (!missing(edgecol)){
+      ccall$edgecol <- edgecol
+    }
+    ccall$edgealpha <- edgealpha
+  
+    # axs means no extension of the xlim values from the prepanel function is
+    # added. See Lattice (Sarkar) book page 141.
+    ccall$scales <- list(draw = F,
+                         axs = "i" # no padding on the axis
+                         )
+    ccall$aspect <- "fill"
+    ccall$as.table <- T
+    ccall$xlab <- list(NULL)
+    ccall$ylab <- list(NULL)
+    ccall$x <- form
+    ccall$data <- inputs
+    ccall$grobNodeSize <- grobNodeSize
+    ccall$grobNode <- grobNode
+    ccall$offset <- offset
+    ccall[[1]] <- quote(lattice::xyplot)
+    ans <- eval(ccall, parent.frame())
+    ans$call <- ocall
+    ans
+  } else {
+    cat("Package 'network' required for plotting")
   }
-  ccall$parents <- parents
-  
-  adj <- as.adjacency(parents)
-  numberOfNodes <- length(parents)
-  
-  isolates <- which(rowSums(adj) == 0 & colSums(adj) == 0)
-  if (hideIsolates){
-    adj <- adj[-isolates, -isolates]
-  }
-  
-  if (missing(layout)){
-    net <- network(adj)
-    layout <- network.layout.fruchtermanreingold(net, layout.par)
-    layout <- as.data.frame(layout)
-    colnames(layout) <- c("xcoord", "ycoord")
-  }
-  
-  if (hideIsolates){
-    newlayout <- matrix(NA, nrow = numberOfNodes, ncol = 2)
-    temp <- setdiff(seq_len(numberOfNodes), isolates)
-    newlayout[temp, ] <- as.matrix(layout)
-    range <- range(layout$xcoord)
-    s <- seq(from = range[1], to = range[2], length = length(isolates))
-    x <- c(s, rep(min(layout$ycoord), length(isolates)))
-    newlayout[isolates, ] <- matrix(x,
-                                    byrow = T,
-                                    nrow  = length(isolates),
-                                    ncol  = 2)
-    layout <- newlayout
-  }
-  
-  inputs <- layout
-  form <- ycoord ~ xcoord
-  ccall$islist <- F
-  
-  if (length(col) < numberOfNodes){
-    col <- rep(col, length.out = numberOfNodes)
-  }
-  
-  ccall$col <- col
-  ccall$alpha <- alpha
-  if (!missing(edgecol)){
-    ccall$edgecol <- edgecol
-  }
-  ccall$edgealpha <- edgealpha
-  
-  # axs means no extension of the xlim values from the prepanel function is
-  # added. See Lattice (Sarkar) book page 141.
-  ccall$scales <- list(draw = F,
-                       axs = "i" # no padding on the axis
-                       )
-  ccall$aspect <- "fill"
-  ccall$as.table <- T
-  ccall$xlab <- list(NULL)
-  ccall$ylab <- list(NULL)
-  ccall$x <- form
-  ccall$data <- inputs
-  ccall$grobNodeSize <- grobNodeSize
-  ccall$grobNode <- grobNode
-  ccall$offset <- offset
-  ccall[[1]] <- quote(lattice::xyplot)
-  ans <- eval(ccall, parent.frame())
-  ans$call <- ocall
-  ans
 }
 
 #' Plot a 'parental list'.
@@ -764,72 +768,75 @@ grplot.parental.list <- function(parentallist,
                                  grobNode     = grobNodeName, 
                                  grobNodeSize = grobNodeNameSize,
                                  offset       = 0.25,
-                                 ...) 
-{
-  ocall <- sys.call(sys.parent())
-  ocall[[1]] <- quote(hexbinplot)
-  ccall <- match.call()
+                                 ...){
+  if (require(network)){
+    ocall <- sys.call(sys.parent())
+    ocall[[1]] <- quote(hexbinplot)
+    ccall <- match.call()
   
-  ccall$panel <- panel.parental
-  ccall$prepanel <- prepanel.parental
+    ccall$panel <- panel.parental
+    ccall$prepanel <- prepanel.parental
   
-  for (i in seq_along(parentallist)){
-    if (is.null(names(parentallist[[i]]))){
-      names(parentallist[[i]]) <- as.character(seq_along(parentallist[[i]]))
+    for (i in seq_along(parentallist)){
+      if (is.null(names(parentallist[[i]]))){
+        names(parentallist[[i]]) <- as.character(seq_along(parentallist[[i]]))
+      }
     }
+    ccall$parents <- parentallist
+  
+    numberOfGraphs <- length(parentallist)
+    numberOfNodes <- length(parentallist[[1]])
+  
+    adj <- as.adjacency(lpunion(parentallist))
+    net <- network(adj)
+    layout <- network.layout.fruchtermanreingold(net, layout.par)
+    layout <- as.data.frame(layout)
+    colnames(layout) <- c("xcoord", "ycoord")
+  
+    torbind <- lapply(seq_len(numberOfGraphs), function(i) layout)
+    layouts <- do.call("rbind", torbind)
+    graphIndicator <- gl(n      = numberOfGraphs,
+                         k      = numberOfNodes,
+                         length = numberOfGraphs * numberOfNodes)
+    if (is.null(names(parentallist))){
+      names(parentallist) <- seq_along(parentallist)
+    }
+  
+    levels(graphIndicator) <- names(parentallist)
+    inputs <- cbind(layouts, whichgraph = graphIndicator)
+    form <- xcoord ~ ycoord | whichgraph
+    ccall$islist <- T
+  
+    if (missing(edgecol)){
+      edgecol <- matrix(1, ncol = numberOfNodes, nrow = numberOfNodes)
+    }
+    if (missing(edgealpha)){
+      edgealpha <- matrix(1, ncol = numberOfNodes, nrow = numberOfNodes)
+    }
+    if (length(col) < numberOfNodes){
+      col <- rep(col, length.out = numberOfNodes)
+    }
+  
+    ccall$col <- col
+    ccall$alpha <- alpha
+    ccall$edgecol <- edgecol
+    ccall$edgealpha <- edgealpha
+    ccall$scales <- list(draw = F)
+    ccall$as.table <- T
+    ccall$xlab <- list(NULL)
+    ccall$ylab <- list(NULL)
+    ccall$grobNodeSize <- grobNodeSize
+    ccall$grobNode <- grobNode
+    ccall$offset <- offset
+    ccall$x <- form
+    ccall$data <- inputs
+    ccall[[1]] <- quote(lattice::xyplot)
+    ans <- eval(ccall, parent.frame())
+    ans$call <- ocall
+    ans
+  } else {
+    cat("Package 'network' required for plotting")
   }
-  ccall$parents <- parentallist
-  
-  numberOfGraphs <- length(parentallist)
-  numberOfNodes <- length(parentallist[[1]])
-  
-  adj <- as.adjacency(lpunion(parentallist))
-  net <- network(adj)
-  layout <- network.layout.fruchtermanreingold(net, layout.par)
-  layout <- as.data.frame(layout)
-  colnames(layout) <- c("xcoord", "ycoord")
-  
-  torbind <- lapply(seq_len(numberOfGraphs), function(i) layout)
-  layouts <- do.call("rbind", torbind)
-  graphIndicator <- gl(n      = numberOfGraphs,
-                       k      = numberOfNodes,
-                       length = numberOfGraphs * numberOfNodes)
-  if (is.null(names(parentallist))){
-    names(parentallist) <- seq_along(parentallist)
-  }
-  
-  levels(graphIndicator) <- names(parentallist)
-  inputs <- cbind(layouts, whichgraph = graphIndicator)
-  form <- xcoord ~ ycoord | whichgraph
-  ccall$islist <- T
-  
-  if (missing(edgecol)){
-    edgecol <- matrix(1, ncol = numberOfNodes, nrow = numberOfNodes)
-  }
-  if (missing(edgealpha)){
-    edgealpha <- matrix(1, ncol = numberOfNodes, nrow = numberOfNodes)
-  }
-  if (length(col) < numberOfNodes){
-    col <- rep(col, length.out = numberOfNodes)
-  }
-  
-  ccall$col <- col
-  ccall$alpha <- alpha
-  ccall$edgecol <- edgecol
-  ccall$edgealpha <- edgealpha
-  ccall$scales <- list(draw = F)
-  ccall$as.table <- T
-  ccall$xlab <- list(NULL)
-  ccall$ylab <- list(NULL)
-  ccall$grobNodeSize <- grobNodeSize
-  ccall$grobNode <- grobNode
-  ccall$offset <- offset
-  ccall$x <- form
-  ccall$data <- inputs
-  ccall[[1]] <- quote(lattice::xyplot)
-  ans <- eval(ccall, parent.frame())
-  ans$call <- ocall
-  ans
 }
 
 
