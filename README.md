@@ -22,6 +22,13 @@ x <- as.bn(adj)
 grplot(x)
 ```
 
+A `bn` object can be converted to an adjacency matrix
+
+``` r
+x <- bn(c(2), c(), c(1, 2))
+as.adjacency(x)
+```
+
 Properties of a `bn`
 
 ``` r
@@ -29,6 +36,25 @@ x <- bn(c(2), c(), c(1, 2))
 nNodes(x)
 nEdges(x)
 indegrees(x)
+checkAcyclic(x)
+topologicallyOrder(x)
+barchart(x)
+```
+
+Manipulating `bn` objects
+
+``` r
+x <- bn(c(2), c(), c(1, 2))
+```
+
+Fast, but less intuitive manipulation of `bn` objects
+
+``` r
+x <- bn(c(2), c(), c(1, 2))
+x[[1]] <- c()
+x
+x[[2]] <- 1
+x
 ```
 
 Sample a BN
@@ -50,6 +76,19 @@ Enumerate all the Bayesian Networks
 enumerateBNSpace(3)
 ```
 
+Tools for handling "routes matrices"
+
+``` r
+x <- bn(c(2), c(), c(1, 2))
+routes(x)
+```
+
+Simulate from a `bn`
+
+``` r
+x <- bn(c(2), c(), c(1, 2))
+simulate.bn(x)
+```
 
 Installation
 ------------
