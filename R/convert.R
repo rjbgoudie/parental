@@ -8,35 +8,68 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' ...
+#' Convert an object to an adjacency matrix
 #' 
-#' ....
-#' @param x ...
-#' @param ... ...
+#' A generic for converting objects to adjacency matrices.
 #' 
+#' An adjacency matrix is a matrix A of dimension n x n, with A[i, j] = 1 if 
+#' an edge exist between nodes i and j, where n is the number of nodes.
+#' 
+#' @param x An object
+#' @param ... Further arguments, passed to method
+#' @seealso \code{\link{as.adjacency.parental}}
 #' @export
+#' @examples
+#' x <- parental(c(), c(1), c(2))
+#' as.adjacency(x)
 as.adjacency <- function(x, ...) {
   UseMethod("as.adjacency")
 }
 
-#' ...
+#' Convert an object to a bn
 #' 
-#' ....
-#' @param x ...
-#' @param ... ...
+#' A generic function that converts objects to \code{bn} objects
+#' 
+#' @param x An object
+#' @param ... Further arguments, passed to method
 #' 
 #' @export
+#' @seealso \code{\link{as.bn.matrix}}, \code{\link{as.bn.character}}, 
+#'   \code{\link{as.bn.graphNEL}}
+#' @examples
+#' edgelist <- matrix(c(c(1,2), c(2, 3)), byrow = T, nrow = 2, ncol = 2)
+#' colnames(edgelist) <- c("row", "col")
+#' as.bn(edgelist, type = "edgelist", n = 2)
+#' 
+#' x <- "[][1][1,2][3]"
+#' as.bn(x, pretty = T)
+#' 
+#' if (require(graph)){
+#'   set.seed(123)
+#'   c1 <- c(1, 1, 2, 4)
+#'   names(c1) <- as.character(1:4)
+#'   g1 <- randomNodeGraph(c1)
+#'   as.parental(g1)
+#' }
 as.bn <- function(x, ...) {
   UseMethod("as.bn")
 }
 
-#' ...
+#' Convert an object to a graph
 #' 
-#' ....
-#' @param x ...
-#' @param ... ...
+#' graphNEL objects are from bioconductor package 'graph'. See 
+#' \link[graph]{graphNEL-class}.
 #' 
+#' @param x An object
+#' @param ... Further arguments, passed to method
+#' @seealso \code{\link{as.graph.parental}}
 #' @export
+#' @examples
+#' if (require(graph)){
+#'   x <- bn(integer(0), 1, 2)
+#'   y <- as.graph(x)
+#'   edges(y)
+#' }
 as.graph <- function(x, ...){
   UseMethod("as.graph")
 }
@@ -44,10 +77,14 @@ as.graph <- function(x, ...){
 #' Convert a matrix to a 'bn'. See for 'as.parental.matrix' for details
 #' 
 #' @param x A matrix, as described in as.parental.matrix()
-#' @param ... unused
+#' @param ... Passed to as.parental.matrix
 #' @return An object of class 'bn'
 #' @S3method as.bn matrix
 #' @method as.bn matrix
+#' @examples
+#' edgelist <- matrix(c(c(1,2), c(2, 3)), byrow = T, nrow = 2, ncol = 2)
+#' colnames(edgelist) <- c("row", "col")
+#' as.bn(edgelist, type = "edgelist", n = 2)
 as.bn.matrix <- function(x, ...){
   class(x) <- "matrix"
   out <- as.parental(x, ...)
@@ -60,8 +97,9 @@ as.bn.matrix <- function(x, ...){
   }
 }
 
-#' Convert a object of class 'parental' to an adjacency matrix. An 
-#' adjacency matrix is a matrix A of dimension n x n, with A[i, j] = 1 if 
+#' Convert a object of class 'parental' to an adjacency matrix.
+#' 
+#' An adjacency matrix is a matrix A of dimension n x n, with A[i, j] = 1 if 
 #' an edge exist between nodes i and j, where n is the number of nodes.
 #' 
 #' @param x A object of class 'parental'.
@@ -69,6 +107,9 @@ as.bn.matrix <- function(x, ...){
 #' @return An adjacency matrix.
 #' @S3method as.adjacency parental
 #' @method as.adjacency parental
+#' @examples
+#' x <- parental(c(), c(1), c(2))
+#' as.adjacency(x)
 as.adjacency.parental <- function(x, ...){
   stopifnot("parental" %in% class(x))
   n <- nNodes(x)
@@ -93,26 +134,59 @@ as.adjacency.parental <- function(x, ...){
 
 #' Convert an object to a parental object
 #' 
-#' A generic
+#' A generic function for converting objects to \code{\link{parental}} 
+#' objects.
 #' 
 #' @param x An object
 #' @param ... Further arguments passed to method
-#' 
+#' @seealso \code{\link{as.parental.bn}}, \code{\link{as.parental.matrix}},
+#'   \code{\link{as.parental.character}}, \code{\link{as.parental.graphNEL}}.
 #' @export
+#' @examples
+#' x <- bn(c(), c(1), c(1, 2))
+#' as.parental(x)
+#' 
+#' adjmat <- matrix(sample(c(0, 1), 100, rep = T), 10, 10)
+#' diag(adjmat) <- 0
+#' as.parental(adjmat)
+#' 
+#' edgelist <- matrix(c(1, 2), nrow = 1, ncol = 2)
+#' colnames(edgelist) <- c("row", "col")
+#' as.parental(edgelist, type = "edgelist", n = 2)
+#' 
+#' x <- "[3][1][2][1][1,3]"
+#' as.parental(x, pretty = T)
+#' 
+#' x <- "3,1,2,1,c(1,3)"
+#' as.parental(x)
+#' 
+#' if (require(graph)){
+#'   set.seed(123)
+#'   c1 <- c(1, 1, 2, 4)
+#'   names(c1) <- as.character(1:4)
+#'   g1 <- randomNodeGraph(c1)
+#'   as.parental(g1)
+#' }
 as.parental <- function(x, ...){
   UseMethod("as.parental")
 }
 
 #' Convert a character string to a parental
 #' 
-#' Format required is one of two. Either standard or pretty.
+#' Format required is one of two. Either standard or pretty. See examples.
 #'
-#' @param x An object
+#' @param x An character object
 #' @param pretty A logical indicating whether the supplied object is pretty
 #' @param ... Further arguments (unused)
-#' @return ....
+#' @return A \code{parental} object.
 #' @S3method as.parental character
 #' @method as.parental character
+#' @examples
+#' x <- "[3][1][2][1][1,3]"
+#' as.parental(x, pretty = T)
+#' 
+#' x <- "3,1,2,1,c(1,3)"
+#' as.parental(x)
 as.parental.character <- function(x, pretty = F, ...){
   if (pretty){
     # handle nodes with no parents
@@ -150,16 +224,19 @@ as.parental.character <- function(x, pretty = F, ...){
   out
 }
 
-#' xxxx
+#' Convert a character vector to a bn
 #' 
-#' ....
+#' Format required is one of two. Either standard or pretty. See examples.
 #'
-#' @param x ....
-#' @param checkAcyclic ...
-#' @param ... ... 
-#' @return ....
+#' @param x A character object
+#' @param checkAcyclic Should the bn be checked for cycles? A logical.
+#' @param ... Further arguments (unused)
+#' @return A object of class \code{bn}.
 #' @S3method as.bn character
 #' @method as.bn character
+#' @examples
+#' x <- "[][1][1,2][3]"
+#' as.bn(x, pretty = T)
 as.bn.character <- function(x, checkAcyclic = T, ...){
   out <- as.parental(x, ...)
   if ("parental.list" %in% class(out)){
@@ -210,6 +287,14 @@ as.bn.character <- function(x, checkAcyclic = T, ...){
 #' @return An object of class 'parental'.
 #' @S3method as.parental matrix
 #' @method as.parental matrix
+#' @examples
+#' adjmat <- matrix(sample(c(0, 1), 100, rep = T), 10, 10)
+#' diag(adjmat) <- 0
+#' as.parental(adjmat)
+#' 
+#' edgelist <- matrix(c(1, 2), nrow = 1, ncol = 2)
+#' colnames(edgelist) <- c("row", "col")
+#' as.parental(edgelist, type = "edgelist", n = 2)
 as.parental.matrix <- function(x, type = "adjacency", n, ...){
   if (type == "adjacency"){
     if (class(x) != "matrix"){
@@ -262,6 +347,9 @@ as.parental.matrix <- function(x, type = "adjacency", n, ...){
 #' @return The object 'x', but of class 'parental'
 #' @S3method as.parental bn
 #' @method as.parental bn
+#' @examples
+#' x <- bn(c(), c(1), c(1, 2))
+#' as.parental(x)
 as.parental.bn <- function(x, ...){
   class(x) <- "parental"
   x
@@ -271,16 +359,22 @@ as.parental.bn <- function(x, ...){
 # Pretty printing of integer sequences c(1L,2L,3L)
 # goes to
 # 1:3
-#' xxxx
+#' Convert a parental object to a character vector
 #' 
-#' ....
+#' Converts a parental object to a character representation.
 #'
-#' @param x ....
-#' @param pretty ...
+#' @param x A character vector
+#' @param pretty A logical, which determines the format of the output
 #' @param ... Further arguments (unused)
-#' @return ....
+#' @return An object of class "parental"
 #' @S3method as.character parental
 #' @method as.character parental
+#' @examples
+#' x <- parental(c(3), c(1), c(1, 2))
+#' as.character(x)
+#' 
+#' x <- parental(c(3), c(1), c(1, 2))
+#' as.character(x, pretty = T)
 as.character.parental <- function (x, pretty = F, ...) {
   if (pretty){
     # Collapse to comma separated, and paste together
@@ -323,13 +417,19 @@ as.character.parental <- function (x, pretty = F, ...) {
 
 #' Convert a 'parental.list' to a character vector.
 #' 
-#' @param x A object of class 'parental'.
+#' @param x A object of class 'parental.list'. A list of \code{parental} 
+#'   objects
 #' @param pretty A logical of length 1 indicating if the character vectors 
 #'   are pretty-printed.
 #' @param ... Further arguments (unused)
 #' @return A character vector.
 #' @S3method as.character parental.list
 #' @method as.character parental.list
+#' @examples
+#' p1 <- parental(c(), c(1), c(1, 2, 4), c(3))
+#' p2 <- parental(c(2), c(), c(4), c(2, 3))
+#' x <- parental.list(p1, p2)
+#' as.character(x)
 as.character.parental.list <- function (x, pretty = F, ...) {
   sapply(x, as.character, pretty)
   #if (pretty == F){
@@ -356,7 +456,9 @@ as.character.parental.list <- function (x, pretty = F, ...) {
   #}
 }
 
-#' A heuristic test for whether it appears that x is 'pretty-printed'. ie 
+#' Heuristic test for pretty-printing
+#' 
+#' #' A heuristic test for whether it appears that x is 'pretty-printed'. ie 
 #' whether it is of the form [2][][3] (printed-printed) or 
 #' "c(2L), integer(0), c(3L)" (not pretty-printed)
 #' 
@@ -364,6 +466,9 @@ as.character.parental.list <- function (x, pretty = F, ...) {
 #' @return A logical of length 1. Returns true if it appears x is 
 #'   pretty-printed.
 #' @export
+#' @examples
+#' seemsPretty("integer(0),1,c(1,2,4),3")
+#' seemsPretty("[][1][2]")
 seemsPretty <- function(x){
   isTRUE(substring(x, 1, 1) == "[")
 }
@@ -383,8 +488,9 @@ seemsPretty <- function(x){
 #}
 #
 
-#' Convert a 'parental' object to a 'graphNEL' object. graphNEL objects are 
-#' from bioconductor package 'graph'
+#' Convert a 'parental' object to a 'graphNEL' object.
+#' 
+#' graphNEL objects are from bioconductor package 'graph'
 #'
 #' Note that graphNEL's edge list are *children* lists.
 #' 
@@ -393,6 +499,12 @@ seemsPretty <- function(x){
 #' @return An object of class 'graphNEL'.
 #' @S3method as.graph parental
 #' @method as.graph parental
+#' @examples
+#' if (require(graph)){
+#'   x <- bn(integer(0), 1, 2)
+#'   y <- as.graph(x)
+#'   edges(y)
+#' }
 as.graph.parental <- function(x, ...){
   require(graph)
   x <- getChildren(x) # convert to children list
@@ -413,6 +525,14 @@ as.graph.parental <- function(x, ...){
 #' @return An object of class 'parental'.
 #' @S3method as.parental graphNEL
 #' @method as.parental graphNEL
+#' @examples
+#' if (require(graph)){
+#'   set.seed(123)
+#'   c1 <- c(1, 1, 2, 4)
+#'   names(c1) <- as.character(1:4)
+#'   g1 <- randomNodeGraph(c1)
+#'   as.parental(g1)
+#' }
 as.parental.graphNEL <- function(x, ...){
   edL <- graph::edges(x)
   edL <- lapply(edL, factor, levels = names(edL))
@@ -435,6 +555,14 @@ as.parental.graphNEL <- function(x, ...){
 #' @return An object of class 'bn'.
 #' @S3method as.bn graphNEL
 #' @method as.bn graphNEL
+#' @examples
+#' if (require(graph)){
+#'   set.seed(123)
+#'   c1 <- c(1, 1, 2, 4)
+#'   names(c1) <- as.character(1:4)
+#'   g1 <- randomNodeGraph(c1)
+#'   as.parental(g1)
+#' }
 as.bn.graphNEL <- function(x, ...){
   res <- as.parental(x)
   if (!checkAcyclic(res)){

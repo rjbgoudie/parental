@@ -6,3 +6,5 @@
 \value{The object 'x', but of class 'parental'}
 \arguments{\item{x}{An object of class 'bn'}
 \item{...}{Further arguments (unused)}}
+\examples{x <- bn(c(), c(1), c(1, 2))
+as.parental(x)}
