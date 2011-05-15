@@ -8,10 +8,16 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' ...
+#' Conversion from 'bnlearn' object
 #' 
-#' ....
-#' @param x ...
+#' Convert a 'bnlearn' graph object to a 'parental' object.
+#' 
+#' This bridge to \code{bnlearn} can be temperamental because 
+#' \code{bnlearn} also has an object called \code{bn}.
+#' 
+#' @param x A 'bnlearn' object, of class \code{bn} (the bnlearn version).
+#' @return An object of class 'bn'.
+#' bnlearn2parental()
 #' @export
 bnlearn2parental <- function(x){
   require(bnlearn)
@@ -38,10 +44,15 @@ bnlearn2parental <- function(x){
   out
 }
 
-#' ...
+#' Conversion to 'bnlearn'
 #' 
-#' ....
-#' @param x ...
+#' Convert a 'parental' object to a 'bnlearn' graph object
+#' 
+#' This bridge to \code{bnlearn} can be temperamental because 
+#' \code{bnlearn} also has an object called \code{bn}.
+#' 
+#' @param x A \code{parental} graph
+#' @return x A 'bnlearn' object, of class \code{bn} (the bnlearn version).
 #' @export
 parental2bnlearn <- function(x){
   require(bnlearn)
@@ -77,19 +88,23 @@ parental2bnlearn <- function(x){
 }
 
 
-# somewhat unbelievably, adding undirected edges does not seem to be 
-# exposed in bnlearn
-
-#' Add undirected edge
+#' Add undirected edge to a 'bnlearn' object
 #' 
-#' ....
+#' Adding undirected edges is not an exported function in \code{bnlearn}, so 
+#' this function exposes this functionality.
 #' 
-#' @param x ...
-#' @param from ...
-#' @param to ...
-#' @param check.cycles ...
-#' @param update ...
-#' @param debug ...
+#' This bridge to \code{bnlearn} can be temperamental because 
+#' \code{bnlearn} also has an object called \code{bn}.
+#' 
+#' @param x A 'bnlearn' object, of class \code{bn}.
+#' @param from A character string, the label of a node.
+#' @param to A character string, the label of a node.
+#' @param check.cycles a boolean value. If TRUE the graph is tested for 
+#'   acyclicity; otherwise the graph is returned anyway.
+#' @param update A logical
+#' @param debug a boolean value. If TRUE a lot of debugging output is 
+#'   printed; otherwise the function is completely silent.
+#' @return A new \code{bnlearn} object
 #' @export
 add.undirected.edge <- function(x, from, to, check.cycles,
                                 update = T, debug = F) {
@@ -134,14 +149,16 @@ add.undirected.edge <- function(x, from, to, check.cycles,
   invisible(x)
 }#ARC.OPERATIONS
 
-#' Add.undirected.backend
+#' (Internal) Add undirected edge to a 'bnlearn' object
 #' 
-#' sfsdf
+#' This bridge to \code{bnlearn} can be temperamental because 
+#' \code{bnlearn} also has an object called \code{bn}.
 #' 
-#' @param from ...
-#' @param to ...
-#' @param arcs ...
-#' @param debug ...
+#' @param from A character string, the label of a node.
+#' @param to A character string, the label of a node.
+#' @param arcs A matrix of two columns of character strings
+#' @param debug a boolean value. If TRUE a lot of debugging output is 
+#'   printed; otherwise the function is completely silent.
 add.undirected.backend <- function(from, to, arcs, debug = F) {
   # the arc is there, undirected
   if (bnlearn::is.listed(arcs, c(to, from), both = T)){
