@@ -17,3 +17,5 @@ setdiff(y, x) in component 2 (apart from the differences described
 above).}
 \arguments{\item{x}{A numeric vector}
 \item{y}{A numeric vector}}
+\examples{setdiff2(c(1,1,2), c(2, 3))[[1]]
+setdiff(c(1, 1, 2), c(2, 3))}
