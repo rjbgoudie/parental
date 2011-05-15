@@ -1,9 +1,9 @@
 \name{enumerateBVSSpace}
 \alias{enumerateBVSSpace}
-\title{Enumerate the space of BVSs...}
+\title{Enumerate the space of BVSs.}
 \usage{enumerateBVSSpace(numberOfNodes, response,
     maxNumberParents=numberOfNodes - 1)}
-\description{Enumerate the space of BVSs}
+\description{Enumerate the space of BVSs.}
 \details{Enumerate (ie make a list of, not just count) the entire space of 
 Bayesian Variable Selection models, on a given number of nodes, for a 
 particular response. Optionally, restrcit the maximum number of parents}

@@ -1,8 +1,8 @@
 \name{coordinatesBetweenRectangles}
 \alias{coordinatesBetweenRectangles}
-\title{Calculate coordinates of line between bounding boxes...}
+\title{Calculate coordinates of line between bounding boxes.}
 \usage{coordinatesBetweenRectangles(x1, y1, x2, y2, w1, h1, w2, h2)}
-\description{Calculate coordinates of line between bounding boxes}
+\description{Calculate coordinates of line between bounding boxes.}
 \details{We have points \code{(x1, y1)} and \code{(x2, y2)} in Cartesian space. 
 We wish to draw a line between these two points.
 

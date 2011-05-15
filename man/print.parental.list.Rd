@@ -1,8 +1,8 @@
 \name{print.parental.list}
 \alias{print.parental.list}
-\title{Prints a 'parental...}
+\title{Prints 'parental list'.}
 \usage{\method{print}{parental.list} (x, ...)}
-\description{Prints a 'parental.list' object to the console.}
+\description{Prints 'parental list'.}
 \value{Prints the 'parental.list' object to the console.}
 \seealso{\code{\link{parental.list}}}
 \arguments{\item{x}{A 'parental.list' object}

@@ -1,7 +1,7 @@
 \name{strip.custom2}
 \alias{strip.custom2}
-\title{.}
+\title{Undocumented.}
 \usage{strip.custom2(...)}
-\description{...}
+\description{Undocumented.}
 \details{...}
 \arguments{\item{...}{...}}

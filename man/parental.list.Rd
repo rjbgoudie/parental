@@ -1,8 +1,8 @@
 \name{parental.list}
 \alias{parental.list}
-\title{Constructor function for a 'parental...}
+\title{Constructor function for a 'parental list' object.}
 \usage{parental.list(...)}
-\description{Constructor function for a 'parental.list' object}
+\description{Constructor function for a 'parental list' object.}
 \value{An object of class 'parental.list'}
 \seealso{\code{\link{parental}}, \code{\link{bn.list}}, 
 \code{\link{[.parental.list}}, \code{\link{c.parental.list}}}

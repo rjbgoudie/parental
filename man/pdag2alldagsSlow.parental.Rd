@@ -1,8 +1,8 @@
 \name{pdag2alldagsSlow.parental}
 \alias{pdag2alldagsSlow.parental}
-\title{xxxx...}
+\title{Undocumented.}
 \usage{\method{pdag2alldagsSlow}{parental} (pdag, verbose=F, ...)}
-\description{xxxx}
+\description{Undocumented.}
 \details{....}
 \value{....}
 \arguments{\item{pdag}{A pdag}

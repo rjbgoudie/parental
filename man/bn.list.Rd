@@ -1,8 +1,8 @@
 \name{bn.list}
 \alias{bn.list}
-\title{Constructor function for a 'bn...}
+\title{Constructor function for a 'bn list'.}
 \usage{bn.list(...)}
-\description{Constructor function for a 'bn.list' object}
+\description{Constructor function for a 'bn list'.}
 \details{Constructs bn.list objects}
 \value{An object of class 'bn.list'}
 \seealso{\code{\link{[.bn.list}}, \code{\link{c.bn.list}}}

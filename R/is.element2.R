@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' ...
+#' Undocumented.
 #'
 #' ...
 #'
@@ -24,7 +24,7 @@ is.element2 <- function (el, set) {
   }))
 }
 
-#' ...
+#' Undocumented.
 #'
 #' ...
 #'

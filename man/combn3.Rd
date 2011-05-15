@@ -1,8 +1,8 @@
 \name{combn3}
 \alias{combn3}
-\title{(C version) Generate All Combinations of n Elements, Taken m at a Time...}
+\title{(C version) Generate All Combinations of n Elements, Taken m at a Time.}
 \usage{combn3(x, m, required=integer(0))}
-\description{(C version) Generate All Combinations of n Elements, Taken m at a Time}
+\description{(C version) Generate All Combinations of n Elements, Taken m at a Time.}
 \details{A fast, simple version of \code{\link[utils]{combn}}.
 
 ALSO NOTE. The output is SORTED!

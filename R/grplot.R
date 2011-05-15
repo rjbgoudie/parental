@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' Convert cartesian coordinates to polars
+#' Convert cartesian coordinates to polars.
 #'
 #' Currently unused. Not sure if this is vectorised
 #'
@@ -25,7 +25,7 @@ toPolar <- function(x, y){
   list(r = r, theta = theta)
 }
 
-#' Convert polar coordinates to Cartesian
+#' Convert polar coordinates to Cartesian.
 #'
 #' Currently unused. Not sure if this is vectorised
 #'
@@ -37,7 +37,7 @@ toCartesian <- function(r, theta){
   list(x = r * cos(theta), y = r * sin(theta))
 }
 
-#' Calculate distance between two points
+#' Calculate distance between two points.
 #'
 #' A vectorised function for calculating the distance between two 
 #' points in Cartesian space. Computes the distance between \code{(x[1], 
@@ -52,7 +52,7 @@ distance <- function(x, y){
   sqrt((y[1] - x[1])^2 + (y[2] - x[2])^2)
 }
 
-#' Calculate coordinates of line between bounding boxes
+#' Calculate coordinates of line between bounding boxes.
 #'
 #' We have points \code{(x1, y1)} and \code{(x2, y2)} in Cartesian space. 
 #' We wish to draw a line between these two points.
@@ -157,7 +157,7 @@ coordinatesBetweenRectangles <- function(x1, y1, x2, y2, w1, h1, w2, h2){
   c(ox1, oy1, ox2, oy2)
 }
 
-#' Convert a lattice object to a grob
+#' Convert a lattice object to a grob.
 #'
 #' See Paul Murrell's message to r-help - Mar 21, 2010 8:21:39 pm.
 #' "Re: [R] lattice grob"
@@ -170,7 +170,7 @@ latticeGrob <- function(p, ...){
    grob(p = p, ..., cl = "lattice")
 }
 
-#' drawDetails for lattice plots
+#' drawDetails for lattice plots.
 #' 
 #' See Paul Murrell's message to r-help - Mar 21, 2010 8:21:39 pm.
 #' "Re: [R] lattice grob"
@@ -183,7 +183,7 @@ drawDetails.lattice <- function(x, recording = F){
    lattice:::plot.trellis(x$p, newpage = F)
 }
 
-#' Pre-panel function for plotting parental objects
+#' Pre-panel function for plotting parental objects.
 #' 
 #' Computes the bounds of the final plot.
 #'
@@ -229,7 +229,7 @@ prepanel.parental <- function(x, y, parents, rawdata = NULL,
        ylim = c(min(unlist(out[3, ])), max(unlist(out[4, ]))))
 }
 
-#' Expand coordinates
+#' Expand coordinates.
 #'
 #' Expand the coordinates. Not currently used
 #'
@@ -247,7 +247,7 @@ convertToEnlargedCoordinates <- function(width, height, x, y){
 }
 
 
-#' Return the size of node when the name of the node is plotted
+#' Return the size of node when the name of the node is plotted.
 #' 
 #' This returns size of the label. Specifically, the return width is number 
 #' of characters in the label.
@@ -271,7 +271,7 @@ grobNodeNameSize <- function(node, parents, rawdata = NULL){
        height = length(gregexpr("\n", names(parents)[node], fixed = T)[[1]]))
 }
 
-#' Return a grob for node "node" when the name of the node is plotted
+#' Return a grob for node "node" when the name of the node is plotted.
 #' 
 #' @param node An integer of length 1, indicating which node the dimensions
 #'   should be computed for.
@@ -286,6 +286,8 @@ grobNodeName <- function(node, parents, rawdata = NULL, gp){
   textGrob(label = names(parents)[node], gp = gp)
 }
 
+#' Levelplot size for a node.
+#' 
 #' Return the size of levelplot for node "node". If the node has no 
 #' parents, the size of a grobNodeName is returned instead.
 #' 
@@ -317,7 +319,7 @@ grobNodeLevelPlotSize <- function(node, parents, rawdata){
   }
 }
 
-#' Return the default theme
+#' Return the default theme.
 #'
 #' Returns the default theme
 #'
@@ -339,6 +341,8 @@ grobNodeLevelPlotDefaultTheme <- function(){
         par.main.text = list(cex = 0.5))
 }
 
+#' Levelplot node grob.
+#' 
 #' Return a grob for node "node" when a levelplot is plotted on each node
 #' 
 #' @param node  An integer of length 1, indicating which node the dimensions
@@ -414,7 +418,7 @@ grobNodeLevelPlot <- function(node,
   }
 }
 
-#' Panel function for ploting a parental graph
+#' Panel function for ploting a parental graph.
 #' 
 #' Panel function for grplot.
 #'
@@ -597,7 +601,7 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
   }
 }
 
-#' Plot a graph
+#' Plot a graph.
 #' 
 #' A generic for plotting graph objects
 #' 
@@ -608,7 +612,7 @@ grplot <- function(...){
   UseMethod("grplot")
 }
 
-#' Plot a parental graph
+#' Plot a graph.
 #' 
 #' Plots a parental graph, by default using the layout routines of the 
 #' package 'network'.
@@ -725,7 +729,7 @@ grplot.parental <- function(parents,
   ans
 }
 
-#' Plot a parental.list
+#' Plot a 'parental list'.
 #' 
 #' Plots a parental graph, by default using the layout routines of the 
 #' package 'network'.
@@ -852,7 +856,7 @@ grplot.bvsresponse <- function(x, col = "default", ...){
   grplot(bvs, col = col, ...)
 }
 
-#' Multi-page plot of nodeLevelPlots
+#' Multi-page plot of nodeLevelPlots.
 #' 
 #' Creates a plot with a level plot for each variable, each of which is 
 #' presented on a separate page.

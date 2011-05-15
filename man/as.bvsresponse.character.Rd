@@ -1,10 +1,12 @@
 \name{as.bvsresponse.character}
 \alias{as.bvsresponse.character}
-\title{Convert a character vector (a comma-separated string) specifying the...}
+\title{Convert character vector to 'bvsresponse'.}
 \usage{\method{as.bvsresponse}{character} (x, response, nNodes, ...)}
-\description{Convert a character vector (a comma-separated string) specifying the 
-parents of a response to a 'bvsresponse' object.}
-\details{For example, as.bvsresponse("1,2,3", 4, 5) returns a 'bvsresponse' object 
+\description{Convert character vector to 'bvsresponse'.}
+\details{Convert a character vector (a comma-separated string) specifying the 
+parents of a response to a 'bvsresponse' object.
+
+For example, as.bvsresponse("1,2,3", 4, 5) returns a 'bvsresponse' object 
 with 5 nodes, with node 4 as response, and nodes 1, 2 and 3 as its 
 parents.}
 \value{If length(x) == 1:

@@ -1,8 +1,8 @@
 \name{psetdiff}
 \alias{psetdiff}
-\title{.}
+\title{Undocumented.}
 \usage{psetdiff(parental1, parental2, count=F)}
-\description{...}
+\description{Undocumented.}
 \details{....}
 \arguments{\item{parental1}{...}
 \item{parental2}{...}

@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' Draw a 'random' BN
+#' Draw a 'random' BN.
 #' 
 #' Generates a BN, by choosing an order, then sampling a BN that respects 
 #' that order
@@ -67,7 +67,7 @@ sampleBN <- function(n, maxNumberParents = NULL){
   out
 }
 
-#' Draw a 'random' BN
+#' Draw a 'random' BN.
 #' 
 #' NOT currently working?
 #' 
@@ -100,7 +100,7 @@ sampleBN2 <- function(n, k){
   out
 }
 
-#' ...
+#' Undocumented.
 #' 
 #' ....
 #' @param n ...
@@ -123,7 +123,7 @@ expected.sample <- function(n, size, replace, prob){
 }
 
 ##### sensitivity to the order in which parents are specified
-#' Draw data according to a Bayesian Network
+#' Draw data according to a Bayesian Network.
 #' 
 #' 
 #' @param object A object of class \code{\link{bn}}
@@ -248,7 +248,7 @@ simulate.bn <- function(object, nsim, seed, ptables, expectation = F, ...){
   data.frame(lapply(dat, as.factor))
 }
 
-#' ...
+#' Undocumented.
 #' 
 #' I don't think this works. In particular check that sample.int is 
 #' sensible. And that N is properly implemented
@@ -320,7 +320,7 @@ marginal.probs <- function(bn, ptables, N){
   }
 }
 
-#' Create a binary Conditional Probability Table
+#' Create a binary Conditional Probability Table.
 #' 
 #' @param i The probability of value 1
 #' @param j The probability of value 2

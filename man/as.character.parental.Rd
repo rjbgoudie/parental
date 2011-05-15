@@ -1,8 +1,8 @@
 \name{as.character.parental}
 \alias{as.character.parental}
-\title{Convert a parental object to a character vector...}
+\title{Convert a parental object to a character vector.}
 \usage{\method{as.character}{parental} (x, pretty=F, ...)}
-\description{Convert a parental object to a character vector}
+\description{Convert a parental object to a character vector.}
 \details{Converts a parental object to a character representation.}
 \value{An object of class "parental"}
 \arguments{\item{x}{A character vector}

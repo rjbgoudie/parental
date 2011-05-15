@@ -1,8 +1,8 @@
 \name{print.parental}
 \alias{print.parental}
-\title{Prints a parental object to the console.}
+\title{Prints 'parental'.}
 \usage{\method{print}{parental} (x, ...)}
-\description{Prints a \code{parental} object to the console.}
+\description{Prints 'parental'.}
 \value{Prints the \code{parental} object to the console.}
 \seealso{\code{\link{parental}}}
 \arguments{\item{x}{A \code{parental} object}

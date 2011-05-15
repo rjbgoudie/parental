@@ -1,9 +1,9 @@
 \name{prepanel.parental}
 \alias{prepanel.parental}
-\title{Pre-panel function for plotting parental objects...}
+\title{Pre-panel function for plotting parental objects.}
 \usage{prepanel.parental(x, y, parents, rawdata, grobNodeSize, offset,
     islist=F, widthMultiplier=2, heightMultipler=1)}
-\description{Pre-panel function for plotting parental objects}
+\description{Pre-panel function for plotting parental objects.}
 \details{Computes the bounds of the final plot.}
 \value{A list of length two. This contains two components: \code{xlim} 
 and \code{ylim}, each of which contain the max and min values in 

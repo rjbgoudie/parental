@@ -1,8 +1,8 @@
 \name{is.valid.bn}
 \alias{is.valid.bn}
-\title{Tests a 'bn' for validity...}
+\title{Check validity.}
 \usage{\method{is.valid}{bn} (x)}
-\description{Tests a 'bn' for validity}
+\description{Check validity.}
 \details{Checks whether the supplied 'bn is valid.
 Tests that the parents are sorted correctly, are of 
 storage.mode() == "integer".

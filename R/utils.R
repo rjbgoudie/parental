@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' Tests for whole numbers
+#' Tests for whole numbers.
 #' 
 #' Tests if x is a whole number, up to the tolerance specified by tol.
 #' Taken from an example on the help page for \code{\link{is.integer}}. 
@@ -34,7 +34,7 @@ is.wholenumber <- function(x, tol = .Machine$double.eps^0.5){
   abs(x - round(x)) < tol
 }
 
-#' Retrieve off-diagonal elements
+#' Retrieve off-diagonal elements.
 #'
 #' Retrieve off-diagonal elements
 #'

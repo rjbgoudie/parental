@@ -1,8 +1,8 @@
 \name{as.bn.character}
 \alias{as.bn.character}
-\title{Convert a character vector to a bn...}
+\title{Convert a character vector to a 'bn'.}
 \usage{\method{as.bn}{character} (x, checkAcyclic=T, ...)}
-\description{Convert a character vector to a bn}
+\description{Convert a character vector to a 'bn'.}
 \details{Format required is one of two. Either standard or pretty. See examples.}
 \value{A object of class \code{bn}.}
 \arguments{\item{x}{A character object}

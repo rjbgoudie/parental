@@ -1,9 +1,9 @@
 \name{enumerateBNSpace}
 \alias{enumerateBNSpace}
-\title{Enumerate the space of BNs...}
+\title{Enumerate the space of BNs.}
 \usage{enumerateBNSpace(n, allowCyclic=F, banned=vector("list", n),
     required=vector("list", n), multicore=F)}
-\description{Enumerate the space of BNs}
+\description{Enumerate the space of BNs.}
 \details{Enumerate (ie make a list of, not just count) the entire space of 
 Bayesian Networks models, on a given number of nodes.}
 \value{A \code{parental.list} including ALL the directed acyclic 

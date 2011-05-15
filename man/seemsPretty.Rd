@@ -1,8 +1,8 @@
 \name{seemsPretty}
 \alias{seemsPretty}
-\title{Heuristic test for pretty-printing...}
+\title{Heuristic test for pretty-printing.}
 \usage{seemsPretty(x)}
-\description{Heuristic test for pretty-printing}
+\description{Heuristic test for pretty-printing.}
 \details{#' A heuristic test for whether it appears that x is 'pretty-printed'. ie 
 whether it is of the form [2][][3] (printed-printed) or 
 "c(2L), integer(0), c(3L)" (not pretty-printed)}

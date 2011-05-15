@@ -1,8 +1,8 @@
 \name{sampleBN}
 \alias{sampleBN}
-\title{Draw a 'random' BN...}
+\title{Draw a 'random' BN.}
 \usage{sampleBN(n, maxNumberParents)}
-\description{Draw a 'random' BN}
+\description{Draw a 'random' BN.}
 \details{Generates a BN, by choosing an order, then sampling a BN that respects 
 that order}
 \value{A new \code{\link{bn}}.}

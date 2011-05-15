@@ -1,10 +1,12 @@
 \name{bvsresponse}
 \alias{bvsresponse}
-\title{Constructor function for a 'bvsresponse' object.}
+\title{Construct 'bvsreponse'.}
 \usage{bvsresponse(x, response, nNodes)}
-\description{Constructor function for a 'bvsresponse' object.
-Objects of class 'bvsresponse' are lists, with the following components:}
-\details{$parents: A vectors of integers, specifying the parents of the response. 
+\description{Construct 'bvsreponse'.}
+\details{Constructor function for a 'bvsresponse' object.
+Objects of class 'bvsresponse' are lists, with the following components:
+
+$parents: A vectors of integers, specifying the parents of the response. 
 The parents must be specified as a vector of integers -- the 
 storage.mode() of these integers MUST be integer. If the node has no 
 parents, use integer(0).

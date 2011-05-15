@@ -1,8 +1,8 @@
 \name{cptBinary}
 \alias{cptBinary}
-\title{Create a binary Conditional Probability Table...}
+\title{Create a binary Conditional Probability Table.}
 \usage{cptBinary(i, j)}
-\description{Create a binary Conditional Probability Table}
+\description{Create a binary Conditional Probability Table.}
 \seealso{\code{\link{simulate.bn}}}
 \arguments{\item{i}{The probability of value 1}
 \item{j}{The probability of value 2}}

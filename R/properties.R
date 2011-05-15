@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' Number of nodes
+#' Number of nodes.
 #' 
 #' A generic to get the number of nodes of a graph object.
 #' 
@@ -24,7 +24,7 @@ nNodes <- function(x, ...){
   UseMethod("nNodes")
 }
 
-#' Number of nodes/vertices
+#' Number of nodes/vertices.
 #' 
 #' Get the number of nodes in a \code{parental} object
 #' 
@@ -44,7 +44,7 @@ nNodes.parental <- function(x, ...){
   length(x)
 }
 
-#' Indegrees
+#' Indegrees.
 #' 
 #' A generic to get the indegree of each node of the supplied graph
 #' 
@@ -61,7 +61,7 @@ indegrees <- function(x, ...){
   UseMethod("indegrees")
 }
 
-#' Indegrees
+#' Indegrees.
 #' 
 #' Get the indegree of each node of the supplied graph
 #' 
@@ -83,7 +83,7 @@ indegrees.parental <- function(x, ...){
 }
 
 
-#' Number of edges
+#' Number of edges.
 #' 
 #' Get the number of edges in a \code{parental} object
 #' 
@@ -98,7 +98,7 @@ nEdges <- function(parental){
   length(unlist(parental))
 }
 
-#' Children lists
+#' Children lists.
 #' 
 #' Create a list, with each component listing the direct children of the 
 #' corresponding node in the supplied parental.
@@ -151,7 +151,7 @@ getChildren <- function(parental){
   #out
 }
 
-#' Acyclicity testing
+#' Acyclicity testing.
 #' 
 #' Check for cycles in a directed graph.
 #' 
@@ -191,7 +191,7 @@ checkAcyclic <- function(parental){
   if (N == nNodes(parental) + 1) T else F
 }
 
-#' Topological ordering
+#' Topological ordering.
 #' 
 #' Finds a permutation of the nodes 1, ..., p such that each all ancestors 
 #' of each node have a lower place in the order.
@@ -261,6 +261,8 @@ setdiff2 <- function(x, y){
   list(x[match(x, y, 0L) == 0L], y[match(y, x, 0L) == 0L])
 }
 
+#' Number of moves between graphs.
+#' 
 #' Compute the number of edge additions, removals (and single-edge flips if 
 #' allowFlips = T) that would be required to morph from network x to network 
 #' y, both of which are objects of class 'parental'. The measure is 
@@ -340,7 +342,7 @@ numberOfMovesBetweenIgnoringCycles <- function(x, y,
   }
 }
 
-#' Unknown
+#' Unknown.
 #' 
 #' @param x An object of class \code{parental}
 #' @param y An object of class \code{parental}
@@ -356,7 +358,7 @@ route <- function(x, y){
   browser()
 }
 
-#' ...
+#' Undocumented.
 #' 
 #' ....
 #' @param parental1 ...
@@ -381,7 +383,7 @@ psetdiff <- function(parental1, parental2, count = F){
   }
 }
 
-#' ...
+#' Undocumented.
 #' 
 #' ....
 #' @param parental1 ...
@@ -406,7 +408,7 @@ pintersect <- function(parental1, parental2, count = F){
   }
 }
 
-#' ...
+#' Undocumented.
 #' 
 #' ....
 #' @param parental1 ...
@@ -427,7 +429,7 @@ punion <- function(parental1, parental2){
   res
 }
 
-#' ...
+#' Undocumented.
 #' 
 #' ....
 #' @param pl ...
@@ -458,6 +460,8 @@ lpunion <- function(pl){
   out
 }
 
+#' Get routes matrix for a 'bn'.
+#' 
 #' Returns a matrix encoding the number of routes between the nodes of the 
 #' bn x.
 #' 
@@ -486,7 +490,7 @@ routes <- function(x){
   routes
 }
 
-#' Update a routes matrix (edge addition)
+#' Update a routes matrix (edge addition).
 #' 
 #' A routes matrix is a matrix A, such that each element (i, j) is the 
 #' number of routes from i to j in some directed graph.
@@ -510,7 +514,7 @@ routesAddEdge <- function(x, i, j){
   x + x[, i] %*% .Internal(t.default((x[j, ])))
 }
 
-#' Update a routes matrix (edge removal)
+#' Update a routes matrix (edge removal).
 #' 
 #' A routes matrix is a matrix A, such that each element (i, j) is the 
 #' number of routes from i to j in some directed graph.
@@ -534,7 +538,7 @@ routesRemoveEdge <- function(x, i, j){
   x - x[, i] %*% .Internal(t.default((x[j, ])))
 }
 
-#' Neighbourhood size
+#' Neighbourhood size.
 #' 
 #' Computes the number of DAGs that can be reach by adding, removing or 
 #' reversing the direction (?) of a single arc

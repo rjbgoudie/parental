@@ -1,7 +1,7 @@
 \name{getpl}
-\title{Extract parts of a parental...}
+\title{Extract parts of a 'parental list'.}
 \usage{\method{[}{parental.list}(x, i)}
-\description{Extract parts of a parental.list}
+\description{Extract parts of a 'parental list'.}
 \details{Operator that acts on objects of class \code{parental.list} to extract 
 parts of the list}
 \value{An object of class \code{parental.list}, consisting the parts of 

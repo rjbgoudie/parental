@@ -1,9 +1,10 @@
 \name{enumerateParents}
 \alias{enumerateParents}
-\title{Enumerate all the combinations of possible parents, given a SET of...}
+\title{Enumerate all possible parents.}
 \usage{enumerateParents(potentialParents,
     maxNumberParents=length(potentialParents), required=integer(0))}
-\description{Enumerate all the combinations of possible parents, given a SET of 
+\description{Enumerate all possible parents.}
+\details{Enumerate all the combinations of possible parents, given a SET of 
 possible parents. Optionally, restrcit the maximum number of parents. 
 Optionally, require that a particular parent is always present.}
 \value{A list of possible parents sets, each of which will be a sorted 

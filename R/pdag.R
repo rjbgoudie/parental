@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' ...
+#' Undocumented.
 #' 
 #' A generic
 #' 
@@ -19,7 +19,7 @@ maximallyOrientEdges <- function(pdag, ...){
   UseMethod("maximallyOrientEdges")
 }
 
-#' ...
+#' Undocumented.
 #'
 #' ...
 #'
@@ -48,7 +48,7 @@ maximallyOrientEdges.parental <- function(pdag, verbose = F, ...){
 #     11L, 25L, integer(0), 30L, integer(0), c(22L, 28L), 21L, 
 #     integer(0), c(22L, 28L), 6L), class = c("bn", "parental"))
 
-#' ...
+#' Undocumented.
 #'
 #' ...
 #'
@@ -66,7 +66,7 @@ maximallyOrientEdges.matrix <- function(pdag, verbose = F, ...){
   .Call("maximallyOrientEdges", pdag, verbose, PACKAGE = "parental")
 }
 
-#' ...
+#' Undocumented.
 #' 
 #' A generic
 #' 
@@ -77,7 +77,7 @@ pdag2alldags <- function(pdag, ...){
   UseMethod("pdag2alldags")
 }
 
-#' xxxx
+#' Undocumented.
 #' 
 #' ....
 #'
@@ -98,7 +98,7 @@ pdag2alldags.parental <- function(pdag, verbose = F, ...){
   out
 }
 
-#' xxxx
+#' Undocumented.
 #' 
 #' ....
 #'
@@ -196,7 +196,7 @@ pdag2alldags.matrix <- function(pdag, verbose = F, ...){
 ##################################################################
 
 
-#' Recurse unoriented edge
+#' Recurse unoriented edge.
 #' 
 #' ...
 #'

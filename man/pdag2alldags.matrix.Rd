@@ -1,8 +1,8 @@
 \name{pdag2alldags.matrix}
 \alias{pdag2alldags.matrix}
-\title{xxxx...}
+\title{Undocumented.}
 \usage{\method{pdag2alldags}{matrix} (pdag, verbose=F, ...)}
-\description{xxxx}
+\description{Undocumented.}
 \details{....}
 \value{....}
 \arguments{\item{pdag}{....}

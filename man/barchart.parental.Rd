@@ -1,9 +1,9 @@
 \name{barchart.parental}
 \alias{barchart.parental}
-\title{Barchart of a graph...}
+\title{Barchart of a graph.}
 \usage{\method{barchart}{parental} (x, data, type=c("indegrees",
     "outdegrees"), ...)}
-\description{Barchart of a graph}
+\description{Barchart of a graph.}
 \details{Plot a barchart of summary statistics about a 'parental' object.}
 \value{A barchart}
 \arguments{\item{x}{An object of class parental}

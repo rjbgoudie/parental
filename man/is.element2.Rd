@@ -1,8 +1,8 @@
 \name{is.element2}
 \alias{is.element2}
-\title{.}
+\title{Undocumented.}
 \usage{is.element2(el, set)}
-\description{...}
+\description{Undocumented.}
 \details{...}
 \value{...}
 \arguments{\item{el}{...}

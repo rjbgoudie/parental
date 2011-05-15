@@ -1,8 +1,8 @@
 \name{combn2}
 \alias{combn2}
-\title{(Fast, simple) Generate All Combinations of n Elements, Taken m at a Time...}
+\title{(Fast, simple) Generate All Combinations of n Elements, Taken m at a Time.}
 \usage{combn2(x, m, required=integer(0))}
-\description{(Fast, simple) Generate All Combinations of n Elements, Taken m at a Time}
+\description{(Fast, simple) Generate All Combinations of n Elements, Taken m at a Time.}
 \details{A fast, simple version of \code{\link[utils]{combn}}.
 
 ALSO NOTE. The output is SORTED!

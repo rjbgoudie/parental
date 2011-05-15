@@ -1,8 +1,8 @@
 \name{convertToEnlargedCoordinates}
 \alias{convertToEnlargedCoordinates}
-\title{Expand coordinates...}
+\title{Expand coordinates.}
 \usage{convertToEnlargedCoordinates(width, height, x, y)}
-\description{Expand coordinates}
+\description{Expand coordinates.}
 \details{Expand the coordinates. Not currently used}
 \value{A list with two components: \code{width} and \code{height}.}
 \seealso{\code{\link{grplot}}}

@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' Convert an object to an adjacency matrix
+#' Convert an object to an adjacency matrix.
 #' 
 #' A generic for converting objects to adjacency matrices.
 #' 
@@ -26,7 +26,7 @@ as.adjacency <- function(x, ...) {
   UseMethod("as.adjacency")
 }
 
-#' Convert an object to a bn
+#' Convert an object to a bn.
 #' 
 #' A generic function that converts objects to \code{bn} objects
 #' 
@@ -55,7 +55,7 @@ as.bn <- function(x, ...) {
   UseMethod("as.bn")
 }
 
-#' Convert an object to a graph
+#' Convert an object to a graph.
 #' 
 #' graphNEL objects are from bioconductor package 'graph'. See 
 #' \link[graph]{graphNEL-class}.
@@ -74,7 +74,9 @@ as.graph <- function(x, ...){
   UseMethod("as.graph")
 }
 
-#' Convert a matrix to a 'bn'. See for 'as.parental.matrix' for details
+#' Convert a matrix to a 'bn'.
+#' 
+#' See for 'as.parental.matrix' for details
 #' 
 #' @param x A matrix, as described in as.parental.matrix()
 #' @param ... Passed to as.parental.matrix
@@ -132,7 +134,7 @@ as.adjacency.parental <- function(x, ...){
   m
 }
 
-#' Convert an object to a parental object
+#' Convert an object to a parental object.
 #' 
 #' A generic function for converting objects to \code{\link{parental}} 
 #' objects.
@@ -171,7 +173,7 @@ as.parental <- function(x, ...){
   UseMethod("as.parental")
 }
 
-#' Convert a character string to a parental
+#' Convert a character string to a parental.
 #' 
 #' Format required is one of two. Either standard or pretty. See examples.
 #'
@@ -224,7 +226,7 @@ as.parental.character <- function(x, pretty = F, ...){
   out
 }
 
-#' Convert a character vector to a bn
+#' Convert a character vector to a 'bn'.
 #' 
 #' Format required is one of two. Either standard or pretty. See examples.
 #'
@@ -340,7 +342,7 @@ as.parental.matrix <- function(x, type = "adjacency", n, ...){
   out
 }
 
-#' Convert a 'bn' to a 'parental'
+#' Convert a 'bn' to a 'parental'.
 #' 
 #' @param x An object of class 'bn'
 #' @param ... Further arguments (unused)
@@ -359,7 +361,7 @@ as.parental.bn <- function(x, ...){
 # Pretty printing of integer sequences c(1L,2L,3L)
 # goes to
 # 1:3
-#' Convert a parental object to a character vector
+#' Convert a parental object to a character vector.
 #' 
 #' Converts a parental object to a character representation.
 #'
@@ -415,7 +417,7 @@ as.character.parental <- function (x, pretty = F, ...) {
   }
 }
 
-#' Convert a 'parental.list' to a character vector.
+#' Convert a 'parental list' to a character vector.
 #' 
 #' @param x A object of class 'parental.list'. A list of \code{parental} 
 #'   objects
@@ -456,7 +458,7 @@ as.character.parental.list <- function (x, pretty = F, ...) {
   #}
 }
 
-#' Heuristic test for pretty-printing
+#' Heuristic test for pretty-printing.
 #' 
 #' #' A heuristic test for whether it appears that x is 'pretty-printed'. ie 
 #' whether it is of the form [2][][3] (printed-printed) or 
@@ -515,8 +517,9 @@ as.graph.parental <- function(x, ...){
   new("graphNEL", nodes = nodeNames, edgeL = edL, edgemode = "directed")
 }
 
-#' Convert a graphNEL object to a 'parental' object. graphNEL objects are 
-#' from bioconductor package 'graph'
+#' Convert a graphNEL object to a 'parental' object.
+#' 
+#' graphNEL objects are from bioconductor package 'graph'
 #'
 #' Note that graphNEL's edge list are *children* lists.
 #' 
@@ -545,8 +548,9 @@ as.parental.graphNEL <- function(x, ...){
   edL
 }
 
-#' Convert a graphNEL object to a 'bn' object. graphNEL objects are 
-#' from bioconductor package 'graph'
+#' Convert a graphNEL object to a 'bn' object.
+#' 
+#' graphNEL objects are from bioconductor package 'graph'
 #'
 #' Note that graphNEL's edge list are *children* lists.
 #' 
@@ -613,6 +617,8 @@ as.bvsresponse.bvs <- function(x, response, ...){
               nNodes = length(x))
 }
 
+#' Convert character vector to 'bvsresponse'.
+#' 
 #' Convert a character vector (a comma-separated string) specifying the 
 #' parents of a response to a 'bvsresponse' object.
 #' 
@@ -659,6 +665,8 @@ as.bvsresponse.character <- function(x, response, nNodes, ...){
   res
 }
 
+#' Convert 'bvsresponse' to character vector.
+#' 
 #' Convert a 'bvsresponse' object to a character string. Note that the 
 #' number of nodes, and which node the response is not contained in the 
 #' resulting character string.
@@ -677,6 +685,8 @@ as.character.bvsresponse <- function(x, ...){
   paste(x$parents, sep = "", collapse = ",")
 }
 
+#' Convert 'bvsresponse list' to character vector.
+#' 
 #' Convert a 'bvsresponse.list' object to a character string. Note that the 
 #' number of nodes, and which node the response is not contained in the 
 #' resulting character string. 
@@ -694,7 +704,7 @@ as.character.bvsresponse.list <- function(x, ...){
   sapply(x, as.character)
 }
 
-#' Convert objects to a bvs
+#' Convert objects to a bvs.
 #' 
 #' A generic function
 #' 
@@ -706,6 +716,8 @@ as.bvs <- function(x, ...){
   UseMethod("as.bvs")
 }
 
+#' Convert 'bvsresponse' to 'bvs'.
+#' 
 #' Convert a 'bvsresponse' object to a 'bvs' object. A 'bvs' object is a 
 #' full 'parental' object, whereas a 'bvsresponse' object is smaller 
 #' object designed specifically for fast MCMC iterations.

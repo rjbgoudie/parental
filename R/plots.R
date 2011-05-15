@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' Barchart of a graph
+#' Barchart of a graph.
 #'
 #' Plot a barchart of summary statistics about a 'parental' object.
 #'

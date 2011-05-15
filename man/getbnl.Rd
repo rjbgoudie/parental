@@ -1,7 +1,7 @@
 \name{getbnl}
-\title{Extract parts of a bn...}
+\title{Extract parts of a 'bn list'.}
 \usage{\method{[}{bn.list}(x, i)}
-\description{Extract parts of a bn.list}
+\description{Extract parts of a 'bn list'.}
 \details{Operator that acts on objects of class \code{bn.list} to extract 
 parts of the list}
 \value{An object of class \code{bn.list}, consisting the parts of 

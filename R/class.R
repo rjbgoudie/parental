@@ -90,7 +90,7 @@ bvs <- function(...){
   parents
 }
 
-#' Constructor function for a 'parental.list' object
+#' Constructor function for a 'parental list' object.
 #' 
 #' @param ... A series of objects of class \code{parental}.
 #' @return An object of class 'parental.list'
@@ -107,7 +107,7 @@ parental.list <- function(...){
   parentallist
 }
 
-#' Extract parts of a parental.list
+#' Extract parts of a 'parental list'.
 #' 
 #' Operator that acts on objects of class \code{parental.list} to extract 
 #' parts of the list
@@ -135,7 +135,7 @@ parental.list <- function(...){
   x
 }
 
-#' Constructor function for a 'bn.list' object
+#' Constructor function for a 'bn list'.
 #' 
 #' Constructs bn.list objects
 #' 
@@ -156,7 +156,7 @@ bn.list <- function(...){
   bnlist
 }
 
-#' Extract parts of a bn.list
+#' Extract parts of a 'bn list'.
 #' 
 #' Operator that acts on objects of class \code{bn.list} to extract 
 #' parts of the list
@@ -184,7 +184,7 @@ bn.list <- function(...){
   x
 }
 
-#' Constructor function for a 'bvsresponse.list' object
+#' Constructor function for a 'bvsresponse list' object.
 #' 
 #' @param ... A series of objects of class 'bvsresponse'.
 #' @return An object of class 'bvsresponse.list'
@@ -195,7 +195,7 @@ bvsresponse.list <- function(...){
   bvsrlist
 }
 
-#' Extract parts of a bvsresponse.list
+#' Extract parts of a 'bvsresponse list'.
 #' 
 #' Operator that acts on objects of class \code{bvsresponse.list} to extract 
 #' parts of the list
@@ -215,7 +215,7 @@ bvsresponse.list <- function(...){
   x
 }
 
-#' Check validity of x
+#' Check validity.
 #' 
 #' Checks the validity of objects
 #' 
@@ -229,7 +229,7 @@ is.valid <- function(x){
   UseMethod("is.valid")
 }
 
-#' Checks a 'parental' for validity
+#' Check validity.
 #' 
 #' Checks whether the supplied \code{parental} is valid.
 #' Tests that the parents are sorted correctly, are of 
@@ -260,6 +260,8 @@ is.valid.parental <- function(x){
     error = function(e) F)
 }
 
+#' Check validity.
+#' 
 #' Checks whether the supplied 'bvs' is valid.
 #' Tests that the parents are sorted correctly, are of 
 #' storage.mode() == "integer".
@@ -288,7 +290,7 @@ is.valid.bvs <- function(x){
     error = function(e) F)
 }
 
-#' Tests a 'bn' for validity
+#' Check validity.
 #' 
 #' Checks whether the supplied 'bn is valid.
 #' Tests that the parents are sorted correctly, are of 
@@ -321,7 +323,7 @@ is.valid.bn <- function(x){
     error = function(e) F)
 }
 
-#' Concatenates a 'parental.list' object to the console.
+#' Concatenates 'parental list'.
 #' 
 #' @param ... Any number of 'parental.list' objects
 #' @return An new 'parental.list' object, including all the supplied 
@@ -341,7 +343,7 @@ c.parental.list <- function(...){
   out
 }
 
-#' Concatenates a 'bn.list' object to the console.
+#' Concatenates 'bn list'.
 #' 
 #' @param ... Any number of 'bn.list' objects
 #' @return An new 'bn.list' object, including all the supplied bn.lists
@@ -361,7 +363,7 @@ c.bn.list <- function(...){
   out
 }
 
-#' Prints a 'parental.list' object to the console.
+#' Prints 'parental list'.
 #' 
 #' @param x A 'parental.list' object
 #' @param ... Further arguments, currently unused.
@@ -379,7 +381,7 @@ print.parental.list <- function(x, ...){
   print(unlist(lapply(x, as.character, pretty = T)))
 }
 
-#' Prints a \code{parental} object to the console.
+#' Prints 'parental'.
 #' 
 #' @param x A \code{parental} object
 #' @param ... Further arguments, currently unused
@@ -394,7 +396,7 @@ print.parental <- function(x, ...){
   print(as.character(x, pretty = T))
 }
 
-#' Prints a 'bn' object to the console.
+#' Prints 'bn'.
 #' 
 #' @param x A 'bn' object
 #' @param ... Further arguments (unused)
@@ -409,7 +411,7 @@ print.bn <- function(x, ...){
   print(as.character(x, pretty = T))
 }
 
-#' Rename nodes
+#' Rename nodes.
 #' 
 #' A generic for renaming nodes
 #' 
@@ -421,6 +423,8 @@ renameNodes <- function(x, ...){
   UseMethod("renameNodes")
 }
 
+#' Rename nodes.
+#' 
 #' Return the parental list, with nodes in each parental
 #' in the parental.list renamed to the newnames.
 #' 
@@ -450,7 +454,7 @@ renameNodes.parental.list <- function(x, newnames, ...){
 }
 
 
-#' Return a complete graph
+#' Return a complete graph.
 #'
 #' @param n the number of nodes
 #' @return A complete \code{parental} graph
@@ -470,6 +474,8 @@ complete <- function(n){
   res
 }
 
+#' Return empty graph.
+#' 
 #' Returns an empty graph with n nodes, of the given class
 #' 
 #' @param n A integer of length 1, specifying the number of nodes
@@ -512,6 +518,8 @@ empty <- function(n, class = "parental", response){
   res
 }
 
+#' Checks validity.
+#' 
 #' Checks whether the supplied 'bvsresponse' is valid.
 #' Tests that the parents are sorted correctly, are of 
 #' storage.mode() == "integer".
@@ -554,6 +562,8 @@ is.valid.bvsresponse <- function(x){
   }
 }
 
+#' Construct 'bvsreponse'.
+#' 
 #' Constructor function for a 'bvsresponse' object.
 #' Objects of class 'bvsresponse' are lists, with the following components:
 #' 
@@ -594,6 +604,8 @@ bvsresponse <- function(x, response, nNodes){
   res
 }
 
+#' Prints 'bvsresponse'.
+#' 
 #' Prints a 'bvsresponse' object to the console.
 #' 
 #' @param x A 'bvsresponse' object
@@ -612,7 +624,7 @@ print.bvsresponse <- function(x, ...){
   }
 }
 
-#' Parents
+#' Parents.
 #'
 #' @param x The object for which to get the parents
 #' @param i Which node

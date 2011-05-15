@@ -1,8 +1,8 @@
 \name{pintersect}
 \alias{pintersect}
-\title{.}
+\title{Undocumented.}
 \usage{pintersect(parental1, parental2, count=F)}
-\description{...}
+\description{Undocumented.}
 \details{....}
 \arguments{\item{parental1}{...}
 \item{parental2}{...}

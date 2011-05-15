@@ -1,7 +1,7 @@
 \name{getbvsrl}
-\title{Extract parts of a bvsresponse...}
+\title{Extract parts of a 'bvsresponse list'.}
 \usage{\method{[}{bvsresponse.list}(x, i)}
-\description{Extract parts of a bvsresponse.list}
+\description{Extract parts of a 'bvsresponse list'.}
 \details{Operator that acts on objects of class \code{bvsresponse.list} to extract 
 parts of the list}
 \value{An object of class \code{bvsresponse.list}, consisting the parts 

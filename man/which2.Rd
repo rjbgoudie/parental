@@ -1,8 +1,8 @@
 \name{which2}
 \alias{which2}
-\title{.}
+\title{Undocumented.}
 \usage{which2(el, set)}
-\description{...}
+\description{Undocumented.}
 \details{...}
 \value{...}
 \arguments{\item{el}{...}

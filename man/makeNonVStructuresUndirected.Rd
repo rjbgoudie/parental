@@ -1,8 +1,8 @@
 \name{makeNonVStructuresUndirected}
 \alias{makeNonVStructuresUndirected}
-\title{.}
+\title{Undocumented.}
 \usage{makeNonVStructuresUndirected(bn)}
-\description{...}
+\description{Undocumented.}
 \details{...}
 \value{...}
 \arguments{\item{bn}{...}}
