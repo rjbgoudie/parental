@@ -8,12 +8,20 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' ...
+#' Draw a 'random' BN
 #' 
-#' ....
-#' @param n ...
-#' @param maxNumberParents ...
+#' Generates a BN, by choosing an order, then sampling a BN that respects 
+#' that order
+#' 
+#' @param n The number of nodes for the Bayesian network. An integer.
+#' @param maxNumberParents The maximum indegree of the network
+#' @return A new \code{\link{bn}}.
 #' @export
+#' @seealso An alternative \code{\link{sampleBN2}}
+#' @examples
+#' sampleBN(5)
+#' sampleBN(10)
+#' sampleBN(10, 2)
 sampleBN <- function(n, maxNumberParents = NULL){
   nodeSeq <- seq_len(n)
   
@@ -59,12 +67,15 @@ sampleBN <- function(n, maxNumberParents = NULL){
   out
 }
 
-#' ...
+#' Draw a 'random' BN
 #' 
-#' ....
-#' @param n ...
-#' @param k ...
+#' NOT currently working?
+#' 
+#' @param n The number of nodes
+#' @param k The dim of the hypercube.
+#' @seealso \code{\link{sampleBN}}
 #' @export
+#' @return A BN
 sampleBN2 <- function(n, k){
   # hypercube
   # the higher k the sparser the partial order
@@ -112,16 +123,41 @@ expected.sample <- function(n, size, replace, prob){
 }
 
 ##### sensitivity to the order in which parents are specified
-#' ...
+#' Draw data according to a Bayesian Network
 #' 
-#' ....
-#' @param object A bn
+#' 
+#' @param object A object of class \code{\link{bn}}
 #' @param nsim Number of simulations
 #' @param seed The starting seed (UNIMPLEMENTED)
 #' @param ptables ...
 #' @param expectation ...
-#' @param ... Further arguments (unused)
+#' @param ... Further arguments, currently unused
 #' @export
+#' @seealso \code{\link{cptBinary}}
+#' @examples
+#' cpt <- list(
+#'   as.table(array(c(0.7, 0.3), 2)), 
+#'   as.table(array(c(0.5, 0.5, 0.2, 0.8), c(2, 2)))
+#' )
+#' net <- bn(NULL, 1)
+#' sim <- simulate(object = net, nsim = 1000, ptables = cpt)
+#' 
+#' # a three node example
+#' cpt <- list(
+#'   as.table(array(c(0.7, 0.3), 2)), 
+#'   as.table(array(c(0.5, 0.5,
+#'                    0.2, 0.8),
+#'                  c(2, 2))),
+#'   as.table(array(c(
+#'               # prob of 1 then 2 given
+#'     0.8, 0.2, # p1 = 1, p2 = 1
+#'     0.2, 0.8, # p1 = 2, p2 = 1
+#'     0.2, 0.8, # p1 = 1, p2 = 2
+#'     0.2, 0.8  # p1 = 2, p2 = 2
+#'   ), c(2, 2, 2)))
+#' )
+#' net <- bn(NULL, 1L, c(1L, 2L))
+#' sim <- simulate(object = net, nsim = 1000, ptables = cpt)
 simulate.bn <- function(object, nsim, seed, ptables, expectation = F, ...){
   stopifnot(
     "bn" %in% class(object),
@@ -284,12 +320,14 @@ marginal.probs <- function(bn, ptables, N){
   }
 }
 
-#' ...
+#' Create a binary Conditional Probability Table
 #' 
-#' ....
-#' @param i ...
-#' @param j ...
+#' @param i The probability of value 1
+#' @param j The probability of value 2
+#' @seealso \code{\link{simulate.bn}}
 #' @export
-cptBinary <- function(i,j){
+#' @examples
+#' cptBinary(0.2, 0.8)
+cptBinary <- function(i, j){
   as.table(array(c(i, j), 2))
 }
