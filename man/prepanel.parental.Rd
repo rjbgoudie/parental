@@ -8,6 +8,7 @@
 \value{A list of length two. This contains two components: \code{xlim} 
 and \code{ylim}, each of which contain the max and min values in 
 that dimension.}
+\seealso{\code{\link{grplot}}}
 \arguments{\item{x}{The x-coordinates of the nodes}
 \item{y}{The y-coordinates of the nodes}
 \item{parents}{An object of class 'parental'}

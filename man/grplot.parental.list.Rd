@@ -9,6 +9,7 @@
 \details{Plots a parental graph, by default using the layout routines of the 
 package 'network'.}
 \value{A lattice plot}
+\seealso{\code{\link{grplot.parental}}, \code{\link{panel.parental}}}
 \arguments{\item{parentallist}{An object of class 'parental.list'}
 \item{col}{A vector of colours for the nodes (FIXME - does not currently 
 work.)}
@@ -22,3 +23,6 @@ currently work.)}
 \item{grobNodeSize}{A function that can compute the sizes of the nodes}
 \item{offset}{A offset}
 \item{...}{Further arguments (not currently passed on?)}}
+\examples{x <- parental(c(), c(1), c(2))
+y <- parental(c(), c(3), c())
+grplot(parental.list(x, y))}
