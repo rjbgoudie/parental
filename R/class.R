@@ -40,9 +40,10 @@ NULL
 #' @return An object of class \code{parental}.
 #' @keywords constructor
 #' @export
+#' @seealso \code{\link{bn}}
 #' @examples
 #' parental(c(), 1, 2)
-#' 
+#' parental(3, c(), 1)
 #' parental(c(), c(1, 3), c())
 parental <- function(...){
   parents <- list(...)
@@ -57,10 +58,13 @@ parental <- function(...){
 #' \code{bn} is a subclass of \code{parental}. See \code{\link{parental}} 
 #' for detailed documentation.
 #' 
-#' @param ...  A series of vectors specifying the parents of each node. 
+#' @param ... A series of vectors specifying the parents of each node. 
 #'   These vectors must be of storage.mode "integer".
 #' @return An object of class 'bn'.
 #' @export
+#' @seealso \code{\link{parental}}
+#' @examples
+#' bn(c(), 1, 2)
 bn <- function(...){
   parents <- list(...)
   parents <- lapply(parents, as.integer)
@@ -88,9 +92,15 @@ bvs <- function(...){
 
 #' Constructor function for a 'parental.list' object
 #' 
-#' @param ...  A series of objects of class \code{parental}.
+#' @param ... A series of objects of class \code{parental}.
 #' @return An object of class 'parental.list'
 #' @export
+#' @seealso \code{\link{parental}}, \code{\link{bn.list}}, 
+#'   \code{\link{[.parental.list}}, \code{\link{c.parental.list}}
+#' @examples
+#' p1 <- parental(c(), c(1), c(1, 2, 4), c(3))
+#' p2 <- parental(c(2), c(), c(4), c(2, 3))
+#' x <- parental.list(p1, p2)
 parental.list <- function(...){
   parentallist <- list(...)
   class(parentallist) <- c("parental.list")
@@ -111,6 +121,14 @@ parental.list <- function(...){
 #' @aliases [.parental.list
 #' @usage \method{[}{parental.list}(x, i)
 #' @name getpl
+#' @seealso \code{\link{parental.list}}, \code{\link{c.parental.list}}
+#' @examples
+#' p1 <- parental(c(), c(1), c(1, 2, 4), c(3))
+#' p2 <- parental(c(2), c(), c(4), c(2, 3))
+#' x <- parental.list(p1, p2)
+#' x[1]
+#' x[[1]]
+#' x[2]
 "[.parental.list" <- function(x, i){
   x <- unclass(x)[i]
   class(x) <- "parental.list"
@@ -124,6 +142,14 @@ parental.list <- function(...){
 #' @param ... A series of objects of class 'bn'.
 #' @return An object of class 'bn.list'
 #' @export
+#' @seealso \code{\link{[.bn.list}}, \code{\link{c.bn.list}}
+#' @examples
+#' p1 <- bn(c(), c(1), c(1, 2, 4), c())
+#' p2 <- bn(c(2), c(), c(1), c())
+#' x <- bn.list(p1, p2)
+#' x[1]
+#' x[[1]]
+#' x[2]
 bn.list <- function(...){
   bnlist <- list(...)
   class(bnlist) <- c("bn.list", "parental.list")
@@ -144,6 +170,14 @@ bn.list <- function(...){
 #' @usage \method{[}{bn.list}(x, i)
 #' @S3method "[" bn.list
 #' @method "[" bn.list
+#' @seealso \code{\link{bn.list}}
+#' @examples
+#' p1 <- bn(c(), c(1), c(1, 2, 4), c())
+#' p2 <- bn(c(2), c(), c(1), c())
+#' x <- bn.list(p1, p2)
+#' x[1]
+#' x[[1]]
+#' x[2]
 "[.bn.list" <- function(x, i){
   x <- unclass(x)[i]
   class(x) <- c("bn.list", "parental.list")
@@ -183,14 +217,20 @@ bvsresponse.list <- function(...){
 
 #' Check validity of x
 #' 
+#' Checks the validity of objects
 #' 
 #' @param x Object to check for validity
 #' @return A logical indicating validity.
+#' @seealso \code{\link{is.valid.parental}},
+#'   \code{\link{is.valid.bn}}, \code{\link{is.valid.bvs}},
+#'   \code{\link{is.valid.bvsresponse}}
 #' @export
 is.valid <- function(x){
   UseMethod("is.valid")
 }
 
+#' Checks a 'parental' for validity
+#' 
 #' Checks whether the supplied \code{parental} is valid.
 #' Tests that the parents are sorted correctly, are of 
 #' storage.mode() == "integer"
@@ -200,6 +240,10 @@ is.valid <- function(x){
 #'   \code{parental} object
 #' @S3method is.valid parental
 #' @method is.valid parental
+#' @seealso \code{\link{is.valid.bn}}
+#' @examples
+#' x <- parental(c(), c(1), c(1, 2, 4), c(3))
+#' is.valid(x)
 is.valid.parental <- function(x){
   stopifnot("parental" %in% class(x))
   tryCatch({
@@ -244,6 +288,8 @@ is.valid.bvs <- function(x){
     error = function(e) F)
 }
 
+#' Tests a 'bn' for validity
+#' 
 #' Checks whether the supplied 'bn is valid.
 #' Tests that the parents are sorted correctly, are of 
 #' storage.mode() == "integer".
@@ -253,6 +299,10 @@ is.valid.bvs <- function(x){
 #' @return A logical of length 1 indicating whether x is a valid 'bn' object
 #' @S3method is.valid bn
 #' @method is.valid bn
+#' @seealso \code{\link{is.valid.parental}}
+#' @examples
+#' x <- bn(c(), 1, 2)
+#' is.valid(x)
 is.valid.bn <- function(x){
   stopifnot("bn" %in% class(x),
             "parental" %in% class(x))
@@ -278,6 +328,13 @@ is.valid.bn <- function(x){
 #'   parental.lists
 #' @S3method c parental.list
 #' @method c parental.list
+#' @seealso \code{\link{parental.list}}, \code{\link{[.parental.list}}
+#' @examples
+#' p1 <- parental(c(), c(1), c(1, 2, 4), c(3))
+#' p2 <- parental(c(2), c(), c(4), c(2, 3))
+#' x <- parental.list(p1, p2)
+#' y <- parental.list(p1, p1)
+#' c(x, y)
 c.parental.list <- function(...){
   out <- NextMethod("c")
   class(out) <- "parental.list"
@@ -290,6 +347,13 @@ c.parental.list <- function(...){
 #' @return An new 'bn.list' object, including all the supplied bn.lists
 #' @S3method c bn.list
 #' @method c bn.list
+#' @seealso \code{\link{bn.list}}, \code{\link{[.bn.list}}
+#' @examples
+#' p1 <- bn(c(), c(1), c(1, 2, 4), c())
+#' p2 <- bn(c(2), c(), c(1), c())
+#' x <- bn.list(p1, p2)
+#' y <- bn.list(p2, p2, p1)
+#' c(x, y)
 c.bn.list <- function(...){
 
   out <- NextMethod("c")
@@ -300,10 +364,16 @@ c.bn.list <- function(...){
 #' Prints a 'parental.list' object to the console.
 #' 
 #' @param x A 'parental.list' object
-#' @param ... Further arguments (unused)
+#' @param ... Further arguments, currently unused.
 #' @return Prints the 'parental.list' object to the console.
 #' @S3method print parental.list
 #' @method print parental.list
+#' @seealso \code{\link{parental.list}}
+#' @examples
+#' p1 <- parental(c(), c(1), c(1, 2, 4), c(3))
+#' p2 <- parental(c(2), c(), c(4), c(2, 3))
+#' x <- parental.list(p1, p2)
+#' x
 print.parental.list <- function(x, ...){
 
   print(unlist(lapply(x, as.character, pretty = T)))
@@ -312,10 +382,14 @@ print.parental.list <- function(x, ...){
 #' Prints a \code{parental} object to the console.
 #' 
 #' @param x A \code{parental} object
-#' @param ... Further arguments (unused)
+#' @param ... Further arguments, currently unused
 #' @return Prints the \code{parental} object to the console.
 #' @S3method print parental
 #' @method print parental
+#' @seealso \code{\link{parental}}
+#' @examples
+#' p1 <- parental(c(), c(1), c(1, 2, 4), c(3))
+#' p1
 print.parental <- function(x, ...){
   print(as.character(x, pretty = T))
 }
@@ -327,17 +401,21 @@ print.parental <- function(x, ...){
 #' @return Prints the 'bn' object to the console.
 #' @S3method print bn
 #' @method print bn
+#' @seealso \code{\link{bn}}
+#' @examples
+#' x <- bn(c(), 1, 2)
+#' x
 print.bn <- function(x, ...){
   print(as.character(x, pretty = T))
 }
 
 #' Rename nodes
 #' 
-#' A generic
+#' A generic for renaming nodes
 #' 
-#' @param x object to rename
-#' @param ... unused
-#' 
+#' @param x Object to rename
+#' @param ... Further arguments, passed to method
+#' @seealso \code{\link{renameNodes.parental.list}}
 #' @export
 renameNodes <- function(x, ...){
   UseMethod("renameNodes")
@@ -349,7 +427,7 @@ renameNodes <- function(x, ...){
 #' @param x A parental.list
 #' @param newnames A character vector specifying the new names for the 
 #'   nodes
-#' @param ... unused
+#' @param ... Further arguments, currently unused
 #'
 #' @return The parental.list with renamed nodes
 #' @S3method renameNodes parental.list
@@ -375,8 +453,11 @@ renameNodes.parental.list <- function(x, newnames, ...){
 #' Return a complete graph
 #'
 #' @param n the number of nodes
-#' @return a complete parental graph
+#' @return A complete \code{parental} graph
 #' @export
+#' @seealso \code{\link{empty}}, \code{\link{parental}}
+#' @examples
+#' complete(5)
 complete <- function(n){
   stopifnot(class(n) %in% c("numeric", "integer"),
             n >= 1,
@@ -397,6 +478,10 @@ complete <- function(n){
 #' @param response For "bvsresponse", which node is the response
 #' @return An empty graph of the specified class.
 #' @export
+#' @seealso \code{\link{complete}}, \code{\link{parental}}, \code{\link{bn}}
+#' @examples
+#' empty(5)
+#' empty(5, "bn")
 empty <- function(n, class = "parental", response){
   stopifnot(class(n) %in% c("numeric", "integer"),
             n >= 1,
@@ -512,7 +597,7 @@ bvsresponse <- function(x, response, nNodes){
 #' Prints a 'bvsresponse' object to the console.
 #' 
 #' @param x A 'bvsresponse' object
-#' @param ... unused
+#' @param ... Further arguments, currently unused
 #' @return Prints the 'bvsresponse' object to the console.
 #' @S3method print bvsresponse
 #' @method print bvsresponse
@@ -533,6 +618,9 @@ print.bvsresponse <- function(x, ...){
 #' @param i Which node
 #' @return The parents
 #' @export
+#' @examples
+#' x <- parental(c(), 1, c(2, 4), c())
+#' parents(x, 3)
 parents <- function(x, i){
   x[[i]]
 }
