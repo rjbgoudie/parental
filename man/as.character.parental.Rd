@@ -12,4 +12,4 @@
 as.character(x)
 
 x <- parental(c(3), c(1), c(1, 2))
-as.character(x, pretty = T)}
+as.character(x, pretty = TRUE)}

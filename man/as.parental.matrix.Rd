@@ -16,7 +16,7 @@ For type = "edgelist", the number of nodes n must be specified.}
 \item{type}{Either "adjacency" or "edgelist"}
 \item{n}{The number of nodes n. Only required for type = "edgelist"}
 \item{...}{Further arguments (unused)}}
-\examples{adjmat <- matrix(sample(c(0, 1), 100, rep = T), 10, 10)
+\examples{adjmat <- matrix(sample(c(0, 1), 100, rep = TRUE), 10, 10)
 diag(adjmat) <- 0
 as.parental(adjmat)
 
