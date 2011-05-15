@@ -7,4 +7,6 @@
 \value{A vector of length \code{nNodes(x)}, with the indegrees of each 
 node of \code{x}}
 \arguments{\item{x}{An object of class \code{parental}}
-\item{...}{Further arguments (unused)}}
+\item{...}{Further arguments, currently unused}}
+\examples{x <- parental(c(), c(3), c(1), c(1, 2))
+indegrees(x)}

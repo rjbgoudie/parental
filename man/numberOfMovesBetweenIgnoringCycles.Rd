@@ -25,3 +25,6 @@ each node should be returned (components = T).}
 \item{allowFlips}{Allow single-edge flip moves. This is not compatible 
 with components = T, because it is not clear for which node to 
 account flip moves.}}
+\examples{bn1 <- bn(2, integer(0))
+bn2 <- bn(integer(0), 1)
+numberOfMovesBetweenIgnoringCycles(bn1, bn2)}

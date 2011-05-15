@@ -10,12 +10,16 @@
 
 #' Number of nodes
 #' 
-#' A generic to get the number of nodes.
+#' A generic to get the number of nodes of a graph object.
 #' 
-#' @param x ...
-#' @param ... ...
+#' @param x A graph object
+#' @param ... Further arguments, passed to method
 #' @return The number of nodes in \code{parental}, an integer.
+#' @seealso \code{\link{nNodes.parental}}
 #' @export
+#' @examples
+#' x <- parental(c(), c(3), c(1), c(1, 2))
+#' nNodes(x)
 nNodes <- function(x, ...){
   UseMethod("nNodes")
 }
@@ -30,6 +34,9 @@ nNodes <- function(x, ...){
 #' @export
 #' @S3method nNodes parental
 #' @method nNodes parental
+#' @examples
+#' x <- parental(c(), c(3), c(1), c(1, 2))
+#' nNodes(x)
 nNodes.parental <- function(x, ...){
   stopifnot(
     "parental" %in% class(x)
@@ -42,10 +49,14 @@ nNodes.parental <- function(x, ...){
 #' A generic to get the indegree of each node of the supplied graph
 #' 
 #' @param x An object of class \code{parental}
-#' @param ... ...
+#' @param ... Further arguments, passed to method
 #' @return A vector of length \code{nNodes(x)}, with the indegrees of each 
 #'   node of \code{x}
 #' @export
+#' @seealso \code{\link{indegrees.parental}}
+#' @examples
+#' x <- parental(c(), c(3), c(1), c(1, 2))
+#' indegrees(x)
 indegrees <- function(x, ...){
   UseMethod("indegrees")
 }
@@ -55,12 +66,15 @@ indegrees <- function(x, ...){
 #' Get the indegree of each node of the supplied graph
 #' 
 #' @param x An object of class \code{parental}
-#' @param ... Further arguments (unused)
+#' @param ... Further arguments, currently unused
 #' @return A vector of length \code{nNodes(x)}, with the indegrees of each 
 #'   node of \code{x}
 #' @export
 #' @S3method indegrees parental
 #' @method indegrees parental
+#' @examples
+#' x <- parental(c(), c(3), c(1), c(1, 2))
+#' indegrees(x)
 indegrees.parental <- function(x, ...){
   stopifnot(
     "parental" %in% class(x)
@@ -76,6 +90,9 @@ indegrees.parental <- function(x, ...){
 #' @param parental An object of class \code{parental}
 #' @return The number of edges in \code{parental}, an integer.
 #' @export
+#' @examples
+#' x <- parental(c(), c(3), c(1), c(1, 2))
+#' nEdges(x)
 nEdges <- function(parental){
   stopifnot("parental" %in% class(parental))
   length(unlist(parental))
@@ -90,6 +107,9 @@ nEdges <- function(parental){
 #' @return A list, the ith component of which is a numeric vector listing 
 #'   the nodes that are children of node i.
 #' @export
+#' @examples
+#' x <- parental(c(), c(3), c(1), c(1, 2))
+#' getChildren(x)
 getChildren <- function(parental){
   stopifnot("parental" %in% class(parental))
   
@@ -139,6 +159,9 @@ getChildren <- function(parental){
 #' @return A logical. TRUE if \code{parental} is acyclic. FALSE if 
 #'   \code{parental} contains a cycle.
 #' @export
+#' @examples
+#' x <- parental(c(), c(3), c(1), c(1, 2))
+#' checkAcyclic(x)
 checkAcyclic <- function(parental){
   stopifnot("parental" %in% class(parental))
   # Graphs, Networks and Algorithms By Dieter Jungnickel
@@ -176,6 +199,9 @@ checkAcyclic <- function(parental){
 #' @param parental An object of class \code{parental}
 #' @return A numeric vector. The order.
 #' @export
+#' @examples
+#' x <- parental(c(), c(3), c(1), c(1, 2))
+#' topologicallyOrder(x)
 topologicallyOrder <- function(parental){
   stopifnot("parental" %in% class(parental))
   # slow but worth it for error checking for now
@@ -228,6 +254,9 @@ topologicallyOrder <- function(parental){
 #'   setdiff(y, x) in component 2 (apart from the differences described 
 #'   above).
 #' @export
+#' @examples
+#' setdiff2(c(1,1,2), c(2, 3))[[1]]
+#' setdiff(c(1, 1, 2), c(2, 3))
 setdiff2 <- function(x, y){
   list(x[match(x, y, 0L) == 0L], y[match(y, x, 0L) == 0L])
 }
@@ -259,6 +288,10 @@ setdiff2 <- function(x, y){
 #'     The figure in position i of the vector relates to the number changes 
 #'     that need to be made to change the inward bound edges toward node i.
 #' @export
+#' @examples
+#' bn1 <- bn(2, integer(0))
+#' bn2 <- bn(integer(0), 1)
+#' numberOfMovesBetweenIgnoringCycles(bn1, bn2)
 numberOfMovesBetweenIgnoringCycles <- function(x, y, 
                                                components = F,
                                                allowFlips = F){
@@ -435,6 +468,9 @@ lpunion <- function(pl){
 #' @param x An object of class 'bn'.
 #' @return A matrix of dimension nNodes(x) x nNodes(x)
 #' @export
+#' @examples
+#' x <- bn(c(), c(3), c(1), c(1, 2))
+#' routes(x)
 routes <- function(x){
   stopifnot("bn" %in% class(x))
   nNodes <- nNodes(x)
@@ -462,6 +498,14 @@ routes <- function(x){
 #' @param i The node from which the added edge emanates
 #' @param j The node that the added edge goes to
 #' @export
+#' @seealso \code{\link{routes}}, \code{\link{routesRemoveEdge}}
+#' @examples
+#' x1 <- bn(c(), c(3), c(1), c(1, 2))
+#' x2 <- bn(c(), c(3), c(1), c(1, 2, 3))
+#' 
+#' y <- routes(x1)
+#' routesAddEdge(y, 3, 4)
+#' routes(x2)
 routesAddEdge <- function(x, i, j){
   x + x[, i] %*% .Internal(t.default((x[j, ])))
 }
@@ -478,17 +522,29 @@ routesAddEdge <- function(x, i, j){
 #' @param i The node from which the removed edge emanates
 #' @param j The node that the removed edge goes to
 #' @export
+#' @seealso \code{\link{routes}}, \code{\link{routesAddEdge}}
+#' @examples
+#' x1 <- bn(c(), c(3), c(1), c(1, 2))
+#' x2 <- bn(c(), c(3), c(1), c(1, 2, 3))
+#' 
+#' y <- routes(x2)
+#' routesRemoveEdge(y, 3, 4)
+#' routes(x1)
 routesRemoveEdge <- function(x, i, j){
   x - x[, i] %*% .Internal(t.default((x[j, ])))
 }
 
 #' Neighbourhood size
 #' 
-#' Computes the number of 
+#' Computes the number of DAGs that can be reach by adding, removing or 
+#' reversing the direction (?) of a single arc
 #' 
 #' @param x An object of class \code{parental}
 #' @return The size of the neighbourhood (an integer)
 #' @export
+#' @examples
+#' x <- bn(c(), c(3), c(1), c(1, 2))
+#' neighbourhoodSize(x)
 neighbourhoodSize <- function(x){
   # this algorithm is pretty rubbish
   stopifnot("bn" %in% class(x))
