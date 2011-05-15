@@ -9,4 +9,4 @@
 \item{checkAcyclic}{Should the bn be checked for cycles? A logical.}
 \item{...}{Further arguments (unused)}}
 \examples{x <- "[][1][1,2][3]"
-as.bn(x, pretty = T)}
+as.bn(x, pretty = TRUE)}

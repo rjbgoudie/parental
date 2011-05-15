@@ -12,7 +12,7 @@ objects.}
 \examples{x <- bn(c(), c(1), c(1, 2))
 as.parental(x)
 
-adjmat <- matrix(sample(c(0, 1), 100, rep = T), 10, 10)
+adjmat <- matrix(sample(c(0, 1), 100, rep = TRUE), 10, 10)
 diag(adjmat) <- 0
 as.parental(adjmat)
 
@@ -21,7 +21,7 @@ colnames(edgelist) <- c("row", "col")
 as.parental(edgelist, type = "edgelist", n = 2)
 
 x <- "[3][1][2][1][1,3]"
-as.parental(x, pretty = T)
+as.parental(x, pretty = TRUE)
 
 x <- "3,1,2,1,c(1,3)"
 as.parental(x)

@@ -37,12 +37,12 @@ as.adjacency <- function(x, ...) {
 #' @seealso \code{\link{as.bn.matrix}}, \code{\link{as.bn.character}}, 
 #'   \code{\link{as.bn.graphNEL}}
 #' @examples
-#' edgelist <- matrix(c(c(1,2), c(2, 3)), byrow = T, nrow = 2, ncol = 2)
+#' edgelist <- matrix(c(c(1,2), c(2, 3)), byrow = TRUE, nrow = 2, ncol = 2)
 #' colnames(edgelist) <- c("row", "col")
-#' as.bn(edgelist, type = "edgelist", n = 2)
+#' as.bn(edgelist, type = "edgelist", n = 3)
 #' 
 #' x <- "[][1][1,2][3]"
-#' as.bn(x, pretty = T)
+#' as.bn(x, pretty = TRUE)
 #' 
 #' if (require(graph)){
 #'   set.seed(123)
@@ -82,9 +82,9 @@ as.graph <- function(x, ...){
 #' @S3method as.bn matrix
 #' @method as.bn matrix
 #' @examples
-#' edgelist <- matrix(c(c(1,2), c(2, 3)), byrow = T, nrow = 2, ncol = 2)
+#' edgelist <- matrix(c(c(1,2), c(2, 3)), byrow = TRUE, nrow = 2, ncol = 2)
 #' colnames(edgelist) <- c("row", "col")
-#' as.bn(edgelist, type = "edgelist", n = 2)
+#' as.bn(edgelist, type = "edgelist", n = 3)
 as.bn.matrix <- function(x, ...){
   class(x) <- "matrix"
   out <- as.parental(x, ...)
@@ -146,7 +146,7 @@ as.adjacency.parental <- function(x, ...){
 #' x <- bn(c(), c(1), c(1, 2))
 #' as.parental(x)
 #' 
-#' adjmat <- matrix(sample(c(0, 1), 100, rep = T), 10, 10)
+#' adjmat <- matrix(sample(c(0, 1), 100, rep = TRUE), 10, 10)
 #' diag(adjmat) <- 0
 #' as.parental(adjmat)
 #' 
@@ -155,7 +155,7 @@ as.adjacency.parental <- function(x, ...){
 #' as.parental(edgelist, type = "edgelist", n = 2)
 #' 
 #' x <- "[3][1][2][1][1,3]"
-#' as.parental(x, pretty = T)
+#' as.parental(x, pretty = TRUE)
 #' 
 #' x <- "3,1,2,1,c(1,3)"
 #' as.parental(x)
@@ -183,7 +183,7 @@ as.parental <- function(x, ...){
 #' @method as.parental character
 #' @examples
 #' x <- "[3][1][2][1][1,3]"
-#' as.parental(x, pretty = T)
+#' as.parental(x, pretty = TRUE)
 #' 
 #' x <- "3,1,2,1,c(1,3)"
 #' as.parental(x)
@@ -236,7 +236,7 @@ as.parental.character <- function(x, pretty = F, ...){
 #' @method as.bn character
 #' @examples
 #' x <- "[][1][1,2][3]"
-#' as.bn(x, pretty = T)
+#' as.bn(x, pretty = TRUE)
 as.bn.character <- function(x, checkAcyclic = T, ...){
   out <- as.parental(x, ...)
   if ("parental.list" %in% class(out)){
@@ -288,7 +288,7 @@ as.bn.character <- function(x, checkAcyclic = T, ...){
 #' @S3method as.parental matrix
 #' @method as.parental matrix
 #' @examples
-#' adjmat <- matrix(sample(c(0, 1), 100, rep = T), 10, 10)
+#' adjmat <- matrix(sample(c(0, 1), 100, rep = TRUE), 10, 10)
 #' diag(adjmat) <- 0
 #' as.parental(adjmat)
 #' 
@@ -374,7 +374,7 @@ as.parental.bn <- function(x, ...){
 #' as.character(x)
 #' 
 #' x <- parental(c(3), c(1), c(1, 2))
-#' as.character(x, pretty = T)
+#' as.character(x, pretty = TRUE)
 as.character.parental <- function (x, pretty = F, ...) {
   if (pretty){
     # Collapse to comma separated, and paste together

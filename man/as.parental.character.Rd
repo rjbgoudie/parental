@@ -9,7 +9,7 @@
 \item{pretty}{A logical indicating whether the supplied object is pretty}
 \item{...}{Further arguments (unused)}}
 \examples{x <- "[3][1][2][1][1,3]"
-as.parental(x, pretty = T)
+as.parental(x, pretty = TRUE)
 
 x <- "3,1,2,1,c(1,3)"
 as.parental(x)}
