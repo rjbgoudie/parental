@@ -19,8 +19,9 @@ Conformance with object requirements can be tested by \code{is.valid()}
 [1] http://cran.r-project.org/doc/manuals/R-lang.html#Constants}
 \value{An object of class \code{parental}.}
 \keyword{constructor}
+\seealso{\code{\link{bn}}}
 \arguments{\item{...}{A series of vectors specifying the parents of each node. These 
 vectors must be of \code{storage.mode} "integer".}}
 \examples{parental(c(), 1, 2)
-
+parental(3, c(), 1)
 parental(c(), c(1, 3), c())}

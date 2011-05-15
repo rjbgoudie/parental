@@ -3,6 +3,7 @@
 \title{Rename nodes...}
 \usage{renameNodes(x, ...)}
 \description{Rename nodes}
-\details{A generic}
-\arguments{\item{x}{object to rename}
-\item{...}{unused}}
+\details{A generic for renaming nodes}
+\seealso{\code{\link{renameNodes.parental.list}}}
+\arguments{\item{x}{Object to rename}
+\item{...}{Further arguments, passed to method}}
