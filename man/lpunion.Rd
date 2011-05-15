@@ -1,7 +1,7 @@
 \name{lpunion}
 \alias{lpunion}
-\title{.}
+\title{Undocumented.}
 \usage{lpunion(pl)}
-\description{...}
+\description{Undocumented.}
 \details{....}
 \arguments{\item{pl}{...}}

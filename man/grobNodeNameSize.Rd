@@ -1,8 +1,8 @@
 \name{grobNodeNameSize}
 \alias{grobNodeNameSize}
-\title{Return the size of node when the name of the node is plotted...}
+\title{Return the size of node when the name of the node is plotted.}
 \usage{grobNodeNameSize(node, parents, rawdata)}
-\description{Return the size of node when the name of the node is plotted}
+\description{Return the size of node when the name of the node is plotted.}
 \details{This returns size of the label. Specifically, the return width is number 
 of characters in the label.
 

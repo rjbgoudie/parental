@@ -1,8 +1,8 @@
 \name{expected.sample}
 \alias{expected.sample}
-\title{.}
+\title{Undocumented.}
 \usage{expected.sample(n, size, replace, prob)}
-\description{...}
+\description{Undocumented.}
 \details{....}
 \arguments{\item{n}{...}
 \item{size}{...}

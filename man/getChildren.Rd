@@ -1,8 +1,8 @@
 \name{getChildren}
 \alias{getChildren}
-\title{Children lists...}
+\title{Children lists.}
 \usage{getChildren(parental)}
-\description{Children lists}
+\description{Children lists.}
 \details{Create a list, with each component listing the direct children of the 
 corresponding node in the supplied parental.}
 \value{A list, the ith component of which is a numeric vector listing 

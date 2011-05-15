@@ -1,8 +1,8 @@
 \name{maximallyOrientEdges.matrix}
 \alias{maximallyOrientEdges.matrix}
-\title{.}
+\title{Undocumented.}
 \usage{\method{maximallyOrientEdges}{matrix} (pdag, verbose=F, ...)}
-\description{...}
+\description{Undocumented.}
 \details{...}
 \value{...}
 \arguments{\item{pdag}{...}

@@ -1,4 +1,4 @@
-#' Put Strips on the Boundary of a Lattice Display
+#' Put Strips on the Boundary of a Lattice Display.
 #' 
 #' Try to update a "trellis" object so that strips are only shown on the 
 #' top and left boundaries when printed, instead of in every panel as is 
@@ -126,7 +126,7 @@ useOuterStrips2 <-
          layout         = c(prod(topdimx), prod(leftdimx)))
 }
 
-#' ...
+#' Undocumented.
 #' 
 #' ...
 #' 
@@ -143,7 +143,7 @@ strip.custom2 <-
     }
 }
 
-#' function title
+#' Undocumented.
 #' 
 #' description
 #' 
@@ -353,7 +353,7 @@ strip.default2 <-
     lattice:::upViewport()
 }
 
-#' function title
+#' Undocumented.
 #' 
 #' description
 #' 

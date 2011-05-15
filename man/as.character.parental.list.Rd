@@ -1,8 +1,8 @@
 \name{as.character.parental.list}
 \alias{as.character.parental.list}
-\title{Convert a 'parental...}
+\title{Convert a 'parental list' to a character vector.}
 \usage{\method{as.character}{parental.list} (x, pretty=F, ...)}
-\description{Convert a 'parental.list' to a character vector.}
+\description{Convert a 'parental list' to a character vector.}
 \value{A character vector.}
 \arguments{\item{x}{A object of class 'parental.list'. A list of \code{parental} 
 objects}

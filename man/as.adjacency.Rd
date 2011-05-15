@@ -1,8 +1,8 @@
 \name{as.adjacency}
 \alias{as.adjacency}
-\title{Convert an object to an adjacency matrix...}
+\title{Convert an object to an adjacency matrix.}
 \usage{as.adjacency(x, ...)}
-\description{Convert an object to an adjacency matrix}
+\description{Convert an object to an adjacency matrix.}
 \details{A generic for converting objects to adjacency matrices.
 
 An adjacency matrix is a matrix A of dimension n x n, with A[i, j] = 1 if 

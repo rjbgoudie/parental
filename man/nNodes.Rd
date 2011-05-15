@@ -1,8 +1,8 @@
 \name{nNodes}
 \alias{nNodes}
-\title{Number of nodes...}
+\title{Number of nodes.}
 \usage{nNodes(x, ...)}
-\description{Number of nodes}
+\description{Number of nodes.}
 \details{A generic to get the number of nodes of a graph object.}
 \value{The number of nodes in \code{parental}, an integer.}
 \seealso{\code{\link{nNodes.parental}}}

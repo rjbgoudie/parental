@@ -10,7 +10,7 @@
 
 # returns a list of every DAG with n nodes
 
-#' Enumerate the space of BNs
+#' Enumerate the space of BNs.
 #' 
 #' Enumerate (ie make a list of, not just count) the entire space of 
 #' Bayesian Networks models, on a given number of nodes.
@@ -112,7 +112,7 @@ enumerateBNSpace <- function(n,
   family
 }
 
-#' Filter cyclic graphs
+#' Filter cyclic graphs.
 #' 
 #' Removes the cyclic graphs from a list of graphs
 #' 

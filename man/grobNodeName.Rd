@@ -1,8 +1,8 @@
 \name{grobNodeName}
 \alias{grobNodeName}
-\title{Return a grob for node "node" when the name of the node is plotted...}
+\title{Return a grob for node "node" when the name of the node is plotted.}
 \usage{grobNodeName(node, parents, rawdata, gp)}
-\description{Return a grob for node "node" when the name of the node is plotted}
+\description{Return a grob for node "node" when the name of the node is plotted.}
 \value{A "grob"}
 \seealso{\code{\link{grplot}}}
 \arguments{\item{node}{An integer of length 1, indicating which node the dimensions

@@ -1,8 +1,8 @@
 \name{is.wholenumber}
 \alias{is.wholenumber}
-\title{Tests for whole numbers...}
+\title{Tests for whole numbers.}
 \usage{is.wholenumber(x, tol=.Machine$double.eps^0.5)}
-\description{Tests for whole numbers}
+\description{Tests for whole numbers.}
 \details{Tests if x is a whole number, up to the tolerance specified by tol.
 Taken from an example on the help page for \code{\link{is.integer}}. 
 

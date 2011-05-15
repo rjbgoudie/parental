@@ -1,7 +1,7 @@
 \name{route}
 \alias{route}
-\title{Unknown...}
+\title{Unknown.}
 \usage{route(x, y)}
-\description{Unknown}
+\description{Unknown.}
 \arguments{\item{x}{An object of class \code{parental}}
 \item{y}{An object of class \code{parental}}}

@@ -1,8 +1,8 @@
 \name{c.bn.list}
 \alias{c.bn.list}
-\title{Concatenates a 'bn...}
+\title{Concatenates 'bn list'.}
 \usage{\method{c}{bn.list} (...)}
-\description{Concatenates a 'bn.list' object to the console.}
+\description{Concatenates 'bn list'.}
 \value{An new 'bn.list' object, including all the supplied bn.lists}
 \seealso{\code{\link{bn.list}}, \code{\link{[.bn.list}}}
 \arguments{\item{...}{Any number of 'bn.list' objects}}

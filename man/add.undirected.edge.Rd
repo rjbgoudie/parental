@@ -1,8 +1,8 @@
 \name{add.undirected.edge}
 \alias{add.undirected.edge}
-\title{Add undirected edge to a 'bnlearn' object...}
+\title{Add undirected edge to a 'bnlearn' object.}
 \usage{add.undirected.edge(x, from, to, check.cycles, update=T, debug=F)}
-\description{Add undirected edge to a 'bnlearn' object}
+\description{Add undirected edge to a 'bnlearn' object.}
 \details{Adding undirected edges is not an exported function in \code{bnlearn}, so 
 this function exposes this functionality.
 

@@ -1,8 +1,8 @@
 \name{as.bn}
 \alias{as.bn}
-\title{Convert an object to a bn...}
+\title{Convert an object to a bn.}
 \usage{as.bn(x, ...)}
-\description{Convert an object to a bn}
+\description{Convert an object to a bn.}
 \details{A generic function that converts objects to \code{bn} objects}
 \seealso{\code{\link{as.bn.matrix}}, \code{\link{as.bn.character}}, 
 \code{\link{as.bn.graphNEL}}}

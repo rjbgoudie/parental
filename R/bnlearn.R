@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' Conversion from 'bnlearn' object
+#' Conversion from 'bnlearn' object.
 #' 
 #' Convert a 'bnlearn' graph object to a 'parental' object.
 #' 
@@ -44,7 +44,7 @@ bnlearn2parental <- function(x){
   out
 }
 
-#' Conversion to 'bnlearn'
+#' Conversion to 'bnlearn'.
 #' 
 #' Convert a 'parental' object to a 'bnlearn' graph object
 #' 
@@ -88,7 +88,7 @@ parental2bnlearn <- function(x){
 }
 
 
-#' Add undirected edge to a 'bnlearn' object
+#' Add undirected edge to a 'bnlearn' object.
 #' 
 #' Adding undirected edges is not an exported function in \code{bnlearn}, so 
 #' this function exposes this functionality.
@@ -149,7 +149,7 @@ add.undirected.edge <- function(x, from, to, check.cycles,
   invisible(x)
 }#ARC.OPERATIONS
 
-#' (Internal) Add undirected edge to a 'bnlearn' object
+#' (Internal) Add undirected edge to a 'bnlearn' object.
 #' 
 #' This bridge to \code{bnlearn} can be temperamental because 
 #' \code{bnlearn} also has an object called \code{bn}.

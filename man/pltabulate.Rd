@@ -1,8 +1,8 @@
 \name{pltabulate}
 \alias{pltabulate}
-\title{Tabulate a parental list...}
+\title{Tabulate a parental list.}
 \usage{pltabulate(pl, pretty=F, levels, sort=F)}
-\description{Tabulate a parental list}
+\description{Tabulate a parental list.}
 \details{Tabulate a parental list.}
 \arguments{\item{pl}{A \code{parental.list} to tabulate.}
 \item{pretty}{A logical indicating how to convert the objects of

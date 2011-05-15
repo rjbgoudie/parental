@@ -1,8 +1,8 @@
 \name{distance}
 \alias{distance}
-\title{Calculate distance between two points...}
+\title{Calculate distance between two points.}
 \usage{distance(x, y)}
-\description{Calculate distance between two points}
+\description{Calculate distance between two points.}
 \details{A vectorised function for calculating the distance between two 
 points in Cartesian space. Computes the distance between \code{(x[1], 
 y[1])} and \code{(x[2], y[2])}.}

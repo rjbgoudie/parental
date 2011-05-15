@@ -1,8 +1,8 @@
 \name{maximallyOrientEdgesSlow}
 \alias{maximallyOrientEdgesSlow}
-\title{.}
+\title{Undocumented.}
 \usage{maximallyOrientEdgesSlow(pdag, ...)}
-\description{...}
+\description{Undocumented.}
 \details{A generic}
 \arguments{\item{pdag}{A pdag}
 \item{...}{Further arguments passed to methods}}

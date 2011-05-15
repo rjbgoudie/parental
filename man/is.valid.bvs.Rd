@@ -1,8 +1,9 @@
 \name{is.valid.bvs}
 \alias{is.valid.bvs}
-\title{Checks whether the supplied 'bvs' is valid.}
+\title{Check validity.}
 \usage{\method{is.valid}{bvs} (x)}
-\description{Checks whether the supplied 'bvs' is valid.
+\description{Check validity.}
+\details{Checks whether the supplied 'bvs' is valid.
 Tests that the parents are sorted correctly, are of 
 storage.mode() == "integer".
 Additionally tests that there is a unique response.}

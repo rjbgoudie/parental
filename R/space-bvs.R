@@ -11,7 +11,7 @@
 # returns a list of every Bayesian Variable Selection network, 
 # with a particular response
 
-#' Enumerate the space of BVSs
+#' Enumerate the space of BVSs.
 #' 
 #' Enumerate (ie make a list of, not just count) the entire space of 
 #' Bayesian Variable Selection models, on a given number of nodes, for a 
@@ -75,6 +75,8 @@ enumerateBVSSpace <- function(numberOfNodes, response,
   out
 }
 
+#' Enumerate all possible parents.
+#' 
 #' Enumerate all the combinations of possible parents, given a SET of 
 #' possible parents. Optionally, restrcit the maximum number of parents. 
 #' Optionally, require that a particular parent is always present.
@@ -117,7 +119,7 @@ enumerateParents <- function(potentialParents,
 }
 
 
-#' (Fast, simple) Generate All Combinations of n Elements, Taken m at a Time
+#' (Fast, simple) Generate All Combinations of n Elements, Taken m at a Time.
 #' 
 #' A fast, simple version of \code{\link[utils]{combn}}.
 #'
@@ -181,7 +183,7 @@ combn2 <- function (x, m, required = integer(0))
     out
 }
 
-#' (C version) Generate All Combinations of n Elements, Taken m at a Time
+#' (C version) Generate All Combinations of n Elements, Taken m at a Time.
 #' 
 #' A fast, simple version of \code{\link[utils]{combn}}.
 #' 

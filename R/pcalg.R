@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' Coerce pcAlgo object to a bn
+#' Coerce pcAlgo object to a bn.
 #'
 #' ....
 #' 
@@ -32,7 +32,7 @@ as.bn.pcAlgo <- function(x, ...){
   }
 }
 
-#' Coerce pcAlgo object to a bn
+#' Coerce pcAlgo object to a bn.
 #'
 #' ....
 #' 
@@ -49,7 +49,7 @@ as.parental.pcAlgo <- function(x, ...){
   }
 }
 
-#' Convert an object to a CPDAG
+#' Convert an object to a CPDAG.
 #' 
 #' A generic
 #' 
@@ -61,7 +61,7 @@ as.cpdag <- function(x, ...){
   UseMethod("as.cpdag")
 }
 
-#' Find V Structure
+#' Find V Structure.
 #' 
 #' @param net ...
 #' @export
@@ -108,7 +108,7 @@ whichVStructure <- function(net){
   })
 }
 
-#' ...
+#' Undocumented.
 #'
 #' ...
 #'
@@ -127,7 +127,7 @@ whichVStructurePlot <- function(net){
   grplot(net, edgecol = adjvs + 1)
 }
 
-#' ...
+#' Undocumented.
 #'
 #' ...
 #'
@@ -149,7 +149,7 @@ makeNonVStructuresUndirected <- function(bn){
   bn2
 }
 
-#' Convert a bn to a CPDAG2 (?)
+#' Convert a bn to a CPDAG2 (?).
 #'
 #' Not sure this is correct
 #'
@@ -169,6 +169,8 @@ as.cpdag.bn <- function(x, ...){
   as.parental(out)
 }
 
+#' Convert 'bn list' to CPDAGs.
+#' 
 #' Convert a bn.list to list of parental.list of
 #' Completed Partially Directed Acyclic Graph (CPDAG).
 #'
@@ -200,6 +202,8 @@ as.cpdag.bn.list <- function(x, verbose = T, ...){
   res
 }
 
+#' Convert 'bnpostmcmc list' to CPDAGs.
+#' 
 #' Convert a full set of MCMC posterior samples to 
 #' Completed Partially Directed Acyclic Graph (CPDAG).
 #' All MCMC runs are converted.
@@ -224,7 +228,7 @@ as.cpdag.bnpostmcmc.list <- function(x, ...){
   })
 }
 
-#' Convert an object to a CPDAG
+#' Convert an object to a CPDAG.
 #' 
 #' A generic function
 #' 
@@ -236,6 +240,8 @@ as.cpdag0 <- function(x, ...){
   UseMethod("as.cpdag0")
 }
 
+#' Convert 'bn' to CPDAG.
+#' 
 #' Convert a parental BN to a 
 #' Completed Partially Directed Acyclic Graph (CPDAG).
 #'
@@ -280,6 +286,8 @@ as.cpdag0.bn <- function(x, ...){
   }
 }
 
+#' Convert 'bn list' to CPDAG (old version).
+#' 
 #' Convert a bn.list to list of parental.list of
 #' Completed Partially Directed Acyclic Graph (CPDAG).
 #'
@@ -296,6 +304,8 @@ as.cpdag0.bn.list <- function(x, ...){
   res
 }
 
+#' Convert 'bnpostmcmc list' to CPDAG (old version).
+#' 
 #' Convert a full set of MCMC posterior samples to 
 #' Completed Partially Directed Acyclic Graph (CPDAG).
 #' All MCMC runs are converted.

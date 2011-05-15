@@ -1,8 +1,8 @@
 \name{c.parental.list}
 \alias{c.parental.list}
-\title{Concatenates a 'parental...}
+\title{Concatenates 'parental list'.}
 \usage{\method{c}{parental.list} (...)}
-\description{Concatenates a 'parental.list' object to the console.}
+\description{Concatenates 'parental list'.}
 \value{An new 'parental.list' object, including all the supplied 
 parental.lists}
 \seealso{\code{\link{parental.list}}, \code{\link{[.parental.list}}}

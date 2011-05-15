@@ -1,8 +1,9 @@
 \name{as.cpdag.bnpostmcmc.list}
 \alias{as.cpdag.bnpostmcmc.list}
-\title{Convert a full set of MCMC posterior samples to...}
+\title{Convert 'bnpostmcmc list' to CPDAGs.}
 \usage{\method{as.cpdag}{bnpostmcmc.list} (x, ...)}
-\description{Convert a full set of MCMC posterior samples to 
+\description{Convert 'bnpostmcmc list' to CPDAGs.}
+\details{Convert a full set of MCMC posterior samples to 
 Completed Partially Directed Acyclic Graph (CPDAG).
 All MCMC runs are converted.}
 \value{A list containing a list of CPDAGs of class CPDAG.}

@@ -1,8 +1,8 @@
 \name{maximallyOrientEdgesSlow.matrix}
 \alias{maximallyOrientEdgesSlow.matrix}
-\title{Maximally orient edges...}
+\title{Maximally orient edges.}
 \usage{maximallyOrientEdgesSlow.matrix(pdag, verbose=F, ...)}
-\description{Maximally orient edges}
+\description{Maximally orient edges.}
 \details{This is the R implementation}
 \value{Something?}
 \arguments{\item{pdag}{A pdag}

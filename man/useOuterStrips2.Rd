@@ -1,10 +1,10 @@
 \name{useOuterStrips2}
 \alias{useOuterStrips2}
-\title{Put Strips on the Boundary of a Lattice Display...}
+\title{Put Strips on the Boundary of a Lattice Display.}
 \usage{useOuterStrips2(x, strip=strip.default2,
     strip.left=strip.custom2(horizontal = horizontal), top=1,
     strip.lines=1, strip.left.lines=strip.lines, horizontal=F)}
-\description{Put Strips on the Boundary of a Lattice Display}
+\description{Put Strips on the Boundary of a Lattice Display.}
 \details{Try to update a "trellis" object so that strips are only shown on the 
 top and left boundaries when printed, instead of in every panel as is 
 usual. This version extend the version in LatticeExtra to allow more than 

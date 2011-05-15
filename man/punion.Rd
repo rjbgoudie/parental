@@ -1,8 +1,8 @@
 \name{punion}
 \alias{punion}
-\title{.}
+\title{Undocumented.}
 \usage{punion(parental1, parental2)}
-\description{...}
+\description{Undocumented.}
 \details{....}
 \arguments{\item{parental1}{...}
 \item{parental2}{...}}

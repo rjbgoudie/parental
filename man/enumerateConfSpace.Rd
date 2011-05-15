@@ -1,9 +1,9 @@
 \name{enumerateConfSpace}
 \alias{enumerateConfSpace}
-\title{Enumerate the space of Confounder Graphs...}
+\title{Enumerate the space of Confounder Graphs.}
 \usage{enumerateConfSpace(numberOfConfounders, response, effect,
     maxNumberParents=numberOfConfounders - 2)}
-\description{Enumerate the space of Confounder Graphs}
+\description{Enumerate the space of Confounder Graphs.}
 \details{Enumerate (ie make a list of, not just count) the entire space of 
 Confounder models, on a given number of nodes, for a 
 particular response.}

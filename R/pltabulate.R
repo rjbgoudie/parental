@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' Tabulate a parental list
+#' Tabulate a parental list.
 #'
 #' Tabulate a parental list.
 #'

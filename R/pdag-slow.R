@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' ...
+#' Undocumented.
 #' 
 #' A generic
 #' 
@@ -19,7 +19,7 @@ maximallyOrientEdgesSlow <- function(pdag, ...){
   UseMethod("maximallyOrientEdgesSlow")
 }
 
-#' ...
+#' Undocumented.
 #'
 #' ...
 #'
@@ -49,7 +49,7 @@ maximallyOrientEdgesSlow.parental <- function(pdag, verbose = F, ...){
 #     integer(0), c(22L, 28L), 6L), class = c("bn", "parental"))
 
 
-#' Maximally orient edges
+#' Maximally orient edges.
 #'
 #' This is the R implementation
 #'
@@ -205,7 +205,7 @@ maximallyOrientEdgesSlow.matrix <- function(pdag, verbose = F, ...){
   pdag
 }
 
-#' ...
+#' Undocumented.
 #' 
 #' A generic
 #' 
@@ -216,7 +216,7 @@ pdag2alldagsSlow <- function(pdag, ...){
   UseMethod("pdag2alldagsSlow")
 }
 
-#' xxxx
+#' Undocumented.
 #' 
 #' ....
 #'
@@ -237,7 +237,7 @@ pdag2alldagsSlow.parental <- function(pdag, verbose = F, ...){
   out
 }
 
-#' xxxx
+#' Undocumented.
 #' 
 #' ....
 #'
@@ -334,7 +334,7 @@ pdag2alldagsSlow.matrix <- function(pdag, verbose = F, ...){
 #    implements Step 2 of the pdag2alldagsSlow algorithm.        #
 ##################################################################
 
-#' Recurse unoriented edge (slow)
+#' Recurse unoriented edge (slow).
 #'
 #' This is the R implementation
 #'

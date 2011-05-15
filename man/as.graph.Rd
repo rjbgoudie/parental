@@ -1,8 +1,8 @@
 \name{as.graph}
 \alias{as.graph}
-\title{Convert an object to a graph...}
+\title{Convert an object to a graph.}
 \usage{as.graph(x, ...)}
-\description{Convert an object to a graph}
+\description{Convert an object to a graph.}
 \details{graphNEL objects are from bioconductor package 'graph'. See 
 \link[graph]{graphNEL-class}.}
 \seealso{\code{\link{as.graph.parental}}}

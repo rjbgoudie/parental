@@ -1,8 +1,9 @@
 \name{empty}
 \alias{empty}
-\title{Returns an empty graph with n nodes, of the given class...}
+\title{Return empty graph.}
 \usage{empty(n, class="parental", response)}
-\description{Returns an empty graph with n nodes, of the given class}
+\description{Return empty graph.}
+\details{Returns an empty graph with n nodes, of the given class}
 \value{An empty graph of the specified class.}
 \seealso{\code{\link{complete}}, \code{\link{parental}}, \code{\link{bn}}}
 \arguments{\item{n}{A integer of length 1, specifying the number of nodes}

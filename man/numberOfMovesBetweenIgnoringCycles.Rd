@@ -1,12 +1,14 @@
 \name{numberOfMovesBetweenIgnoringCycles}
 \alias{numberOfMovesBetweenIgnoringCycles}
-\title{Compute the number of edge additions, removals (and single-edge flips if...}
+\title{Number of moves between graphs.}
 \usage{numberOfMovesBetweenIgnoringCycles(x, y, components=F, allowFlips=F)}
-\description{Compute the number of edge additions, removals (and single-edge flips if 
+\description{Number of moves between graphs.}
+\details{Compute the number of edge additions, removals (and single-edge flips if 
 allowFlips = T) that would be required to morph from network x to network 
 y, both of which are objects of class 'parental'. The measure is 
-symmetric.}
-\details{The parental objects x and y must have the same number of 
+symmetric.
+
+The parental objects x and y must have the same number of 
 nodes. No attempt is made to account for whether intermediate graphs are 
 cyclic (but perhaps there is always one ordering of the moves that is 
 OK?).}

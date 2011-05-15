@@ -1,8 +1,8 @@
 \name{maximallyOrientEdgesSlow.parental}
 \alias{maximallyOrientEdgesSlow.parental}
-\title{.}
+\title{Undocumented.}
 \usage{maximallyOrientEdgesSlow.parental(pdag, verbose=F, ...)}
-\description{...}
+\description{Undocumented.}
 \details{...}
 \value{...}
 \arguments{\item{pdag}{...}

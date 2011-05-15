@@ -8,7 +8,7 @@
 #
 # Copyright 2008 Robert J. B. Goudie, University of Warwick
 
-#' Enumerate the space of Confounder Graphs
+#' Enumerate the space of Confounder Graphs.
 #'
 #' Enumerate (ie make a list of, not just count) the entire space of 
 #' Confounder models, on a given number of nodes, for a 

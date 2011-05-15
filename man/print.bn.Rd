@@ -1,8 +1,8 @@
 \name{print.bn}
 \alias{print.bn}
-\title{Prints a 'bn' object to the console.}
+\title{Prints 'bn'.}
 \usage{\method{print}{bn} (x, ...)}
-\description{Prints a 'bn' object to the console.}
+\description{Prints 'bn'.}
 \value{Prints the 'bn' object to the console.}
 \seealso{\code{\link{bn}}}
 \arguments{\item{x}{A 'bn' object}
