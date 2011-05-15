@@ -200,6 +200,7 @@ drawDetails.lattice <- function(x, recording = F){
 #'   and \code{ylim}, each of which contain the max and min values in 
 #'   that dimension.
 #' @export
+#' @seealso \code{\link{grplot}}
 prepanel.parental <- function(x, y, parents, rawdata = NULL, 
                               grobNodeSize, offset, islist = F,
                               widthMultiplier = 2, heightMultipler = 1){
@@ -237,6 +238,7 @@ prepanel.parental <- function(x, y, parents, rawdata = NULL,
 #' @param x x-coordinates
 #' @param y y-coordinates
 #' @return A list with two components: \code{width} and \code{height}.
+#' @seealso \code{\link{grplot}}
 convertToEnlargedCoordinates <- function(width, height, x, y){
   curr.xlim <- current.panel.limits()$xlim
   curr.ylim <- current.panel.limits()$ylim
@@ -260,6 +262,7 @@ convertToEnlargedCoordinates <- function(width, height, x, y){
 #' @return A list of length 2 containing two items:
 #'     width: An integer vector of length 1. The width in characters.
 #'     height: An integer vector of length 1. The height in lines.
+#' @seealso \code{\link{grplot}}
 #' @export
 grobNodeNameSize <- function(node, parents, rawdata = NULL){
   # grobWidth etc can not be used here because  this function is used in 
@@ -277,6 +280,7 @@ grobNodeNameSize <- function(node, parents, rawdata = NULL){
 #' @param rawdata The rawdata
 #' @param gp Graphical parameters, passed to \code{\link[grid]{textGrob}}.
 #' @return A "grob"
+#' @seealso \code{\link{grplot}}
 #' @export
 grobNodeName <- function(node, parents, rawdata = NULL, gp){
   textGrob(label = names(parents)[node], gp = gp)
@@ -294,6 +298,7 @@ grobNodeName <- function(node, parents, rawdata = NULL, gp){
 #' @return A list of length 2 containing two items:
 #'     width: A object of class "unit"
 #'     height: A object of class "unit"
+#' @seealso \code{\link{grplot}}
 #' @export
 grobNodeLevelPlotSize <- function(node, parents, rawdata){
   # grobWidth etc can not be used here because  this function is used in 
@@ -347,6 +352,7 @@ grobNodeLevelPlotDefaultTheme <- function(){
 #' @param horizontal ...
 #' @param ... ...
 #' @return A "grob"
+#' @seealso \code{\link{grplot}}
 #' @export
 grobNodeLevelPlot <- function(node,
                               parents,
@@ -430,6 +436,7 @@ grobNodeLevelPlot <- function(node,
 #' @param heightMultipler A height multiplier
 #' @param ... Further arguments
 #' @return A panel
+#' @seealso \code{\link{grplot}}
 #' @export
 panel.parental <- function(x, y, parents, layout, col, alpha, 
                            edgecol, 
@@ -592,10 +599,10 @@ panel.parental <- function(x, y, parents, layout, col, alpha,
 
 #' Plot a graph
 #' 
-#' A generic
+#' A generic for plotting graph objects
 #' 
 #' @param ... Passed to method
-#' 
+#' @seealso \code{\link{grplot.parental}}, \code{\link{grplot.parental.list}}
 #' @export
 grplot <- function(...){
   UseMethod("grplot")
@@ -627,6 +634,10 @@ grplot <- function(...){
 #' @return A lattice plot
 #' @S3method grplot parental
 #' @method grplot parental
+#' @seealso \code{\link{grplot.parental.list}}, \code{\link{panel.parental}}
+#' @examples
+#' x <- parental(c(), c(1), c(2))
+#' grplot(x)
 grplot.parental <- function(parents,
                             col          = 1,
                             alpha        = 1,
@@ -735,6 +746,11 @@ grplot.parental <- function(parents,
 #' @return A lattice plot
 #' @S3method grplot parental.list
 #' @method grplot parental.list
+#' @seealso \code{\link{grplot.parental}}, \code{\link{panel.parental}}
+#' @examples
+#' x <- parental(c(), c(1), c(2))
+#' y <- parental(c(), c(3), c())
+#' grplot(parental.list(x, y))
 grplot.parental.list <- function(parentallist,
                                  col          = 1, 
                                  alpha        = 1,

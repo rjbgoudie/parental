@@ -9,6 +9,7 @@
 \details{Plots a parental graph, by default using the layout routines of the 
 package 'network'.}
 \value{A lattice plot}
+\seealso{\code{\link{grplot.parental.list}}, \code{\link{panel.parental}}}
 \arguments{\item{parents}{An object of class 'parental'}
 \item{col}{A vector of colours for the nodes (FIXME - does not currently 
 work.)}
@@ -27,3 +28,5 @@ currently work.)}
 be drawn. This should be supplied as a data.frame with columns 
 \code{xcoord} and \code{ycoord}.}
 \item{...}{Further arguments (not currently passed on?)}}
+\examples{x <- parental(c(), c(1), c(2))
+grplot(x)}

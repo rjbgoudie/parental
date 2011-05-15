@@ -6,6 +6,7 @@
     horizontal=F, ...)}
 \description{Return a grob for node "node" when a levelplot is plotted on each node}
 \value{A "grob"}
+\seealso{\code{\link{grplot}}}
 \arguments{\item{node}{An integer of length 1, indicating which node the dimensions
 should be computed for.}
 \item{parents}{An object of class "parental" containing the graph that 

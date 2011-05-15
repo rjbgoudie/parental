@@ -7,6 +7,7 @@
 \description{Panel function for ploting a parental graph}
 \details{Panel function for grplot.}
 \value{A panel}
+\seealso{\code{\link{grplot}}}
 \arguments{\item{x}{The x-coordinates of the nodes}
 \item{y}{The y-coordinates of the nodes}
 \item{parents}{An object of class parental}
