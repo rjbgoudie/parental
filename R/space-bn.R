@@ -27,6 +27,12 @@
 #' @return A \code{parental.list} including ALL the directed acyclic 
 #'   graphs with \code{n} nodes.
 #' @export
+#' @examples
+#' enumerateBNSpace(3)
+#' enumerateBNSpace(3, banned = list(c(), 1, c()))
+#' 
+#' x <- enumerateBNSpace(3, allowCyclic = TRUE)
+#' filterCyclic(x)
 enumerateBNSpace <- function(n,
                              allowCyclic = F,
                              banned = vector("list", n),
@@ -114,6 +120,10 @@ enumerateBNSpace <- function(n,
 #' @return An object of class \code{bn.list}, containing all the acyclic 
 #'   graphs in \code{bnlist}
 #' @export
+#' @seealso \code{\link{enumerateBNSpace}}
+#' @examples
+#' x <- enumerateBNSpace(3, allowCyclic = TRUE)
+#' filterCyclic(x)
 filterCyclic <- function(bnlist){
   isAcyclic <- lapply(bnlist, checkAcyclic)
   out <- bnlist[which(isAcyclic == T)]

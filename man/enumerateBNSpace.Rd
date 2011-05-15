@@ -17,3 +17,8 @@ nodes cannot be parents of the corresponding node.}
 which nodes must be includes as parents of the corresponding node.}
 \item{multicore}{A logical specifying whether to use 
 \link[multicore]{mclapply}.}}
+\examples{enumerateBNSpace(3)
+enumerateBNSpace(3, banned = list(c(), 1, c()))
+
+x <- enumerateBNSpace(3, allowCyclic = TRUE)
+filterCyclic(x)}
