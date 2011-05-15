@@ -184,7 +184,8 @@ strip.default2 <-
     extent <- prod(prev.dim)
 
     if (horizontal)
-        lattice:::pushViewport(lattice:::viewport(y = (which.given-0.5)/length(which.panel),
+        lattice:::pushViewport(lattice:::viewport(y = 
+                                (which.given-0.5)/length(which.panel),
                               height = 1/length(which.panel),
                               width = extent,
                               x = extent/2,
@@ -192,7 +193,8 @@ strip.default2 <-
                               name = paste("strip.default", which.given,
                                            sep = ".")))
     else 
-        lattice:::pushViewport(lattice:::viewport(x = 1 - (which.given-0.5)/length(which.panel),
+        lattice:::pushViewport(lattice:::viewport(x = 
+                                1 - (which.given-0.5)/length(which.panel),
                               width = 1/length(which.panel),
                               height = extent,
                               y = extent/2,
@@ -243,11 +245,13 @@ strip.default2 <-
         r <- (range(shingle.intervals[level,]) - t[1]) / diff(t)
         if (horizontal)
             lattice:::grid.rect(x = lattice:::unit(r %*% c(.5,.5),"npc"),
-                      width = max(lattice:::unit(c(diff(r), 1), c("npc", "mm"))),
+                      width = max(lattice:::unit(c(diff(r), 1), 
+                                                        c("npc", "mm"))),
                       gp = lattice:::gpar(col = fg, fill = fg))
         else 
             lattice:::grid.rect(y = lattice:::unit(r %*% c(.5,.5),"npc"),
-                      height = max(lattice:::unit( c(diff(r), 1), c("npc", "mm"))),
+                      height = max(lattice:::unit( c(diff(r), 1), 
+                                                        c("npc", "mm"))),
                       gp = lattice:::gpar(col = fg, fill = fg))
 
         lattice:::paste.and.draw(name, factor.levels[level],
@@ -267,7 +271,8 @@ strip.default2 <-
         ## coloring:
 
         ## background: all except style = 2
-        if (style != 2) lattice:::grid.rect(gp = lattice:::gpar(fill = bg, col = bg))
+        if (style != 2) lattice:::grid.rect(gp = lattice:::gpar(fill = bg,
+                                                                col = bg))
 
         ## foreground: needed only for style = 2, 3 and 4
 
@@ -275,13 +280,15 @@ strip.default2 <-
         {
             if (horizontal)
             {
-                lattice:::grid.rect(x = lattice:::unit((2*level-1)/(2*num), "npc"),
+                lattice:::grid.rect(x = 
+                                  lattice:::unit((2*level-1)/(2*num), "npc"),
                           width = lattice:::unit(1/num, "npc"),
                           gp = lattice:::gpar(fill = fg, col = fg))
             }
             else
             {
-                lattice:::grid.rect(y = lattice:::unit((2*level-1)/(2*num), "npc"),
+                lattice:::grid.rect(y = 
+                                  lattice:::unit((2*level-1)/(2*num), "npc"),
                           height = lattice:::unit(1/num, "npc"),
                           gp = lattice:::gpar(fill = fg, col = fg))
             }
@@ -321,7 +328,8 @@ strip.default2 <-
 
     ## border is drawn with clipping off
     if (horizontal)
-        lattice:::pushViewport(lattice:::viewport(y = (which.given-0.5)/length(which.panel),
+        lattice:::pushViewport(lattice:::viewport(y = 
+                                  (which.given-0.5)/length(which.panel),
                               height = 1/length(which.panel),
                               width = extent,
                               x = extent/2,
@@ -329,7 +337,8 @@ strip.default2 <-
                               name = paste("strip.default.off", 
                                            which.given, sep = ".")))
     else 
-        lattice:::pushViewport(lattice:::viewport(x = 1 - (which.given-0.5)/length(which.panel),
+        lattice:::pushViewport(lattice:::viewport(x = 
+                                  1 - (which.given-0.5)/length(which.panel),
                               width = 1/length(which.panel),
                               height = extent,
                               y = extent/2,
@@ -382,7 +391,8 @@ paste.and.draw2 <- function(left, right, sep = " : ", horizontal = TRUE,
             if (shows) 
                 lattice:::grid.text(sep, x = offset, gp = gp)
             if (showl) 
-                lattice:::grid.text(left, x = offset - wsep, gp = gp, just = "right")
+                lattice:::grid.text(left, x = offset - wsep,
+                                    gp = gp, just = "right")
             if (showr) 
                 lattice:::grid.text(right, x = offset + wsep, gp = gp, 
                   just = "left")
@@ -391,8 +401,8 @@ paste.and.draw2 <- function(left, right, sep = " : ", horizontal = TRUE,
             if (shows) 
                 lattice:::grid.text(sep, y = offset, gp = gp, rot = 0)
             if (showl) 
-                lattice:::grid.text(left, y = offset - wsep, gp = gp, just = "right", 
-                  rot = 0)
+                lattice:::grid.text(left, y = offset - wsep, gp = gp,
+                                    just = "right", rot = 0)
             if (showr) 
                 lattice:::grid.text(right, y = offset + wsep, gp = gp, 
                   just = "left", rot = 0)
