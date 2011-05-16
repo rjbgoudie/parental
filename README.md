@@ -95,10 +95,17 @@ sim <- simulate(object = net, nsim = 1000, ptables = cpt)
 
 Installation
 ------------
+Download the current version, and `unzip` the file. Then install in `R` using the following, where `rjbgoudie-parental-XXXXX` is the name of the `unzip`ped directory/folder, and `path/to/rjbgoudie-parental-XXXXX` is the path to this folder.
 
+``` r
+install.packages("path/to/rjbgoudie-parental-XXXXX", repos = NULL, type = "source")
+```
+
+The package also depends on [`lattice`][cran:lattice], and `grid`, both of which are included with R.
 
 Contact
 -------
 
 
 [R]: http://www.r-project.org "The R Project for Statistical Computing"
+[cran:lattice]: http://cran.r-project.org/web/packages/lattice "lattice: Lattice Graphics"
