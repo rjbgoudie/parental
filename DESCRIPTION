@@ -1,7 +1,7 @@
 Package: parental
 Type: Package
 Title: Light-weight graph package
-Version: 0.9
+Version: 1.0
 Author: Robert Goudie <r.j.b.goudie@warwick.ac.uk>
 Maintainer: Robert Goudie <r.j.b.goudie@warwick.ac.uk>
 Description: Data structures and tools for handling and manipulating
