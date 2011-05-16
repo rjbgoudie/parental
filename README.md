@@ -38,7 +38,6 @@ nEdges(x)
 indegrees(x)
 checkAcyclic(x)
 topologicallyOrder(x)
-barchart(x)
 ```
 
 Manipulating `bn` objects
@@ -86,8 +85,12 @@ routes(x)
 Simulate from a `bn`
 
 ``` r
-x <- bn(c(2), c(), c(1, 2))
-simulate.bn(x)
+cpt <- list(
+  as.table(array(c(0.7, 0.3), 2)), 
+  as.table(array(c(0.5, 0.5, 0.2, 0.8), c(2, 2)))
+)
+net <- bn(c(), 1)
+sim <- simulate(object = net, nsim = 1000, ptables = cpt)
 ```
 
 Installation
