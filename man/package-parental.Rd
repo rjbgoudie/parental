@@ -1,9 +1,16 @@
 \name{package-parental}
 \title{The parental package.}
-\description{The parental package.}
-\details{The package \code{parental} provides lightweight tools for creating, 
-modifying network/graph objects. The emphasis is on representing 
-Bayesian Networks, so the focus is on Directed Acyclic Graphs.}
+
+\description{
+  The parental package.
+}
+
+\details{
+  The package \code{parental} provides lightweight tools
+  for creating, modifying network/graph objects. The
+  emphasis is on representing Bayesian Networks, so the
+  focus is on Directed Acyclic Graphs.
+}
 \docType{package}
 \alias{package-parental}
 \seealso{Constructors for objects: \code{\link{parental}}, 

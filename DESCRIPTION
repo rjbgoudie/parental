@@ -1,18 +1,43 @@
 Package: parental
-Type: Package
-Title: Light-weight graph package
-Version: 1.0
-Author: R.J.B Goudie <rjbgoudie@gmail.com>
+Imports:
+    base,
+    lattice,
+    grid
 Maintainer: R.J.B Goudie <rjbgoudie@gmail.com>
-Description: Data structures and tools for handling and manipulating
-    graphs, Bayesian Networks, and Bayesian Variable Selection graphs.
-URL: localhost
-Imports: base, lattice, grid
-Depends: R (>= 2.9)
-Suggests: pcalg, graph, bnlearn, multicore, graphicsQC, network
 License: GPL-3
+Title: Light-weight graph package
 LazyData: true
-Collate: 'bnlearn.R' 'class.R' 'convert.R' 'grplot.R' 'is.element2.R'
-    'pcalg.R' 'pdag-slow.R' 'pdag.R' 'plots.R' 'pltabulate.R'
-    'properties.R' 'sample.R' 'space-bn.R' 'space-bvs.R' 'space-conf.R'
-    'useOuterStrips2.R' 'utils.R'
+Type: Package
+Author: R.J.B Goudie <rjbgoudie@gmail.com>
+Description: Data structures and tools for handling and
+    manipulating graphs, Bayesian Networks, and Bayesian
+    Variable Selection graphs.
+Version: 1.0
+URL: localhost
+Depends:
+    R (>= 2.9)
+Suggests:
+    pcalg,
+    graph,
+    bnlearn,
+    multicore,
+    graphicsQC,
+    network
+Collate:
+    'bnlearn.R'
+    'class.R'
+    'convert.R'
+    'grplot.R'
+    'is.element2.R'
+    'pcalg.R'
+    'pdag-slow.R'
+    'pdag.R'
+    'plots.R'
+    'pltabulate.R'
+    'properties.R'
+    'sample.R'
+    'space-bn.R'
+    'space-bvs.R'
+    'space-conf.R'
+    'useOuterStrips2.R'
+    'utils.R'

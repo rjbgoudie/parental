@@ -2,10 +2,19 @@
 \alias{parental2bnlearn}
 \title{Conversion to 'bnlearn'.}
 \usage{parental2bnlearn(x)}
-\description{Conversion to 'bnlearn'.}
-\details{Convert a 'parental' object to a 'bnlearn' graph object
 
-This bridge to \code{bnlearn} can be temperamental because 
-\code{bnlearn} also has an object called \code{bn}.}
+\description{
+  Conversion to 'bnlearn'.
+}
+
+\details{
+  Convert a 'parental' object to a 'bnlearn' graph object
+
+  This bridge to \code{bnlearn} can be temperamental
+  because \code{bnlearn} also has an object called
+  \code{bn}.
+}
 \value{x A 'bnlearn' object, of class \code{bn} (the bnlearn version).}
-\arguments{\item{x}{A \code{parental} graph}}
+\arguments{
+  \item{x}{A \code{parental} graph}
+}

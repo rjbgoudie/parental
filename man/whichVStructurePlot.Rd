@@ -2,7 +2,15 @@
 \alias{whichVStructurePlot}
 \title{Undocumented.}
 \usage{whichVStructurePlot(net)}
-\description{Undocumented.}
-\details{...}
+
+\description{
+  Undocumented.
+}
+
+\details{
+  ...
+}
 \value{...}
-\arguments{\item{net}{...}}
+\arguments{
+  \item{net}{...}
+}

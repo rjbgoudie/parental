@@ -1,23 +1,33 @@
 \name{as.bvsresponse.character}
 \alias{as.bvsresponse.character}
 \title{Convert character vector to 'bvsresponse'.}
-\usage{\method{as.bvsresponse}{character} (x, response, nNodes, ...)}
-\description{Convert character vector to 'bvsresponse'.}
-\details{Convert a character vector (a comma-separated string) specifying the 
-parents of a response to a 'bvsresponse' object.
+\usage{\method{as.bvsresponse}{character} (x, response, nNodes,
+    ...)}
 
-For example, as.bvsresponse("1,2,3", 4, 5) returns a 'bvsresponse' object 
-with 5 nodes, with node 4 as response, and nodes 1, 2 and 3 as its 
-parents.}
+\description{
+  Convert character vector to 'bvsresponse'.
+}
+
+\details{
+  Convert a character vector (a comma-separated string)
+  specifying the parents of a response to a 'bvsresponse'
+  object.
+
+  For example, as.bvsresponse("1,2,3", 4, 5) returns a
+  'bvsresponse' object with 5 nodes, with node 4 as
+  response, and nodes 1, 2 and 3 as its parents.
+}
 \value{If length(x) == 1:
 An object of class 'bvsresponse'.
 If length(x) > 1:
 A list of class "bvsresponse.list" containing a number of 
 'bvsresponse' objects}
-\arguments{\item{x}{A character string (possibly vector), a comma-separated list of 
+\arguments{
+  \item{x}{A character string (possibly vector), a comma-separated list of 
 the parents of the response.}
-\item{response}{An integer of length 1 specifying which node 
+  \item{response}{An integer of length 1 specifying which node 
 is the response.}
-\item{nNodes}{An integer of length 1 specifying the number of nodes in 
+  \item{nNodes}{An integer of length 1 specifying the number of nodes in 
 the variable selection.}
-\item{...}{Further arguments (unused)}}
+  \item{...}{Further arguments (unused)}
+}

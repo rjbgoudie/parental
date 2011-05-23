@@ -1,15 +1,21 @@
 \name{simulate.bn}
 \alias{simulate.bn}
 \title{Draw data according to a Bayesian Network.}
-\usage{simulate.bn(object, nsim, seed, ptables, expectation=F, ...)}
-\description{Draw data according to a Bayesian Network.}
+\usage{simulate.bn(object, nsim, seed, ptables, expectation=F,
+    ...)}
+
+\description{
+  Draw data according to a Bayesian Network.
+}
 \seealso{\code{\link{cptBinary}}}
-\arguments{\item{object}{A object of class \code{\link{bn}}}
-\item{nsim}{Number of simulations}
-\item{seed}{The starting seed (UNIMPLEMENTED)}
-\item{ptables}{...}
-\item{expectation}{...}
-\item{...}{Further arguments, currently unused}}
+\arguments{
+  \item{object}{A object of class \code{\link{bn}}}
+  \item{nsim}{Number of simulations}
+  \item{seed}{The starting seed (UNIMPLEMENTED)}
+  \item{ptables}{...}
+  \item{expectation}{...}
+  \item{...}{Further arguments, currently unused}
+}
 \examples{cpt <- list(
 as.table(array(c(0.7, 0.3), 2)), 
 as.table(array(c(0.5, 0.5, 0.2, 0.8), c(2, 2)))
