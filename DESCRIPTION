@@ -22,7 +22,8 @@ Suggests:
     bnlearn,
     multicore,
     graphicsQC,
-    network
+    network,
+    testthat
 Collate:
     'bnlearn.R'
     'class.R'
