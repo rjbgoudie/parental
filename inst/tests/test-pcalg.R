@@ -149,8 +149,9 @@ test_that("as.cpdag0.bnpostmcmc.list", {
 
 
 test_that("CPDAG <-> DAG conversion", {
-  data(discreteData)
-  dat <- dat[1:500, ]
+  require(pcalg)
+  data(gmD)
+  dat <- gmD$x[1:500, ]
   p <- ncol(dat)
   ## define independence test (G^2 statistics)
   indepTest <- disCItest
@@ -165,7 +166,6 @@ test_that("CPDAG <-> DAG conversion", {
   expect_that(direct, is_identical_to(as.cpdag0(as.bn(pc.fit))))
   
   # the following is a fairly weak test
-  data(discreteData)
   p <- ncol(dat)
   ## define independence test (G^2 statistics)
   indepTest <- disCItest
@@ -307,8 +307,8 @@ test_that("as.cpdag.bnpostmcmc.list", {
 })
 
 test_that("CPDAG <-> DAG conversion as.cpdag", {
-  data(discreteData)
-  dat <- dat[1:500, ]
+  data(gmD)
+  dat <- gmD$x[1:500, ]
   p <- ncol(dat)
   ## define independence test (G^2 statistics)
   indepTest <- disCItest
@@ -323,7 +323,6 @@ test_that("CPDAG <-> DAG conversion as.cpdag", {
   expect_that(direct, is_identical_to(as.cpdag(as.bn(pc.fit))))
   
   # the following is a fairly weak test
-  data(discreteData)
   p <- ncol(dat)
   ## define independence test (G^2 statistics)
   indepTest <- disCItest
