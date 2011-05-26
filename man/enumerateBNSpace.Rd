@@ -3,7 +3,7 @@
 \title{Enumerate the space of BNs.}
 \usage{enumerateBNSpace(n, allowCyclic=F, banned=vector("list",
     n), required=vector("list", n), maxIndegree=n - 1,
-    multicore=F)}
+    multicore=F, check=T)}
 
 \description{
   Enumerate the space of BNs.
@@ -28,6 +28,7 @@ which nodes must be includes as parents of the corresponding node.}
 1.}
   \item{multicore}{A logical specifying whether to use 
 \link[multicore]{mclapply}.}
+  \item{check}{Should the input be checked for validity?}
 }
 \examples{enumerateBNSpace(3)
 enumerateBNSpace(3, banned = list(c(), 1, c()))

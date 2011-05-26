@@ -26,6 +26,7 @@
 #'   1.
 #' @param multicore A logical specifying whether to use 
 #'   \link[multicore]{mclapply}.
+#' @param check Should the input be checked for validity?
 #' @return A \code{parental.list} including ALL the directed acyclic 
 #'   graphs with \code{n} nodes.
 #' @export
@@ -40,23 +41,27 @@ enumerateBNSpace <- function(n,
                              banned = vector("list", n),
                              required = vector("list", n),
                              maxIndegree = n - 1,
-                             multicore = F){
+                             multicore = F,
+                             check = T){
   myapply <- function(...) lapply(...)
   if (multicore){
     require(multicore)
     myapply <- function(...) mclapply(..., mc.cores = 10)
   }
-  stopifnot(inherits(n, c("numeric", "integer")),
-            is.logical(allowCyclic),
-            length(allowCyclic) == 1,
-            length(banned)      == n,
-            length(required)    == n,
-            length(maxIndegree) == 1,
-            inherits(maxIndegree, c("numeric", "integer")),
-            is.wholenumber(maxIndegree),
-            all(findInterval(maxIndegree, c(0, n - 1), right = T) == 1),
-            is.logical(multicore),
-            length(multicore)   == 1)
+  if (check){
+    stopifnot(inherits(n, c("numeric", "integer")),
+              is.logical(allowCyclic),
+              length(allowCyclic) == 1,
+              length(banned)      == n,
+              length(required)    == n,
+              length(maxIndegree) == 1,
+              inherits(maxIndegree, c("numeric", "integer")),
+              is.wholenumber(maxIndegree),
+              all(findInterval(maxIndegree, c(0, n - 1), right = T) == 1),
+              max(sapply(required, length)) <= maxIndegree,
+              is.logical(multicore),
+              length(multicore)   == 1)
+  }
   required <- lapply(required, function(x){
     storage.mode(x) <- "integer"
     x
@@ -69,55 +74,84 @@ enumerateBNSpace <- function(n,
   combin <- function(element, n, banned, required, maxIndegree){
     nRequired <- length(required)
     nBanned <- length(banned)
-    maxIndegree <- min(n - 1 - nBanned - nRequired, maxIndegree)
-    s <- seq_len(maxIndegree)
-    if (length(s) == 0){
+    numChoosable <- min(n - 1 - nBanned, maxIndegree)
+    numLeft <- max(numChoosable - nRequired, 0)
+    if (numLeft == 0){
       out <- list(list(required))
     } else {
-      out <- lapply(c(0, s), function(i){
+      out <- vector("list", length = numLeft + 1)
+      i = 0
+      while (i <= numLeft){
         banned <- c(banned, element, required)
         x <- setdiff(seq_len(n), banned) # all elements except banned/required
                                           # elements and the current element
-        combn3(x, i, required = required)
-      })
+        out[[i + 1]] <- combn3(x, i, required = required)
+        i <- i + 1
+      }
     }
     unlist(out, recursive = F)
   }
-  
-  options <- lapply(seq_len(n), function(i){
-    combin(i, n, banned[[i]], required[[i]], maxIndegree)
-  })
 
-  # plus 1 for no parents
-  choices <- expand.grid(lapply(options, function(option){
-    seq_len(length(option))
-  }))
+  options <- vector("list", length = n)
+  choicesOptions <- vector("list", length = n)
+  i <- 1
+  while (i <= n){
+    options[[i]] <- combin(i, n, banned[[i]], required[[i]], maxIndegree)
+    choicesOptions[[i]] <- seq_len(length(options[[i]]))
+    i <- i + 1
+  }
+
+  choices <- data.matrix(expand.grid(choicesOptions))
+  nChoices <- nrow(choices)
+  family <- vector("list", length = nChoices)
+  bnempty <- empty(n, "bn")
+  routesempty <- matrix(0, n, n)
+  diag(routesempty) <- 1
+  i <- 1
+  wh <- 1
   
-  family <- myapply(seq_len(nrow(choices)), function(i){
-    out <- unlist(
-      lapply(seq_len(n), function(node){
-        out <- options[[node]][choices[i,node]]
-        if (is.null(out[[1]])){
-          out[[1]] <- integer(0)
+  while (i <= nChoices){
+    bn <- bnempty
+    r <- routesempty
+    node <- 1
+    cycle <- F
+    while (node <= n & !cycle){
+      new <- options[[node]][[choices[i, node]]]
+      if (any(r[node, new] != 0)){
+        cycle <- T
+      } else {
+        if (is.null(new)){
+          new <- integer(0)
         }
-        out
-      }), 
-      rec = F
-    )
-    class(out) <- c("bn", "parental")
-    out
-  })
+        bn[[node]] <- new
+        r <- routesAddEdges(r, new, node)
+        node <- node + 1
+      }
+    }
+    if (!cycle){
+      family[[wh]] <- bn
+      wh <- wh + 1
+    }
+    i <- i + 1
+  }
+  family <- family[seq_len(wh - 1)]
   
   class(family) <- c("bn.list", "parental.list")
-  
-  if (allowCyclic){
-    warning("** NOTE: ALLOWING CYCLIC GRAPHS **")
-  }
-  else {
-    family <- filterCyclic(family)
-  }
-  
+
   family
+}
+
+routesAddEdges <- function(x, i, j){
+  if (length(i) > 0){
+    x + rowSumsFast(x[, i, drop = F]) * x[rep(j, dim(x)[1]), ]
+  } else {
+    x
+  }
+}
+
+rowSumsFast <- function(x){
+  dn <- dim(x)
+  .Internal(rowSums(x, prod(dn[1L]), prod(dn[-1L]), FALSE))
 }
 
 #' Filter cyclic graphs.
@@ -138,3 +172,4 @@ filterCyclic <- function(bnlist){
   class(out) <- c("bn.list", "parental.list")
   out
 }
+
