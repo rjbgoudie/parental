@@ -22,6 +22,8 @@
 #'   nodes cannot be parents of the corresponding node.
 #' @param required A list of length \code{n}. Each component indicates
 #'   which nodes must be includes as parents of the corresponding node.
+#' @param maxIndegree The maximum indegree of all nodes. A numeric of length
+#'   1.
 #' @param multicore A logical specifying whether to use 
 #'   \link[multicore]{mclapply}.
 #' @return A \code{parental.list} including ALL the directed acyclic 
@@ -37,6 +39,7 @@ enumerateBNSpace <- function(n,
                              allowCyclic = F,
                              banned = vector("list", n),
                              required = vector("list", n),
+                             maxIndegree = n - 1,
                              multicore = F){
   myapply <- function(...) lapply(...)
   if (multicore){
@@ -48,6 +51,10 @@ enumerateBNSpace <- function(n,
             length(allowCyclic) == 1,
             length(banned)      == n,
             length(required)    == n,
+            length(maxIndegree) == 1,
+            inherits(maxIndegree, c("numeric", "integer")),
+            is.wholenumber(maxIndegree),
+            all(findInterval(maxIndegree, c(0, n - 1), right = T) == 1),
             is.logical(multicore),
             length(multicore)   == 1)
   required <- lapply(required, function(x){
@@ -59,10 +66,11 @@ enumerateBNSpace <- function(n,
     x
   })
   
-  combin <- function(element, n, banned, required){
+  combin <- function(element, n, banned, required, maxIndegree){
     nRequired <- length(required)
     nBanned <- length(banned)
-    s <- seq_len(n - 1 - nBanned - nRequired)
+    maxIndegree <- min(n - 1 - nBanned - nRequired, maxIndegree)
+    s <- seq_len(maxIndegree)
     if (length(s) == 0){
       out <- list(list(required))
     } else {
@@ -77,7 +85,7 @@ enumerateBNSpace <- function(n,
   }
   
   options <- lapply(seq_len(n), function(i){
-    combin(i, n, banned[[i]], required[[i]])
+    combin(i, n, banned[[i]], required[[i]], maxIndegree)
   })
 
   # plus 1 for no parents

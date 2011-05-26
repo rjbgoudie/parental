@@ -152,6 +152,36 @@ test_that("enumerateBNSpace - required 2", {
   expect_true(is.ok & len.ok)
 })
 
+test_that("enumerateBNSpace - maxIndegree", {
+  expect_error(enumerateBNSpace(2, maxIndegree = -1))
+  expect_error(enumerateBNSpace(2, maxIndegree = 3))
+  expect_error(enumerateBNSpace(2, maxIndegree = 1.5))
+  expect_error(enumerateBNSpace(2, maxIndegree = c(1, 2)))
+
+  expect_equal(length(enumerateBNSpace(2, maxIndegree = 0)), 1)
+  expect_equal(length(enumerateBNSpace(100, maxIndegree = 0)), 1)
+
+  expected <- bn.list(bn(c(), c()),
+                      bn(c(2), c()),
+                      bn(c(), c(1)))
+  expect_equal(length(enumerateBNSpace(2, maxIndegree = 1)), 3)
+  expect_equal(enumerateBNSpace(2, maxIndegree = 1), expected)
+
+  getMaxIndegree <- function(x, maxIndegree){
+    max(sapply(x, length)) <= maxIndegree
+  }
+
+  all <- enumerateBNSpace(3)
+
+  getMaxIndegree2 <- function(x) getMaxIndegree(x, 2)
+  filtered <- Filter(getMaxIndegree2, all)
+  expect_identical(enumerateBNSpace(3, maxIndegree = 2), filtered)
+
+  getMaxIndegree1 <- function(x) getMaxIndegree(x, 1)
+  filtered <- Filter(getMaxIndegree1, all)
+  expect_identical(enumerateBNSpace(3, maxIndegree = 1), filtered)
+})
+
 # test_that("enumerateBNSpace - required 2", {
 #   banned <- list(c(2,3,4), c(1,3,4), integer(0), 3)
 #   required <- list(integer(0), integer(0), 4, integer(0))

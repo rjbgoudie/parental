@@ -2,7 +2,8 @@
 \alias{enumerateBNSpace}
 \title{Enumerate the space of BNs.}
 \usage{enumerateBNSpace(n, allowCyclic=F, banned=vector("list",
-    n), required=vector("list", n), multicore=F)}
+    n), required=vector("list", n), maxIndegree=n - 1,
+    multicore=F)}
 
 \description{
   Enumerate the space of BNs.
@@ -23,6 +24,8 @@ should be filtered out.}
 nodes cannot be parents of the corresponding node.}
   \item{required}{A list of length \code{n}. Each component indicates
 which nodes must be includes as parents of the corresponding node.}
+  \item{maxIndegree}{The maximum indegree of all nodes. A numeric of length
+1.}
   \item{multicore}{A logical specifying whether to use 
 \link[multicore]{mclapply}.}
 }
