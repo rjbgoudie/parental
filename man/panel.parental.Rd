@@ -1,7 +1,7 @@
 \name{panel.parental}
 \alias{panel.parental}
 \title{Panel function for ploting a parental graph.}
-\usage{panel.parental(x, y, parents, layout, col, alpha, edgecol,
+\usage{panel.parental(x, y, parents, coords, col, alpha, edgecol,
     edgealpha, islist=F, rawdata, grobNode, grobNodeSize,
     offset, widthMultiplier=2, heightMultipler=3, ...)}
 
@@ -18,7 +18,7 @@
   \item{x}{The x-coordinates of the nodes}
   \item{y}{The y-coordinates of the nodes}
   \item{parents}{An object of class parental}
-  \item{layout}{The layout (not currently used??)}
+  \item{coords}{The coords (not currently used??)}
   \item{col}{A vector of colours for the nodes (not currently used??)}
   \item{alpha}{A vector of alpha values for the nodes (not currently used??)}
   \item{edgecol}{A matrix of edge colours}

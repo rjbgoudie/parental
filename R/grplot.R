@@ -425,7 +425,7 @@ grobNodeLevelPlot <- function(node,
 #' @param x The x-coordinates of the nodes
 #' @param y The y-coordinates of the nodes
 #' @param parents An object of class parental
-#' @param layout The layout (not currently used??)
+#' @param coords The coords (not currently used??)
 #' @param col A vector of colours for the nodes (not currently used??)
 #' @param alpha A vector of alpha values for the nodes (not currently used??)
 #' @param edgecol A matrix of edge colours
@@ -442,7 +442,7 @@ grobNodeLevelPlot <- function(node,
 #' @return A panel
 #' @seealso \code{\link{grplot}}
 #' @export
-panel.parental <- function(x, y, parents, layout, col, alpha, 
+panel.parental <- function(x, y, parents, coords, col, alpha,
                            edgecol, 
                            edgealpha, islist = F, rawdata = NULL,
                            grobNode,
@@ -631,9 +631,9 @@ grplot <- function(...){
 #' @param offset A offset
 #' @param hideIsolates A logical of length 1. If true, isolates nodes 
 #'   (those not connected to any other node) are removed.
-#' @param layout Optionally provide the coordinates at which each node will 
-#'   be drawn. This should be supplied as a data.frame with columns 
-#'   \code{xcoord} and \code{ycoord}. 
+#' @param coords Optionally provide the coordinates at which each node will
+#'   be drawn. This should be supplied as a data.frame with columns
+#'   \code{xcoord} and \code{ycoord}.
 #' @param ... Further arguments (not currently passed on?)
 #' @return A lattice plot
 #' @S3method grplot parental
@@ -652,7 +652,7 @@ grplot.parental <- function(parents,
                             grobNodeSize = grobNodeNameSize,
                             offset       = 0.25,
                             hideIsolates = F,
-                            layout,
+                            coords,
                             ...){
   if (require(network)){
     stopifnot("parental" %in% class(parents))
@@ -674,28 +674,28 @@ grplot.parental <- function(parents,
       adj <- adj[-isolates, -isolates]
     }
   
-    if (missing(layout)){
+    if (missing(coords)){
       net <- network(adj)
-      layout <- network.layout.fruchtermanreingold(net, layout.par)
-      layout <- as.data.frame(layout)
-      colnames(layout) <- c("xcoord", "ycoord")
+      coords <- network.layout.fruchtermanreingold(net, layout.par)
+      coords <- as.data.frame(coords)
+      colnames(coords) <- c("xcoord", "ycoord")
     }
   
     if (hideIsolates){
-      newlayout <- matrix(NA, nrow = numberOfNodes, ncol = 2)
+      newcoords <- matrix(NA, nrow = numberOfNodes, ncol = 2)
       temp <- setdiff(seq_len(numberOfNodes), isolates)
-      newlayout[temp, ] <- as.matrix(layout)
-      range <- range(layout$xcoord)
+      newcoords[temp, ] <- as.matrix(coords)
+      range <- range(coords$xcoord)
       s <- seq(from = range[1], to = range[2], length = length(isolates))
-      x <- c(s, rep(min(layout$ycoord), length(isolates)))
-      newlayout[isolates, ] <- matrix(x,
+      x <- c(s, rep(min(coords$ycoord), length(isolates)))
+      newcoords[isolates, ] <- matrix(x,
                                       byrow = T,
                                       nrow  = length(isolates),
                                       ncol  = 2)
-      layout <- newlayout
+      coords <- newcoords
     }
   
-    inputs <- layout
+    inputs <- coords
     form <- ycoord ~ xcoord
     ccall$islist <- F
   
@@ -789,12 +789,12 @@ grplot.parental.list <- function(parentallist,
   
     adj <- as.adjacency(lpunion(parentallist))
     net <- network(adj)
-    layout <- network.layout.fruchtermanreingold(net, layout.par)
-    layout <- as.data.frame(layout)
-    colnames(layout) <- c("xcoord", "ycoord")
+    coords <- network.layout.fruchtermanreingold(net, layout.par)
+    coords <- as.data.frame(coords)
+    colnames(coords) <- c("xcoord", "ycoord")
   
-    torbind <- lapply(seq_len(numberOfGraphs), function(i) layout)
-    layouts <- do.call("rbind", torbind)
+    torbind <- lapply(seq_len(numberOfGraphs), function(i) coords)
+    coordss <- do.call("rbind", torbind)
     graphIndicator <- gl(n      = numberOfGraphs,
                          k      = numberOfNodes,
                          length = numberOfGraphs * numberOfNodes)
@@ -803,7 +803,7 @@ grplot.parental.list <- function(parentallist,
     }
   
     levels(graphIndicator) <- names(parentallist)
-    inputs <- cbind(layouts, whichgraph = graphIndicator)
+    inputs <- cbind(coordss, whichgraph = graphIndicator)
     form <- xcoord ~ ycoord | whichgraph
     ccall$islist <- T
   

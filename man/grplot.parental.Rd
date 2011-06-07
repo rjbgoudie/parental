@@ -4,7 +4,7 @@
 \usage{\method{grplot}{parental} (parents, col=1, alpha=1,
     edgecol, edgealpha=1, layout.par=list(niter = 1e+05),
     grobNode=grobNodeName, grobNodeSize=grobNodeNameSize,
-    offset=0.25, hideIsolates=F, layout, ...)}
+    offset=0.25, hideIsolates=F, coords, ...)}
 
 \description{
   Plot a graph.
@@ -31,8 +31,8 @@ currently work.)}
   \item{offset}{A offset}
   \item{hideIsolates}{A logical of length 1. If true, isolates nodes 
 (those not connected to any other node) are removed.}
-  \item{layout}{Optionally provide the coordinates at which each node will 
-be drawn. This should be supplied as a data.frame with columns 
+  \item{coords}{Optionally provide the coordinates at which each node will
+be drawn. This should be supplied as a data.frame with columns
 \code{xcoord} and \code{ycoord}.}
   \item{...}{Further arguments (not currently passed on?)}
 }
