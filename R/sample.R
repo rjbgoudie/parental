@@ -330,3 +330,25 @@ marginal.probs <- function(bn, ptables, N){
 cptBinary <- function(i, j){
   as.table(array(c(i, j), 2))
 }
+
+
+#' Sampling from Dirichlet distribution.
+#'
+#' Generate random deviates from the Dirichlet distribution.
+#'
+#' @param n Number of random vectors to generate.
+#' @param alpha Vector containing shape parameters.
+#' @return returns a matrix with n rows, each containing a single Dirichlet
+#'   random deviate.
+#' @author Code original posted by Ben Bolker to R-News on Fri Dec 15 2000.
+#'   See \url{http://www.r-project.org/nocvs/mail/r-help/2000/3865.html}.
+#'   Ben attributed the code to Ian Wilson <i.wilson@maths.abdn.ac.uk>.
+#'   Subsequent modifications by Gregory R. Warnes <greg@warnes.net>.
+#' @examples
+#' rdirichlet(20, c(1,1,1)
+rdirichlet <- function (n, alpha){
+  l <- length(alpha)
+  x <- matrix(rgamma(l * n, alpha), ncol = l, byrow = TRUE)
+  sm <- x %*% rep(1, l)
+  return(x/as.vector(sm))
+}
