@@ -1,17 +1,18 @@
 \name{which2}
 \alias{which2}
 \title{Undocumented.}
-\usage{which2(el, set)}
-
-\description{
-  Undocumented.
+\usage{
+  which2(el, set)
 }
-
-\details{
-  ...
-}
-\value{...}
 \arguments{
   \item{el}{...}
+
   \item{set}{...}
 }
+\value{
+  ...
+}
+\description{
+  ...
+}
+

@@ -1,16 +1,16 @@
 \name{whichVStructurePlot}
 \alias{whichVStructurePlot}
 \title{Undocumented.}
-\usage{whichVStructurePlot(net)}
-
-\description{
-  Undocumented.
+\usage{
+  whichVStructurePlot(net)
 }
-
-\details{
-  ...
-}
-\value{...}
 \arguments{
   \item{net}{...}
 }
+\value{
+  ...
+}
+\description{
+  ...
+}
+

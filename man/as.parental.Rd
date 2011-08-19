@@ -1,23 +1,20 @@
 \name{as.parental}
 \alias{as.parental}
 \title{Convert an object to a parental object.}
-\usage{as.parental(x, ...)}
-
-\description{
-  Convert an object to a parental object.
+\usage{
+  as.parental(x, ...)
 }
+\arguments{
+  \item{x}{An object}
 
-\details{
+  \item{...}{Further arguments passed to method}
+}
+\description{
   A generic function for converting objects to
   \code{\link{parental}} objects.
 }
-\seealso{\code{\link{as.parental.bn}}, \code{\link{as.parental.matrix}},
-\code{\link{as.parental.character}}, \code{\link{as.parental.graphNEL}}.}
-\arguments{
-  \item{x}{An object}
-  \item{...}{Further arguments passed to method}
-}
-\examples{x <- bn(c(), c(1), c(1, 2))
+\examples{
+x <- bn(c(), c(1), c(1, 2))
 as.parental(x)
 
 adjmat <- matrix(sample(c(0, 1), 100, rep = TRUE), 10, 10)
@@ -40,4 +37,12 @@ c1 <- c(1, 1, 2, 4)
 names(c1) <- as.character(1:4)
 g1 <- randomNodeGraph(c1)
 as.parental(g1)
-}}
+}
+}
+\seealso{
+  \code{\link{as.parental.bn}},
+  \code{\link{as.parental.matrix}},
+  \code{\link{as.parental.character}},
+  \code{\link{as.parental.graphNEL}}.
+}
+

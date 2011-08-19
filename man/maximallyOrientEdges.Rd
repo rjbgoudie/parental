@@ -1,16 +1,15 @@
 \name{maximallyOrientEdges}
 \alias{maximallyOrientEdges}
 \title{Undocumented.}
-\usage{maximallyOrientEdges(pdag, ...)}
-
-\description{
-  Undocumented.
-}
-
-\details{
-  A generic
+\usage{
+  maximallyOrientEdges(pdag, ...)
 }
 \arguments{
   \item{pdag}{A pdag}
+
   \item{...}{Further arguments passed to methods}
 }
+\description{
+  A generic
+}
+

@@ -1,14 +1,22 @@
 \name{complete}
 \alias{complete}
 \title{Return a complete graph.}
-\usage{complete(n)}
-
-\description{
-  Return a complete graph.
+\usage{
+  complete(n)
 }
-\value{A complete \code{parental} graph}
-\seealso{\code{\link{empty}}, \code{\link{parental}}}
 \arguments{
   \item{n}{the number of nodes}
 }
-\examples{complete(5)}
+\value{
+  A complete \code{parental} graph
+}
+\description{
+  Return a complete graph.
+}
+\examples{
+complete(5)
+}
+\seealso{
+  \code{\link{empty}}, \code{\link{parental}}
+}
+

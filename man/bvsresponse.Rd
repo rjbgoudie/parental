@@ -1,19 +1,30 @@
 \name{bvsresponse}
 \alias{bvsresponse}
 \title{Construct 'bvsreponse'.}
-\usage{bvsresponse(x, response, nNodes)}
-
-\description{
-  Construct 'bvsreponse'.
+\usage{
+  bvsresponse(x, response, nNodes)
 }
+\arguments{
+  \item{x}{A vector of integers specifying the parents of
+  the response.}
 
-\details{
+  \item{response}{A integer of length 1 specifying which
+  node (column) is the response.}
+
+  \item{nNodes}{The number of nodes (columns) in the
+  variable selection.}
+}
+\value{
+  An object of class 'bvsresponse'.
+}
+\description{
   Constructor function for a 'bvsresponse' object. Objects
   of class 'bvsresponse' are lists, with the following
   components:
-
+}
+\details{
   $parents: A vectors of integers, specifying the parents
-  of the response.  The parents must be specified as a
+  of the response. The parents must be specified as a
   vector of integers -- the storage.mode() of these
   integers MUST be integer. If the node has no parents, use
   integer(0).
@@ -30,10 +41,4 @@
   [1]
   http://cran.r-project.org/doc/manuals/R-lang.html#Constants
 }
-\value{An object of class 'bvsresponse'.}
-\arguments{
-  \item{x}{A vector of integers specifying the parents of the response.}
-  \item{response}{A integer of length 1 specifying which node (column) 
-is the response.}
-  \item{nNodes}{The number of nodes (columns) in the variable selection.}
-}
+

@@ -1,16 +1,15 @@
 \name{as.cpdag}
 \alias{as.cpdag}
 \title{Convert an object to a CPDAG.}
-\usage{as.cpdag(x, ...)}
-
-\description{
-  Convert an object to a CPDAG.
-}
-
-\details{
-  A generic
+\usage{
+  as.cpdag(x, ...)
 }
 \arguments{
   \item{x}{An object}
+
   \item{...}{Further arguments passed to method}
 }
+\description{
+  A generic
+}
+

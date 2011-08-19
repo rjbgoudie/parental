@@ -1,15 +1,13 @@
 \name{lpunion}
 \alias{lpunion}
 \title{Undocumented.}
-\usage{lpunion(pl)}
-
-\description{
-  Undocumented.
-}
-
-\details{
-  ....
+\usage{
+  lpunion(pl)
 }
 \arguments{
   \item{pl}{...}
 }
+\description{
+  ....
+}
+
