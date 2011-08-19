@@ -182,6 +182,12 @@ test_that("enumerateBNSpace - maxIndegree", {
   expect_identical(enumerateBNSpace(3, maxIndegree = 1), filtered)
 })
 
+test_that("enumerateBNSpace - maxIndegree and required", {
+  enumerateBNSpace(3, maxIndegree = 1, required = list(c(), c(), c(1)))
+  
+  enumerateBNSpace(3, maxIndegree = 1, required = list(c(), c(), c(1, 2)))
+})
+
 # test_that("enumerateBNSpace - required 2", {
 #   banned <- list(c(2,3,4), c(1,3,4), integer(0), 3)
 #   required <- list(integer(0), integer(0), 4, integer(0))
