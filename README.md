@@ -103,8 +103,10 @@ install.packages("path/to/rjbgoudie-parental-XXXXX", repos = NULL, type = "sourc
 
 The package also depends on [`lattice`][cran:lattice], and `grid`, both of which are included with R.
 
-Contact
--------
+
+How to cite
+-----------
+Goudie, R. J. B., & Mukherjee, S. (2016). A Gibbs Sampler for Learning DAGs. _Journal of Machine Learning Research_, **17**(30), 1-39. [http://jmlr.org/papers/v17/14-486.html](http://jmlr.org/papers/v17/14-486.html)
 
 
 [R]: http://www.r-project.org "The R Project for Statistical Computing"
